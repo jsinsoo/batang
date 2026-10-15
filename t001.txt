@@ -1,0 +1,122 @@
+파이썬 거북이의 노래 — 열다섯 가지 수학 여행
+Python Turtle's Song — Fifteen Mathematical Adventures
+
+[SUNO STYLE PROMPT — Styles 칸에 입력]
+Joyful and playful Czech Romantic orchestral folk dance inspired by the bright, lyrical spirit of Antonín Dvořák, original melody, lively Slavonic dance energy, 132 BPM, 6/8 dance rhythm, sparkling strings, playful woodwinds, clarinet, flute, oboe, pizzicato violins, warm French horns, light brass fanfares, piano, glockenspiel, buoyant timpani, cheerful male and female Korean duet, crystal-clear Korean diction, catchy student sing-along chorus, energetic call and response, uplifting modulations, vivid orchestral colors, whimsical mathematical adventure, theatrical finale, polished studio recording. No direct quotation of an existing classical melody.
+
+[가사 — Lyrics 칸에 입력]
+[Overture — Bright orchestral dance, flute and strings]
+빙글빙글 거북이가 신나는 여행 떠나요!
+파이썬 붓을 들고 수학 세상을 그려요!
+하나 둘 셋, 열다섯 꿈!
+화면 위에 무지개가 피어나요!
+
+[Verse 1 — K1, K2, K3: Theodorus spiral]
+[K1 — Male] 직각삼각형 하나씩 이어 붙여!
+[K2 — Female] 제곱근의 나선이 빙글빙글 돌아!
+[K3 — Together] 색깔 입힌 삼각형 차례차례 나타나!
+테오도러스 나선 따라 꿈이 커져 가요!
+
+[Verse 2 — K4, K5: Sierpinski triangle]
+[K4 — Male] 큰 삼각형 세 조각, 또 세 조각 나누고!
+[K5 — Female] 빨주노초 무지개로 작은 삼각형 채워요!
+[Duet] 재귀가 재귀를 부르며!
+작은 무늬 속에 큰 무늬가 보여요!
+
+[Chorus — Full ensemble, cheerful and catchy]
+거북아 거북아 신나게 그려 봐!
+앞으로 가고 왼쪽으로 돌아!
+반복하고 나누고 다시 돌아와!
+수학의 꽃이 활짝 피어나!
+랄랄라 터틀! 빙글빙글 터틀!
+열다섯 가지 세상이 반짝반짝!
+
+[Verse 3 — K6: Koch snowflake]
+[K6 — Female] 선 하나를 셋으로 나눠!
+가운데에 뾰족한 봉우리를 세워!
+네 조각으로 바뀌는 코흐의 눈송이!
+하얀 겨울에도 무지개가 내려요!
+
+[Verse 4 — K7: Lissajous curve]
+[K7 — Male] 사인 곡선 둘이 만나 춤을 추네!
+[Female] 위상이 바뀌면 고리도 달라져!
+[Duet] 리사주 곡선, 왈츠처럼 흔들려!
+가로세로 진동이 꽃무늬를 만들어요!
+
+[Verse 5 — K8: Pythagoras tree]
+[K8 — Male] 네모 위에 네모, 작은 네모 두 개!
+[Female] 피타고라스 나무가 하늘로 자라!
+[Duet] 각도 따라 가지가 뻗어 나가고!
+무지개 숲속에 정사각형이 피어요!
+
+[Chorus — Full ensemble]
+거북아 거북아 신나게 그려 봐!
+앞으로 가고 왼쪽으로 돌아!
+반복하고 나누고 다시 돌아와!
+수학의 꽃이 활짝 피어나!
+랄랄라 터틀! 빙글빙글 터틀!
+열다섯 가지 세상이 반짝반짝!
+
+[Verse 6 — K9, K10, K11, K12: Flowering recursive trees]
+[K9 — Male] 가지 하나 둘로 갈라지는 나무!
+[K10 — Female] 가지 끝에 알록달록 꽃이 피네!
+[K11 — Male] 세 갈래로 펼쳐지는 꽃나무!
+[K12 — Female] 곡선으로 굽어지는 부드러운 가지!
+[Duet] 저장하고 돌아오는 백트래킹!
+작은 꽃이 모여 커다란 봄을 만들어요!
+
+[Verse 7 — K13, K14: Star envelopes]
+[K13 — Female] 열두 방향 꼭짓점을 연결해!
+[K14 — Male] 연결 간격 바꾸면 별빛이 달라져!
+[Duet] 수많은 직선이 곡선처럼 보여!
+무지개 포락선이 밤하늘에 피어나!
+
+[Verse 8 — K15: Interactive star]
+[K15 — Male] 슬라이더를 움직여, 가지 수를 바꿔!
+[Female] 크기와 간격, 선의 밀도도 조절해!
+[Duet] 내가 고른 모양대로 별이 다시 태어나!
+수학과 코딩이 만나 마법 같은 그림!
+
+[Bridge — Playful woodwind solo, then rising strings]
+[Male] 앞으로 전진! [Female] 왼쪽 회전!
+[Male] 조건을 확인! [Female] 재귀 호출!
+[Male] 좌표를 기억해! [Female] 원래 자리로!
+[Together] 한 줄 한 줄 코드가 아름다운 그림이 돼!
+
+[Final Chorus — Jubilant orchestral tutti]
+거북아 거북아 신나게 그려 봐!
+나선과 눈송이, 꽃나무와 별!
+열다섯 가지 알고리즘 한데 모여!
+우리 교실에 무지개를 펼쳐요!
+랄랄라 터틀! 신나는 파이썬!
+상상하고 만들고 다시 도전해!
+랄랄라 터틀! 행복한 수학!
+열다섯 가지 꿈이 반짝반짝!
+
+[Outro — Sparkling glockenspiel, bright orchestral cadence]
+한 걸음씩 그려 가는 우리들의 이야기!
+파이썬 거북이야, 내일 또 만나자!
+
+[작품별 대응표]
+K1: 테오도러스 나선 기본
+K2: 테오도러스 나선 색채·길이 표시
+K3: 테오도러스 나선 순차적 그리기
+K4: 시에르핀스키 삼각형
+K5: 무지개 시에르핀스키 삼각형
+K6: 무지개 코흐 눈송이
+K7: 움직이는 무지개 리사주 곡선
+K8: 무지개 피타고라스 나무
+K9: 재귀 꽃나무
+K10: 세 갈래 무지개 꽃나무
+K11: 곡선 가지 무지개 꽃나무
+K12: 황금빛 줄기와 빛나는 꽃·뿌리의 재귀나무
+K13: 포락선 별 기본
+K14: 연결 간격을 조절하는 포락선 별
+K15: Tkinter 슬라이더로 조절하는 포락선 별
+
+[SUNO 활용 팁]
+1. Suno의 Custom 모드를 켭니다.
+2. Style of Music에는 상단 영문 스타일 프롬프트를 붙여 넣습니다.
+3. Lyrics에는 [Overture]부터 [Outro]까지 붙여 넣습니다.
+4. 제목은 '파이썬 거북이의 노래 — 열다섯 가지 수학 여행'으로 지정합니다.
+5. 노래가 길어 중간에서 끝나면 Suno의 Extend 기능으로 뒷부분을 이어 만듭니다.
