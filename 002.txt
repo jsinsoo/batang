@@ -1,0 +1,197 @@
+﻿정보과학 코드의 노래 — 스물두 가지 개념의 춤
+Information Science Code Song — Twenty-Two Dancing Programs
+
+[Intro — Playful Orchestral Overture]
+[Male] 자, 거북이도 컴퓨터도 신나는 무도회!
+[Female] 스물두 가지 원리가 음악으로 피어나!
+[All] 딩가 딩가, 코드를 읽고 결과를 맞혀 봐!
+
+[Verse 01 — 함수의 첫인사]
+[Male] 입력을 받아 약속한 일을 해내고
+[Female] 기본값은 빈자리를 살며시 채워
+[All] 칠과 십삼! return으로 답을 전해!
+
+[Verse 02 — 재귀의 계단]
+[Male] 나를 다시 불러 작은 문제로 가고
+[Female] 멈추는 조건 만나 거꾸로 돌아와
+[All] 오 더하기 삼 더하기 일, 아홉이 되네!
+
+[Verse 03 — 큐의 행진]
+[Male] 먼저 온 친구가 먼저 나가는 줄
+[Female] append로 뒤에 서고 popleft로 출발
+[All] 사 육 삼! 차례차례 피포 행진!
+
+[Verse 04 — 스택의 왈츠]
+[Male] 맨 위에 쌓은 것을 먼저 꺼내요
+[Female] append로 올리고 pop으로 내려
+[All] 라스트 인 퍼스트 아웃, 되돌림의 춤!
+
+[Chorus — Bright Czech Folk Dance, Full Ensemble]
+[Male] 하나 둘 셋, 코드가 춤춘다!
+[Female] Read the code, let the answers shine!
+[All] 생각하고 실행하고, 결과를 확인해!
+[All] 정보과학 스물두 빛, 함께 노래해!
+
+[Verse 05 — 그래프의 다리]
+[Male] 정점과 간선이 서로 길을 만들고
+[Female] 이웃 목록 따라 연결을 찾아봐
+[All] 차수의 합은 여덟, 간선은 넷!
+
+[Verse 06 — 트리의 높이]
+[Male] 뿌리에서 가지로 계층이 뻗어나가
+[Female] 자식 없는 잎에서 높이를 세어
+[All] 에이 비 디, 세 층으로 자라나!
+
+[Verse 07 — 이진 탐색]
+[Male] 정렬된 수 가운데를 콕 집어 보고
+[Female] 크면 왼쪽 작으면 오른쪽을 찾아
+[All] 절반씩 줄여 세 번 만에 열넷 발견!
+
+[Verse 08 — 백트래킹]
+[Male] 하나를 고르고 다음 길로 걸어가
+[Female] 막히면 팝! 되돌아 다른 길 선택
+[All] 여섯 가지 순열, 세 번째는 이 일!
+
+[Chorus — Bright Czech Folk Dance, Full Ensemble]
+[Male] 하나 둘 셋, 코드가 춤춘다!
+[Female] Read the code, let the answers shine!
+[All] 생각하고 실행하고, 결과를 확인해!
+[All] 정보과학 스물두 빛, 함께 노래해!
+
+[Verse 09 — 가지치기]
+[Male] 목표를 넘은 길은 더 갈 필요 없어
+[Female] 가능성 없는 가지는 일찍 멈춰
+[All] 열세 번의 방문, 탐색을 아껴!
+
+[Verse 10 — 탐욕법]
+[Male] 눈앞에 큰 동전을 먼저 집었더니
+[Female] 네 원 하나 일 원 둘, 세 개가 필요해
+[All] 삼 원 두 개면 둘! 탐욕이 늘 최선은 아냐!
+
+[Verse 11 — 문제분해]
+[Male] 복잡한 일을 작은 역할로 나누고
+[Female] 파싱하고 짝수 골라 더해 보자
+[All] 넷과 육이 만나 십으로 완성!
+
+[Verse 12 — 분할 정복법]
+[Male] 커다란 배열을 반으로 나누고
+[Female] 작은 답을 구해 서로 비교해
+[All] 칠과 구 중 큰 값, 최댓값 구!
+
+[Chorus — Bright Czech Folk Dance, Full Ensemble]
+[Male] 하나 둘 셋, 코드가 춤춘다!
+[Female] Read the code, let the answers shine!
+[All] 생각하고 실행하고, 결과를 확인해!
+[All] 정보과학 스물두 빛, 함께 노래해!
+
+[Verse 13 — 동적계획법]
+[Male] 한 번 푼 문제는 표에 기억해 둬
+[Female] 앞의 두 답을 더해 다음 칸 채워
+[All] 중복 계산 줄여, 다섯째 답은 팔!
+
+[Verse 14 — 빅오 표기법]
+[Male] 입력이 커질 때 증가하는 속도
+[Female] 두 배씩 뛰는 반복 로그로 읽어
+[All] 엔 로그 엔, 스물네 번의 걸음!
+
+[Verse 15 — 문제발견]
+[Male] 기다림의 기록에서 불편을 찾아
+[Female] 열을 넘는 순간 문제로 정해
+[All] 둘째와 넷째, 해결할 곳 발견!
+
+[Verse 16 — 설계]
+[Male] 조건의 경계를 먼저 분명히 하고
+[Female] 여덟 미만, 열아홉 미만 나눠
+[All] 영 원 칠백 원 천이백 원, 기준이 또렷해!
+
+[Chorus — Bright Czech Folk Dance, Full Ensemble]
+[Male] 하나 둘 셋, 코드가 춤춘다!
+[Female] Read the code, let the answers shine!
+[All] 생각하고 실행하고, 결과를 확인해!
+[All] 정보과학 스물두 빛, 함께 노래해!
+
+[Verse 17 — 구현]
+[Male] 생각한 설계를 코드로 옮겨
+[Female] 앞에서부터 합을 차곡차곡 쌓아
+[All] 누적합의 차로 넷 더하기 육!
+
+[Verse 18 — 협업]
+[Male] 서로 만든 함수를 이어 붙이고
+[Female] 입력과 반환값 약속을 맞춰
+[All] 정렬은 새 리스트, 원본은 그대로!
+
+[Verse 19 — 테스트]
+[Male] 예상한 답과 실제 답을 맞대고
+[Female] 경계와 예외까지 하나씩 확인
+[All] 세 번은 통과, 한 번은 다시 살펴!
+
+[Verse 20 — 평가]
+[Male] 무엇을 잘했는지 기준을 세우고
+[Female] 점수 먼저 보고 동점이면 시간
+[All] 같은 구십 점, 더 빠른 비가 앞서!
+
+[Chorus — Bright Czech Folk Dance, Full Ensemble]
+[Male] 하나 둘 셋, 코드가 춤춘다!
+[Female] Read the code, let the answers shine!
+[All] 생각하고 실행하고, 결과를 확인해!
+[All] 정보과학 스물두 빛, 함께 노래해!
+
+[Verse 21 — 종합]
+[Male] 문자열 숫자로 바꿔 중복을 지우고
+[Female] 큰 수부터 정렬해 세 개를 골라
+[All] 구 더하기 칠 더하기 사, 이십 완성!
+
+[Verse 22 — 성찰]
+[Male] 틀린 까닭을 찾아 범위를 고치고
+[Female] 전과 후를 비교해 다시 시험해
+[All] 영 번 통과에서 세 번 통과로 성장!
+
+[Bridge — Woodwind Solo and Pizzicato Strings]
+[Female] 틀린 답도 다시 보면 배움의 씨앗!
+[Male] 조건과 순서, 경계값을 살펴봐!
+[All] 함수에서 성찰까지 이어진 우리의 길!
+
+[Final Chorus — Jubilant Orchestral Finale]
+[Male] 서로 다른 원리로 더 넓어진 생각!
+[Female] Twenty-two bright ideas, dancing in the light!
+[All] 나누고 찾고 기억하며 더 멀리 날아가!
+[All] 정보과학의 노래, 오늘도 즐겁게!
+[All] 헤이! 헤이! 정보과학의 축제!
+
+[Outro — Sparkling Flute, Strings and Brass]
+[All] 출력은 답이 되고, 질문은 꿈이 된다!
+
+=======================================================
+SUNO STYLE OF MUSIC — 붙여넣기용
+=======================================================
+Joyful and playful Czech Romantic orchestral folk dance inspired by the bright, lyrical spirit of Antonín Dvořák, original melody, lively Slavonic dance energy, 132 BPM, 6/8 dance rhythm, sparkling strings, playful woodwinds, clarinet, flute, oboe, pizzicato violins, warm French horns, light brass fanfares, piano, glockenspiel, buoyant timpani, cheerful male and female Korean duet, crystal-clear Korean diction, catchy student sing-along chorus, energetic call and response, uplifting modulations, vivid orchestral colors, whimsical mathematical adventure, theatrical finale.
+
+SUNO 사용 안내
+1. Custom 모드의 Lyrics에 위 가사를 붙여넣으세요.
+2. Style of Music에 영문 프롬프트를 붙여넣으세요.
+3. 22절이 길어 Suno에서 일부가 생략될 수 있으므로 필요하면 1~11절과 12~22절로 나누어 생성하세요.
+4. 가사는 각 코드의 개념적 특징과 실제 출력 결과를 바탕으로 구성했습니다. 전체 실행 가능한 프로그램은 q001.html을 참조하세요.
+
+22개 코드 주제 및 정확한 출력 결과 (q001.html 기준)
+01. 함수: 7 13
+02. 재귀함수: 9
+03. 큐: [4, 6, 3]
+04. 스택: [1, 3] 3
+05. 그래프: 4
+06. 트리: 3
+07. 탐색 알고리즘: 4 3
+08. 백트래킹: 6 21
+09. 가지치기: 13
+10. 탐욕법: 3
+11. 문제분해: 10
+12. 분할 정복법: 9
+13. 동적계획법: 8
+14. 빅오법: 24
+15. 문제발견: [2, 4]
+16. 설계: 0 700 1200
+17. 구현: 10
+18. 협업: 6 [5, 1, 3]
+19. 테스트: 3 1
+20. 평가: B
+21. 종합: 20
+22. 성찰: 0 3
