@@ -1,0 +1,294 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>알고리즘 성능 | 6개 개념 실습</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f6fb;color:#17243a;font-family:system-ui,"Apple SD Gothic Neo","Nanum Gothic",sans-serif;line-height:1.8}header{background:#14263e;color:#fff;padding:64px max(24px,calc((100vw - 1120px)/2))}header p{color:#d7e6f8;max-width:850px}h1{font-size:clamp(28px,4vw,44px);line-height:1.3;margin:12px 0}h2{font-size:26px;line-height:1.4}h3{font-size:18px;margin-top:28px}main{max-width:1120px;margin:auto;padding:30px 20px 70px}section{background:white;border:1px solid #dce3ef;border-radius:16px;padding:32px;margin:24px 0;scroll-margin-top:20px}.badge{color:#1557a0;font-weight:750;font-size:14px;letter-spacing:.04em}.lead{font-size:18px}.note{background:#edf4ff;border-left:4px solid #266ac4;padding:16px 20px;margin:20px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}pre{margin:0;background:#132035;color:#e7eefb;border-radius:10px;padding:20px;overflow:auto;line-height:1.65;font-size:13px;tab-size:4}pre.output{background:#eef3f8;color:#17243a;max-height:540px}code{font-family:Consolas,Menlo,monospace}button,.jump{border:1px solid #b7cbe5;background:white;color:#1557a0;border-radius:7px;padding:8px 12px;font:inherit;font-size:13px;cursor:pointer}button{float:right}nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}a{color:#1557a0}nav a{text-decoration:none}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;border-bottom:1px solid #dce3ef;text-align:left}th{background:#edf3fb}.tablewrap{overflow:auto}.question{padding:16px;background:#fff7e7;border-left:4px solid #b98513}summary{cursor:pointer;font-weight:700}footer{text-align:center;color:#52647b;font-size:14px;padding:20px}@media(max-width:850px){.grid{grid-template-columns:1fr}section{padding:20px}header{padding:40px 24px}}@media print{header{padding:20px;background:white;color:#17243a}header p{color:#17243a}body{background:white}section{border-radius:0;break-before:page}nav,button{display:none}pre{white-space:pre-wrap;overflow:visible;font-size:10px}.grid{display:block}pre.output{max-height:none}details>*{display:block}}</style></head><body><header><div>COMPUTER SCIENCE · PYTHON LAB</div><h1>입력이 커지면,<br>알고리즘은 얼마나 느려질까?</h1><p class="lead">6개 개념으로 배우는 시간 복잡도와 알고리즘 선택</p><p><strong>학습목표</strong> · 입력 크기와 연산 횟수의 관계를 바탕으로 O(1), O(log n), O(n), O(n log n), O(n²)을 비교하고 실제 실행 시간을 측정하여 문제에 적합한 알고리즘을 선택한다.</p></header><main><section><h2>학습 안내</h2><p>각 개념은 <strong>단독 실행 가능한 Python 3 코드 → 실제 실행 출력 → 상세 해설 → 확인 질문</strong> 순서입니다. 코드의 과정을 읽은 뒤 입력을 바꾸어 결과를 예측하세요. HTML은 코드를 보여 주는 학습 자료이며, 파이썬 실행 환경을 포함하지 않습니다.</p><div class="note">코드의 <strong>코드 복사</strong> 버튼을 누르고 파이썬 편집기에서 실행하세요. 출력은 코드와 동일한 실행에서 수집했습니다. 실행 시간은 환경에 따라 달라집니다. 페이지 내 검색과 인쇄도 사용할 수 있습니다.</div><nav><a class="jump" href="#concept1">개념 1</a><a class="jump" href="#concept2">개념 2</a><a class="jump" href="#concept3">개념 3</a><a class="jump" href="#concept4">개념 4</a><a class="jump" href="#concept5">개념 5</a><a class="jump" href="#concept6">개념 6</a><a class="jump" href="#compare">종합 비교</a></nav></section><section id="concept1"><div class="badge">01 · 입력과 연산</div><h2>개념 1. 알고리즘 성능과 입력 크기 n</h2><p class="lead">입력 크기 n은 이 예제에서는 리스트의 원소 개수입니다. 같은 자료를 받더라도 첫 값만 읽는 작업과 모든 값을 더하는 작업의 연산 횟수는 다릅니다.</p><div class="grid"><div><h3>과정 출력 코드 <button type="button" data-copy="code1">코드 복사</button></h3><pre><code id="code1">def first_value(data):
+    if not data:
+        raise ValueError(&quot;빈 리스트에는 첫 번째 값이 없습니다.&quot;)
+    print(f&quot;첫 값 읽기: data[0] = {data[0]} (원소 접근 1회)&quot;)
+    return data[0]
+
+
+def total(data):
+    s = 0
+    for step, x in enumerate(data, start=1):
+        before = s
+        s += x
+        print(f&quot;{step}단계: {before} + {x} = {s}&quot;)
+    print(f&quot;덧셈 횟수: {len(data)}회&quot;)
+    return s
+
+
+# 과정을 읽기 쉽도록 작은 입력부터 확인합니다.
+data = list(range(5))
+print(&quot;입력:&quot;, data, &quot;n =&quot;, len(data))
+print(&quot;첫 값 결과:&quot;, first_value(data))
+print(&quot;합계 결과:&quot;, total(data))
+
+# 원래 예제와 같은 n=100의 결과도 확인합니다.
+large_data = list(range(100))
+print(&quot;n=100의 첫 값:&quot;, first_value(large_data))
+print(&quot;n=100의 합계:&quot;, sum(large_data))
+print(&quot;직접 total로 더하면 덧셈 100회가 필요합니다.&quot;)</code></pre></div><div><h3>실행 결과</h3><pre class="output"><code>입력: [0, 1, 2, 3, 4] n = 5
+첫 값 읽기: data[0] = 0 (원소 접근 1회)
+첫 값 결과: 0
+1단계: 0 + 0 = 0
+2단계: 0 + 1 = 1
+3단계: 1 + 2 = 3
+4단계: 3 + 3 = 6
+5단계: 6 + 4 = 10
+덧셈 횟수: 5회
+합계 결과: 10
+첫 값 읽기: data[0] = 0 (원소 접근 1회)
+n=100의 첫 값: 0
+n=100의 합계: 4950
+직접 total로 더하면 덧셈 100회가 필요합니다.
+</code></pre></div></div><h3>상세 해설</h3><p><strong>입력의 크기를 먼저 정의하기</strong><br>여기서는 len(data)가 n입니다. 다른 문제에서는 문자열 길이, 정점 수, 행렬의 행·열 수 등이 입력 크기가 될 수 있습니다.</p><p><strong>무엇을 세는가?</strong><br>첫 값 읽기는 원소 접근 횟수, total은 s += x 실행 횟수를 셉니다. 모든 기계 명령을 정확히 세는 것이 아니라 입력에 따라 증가하는 대표 연산을 정합니다.</p><p><strong>O(1)과 O(n)</strong><br>파이썬 리스트의 인덱스 접근을 상수 시간으로 보면 first_value는 O(1), total은 모든 원소를 한 번씩 읽으므로 O(n)입니다. range를 리스트로 만드는 준비 시간은 이 함수들의 분석에서 제외합니다.</p><p><strong>전제와 출력의 영향</strong><br>첫 값은 비어 있지 않은 리스트에서만 정의됩니다. 과정 출력은 학습을 위한 장치이며 실제 성능 측정 코드에서는 제거해야 합니다. 마지막 sum도 모든 원소를 확인하는 선형 작업입니다.</p><div class="question"><strong>생각해 보기</strong><br>data를 list(range(8))로 바꾸면 원소 접근 횟수와 덧셈 횟수는 각각 어떻게 될까요?</div></section><section id="concept2"><div class="badge">02 · O(1) / O(n) / O(n log n)</div><h2>개념 2. 빅오 표기법: 증가하는 정도</h2><p class="lead">빅오는 입력이 커질 때 실행 비용의 증가를 나타내는 점근적 상한입니다. 아래에서는 간단한 정수 연산이 일정한 비용이라는 모형을 사용합니다.</p><div class="grid"><div><h3>과정 출력 코드 <button type="button" data-copy="code2">코드 복사</button></h3><pre><code id="code2">def constant_work(n, trace=True):
+    result = n * 2
+    if trace:
+        print(f&quot;n={n}: 곱셈 1회 → 결과 {result}&quot;)
+    return result
+
+
+def linear_work(n, trace=True):
+    count = 0
+    for i in range(n):
+        count += 1
+        if trace:
+            print(f&quot;i={i}: 누적 연산 횟수 = {count}&quot;)
+    return count
+
+
+constant_work(5)
+print(&quot;선형 작업 결과:&quot;, linear_work(5))
+print(&quot;입력 크기별 대표 연산 횟수&quot;)
+for n in [10, 100, 1000]:
+    print(f&quot;n={n}: 상수 작업 1회 / 선형 작업 {linear_work(n, False)}회&quot;)
+
+
+# 보충: 병합 정렬의 분할과 병합 → O(n log n)
+def merge_sort(a, depth=0):
+    indent = &quot;  &quot; * depth
+    print(f&quot;{indent}분할 대상: {a}&quot;)
+    if len(a) &lt;= 1:
+        return a[:]
+    mid = len(a) // 2
+    left = merge_sort(a[:mid], depth + 1)
+    right = merge_sort(a[mid:], depth + 1)
+    merged = []
+    i = j = 0
+    while i &lt; len(left) and j &lt; len(right):
+        if left[i] &lt;= right[j]:
+            merged.append(left[i])
+            i += 1
+        else:
+            merged.append(right[j])
+            j += 1
+    merged.extend(left[i:])
+    merged.extend(right[j:])
+    print(f&quot;{indent}병합: {left} + {right} → {merged}&quot;)
+    return merged
+
+
+print(&quot;병합 정렬 결과:&quot;, merge_sort([7, 2, 6, 1]))</code></pre></div><div><h3>실행 결과</h3><pre class="output"><code>n=5: 곱셈 1회 → 결과 10
+i=0: 누적 연산 횟수 = 1
+i=1: 누적 연산 횟수 = 2
+i=2: 누적 연산 횟수 = 3
+i=3: 누적 연산 횟수 = 4
+i=4: 누적 연산 횟수 = 5
+선형 작업 결과: 5
+입력 크기별 대표 연산 횟수
+n=10: 상수 작업 1회 / 선형 작업 10회
+n=100: 상수 작업 1회 / 선형 작업 100회
+n=1000: 상수 작업 1회 / 선형 작업 1000회
+분할 대상: [7, 2, 6, 1]
+  분할 대상: [7, 2]
+    분할 대상: [7]
+    분할 대상: [2]
+  병합: [7] + [2] → [2, 7]
+  분할 대상: [6, 1]
+    분할 대상: [6]
+    분할 대상: [1]
+  병합: [6] + [1] → [1, 6]
+병합: [2, 7] + [1, 6] → [1, 2, 6, 7]
+병합 정렬 결과: [1, 2, 6, 7]
+</code></pre></div></div><h3>상세 해설</h3><p><strong>결과의 크기 ≠ 연산 횟수</strong><br>constant_work(1000)의 반환값은 2000이지만 곱셈은 한 번입니다. linear_work(1000)은 반복 본문을 1000번 실행합니다.</p><p><strong>상수와 낮은 차수 생략</strong><br>대표 연산 횟수가 3n + 2라면 성장의 주된 항을 기준으로 O(n)으로 표현합니다. 그러나 작은 입력의 실제 실행 시간에는 상수 계수도 영향을 줍니다.</p><p><strong>왜 병합 정렬은 O(n log n)인가?</strong><br>절반씩 분할하는 단계가 약 log₂n개이고 각 병합 단계에서 합쳐 처리하는 원소 수는 O(n)입니다. 따라서 전체 비용은 O(n log n)입니다. 이 구현의 리스트 복사도 같은 점근적 시간 범위에 포함되며, 최대 보조 공간은 O(n)입니다.</p><p><strong>빅오는 정확한 초 단위 시간이 아니다</strong><br>빅오 자체가 곧 최악의 경우라는 뜻은 아닙니다. 최선·평균·최악 중 어느 상황의 비용을 분석하는지 별도로 명시합니다. 이 자료에서는 주로 최악의 경우 증가율을 비교합니다. 임의 정밀도 정수의 자릿수까지 따지면 산술 비용 모형도 달라질 수 있습니다.</p><div class="question"><strong>생각해 보기</strong><br>n이 10배일 때 O(1), O(n)의 대표 연산 횟수는 각각 몇 배가 될까요?</div></section><section id="concept3"><div class="badge">03 · 절반으로 줄이기</div><h2>개념 3. O(log n): 이진 탐색의 범위 감소</h2><p class="lead">이진 탐색은 오름차순으로 정렬된 자료에서 가운데 값과 비교하여 탐색 범위를 절반가량 버립니다. 원본의 중복 정의와 return -1def 연결 오류를 정리했습니다.</p><div class="grid"><div><h3>과정 출력 코드 <button type="button" data-copy="code3">코드 복사</button></h3><pre><code id="code3">def binary_search(a, target):
+    left, right = 0, len(a) - 1
+    step = 0
+    while left &lt;= right:
+        step += 1
+        mid = (left + right) // 2
+        print(f&quot;{step}단계: left={left}, right={right}, &quot;
+              f&quot;mid={mid}, 값={a[mid]}, 후보 수={right-left+1}&quot;)
+        if a[mid] == target:
+            print(f&quot;발견! 인덱스 {mid}, 반복 {step}회&quot;)
+            return mid
+        elif target &lt; a[mid]:
+            print(&quot;목표가 더 작음 → 왼쪽 범위 선택&quot;)
+            right = mid - 1
+        else:
+            print(&quot;목표가 더 큼 → 오른쪽 범위 선택&quot;)
+            left = mid + 1
+    print(f&quot;탐색 종료: 없음, 반복 {step}회&quot;)
+    return -1
+
+
+data = [2, 5, 8, 12, 16, 23, 38]
+print(&quot;23 찾기 결과:&quot;, binary_search(data, 23))
+print(&quot;--- 없는 값 7 찾기 ---&quot;)
+print(&quot;7 찾기 결과:&quot;, binary_search(data, 7))</code></pre></div><div><h3>실행 결과</h3><pre class="output"><code>1단계: left=0, right=6, mid=3, 값=12, 후보 수=7
+목표가 더 큼 → 오른쪽 범위 선택
+2단계: left=4, right=6, mid=5, 값=23, 후보 수=3
+발견! 인덱스 5, 반복 2회
+23 찾기 결과: 5
+--- 없는 값 7 찾기 ---
+1단계: left=0, right=6, mid=3, 값=12, 후보 수=7
+목표가 더 작음 → 왼쪽 범위 선택
+2단계: left=0, right=2, mid=1, 값=5, 후보 수=3
+목표가 더 큼 → 오른쪽 범위 선택
+3단계: left=2, right=2, mid=2, 값=8, 후보 수=1
+목표가 더 작음 → 왼쪽 범위 선택
+탐색 종료: 없음, 반복 3회
+7 찾기 결과: -1
+</code></pre></div></div><h3>상세 해설</h3><p><strong>유지하는 범위</strong><br>left와 right는 아직 확인할 후보 구간의 양 끝 인덱스입니다. mid는 (left + right) // 2로 계산하며 인덱스는 0부터 시작합니다.</p><p><strong>왜 ±1을 하는가?</strong><br>가운데 값이 목표가 아니라는 사실을 이미 확인했으므로 mid 자체를 제외합니다. right = mid - 1 또는 left = mid + 1로 바꾸어 반복이 반드시 진행되게 합니다.</p><p><strong>반복 횟수와 비교 횟수 구별</strong><br>각 반복에서 가운데 원소 하나를 조사합니다. 비어 있지 않은 길이 n에 대해 최악의 반복 횟수는 floor(log₂n) + 1 이하입니다. 한 반복에서 ==와 <를 모두 검사할 수도 있으므로 원시 비교 연산의 총수와 반복 횟수는 구별해야 합니다.</p><p><strong>적용 조건</strong><br>정렬 여부를 함수가 자동 확인하지 않습니다. 정렬되지 않은 리스트에는 결과를 신뢰할 수 없습니다. 중복값이 있으면 일치하는 인덱스 하나를 반환하며 첫 번째 위치를 보장하지 않습니다. 빈 리스트는 바로 -1을 반환합니다.</p><div class="question"><strong>생각해 보기</strong><br>23을 찾을 때 왜 38은 직접 확인할 필요가 없을까요?</div></section><section id="concept4"><div class="badge">04 · 모든 순서쌍</div><h2>개념 4. O(n²): 중첩 반복문의 증가</h2><p class="lead">두 반복문이 각각 n번씩 돌면 안쪽 본문은 n × n번 실행됩니다. 이 예제는 자기 자신과의 쌍과 순서가 뒤바뀐 쌍을 모두 셉니다.</p><div class="grid"><div><h3>과정 출력 코드 <button type="button" data-copy="code4">코드 복사</button></h3><pre><code id="code4">def count_pairs(data, trace=True):
+    count = 0
+    for i in range(len(data)):
+        for j in range(len(data)):
+            count += 1
+            if trace:
+                print(f&quot;i={i}, j={j}: ({data[i]}, {data[j]}) → 누적 {count}&quot;)
+    return count
+
+
+print(&quot;전체 순서쌍 수:&quot;, count_pairs([1, 2, 3, 4]))
+print(&quot;입력 증가 비교&quot;)
+for n in [2, 4, 8]:
+    print(f&quot;n={n}: {count_pairs(list(range(n)), False)}회&quot;)</code></pre></div><div><h3>실행 결과</h3><pre class="output"><code>i=0, j=0: (1, 1) → 누적 1
+i=0, j=1: (1, 2) → 누적 2
+i=0, j=2: (1, 3) → 누적 3
+i=0, j=3: (1, 4) → 누적 4
+i=1, j=0: (2, 1) → 누적 5
+i=1, j=1: (2, 2) → 누적 6
+i=1, j=2: (2, 3) → 누적 7
+i=1, j=3: (2, 4) → 누적 8
+i=2, j=0: (3, 1) → 누적 9
+i=2, j=1: (3, 2) → 누적 10
+i=2, j=2: (3, 3) → 누적 11
+i=2, j=3: (3, 4) → 누적 12
+i=3, j=0: (4, 1) → 누적 13
+i=3, j=1: (4, 2) → 누적 14
+i=3, j=2: (4, 3) → 누적 15
+i=3, j=3: (4, 4) → 누적 16
+전체 순서쌍 수: 16
+입력 증가 비교
+n=2: 4회
+n=4: 16회
+n=8: 64회
+</code></pre></div></div><h3>상세 해설</h3><p><strong>4 × 4 = 16회</strong><br>바깥쪽의 i가 하나 정해질 때마다 j는 0, 1, 2, 3을 모두 방문합니다. 이런 묶음이 4개이므로 총 16회입니다.</p><p><strong>입력 2배 → 작업 4배</strong><br>n=2, 4, 8일 때 본문 실행 횟수는 4, 16, 64회입니다. 입력이 두 배가 될 때 대표 연산 횟수는 네 배로 증가합니다.</p><p><strong>서로 다른 두 원소만 고른다면?</strong><br>j를 range(i + 1, len(data))로 바꾸면 중복 없는 인덱스 쌍을 셉니다. 개수는 n(n−1)/2로 줄지만 증가 차수는 여전히 O(n²)입니다.</p><p><strong>중첩 모양만 보고 판단하지 않기</strong><br>안쪽 반복문이 항상 고정된 3번만 실행되면 전체는 O(n)입니다. 반복문이 몇 겹인지보다 각 반복의 범위와 전체 실행 횟수를 확인해야 합니다.</p><div class="question"><strong>생각해 보기</strong><br>n=100과 n=1000의 순서쌍 수는 각각 몇 개이며, 몇 배 차이인가요?</div></section><section id="concept5"><div class="badge">05 · 측정과 해석</div><h2>개념 5. 실제 실행 시간 측정: perf_counter</h2><p class="lead">과정 출력용 함수와 측정 대상 함수를 분리합니다. 출력, 입력 생성, 워밍업은 측정 구간 밖에 두고 같은 작업을 여러 번 측정하여 중앙값을 비교합니다.</p><div class="grid"><div><h3>과정 출력 코드 <button type="button" data-copy="code5">코드 복사</button></h3><pre><code id="code5">import time
+import statistics
+
+
+def linear_sum(n):
+    s = 0
+    for i in range(n):
+        s += i
+    return s
+
+
+print(&quot;[준비] 작은 입력으로 워밍업&quot;)
+linear_sum(1000)
+repeats = 5
+for n in [10000, 100000, 1000000]:
+    durations = []
+    print(f&quot;\n[측정 시작] n={n}, {repeats}회 반복&quot;)
+    for trial in range(1, repeats + 1):
+        start = time.perf_counter()
+        result = linear_sum(n)
+        end = time.perf_counter()
+        elapsed = end - start
+        # 검증과 출력은 종료 시각 기록 이후에 실행합니다.
+        assert result == n * (n - 1) // 2
+        durations.append(elapsed)
+        print(f&quot;{trial}회: 합={result}, {elapsed:.6f}초&quot;)
+    median = statistics.median(durations)
+    print(f&quot;중앙값: {median:.6f}초 / 원소당 {median/n:.9f}초&quot;)</code></pre></div><div><h3>실행 결과 · 실제 측정 예시</h3><pre class="output"><code>[준비] 작은 입력으로 워밍업
+
+[측정 시작] n=10000, 5회 반복
+1회: 합=49995000, 0.000480초
+2회: 합=49995000, 0.000403초
+3회: 합=49995000, 0.000422초
+4회: 합=49995000, 0.000412초
+5회: 합=49995000, 0.000422초
+중앙값: 0.000422초 / 원소당 0.000000042초
+
+[측정 시작] n=100000, 5회 반복
+1회: 합=4999950000, 0.004386초
+2회: 합=4999950000, 0.004432초
+3회: 합=4999950000, 0.004454초
+4회: 합=4999950000, 0.004406초
+5회: 합=4999950000, 0.004428초
+중앙값: 0.004428초 / 원소당 0.000000044초
+
+[측정 시작] n=1000000, 5회 반복
+1회: 합=499999500000, 0.046751초
+2회: 합=499999500000, 0.046464초
+3회: 합=499999500000, 0.046361초
+4회: 합=499999500000, 0.046582초
+5회: 합=499999500000, 0.046465초
+중앙값: 0.046465초 / 원소당 0.000000046초
+</code></pre></div></div><h3>상세 해설</h3><p><strong>시작과 종료의 차이</strong><br>perf_counter()는 짧은 구간을 측정하기 위한 고해상도 성능 카운터입니다. 반환값 자체보다 end − start의 경과 시간(초)을 사용합니다. 대기 시간이나 실행 중단의 영향도 포함되므로 순수 CPU 명령 비용만을 뜻하지는 않습니다.</p><p><strong>반복 측정의 이유</strong><br>다른 작업, 시스템 스케줄링, 실행 환경 등으로 결과가 흔들릴 수 있습니다. 중앙값은 일부 튀는 값의 영향을 줄입니다. 다만 5회 측정만으로 엄밀한 성능 실험이 완성되는 것은 아닙니다.</p><p><strong>올바른 해석</strong><br>입력이 10배가 되면 O(n) 작업의 연산량은 10배지만, 측정 시간의 비율이 정확히 10일 필요는 없습니다. 작은 입력은 측정 오버헤드 비중이 크고 출력 반올림 때문에 0처럼 보일 수도 있습니다.</p><p><strong>이 페이지의 출력</strong><br>아래 시간은 문서를 만들 때 코드를 실제 실행한 한 번의 측정 예시입니다. 고정된 정답이나 사용자 기기의 예상 속도가 아닙니다. 자신의 환경에서 다시 실행하여 비교하세요.</p><div class="question"><strong>생각해 보기</strong><br>반복문 안에 print를 넣고 측정하면 무엇의 시간을 주로 측정하게 될까요?</div></section><section id="concept6"><div class="badge">06 · 조건을 보고 선택</div><h2>개념 6. 알고리즘 선택: 정확성·복잡도·적용 조건</h2><p class="lead">같은 정답을 반환하는지 먼저 확인하고, 자료의 정렬 여부와 탐색 횟수, 준비 비용을 따져 알고리즘을 선택합니다. 이 코드는 앞 절을 실행하지 않아도 단독 실행됩니다.</p><div class="grid"><div><h3>과정 출력 코드 <button type="button" data-copy="code6">코드 복사</button></h3><pre><code id="code6">def linear_search(a, target):
+    for i in range(len(a)):
+        print(f&quot;선형 탐색: 인덱스 {i}, 값 {a[i]}&quot;)
+        if a[i] == target:
+            return i
+    return -1
+
+
+def binary_search(a, target):
+    left, right = 0, len(a) - 1
+    while left &lt;= right:
+        mid = (left + right) // 2
+        print(f&quot;이진 탐색: 범위 [{left}, {right}], &quot;
+              f&quot;중간 인덱스 {mid}, 값 {a[mid]}&quot;)
+        if a[mid] == target:
+            return mid
+        elif target &lt; a[mid]:
+            right = mid - 1
+        else:
+            left = mid + 1
+    return -1
+
+
+data = [2, 5, 8, 12, 16, 23, 38]
+target = 23
+print(&quot;자료:&quot;, data)
+linear_result = linear_search(data, target)
+binary_result = binary_search(data, target)
+print(&quot;선형 탐색 결과:&quot;, linear_result)
+print(&quot;이진 탐색 결과:&quot;, binary_result)
+assert linear_result == binary_result == 5
+
+# 정렬은 원래 인덱스를 바꿀 수 있습니다.
+original = [23, 2, 16, 5]
+ordered = sorted(original)
+print(&quot;정렬 전:&quot;, original)
+print(&quot;정렬 후:&quot;, ordered)
+print(&quot;정렬 전 23의 인덱스:&quot;, linear_search(original, 23))
+print(&quot;정렬 후 23의 인덱스:&quot;, binary_search(ordered, 23))</code></pre></div><div><h3>실행 결과</h3><pre class="output"><code>자료: [2, 5, 8, 12, 16, 23, 38]
+선형 탐색: 인덱스 0, 값 2
+선형 탐색: 인덱스 1, 값 5
+선형 탐색: 인덱스 2, 값 8
+선형 탐색: 인덱스 3, 값 12
+선형 탐색: 인덱스 4, 값 16
+선형 탐색: 인덱스 5, 값 23
+이진 탐색: 범위 [0, 6], 중간 인덱스 3, 값 12
+이진 탐색: 범위 [4, 6], 중간 인덱스 5, 값 23
+선형 탐색 결과: 5
+이진 탐색 결과: 5
+정렬 전: [23, 2, 16, 5]
+정렬 후: [2, 5, 16, 23]
+선형 탐색: 인덱스 0, 값 23
+정렬 전 23의 인덱스: 0
+이진 탐색: 범위 [0, 3], 중간 인덱스 1, 값 5
+이진 탐색: 범위 [2, 3], 중간 인덱스 2, 값 16
+이진 탐색: 범위 [3, 3], 중간 인덱스 3, 값 23
+정렬 후 23의 인덱스: 3
+</code></pre></div></div><h3>상세 해설</h3><p><strong>먼저 정확성</strong><br>두 함수는 이 예제에서 인덱스 5를 반환합니다. 선형 탐색은 최악 O(n), 이진 탐색은 정렬된 리스트에서 최악 O(log n)입니다. 두 방법 모두 운 좋게 첫 조사에서 발견하면 O(1)일 수 있습니다.</p><p><strong>정렬되지 않은 자료를 한 번 찾기</strong><br>선형 탐색은 바로 사용할 수 있습니다. 탐색 한 번을 위해 전체를 정렬하면 일반 비교 정렬 기준 O(n log n)의 준비 비용이 추가되므로, 이진 탐색이 무조건 유리하지 않습니다.</p><p><strong>탐색을 q번 반복한다면</strong><br>정렬되지 않은 자료를 선형 탐색으로 반복하면 최악 O(qn), 한 번 정렬한 뒤 이진 탐색하면 O(n log n + q log n)입니다. 입력이 자주 바뀌지 않고 탐색이 많을수록 후자가 유리할 가능성이 커집니다.</p><p><strong>반환값의 의미와 추가 조건</strong><br>정렬 후의 인덱스는 원래 인덱스와 다를 수 있습니다. 원래 위치가 필요하면 위치 정보를 함께 보관해야 합니다. 중복값에서 첫 위치가 필요한지, 메모리 제약이 있는지, 데이터 갱신이 잦은지도 선택 기준입니다.</p><div class="question"><strong>생각해 보기</strong><br>정렬되지 않은 자료를 한 번만 찾는 경우와 10만 번 찾는 경우에 선택 기준이 어떻게 달라질까요?</div></section><section id="compare"><div class="badge">REVIEW · 다섯 증가율</div><h2>한눈에 비교하기</h2><p>아래 숫자는 실제 코드의 정확한 실행 횟수나 측정 시간이 아니라 <strong>성장 함수의 계산값</strong>입니다. 로그는 밑이 2이며, 소수는 반올림했습니다. 일반적인 시간 복잡도에서 로그의 밑은 상수 배 차이이므로 생략합니다.</p><div class="tablewrap"><table><thead><tr><th>복잡도</th><th>대표 예시</th><th>n=8</th><th>n=16</th><th>n=1024</th></tr></thead><tbody><tr><td>O(1)</td><td>첫 원소 접근</td><td>1</td><td>1</td><td>1</td></tr><tr><td>O(log n)</td><td>정렬된 리스트의 이진 탐색</td><td>3</td><td>4</td><td>10</td></tr><tr><td>O(n)</td><td>모든 원소 합산</td><td>8</td><td>16</td><td>1,024</td></tr><tr><td>O(n log n)</td><td>병합 정렬</td><td>24</td><td>64</td><td>10,240</td></tr><tr><td>O(n²)</td><td>모든 순서쌍 확인</td><td>64</td><td>256</td><td>1,048,576</td></tr></tbody></table></div><div class="note">특히 log₂8 = 3은 성장 함수의 값입니다. 이진 탐색의 최악 반복 횟수는 n=8에서 4회가 될 수 있으므로 두 수를 혼동하지 마세요.</div><h3>알고리즘 선택 체크리스트</h3><ol><li><strong>정확성:</strong> 없는 값, 빈 입력, 중복값에서도 요구한 결과를 내는가?</li><li><strong>적용 조건:</strong> 정렬, 인덱스 접근 등 필요한 조건이 충족되는가?</li><li><strong>규모와 빈도:</strong> 최대 n과 탐색 횟수 q가 얼마나 큰가?</li><li><strong>전체 비용:</strong> 정렬·복사·입력 준비와 추가 메모리까지 고려했는가?</li><li><strong>실측:</strong> 출력 없이 동일한 조건에서 반복 측정하고 결과를 검증했는가?</li></ol><h3>확인 질문 해설</h3><details><summary>6개 질문의 답 확인</summary><ol><li>n=8이면 첫 원소 접근은 1회, 합산의 덧셈은 8회입니다.</li><li>상수 작업은 1배, 선형 작업은 10배입니다.</li><li>가운데 값 12보다 목표 23이 크므로 오른쪽만 남깁니다. 다음 가운데 값 23에서 발견하므로 38은 확인하지 않습니다.</li><li>10,000개와 1,000,000개로 100배 차이입니다.</li><li>계산뿐 아니라 문자열 생성·출력 처리·입출력 대기 등이 섞여 알고리즘의 계산 성능 비교가 흐려집니다.</li><li>한 번이면 선형 탐색이 단순하고 정렬 준비 비용이 없습니다. 여러 번이면 한 번 정렬한 뒤 이진 탐색하는 전체 비용을 비교합니다. 원래 위치와 갱신 빈도도 고려해야 합니다.</li></ol></details><h3>마무리 실습</h3><p>개념 6의 두 탐색 함수에서 출력을 제거하고 같은 정렬 리스트와 같은 목표값으로 측정하세요. 목표가 맨 앞·중간·맨 뒤·자료에 없음인 경우를 각각 비교하세요. 매우 짧은 탐색은 한 번의 측정 구간에서 여러 번 실행한 뒤 1회 평균을 구하세요. 이 평균을 구하는 반복 묶음도 여러 번 측정하고 중앙값을 사용하면 도움이 됩니다.</p><p>실험 기록: 입력 크기 n / 자료의 정렬 여부 / 목표 위치 / 반복 횟수 / 준비 비용 포함 여부 / 중앙값 / 선택 이유.</p></section></main><footer>알고리즘 성능 학습 자료 · Python 3 · 외부 연결 없이 열람 가능</footer><script>
+document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{const text=document.getElementById(button.dataset.copy).textContent;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text)}else{const el=document.createElement('textarea');el.value=text;el.style.position='fixed';el.style.opacity='0';document.body.appendChild(el);el.select();const ok=document.execCommand('copy');el.remove();if(!ok)throw new Error('copy')}button.textContent='복사 완료';setTimeout(()=>button.textContent='코드 복사',1500)}catch(e){button.textContent='코드를 선택해 복사하세요';}}));
+</script></body></html>
