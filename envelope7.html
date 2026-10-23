@@ -1,0 +1,174 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>포락선의 노래 — 스무 곡선의 행진</title><style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#090e20;color:#f2f5ff;font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif}header{padding:17px 24px;background:#121b35;border-bottom:1px solid #344262}h1{font-size:clamp(20px,2.5vw,32px);margin:0 0 7px}.sub{color:#b7c9eb}main{display:grid;grid-template-columns:minmax(260px,36%) 1fr;min-height:calc(100vh - 110px)}aside{padding:22px;background:#10182c;border-right:1px solid #33415e;overflow:auto;max-height:calc(100vh - 100px)}.num{color:#7ee9dc;font-weight:800;letter-spacing:2px}.name{font-size:clamp(25px,3vw,40px);margin:10px 0}.en{color:#a7b9d8}.lyrics{white-space:pre-line;font-size:clamp(17px,1.6vw,23px);line-height:1.9;margin-top:22px}.note{color:#c8d5eb;line-height:1.65;font-size:15px;margin-top:22px}.stage{padding:16px;display:flex;flex-direction:column;gap:13px;min-width:0}.canvasWrap{position:relative;flex:1;min-height:390px;background:radial-gradient(ellipse at 50% 45%,#1b3153,#090e20 72%);border:1px solid #334766;border-radius:20px;overflow:hidden}canvas{width:100%;height:100%;display:block}.overlay{position:absolute;top:18px;left:20px;color:#9cc2ef;font-size:14px}.controls{display:flex;gap:9px;flex-wrap:wrap;align-items:center}button,select,input[type=file]{background:#1e3252;color:#fff;border:1px solid #496489;border-radius:10px;padding:11px 13px;font-size:15px;cursor:pointer}button:hover{background:#2c4b73}button.primary{background:#176e80}input[type=range]{flex:1;min-width:120px;accent-color:#5ddfca}.progress{display:flex;gap:4px}.dot{height:7px;flex:1;background:#34445f;border-radius:5px;cursor:pointer}.dot.on{background:#63e5d2}.hint{font-size:13px;color:#a5b9d5}.audio{width:100%;height:35px}#list{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}#list button{font-size:12px;padding:8px 3px}#list button.active{border-color:#6cead6;background:#176e80}@media(max-width:850px){main{grid-template-columns:1fr}aside{max-height:none}.canvasWrap{min-height:420px}#list{grid-template-columns:repeat(4,1fr)}}
+</style><style>.songfull{margin:14px 18px 25px;padding:16px;border:1px solid #415776;border-radius:14px;background:#121b35}.songfull summary{cursor:pointer;font-weight:700;font-size:19px}.songfull pre{white-space:pre-wrap;line-height:1.8;font-family:inherit;font-size:16px;max-height:65vh;overflow:auto}.songfull .source{color:#b7c9eb;font-size:13px}</style><style>
+.codepanel{margin:16px 18px 26px;background:#101b31;border:1px solid #466083;border-radius:15px;padding:18px}.codepanel h2{margin:0 0 10px;font-size:22px}.codepanel pre{white-space:pre;overflow:auto;background:#070e1c;border-radius:10px;padding:16px;color:#b7f4dc;font:14px/1.65 Consolas,monospace;max-height:460px}.codeactions{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.codeactions button{background:#1b4762}.codehelp{color:#b6c7df;line-height:1.6;font-size:14px}#codeStatus{color:#83e6d2;font-size:13px}@media(min-width:1150px){.codepanel{margin-top:4px}}
+</style></head><body><header><h1>🎼 포락선의 노래 — 스무 곡선의 행진</h1><div class="sub">The March of Twenty Curves · 20가지 수학 곡선의 순차 애니메이션</div></header><main><aside><div class="num" id="number">01 / 20</div><div class="name" id="name"></div><div class="en" id="english"></div><div class="lyrics" id="lyrics"></div><div class="note" id="note"></div></aside><section class="stage"><div class="canvasWrap"><canvas id="canvas"></canvas><div class="overlay" id="overlay">곡선을 그리는 중…</div></div><div class="progress" id="progress"></div><div class="controls"><button id="prev">◀ 이전</button><button class="primary" id="play">⏸ 일시정지</button><button id="next">다음 ▶</button><label>속도 <select id="speed"><option value="6">6초</option><option value="10" selected>10초</option><option value="15">15초</option><option value="20">20초</option><option value="30">30초</option></select></label><label><input type="checkbox" id="loop" checked> 반복</label><label><input type="checkbox" id="trace" checked> 그리기 과정</label></div><div class="hint">각 곡선은 선택한 시간 동안 차례로 그려집니다. 기본 음악 envelope.mp3를 자동으로 불러옵니다. 곡선 전환은 음원과 자동 동기화되지 않습니다.</div><div class="controls"><label>🎵 MP3/M4A 선택 <input type="file" id="music" accept="audio/*"></label><button id="sync">음악 처음부터</button></div><audio id="audio" class="audio" controls preload="auto" src="envelope.mp3"></audio><div class="hint" id="audioHint">기본 음악: envelope.mp3 · 브라우저 자동재생이 차단되면 ▶ 음악 재생 버튼을 누르세요.</div><button id="startMusic" class="primary">▶ 음악 재생</button><div id="list"></div></section></main><section class="codepanel" aria-label="파이썬 코드"><h2>🐍 <span id="codeTitle">01 포물선</span> — 파이썬 그래프 코드</h2><p class="codehelp">곡선을 선택하면 코드가 자동으로 바뀝니다. Python IDLE에서 실행할 수 있는 독립적인 예제입니다.</p><div class="codeactions"><button id="copyCode">📋 코드 복사</button><button id="saveCode">⬇ 현재 .py 다운로드</button><button id="saveAll">⬇ 20개 코드 전체 .py 다운로드</button><span id="codeStatus" aria-live="polite"></span></div><pre><code id="pythonCode"></code></pre><p class="codehelp">필요한 라이브러리: <code>py -m pip install numpy matplotlib</code> · 그래프는 별도 Python 실행 환경에서 출력됩니다.</p></section><details class="songfull"><summary>🎼 envelope9.txt 전체 가사 보기 (서주·후렴·20곡선·피날레)</summary><p class="source">제공된 envelope9.txt 원문 · 곡선별 가사는 위 애니메이션과 함께 표시됩니다.</p><pre>포락선의 노래 — 스무 곡선의 행진
+The March of Twenty Curves
+
+[Suno Style Prompt]
+Epic Korean musical-theatre anthem, majestic revolutionary chorus atmosphere, original uplifting march melody, thunderous military bass drums and timpani opening, bold brass fanfares, sweeping strings, full mixed choir, powerful female soprano lead and resonant male baritone responses, cinematic orchestration, 4/4 marching pulse, dramatic crescendo, triumphant finale, clear Korean diction, 105 BPM. No imitation of an existing song&#x27;s melody.
+
+[Intro — Thunderous Bass Drums, Timpani, Brass Fanfare]
+[Instrumental — eight bars of solemn marching drums, growing brass and strings]
+[Female Soprano]
+들리는가, 북소리! 선들이 깨어난다!
+[Male Baritone]
+보이는가, 저 빛을! 곡선이 일어난다!
+[Full Choir]
+수많은 직선 사이 숨겨진 윤곽!
+스무 곡선, 하나 되어 당당히 나아가!
+
+[Verse 1 — Four Curves, Steady March]
+[01 포물선 — Female]
+나는 포물선, 꼭짓점에서 출발해
+대칭의 두 날개를 활짝 펼친다!
+[02 네프로드 — Male]
+나는 네프로드, 반사광의 노래!
+두 첨점 번쩍이며 빛을 모은다!
+[03 카디오이드 — Female]
+나는 카디오이드, 한 첨점의 심장!
+둥글게 품은 마음, 힘차게 뛴다!
+[04 델토이드 — Male]
+나는 델토이드, 세 첨점의 행진!
+원 안의 작은 원이 굴러 나를 그린다!
+
+[Chorus — Full Choir, Brass and Drums]
+울려라 북소리, 펼쳐라 곡선!
+서로 다른 모양도 함께 빛난다!
+스치고 또 스치는 선들의 물결!
+숨겨진 윤곽이 세상에 드러난다!
+하나, 둘, 셋, 넷! 스무 곡선의 행진!
+수학의 무대 위로 당당히 나아가!
+
+[Verse 2 — Rhythmic Orchestral March]
+[05 아스트로이드 — Female]
+나는 아스트로이드, 네 첨점의 별!
+동서남북 네 방향, 빛을 발한다!
+[06 에피사이클로이드 — Male]
+나는 에피사이클로이드, 원 밖을 굴러!
+바깥으로 달린 점이 첨점을 만든다!
+[07 하이포사이클로이드 — Female]
+나는 하이포사이클로이드, 원 안을 굴러!
+안쪽의 작은 원이 별을 그린다!
+[08 에피트로코이드 — Male]
+나는 에피트로코이드, 바깥의 화가!
+중심에서 떨어진 점, 무늬를 바꾼다!
+[09 하이포트로코이드 — Female]
+나는 하이포트로코이드, 안쪽의 화가!
+스피로그래프의 꿈을 펼쳐 보인다!
+
+[Chorus — Choir, Louder]
+울려라 북소리, 펼쳐라 곡선!
+안으로 밖으로, 끝없이 움직여!
+서로 다른 발자국 하나의 축제!
+스무 곡선의 이름을 크게 외쳐라!
+
+[Verse 3 — Sweeping Strings and Brass]
+[10 원 — Male]
+나는 원, 중심에서 거리가 같아!
+반지름과 접선은 직각으로 만난다!
+[11 타원 — Female]
+나는 타원, 두 초점 품은 노래!
+두 거리의 합은 언제나 같아!
+[12 쌍곡선 — Male]
+나는 쌍곡선, 두 갈래의 날개!
+두 거리 차의 절댓값 일정하다!
+[13 사인곡선 — Female]
+나는 사인곡선, 영에서 일어나!
+주기 따라 물결치며 전진한다!
+[14 코사인곡선 — Male]
+나는 코사인곡선, 꼭대기서 출발!
+사인보다 사분 주기 먼저 간다!
+
+[Instrumental — Heroic Brass Interlude, Eight Bars]
+[No vocals. Snare drum rolls, timpani, rising strings and brass.]
+
+[Verse 4 — Accelerating Crescendo]
+[15 장미곡선 — Female]
+나는 장미곡선, 극좌표의 꽃!
+각도의 배수 따라 꽃잎을 펼친다!
+[16 리사주 — Male]
+나는 리사주, 두 진동의 만남!
+진동수와 위상이 무늬를 만든다!
+[17 아르키메데스 나선 — Female]
+나는 아르키메데스, 일정하게 멀어져!
+한 바퀴 돌아갈 때 간격은 같다!
+[18 로그나선 — Male]
+나는 로그나선, 비율로 자라나!
+돌아도 닮은 모습, 소용돌이 친다!
+
+[Bridge — Quiet Voices to Mighty Crescendo]
+[19 인벌류트 — Female, Solo]
+나는 인벌류트, 실 끝의 여행자!
+원에 감긴 실을 팽팽히 풀어 간다!
+[20 베지에 곡선 — Male, Solo]
+나는 베지에, 조절점의 마법사!
+시작과 끝을 잇는 부드러운 길!
+[Duet]
+하나의 점이 길을 만들고!
+수많은 길이 세상을 그린다!
+[Full Choir — Crescendo]
+이제 모두 모여라! 우리의 시간이다!
+
+[Final Chorus — Grand Triumphant Choir]
+포물선! 네프로드! 카디오이드!
+델토이드! 아스트로이드! 빛나라!
+에피사이클로이드, 하이포사이클로이드!
+에피트로코이드, 하이포트로코이드!
+원과 타원, 두 갈래 쌍곡선!
+사인과 코사인, 물결의 행진!
+장미와 리사주, 아르키메데스 나선!
+로그나선, 인벌류트, 베지에까지!
+
+울려라 북소리! 펼쳐라 곡선!
+서로 다른 스무 모습, 하나의 무대!
+수많은 접선이 속삭이는 곳!
+찬란한 포락선의 노래가 울린다!
+
+[Outro — Soprano High Note, Full Choir, Final Timpani]
+[Female Soprano]
+나는 나, 너는 너, 서로 다르게 빛나!
+[Full Choir]
+스무 곡선 함께 외쳐라, 수학의 아름다움!
+선들이 만나고 새로운 길이 열린다!
+오늘도 곡선의 행진은 계속된다!
+[End — Grand Brass Chord, Cymbal Crash, Final Drum Hit]
+</pre></details><script>
+const C=[
+['포물선','Parabola',"나는 포물선, 꼭짓점에서 출발해\n대칭의 두 날개를 활짝 펼친다!",'y = 0.13x². 대칭축과 꼭짓점이 있는 이차곡선.',t=>{let x=-4+8*t;return [x,.13*x*x-1.7]}],
+['네프로드','Nephroid',"나는 네프로드, 반사광의 노래!\n두 첨점 번쩍이며 빛을 모은다!",'네프로드는 두 첨점을 갖는 6차 대수곡선이며 원의 반사 카우스틱으로 나타납니다.',t=>{let a=t*2*Math.PI;return [2.2*(3*Math.cos(a)-Math.cos(3*a))/4,2.2*(3*Math.sin(a)-Math.sin(3*a))/4]}],
+['카디오이드','Cardioid',"나는 카디오이드, 한 첨점의 심장!\n둥글게 품은 마음, 힘차게 뛴다!",'극좌표 r = 1.25(1−cos θ), 첨점이 하나인 심장형 곡선.',t=>{let a=2*Math.PI*t,r=1.25*(1-Math.cos(a));return [r*Math.cos(a),r*Math.sin(a)]}],
+['델토이드','Deltoid',"나는 델토이드, 세 첨점의 행진!\n원 안의 작은 원이 굴러 나를 그린다!",'세 첨점 하이포사이클로이드.',t=>{let a=2*Math.PI*t;return [1.7*Math.cos(a)+.85*Math.cos(2*a),1.7*Math.sin(a)-.85*Math.sin(2*a)]}],
+['아스트로이드','Astroid',"나는 아스트로이드, 네 첨점의 별!\n동서남북 네 방향, 빛을 발한다!",'x = a cos³t, y = a sin³t. 네 첨점 하이포사이클로이드.',t=>{let a=2*Math.PI*t;return [2.5*Math.cos(a)**3,2.5*Math.sin(a)**3]}],
+['에피사이클로이드','Epicycloid',"나는 에피사이클로이드, 원 밖을 굴러!\n바깥으로 달린 점이 첨점을 만든다!",'반지름 비 R/r = 3인 3첨점 에피사이클로이드.',t=>{let a=2*Math.PI*t;return [1.8*Math.cos(a)-.45*Math.cos(4*a),1.8*Math.sin(a)-.45*Math.sin(4*a)]}],
+['하이포사이클로이드','Hypocycloid',"나는 하이포사이클로이드, 원 안을 굴러!\n안쪽의 작은 원이 별을 그린다!",'반지름 비 R/r = 5인 5첨점 하이포사이클로이드.',t=>{let a=2*Math.PI*t;return [2*Math.cos(a)+.5*Math.cos(4*a),2*Math.sin(a)-.5*Math.sin(4*a)]}],
+['에피트로코이드','Epitrochoid',"나는 에피트로코이드, 바깥의 화가!\n중심에서 떨어진 점, 무늬를 바꾼다!",'원 둘레에서 떨어진 점이 만드는 바깥쪽 트로코이드.',t=>{let a=2*Math.PI*t;return [1.65*Math.cos(a)-.8*Math.cos(5*a),1.65*Math.sin(a)-.8*Math.sin(5*a)]}],
+['하이포트로코이드','Hypotrochoid',"나는 하이포트로코이드, 안쪽의 화가!\n스피로그래프의 꿈을 펼쳐 보인다!",'큰 원 안에서 구르는 작은 원에 고정된 점의 자취.',t=>{let a=2*Math.PI*t;return [1.5*Math.cos(a)+1*Math.cos(4*a),1.5*Math.sin(a)-1*Math.sin(4*a)]}],
+['원','Circle',"나는 원, 중심에서 거리가 같아!\n반지름과 접선은 직각으로 만난다!",'x²+y²=r². 중심에서 같은 거리에 있는 점들의 집합.',t=>{let a=2*Math.PI*t;return [2.2*Math.cos(a),2.2*Math.sin(a)]}],
+['타원','Ellipse',"나는 타원, 두 초점 품은 노래!\n두 거리의 합은 언제나 같아!",'두 초점까지 거리 합이 일정한 곡선.',t=>{let a=2*Math.PI*t;return [2.8*Math.cos(a),1.55*Math.sin(a)]}],
+['쌍곡선','Hyperbola',"나는 쌍곡선, 두 갈래의 날개!\n두 거리 차의 절댓값 일정하다!",'x²/a²−y²/b²=1. 두 가지를 각각 그립니다.',t=>{let side=t<.5?1:-1,u=(t% .5)*2,v=-1.5+3*u;return [side*1.05*Math.cosh(v),1.05*Math.sinh(v)]}],
+['사인곡선','Sine Wave',"나는 사인곡선, 영에서 일어나!\n주기 따라 물결치며 전진한다!",'y = 1.6 sin(2x), 주기 π.',t=>{let x=-3.1+6.2*t;return [x,1.6*Math.sin(2*x)]}],
+['코사인곡선','Cosine Wave',"나는 코사인곡선, 꼭대기서 출발!\n사인보다 사분 주기 먼저 간다!",'y = 1.6 cos(2x), 사인보다 위상이 π/2 앞섭니다.',t=>{let x=-3.1+6.2*t;return [x,1.6*Math.cos(2*x)]}],
+['장미곡선','Rose Curve',"나는 장미곡선, 극좌표의 꽃!\n각도의 배수 따라 꽃잎을 펼친다!",'r = 2.4 cos(5θ). 홀수 5의 장미곡선은 꽃잎 5개.',t=>{let a=2*Math.PI*t,r=2.4*Math.cos(5*a);return [r*Math.cos(a),r*Math.sin(a)]}],
+['리사주','Lissajous Curve',"나는 리사주, 두 진동의 만남!\n진동수와 위상이 무늬를 만든다!",'x = 2.5 sin(3t+π/2), y = 2 sin(4t).',t=>{let a=2*Math.PI*t;return [2.5*Math.sin(3*a+Math.PI/2),2*Math.sin(4*a)]}],
+['아르키메데스 나선','Archimedean Spiral',"나는 아르키메데스, 일정하게 멀어져!\n한 바퀴 돌아갈 때 간격은 같다!",'r = 0.12θ. 한 바퀴마다 반지름이 같은 양만큼 증가.',t=>{let a=6*Math.PI*t,r=.13*a;return [r*Math.cos(a),r*Math.sin(a)]}],
+['로그나선','Logarithmic Spiral',"나는 로그나선, 비율로 자라나!\n돌아도 닮은 모습, 소용돌이 친다!",'r = 0.12e^(0.16θ). 회전할 때 반지름이 일정한 비율로 증가.',t=>{let a=6*Math.PI*t,r=.12*Math.exp(.16*a);return [r*Math.cos(a),r*Math.sin(a)]}],
+['인벌류트','Involute of a Circle',"나는 인벌류트, 실 끝의 여행자!\n원에 감긴 실을 팽팽히 풀어 간다!",'원에서 실을 풀 때 실 끝의 자취. x=a(cos t+t sin t), y=a(sin t−t cos t).',t=>{let a=9*t;return [.48*(Math.cos(a)+a*Math.sin(a)),.48*(Math.sin(a)-a*Math.cos(a))]}],
+['베지에 곡선','Bézier Curve',"나는 베지에, 조절점의 마법사!\n시작과 끝을 잇는 부드러운 길!",'3차 베지에: 네 조절점의 가중합으로 부드러운 곡선을 생성.',t=>{let p=[[-2.8,-1.7],[-2.1,2.8],[1.6,-2.8],[2.8,1.7]],u=1-t;return [0,1].map(k=>u**3*p[0][k]+3*u*u*t*p[1][k]+3*u*t*t*p[2][k]+t**3*p[3][k])}]
+];
+const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d');let idx=0,playing=true,start=performance.now(),elapsed=0,last=performance.now(),duration=10000;const $=id=>document.getElementById(id);function setIndex(n){idx=Math.max(0,Math.min(19,n));elapsed=0;start=performance.now();$('number').textContent=String(idx+1).padStart(2,'0')+' / 20';$('name').textContent=C[idx][0];$('english').textContent=C[idx][1];$('lyrics').textContent=C[idx][2];$('note').textContent=C[idx][3];document.querySelectorAll('#list button').forEach((b,i)=>b.classList.toggle('active',i===idx));document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i<=idx));}for(let i=0;i<20;i++){let b=document.createElement('button');b.textContent=String(i+1).padStart(2,'0')+' '+C[i][0];b.onclick=()=>setIndex(i);$('list').appendChild(b);let d=document.createElement('div');d.className='dot';d.onclick=()=>setIndex(i);$('progress').appendChild(d)}function resize(){let r=canvas.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(r.width*d);canvas.height=Math.round(r.height*d);ctx.setTransform(d,0,0,d,0,0)}window.addEventListener('resize',resize);function frame(now){let dt=Math.min(now-last,100);last=now;if(playing)elapsed+=dt;if(elapsed>=duration){if(idx===19&&!$('loop').checked){elapsed=duration;playing=false;$('play').textContent='▶ 재생'}else setIndex((idx+1)%20)}let w=canvas.clientWidth,h=canvas.clientHeight;ctx.clearRect(0,0,w,h);let s=Math.min(w/8.3,h/7.3),ox=w/2,oy=h/2;function point(p){return [ox+p[0]*s,oy-p[1]*s]}ctx.strokeStyle='#263955';ctx.lineWidth=1;for(let x=-4;x<=4;x++){let a=point([x,-4]),b=point([x,4]);ctx.beginPath();ctx.moveTo(...a);ctx.lineTo(...b);ctx.stroke()}for(let y=-4;y<=4;y++){let a=point([-5,y]),b=point([5,y]);ctx.beginPath();ctx.moveTo(...a);ctx.lineTo(...b);ctx.stroke()}ctx.strokeStyle='#50708f';ctx.beginPath();ctx.moveTo(...point([-5,0]));ctx.lineTo(...point([5,0]));ctx.moveTo(...point([0,-5]));ctx.lineTo(...point([0,5]));ctx.stroke();let progress=Math.min(1,elapsed/duration),N=1800,count=$('trace').checked?Math.max(2,Math.round(progress*N)):N;ctx.beginPath();for(let j=0;j<=count;j++){let t=j/N,p=C[idx][4](t),xy=point(p);if(j===0||idx===11&&t>=.5&&((j-1)/N)<.5)ctx.moveTo(...xy);else ctx.lineTo(...xy)}ctx.strokeStyle='#5ef4d5';ctx.lineWidth=3;ctx.lineJoin='round';ctx.lineCap='round';ctx.shadowColor='#43e5da';ctx.shadowBlur=13;ctx.stroke();ctx.shadowBlur=0;if($('trace').checked){let p=point(C[idx][4](count/N));ctx.beginPath();ctx.arc(...p,5,0,2*Math.PI);ctx.fillStyle='#fff5a5';ctx.fill()}$('overlay').textContent=`${String(idx+1).padStart(2,'0')} / 20 · ${Math.round(progress*100)}% · ${C[idx][1]}`;requestAnimationFrame(frame)}$('play').onclick=()=>{playing=!playing;$('play').textContent=playing?'⏸ 일시정지':'▶ 재생'};$('prev').onclick=()=>setIndex((idx+19)%20);$('next').onclick=()=>setIndex((idx+1)%20);$('speed').onchange=e=>{duration=+e.target.value*1000;elapsed=0};$('music').onchange=e=>{let f=e.target.files[0];if(f){if(window.musicUrl)URL.revokeObjectURL(window.musicUrl);window.musicUrl=URL.createObjectURL(f);$('audio').src=window.musicUrl;$('audio').play().catch(()=>{})}};$('startMusic').onclick=()=>{$('audio').play().catch(()=>{});};window.addEventListener('load',()=>{$('audio').play().catch(()=>{$('audioHint').textContent='자동재생이 차단되었습니다. ▶ 음악 재생을 누르세요. HTML과 envelope.mp3를 같은 폴더에 두세요.';});});$('sync').onclick=()=>{$('audio').currentTime=0;setIndex(0);playing=true;$('play').textContent='⏸ 일시정지';$('audio').play().catch(()=>{})};document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT')return;if(e.key==='ArrowRight')setIndex((idx+1)%20);if(e.key==='ArrowLeft')setIndex((idx+19)%20);if(e.code==='Space'){e.preventDefault();$('play').click()}});setIndex(0);resize();requestAnimationFrame(frame);
+</script><script>
+const PYTHON_CODES = ["# 01 포물선\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nx = np.linspace(-4, 4, 1200)\ny = 0.13*x**2 - 1.7\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"01 포물선\", fontname=\"Malgun Gothic\")\nplt.show()", "# 02 네프로드\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 1500)\nx = 0.55*(3*np.cos(t)-np.cos(3*t))\ny = 0.55*(3*np.sin(t)-np.sin(3*t))\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"02 네프로드\", fontname=\"Malgun Gothic\")\nplt.show()", "# 03 카디오이드\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 1500)\nr = 1.25*(1-np.cos(t))\nx, y = r*np.cos(t), r*np.sin(t)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"03 카디오이드\", fontname=\"Malgun Gothic\")\nplt.show()", "# 04 델토이드\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 1500)\nx = 1.7*np.cos(t)+0.85*np.cos(2*t)\ny = 1.7*np.sin(t)-0.85*np.sin(2*t)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"04 델토이드\", fontname=\"Malgun Gothic\")\nplt.show()", "# 05 아스트로이드\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 1500)\nx = 2.5*np.cos(t)**3\ny = 2.5*np.sin(t)**3\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"05 아스트로이드\", fontname=\"Malgun Gothic\")\nplt.show()", "# 06 에피사이클로이드\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 1500)\nx = 1.8*np.cos(t)-0.45*np.cos(4*t)\ny = 1.8*np.sin(t)-0.45*np.sin(4*t)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"06 에피사이클로이드\", fontname=\"Malgun Gothic\")\nplt.show()", "# 07 하이포사이클로이드\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 1500)\nx = 2*np.cos(t)+0.5*np.cos(4*t)\ny = 2*np.sin(t)-0.5*np.sin(4*t)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"07 하이포사이클로이드\", fontname=\"Malgun Gothic\")\nplt.show()", "# 08 에피트로코이드\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 1500)\nx = 1.65*np.cos(t)-0.8*np.cos(5*t)\ny = 1.65*np.sin(t)-0.8*np.sin(5*t)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"08 에피트로코이드\", fontname=\"Malgun Gothic\")\nplt.show()", "# 09 하이포트로코이드\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 1500)\nx = 1.5*np.cos(t)+np.cos(4*t)\ny = 1.5*np.sin(t)-np.sin(4*t)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"09 하이포트로코이드\", fontname=\"Malgun Gothic\")\nplt.show()", "# 10 원\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 1500)\nx, y = 2.2*np.cos(t), 2.2*np.sin(t)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"10 원\", fontname=\"Malgun Gothic\")\nplt.show()", "# 11 타원\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 1500)\nx, y = 2.8*np.cos(t), 1.55*np.sin(t)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"11 타원\", fontname=\"Malgun Gothic\")\nplt.show()", "# 12 쌍곡선\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(-1.5, 1.5, 800)\nx = 1.05*np.cosh(t)\ny = 1.05*np.sinh(t)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.plot(-x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"12 쌍곡선\", fontname=\"Malgun Gothic\")\nplt.show()", "# 13 사인곡선\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nx = np.linspace(-3.1, 3.1, 1500)\ny = 1.6*np.sin(2*x)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"13 사인곡선\", fontname=\"Malgun Gothic\")\nplt.show()", "# 14 코사인곡선\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nx = np.linspace(-3.1, 3.1, 1500)\ny = 1.6*np.cos(2*x)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"14 코사인곡선\", fontname=\"Malgun Gothic\")\nplt.show()", "# 15 장미곡선\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 1500)\nr = 2.4*np.cos(5*t)\nx, y = r*np.cos(t), r*np.sin(t)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"15 장미곡선\", fontname=\"Malgun Gothic\")\nplt.show()", "# 16 리사주\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 1500)\nx = 2.5*np.sin(3*t+np.pi/2)\ny = 2*np.sin(4*t)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"16 리사주\", fontname=\"Malgun Gothic\")\nplt.show()", "# 17 아르키메데스 나선\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 6*np.pi, 1500)\nr = 0.13*t\nx, y = r*np.cos(t), r*np.sin(t)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"17 아르키메데스 나선\", fontname=\"Malgun Gothic\")\nplt.show()", "# 18 로그나선\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 6*np.pi, 1500)\nr = 0.12*np.exp(0.16*t)\nx, y = r*np.cos(t), r*np.sin(t)\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"18 로그나선\", fontname=\"Malgun Gothic\")\nplt.show()", "# 19 인벌류트\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 9, 1500)\nx = 0.48*(np.cos(t)+t*np.sin(t))\ny = 0.48*(np.sin(t)-t*np.cos(t))\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"19 인벌류트\", fontname=\"Malgun Gothic\")\nplt.show()", "# 20 베지에 곡선\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 1, 1500)\np = np.array([[-2.8,-1.7],[-2.1,2.8],[1.6,-2.8],[2.8,1.7]])\nu = 1-t\ncurve = (u**3)[:,None]*p[0] + (3*u*u*t)[:,None]*p[1] + (3*u*t*t)[:,None]*p[2] + (t**3)[:,None]*p[3]\nx, y = curve[:,0], curve[:,1]\nplt.plot(x, y, color=\"teal\", lw=2.5)\nplt.axhline(0, color=\"gray\", lw=0.5)\nplt.axvline(0, color=\"gray\", lw=0.5)\nplt.axis(\"equal\")\nplt.grid(alpha=0.25)\nplt.title(\"20 베지에 곡선\", fontname=\"Malgun Gothic\")\nplt.show()"];
+function updatePythonCode(){
+ const i=typeof idx==='number'?idx:0;
+ document.getElementById('codeTitle').textContent=String(i+1).padStart(2,'0')+' '+C[i][0];
+ document.getElementById('pythonCode').textContent=PYTHON_CODES[i];
+}
+function savePy(text,filename){const blob=new Blob([text],{type:'text/x-python;charset=utf-8'});const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+document.getElementById('copyCode').onclick=async()=>{try{await navigator.clipboard.writeText(PYTHON_CODES[idx]);document.getElementById('codeStatus').textContent='복사했습니다.'}catch(e){document.getElementById('codeStatus').textContent='복사 권한이 없으면 코드를 직접 선택해 복사하세요.'}};
+document.getElementById('saveCode').onclick=()=>savePy(PYTHON_CODES[idx],String(idx+1).padStart(2,'0')+'_'+C[idx][0]+'.py');
+document.getElementById('saveAll').onclick=()=>savePy(PYTHON_CODES.map((c,i)=>'# ===== '+String(i+1).padStart(2,'0')+' '+C[i][0]+' =====\n'+c).join('\n\n'),'포락선_20곡선_전체코드.py');
+const originalSetIndex=setIndex;
+setIndex=function(n){originalSetIndex(n);updatePythonCode()};
+updatePythonCode();
+</script></body></html>
