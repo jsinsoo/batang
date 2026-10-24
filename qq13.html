@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서술형 13번 심층 풀이 및 파이썬 해석</title>
+    <!-- MathJax for LaTeX Rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 40px;
+        }
+        h1 {
+            color: #1a365d;
+            border-bottom: 3px solid #3182ce;
+            padding-bottom: 12px;
+            font-size: 28px;
+            margin-top: 0;
+        }
+        h2 {
+            color: #2b6cb0;
+            margin-top: 32px;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+        }
+        h2::before {
+            content: '■';
+            color: #3182ce;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        .problem-box {
+            background-color: #ebf8ff;
+            border-left: 5px solid #3182ce;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .choice-list {
+            display: flex;
+            justify-content: space-between;
+            max-width: 500px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .step-box {
+            background-color: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        .step-title {
+            font-weight: bold;
+            color: #2d3748;
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+        .highlight {
+            background-color: #fefcbf;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .answer-badge {
+            display: inline-block;
+            background-color: #38a169;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .graph-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        pre {
+            background-color: #1a202c;
+            color: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Fira Code', Consolas, Monaco, monospace;
+            font-size: 14px;
+        }
+        .app-card {
+            background-color: #f7fafc;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-left: 4px solid #4299e1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>서술형 13번 심층 풀이 및 파이썬 해석</h1>
+
+        <h2>1. 원본 문항 (Original Problem)</h2>
+        <div class="problem-box">
+            <p><strong>13.</strong> 다항함수 \(f(x)\)가 \(f'(0) = 1\)이고 모든 실수 \(x\)에 대하여</p>
+            \[
+                f(x) = (f'(x) + 2)(f'(x) - 2)
+            \]
+            <p>를 만족시킬 때, \(f(4)\)의 값은? [4점]</p>
+            <div class="choice-list">
+                <span>① 1</span>
+                <span>② 3</span>
+                <span>③ 5</span>
+                <span>④ 7</span>
+                <span>⑤ 9</span>
+            </div>
+        </div>
+
+        <h2>2. 꼼꼼하게 논리적으로 손으로 풀기 (Step-by-Step Solution)</h2>
+        
+        <div class="step-box">
+            <div class="step-title">단계 1: 다항함수 \(f(x)\)의 차수(Degree) 결정</div>
+            <p>주어진 항등식은 다음과 같이 정리할 수 있습니다:</p>
+            \[
+                f(x) = (f'(x))^2 - 4
+            \]
+            <p>다항함수 \(f(x)\)의 차수를 \(n\) (\(n \ge 0\))이라 합시다.</p>
+            <ul>
+                <li>만약 \(n = 0\) (상수함수)라면, \(f'(x) = 0\)이므로 \(f(x) = -4\)가 됩니다. 그러나 조건에서 \(f'(0) = 1\)이라 했으므로 모순입니다.</li>
+                <li>만약 \(n \ge 1\)이라면, 좌변 \(f(x)\)의 차수는 \(n\)이고, 우변 \((f'(x))^2 - 4\)의 차수는 \(2(n - 1)\)입니다.</li>
+            </ul>
+            <p>모든 실수 \(x\)에 대해 성립해야 하므로 양변의 차수가 같아야 합니다:</p>
+            \[
+                n = 2(n - 1) \implies n = 2n - 2 \implies n = 2
+            \]
+            <p>따라서 \(f(x)\)는 <span class="highlight">2차함수</span>입니다.</p>
+        </div>
+
+        <div class="step-box">
+            <div class="step-title">단계 2: 계수 설정 및 미분계수 조건 적용</div>
+            <p>\(f(x)\)가 2차함수이므로 계수를 다음과 같이 설정합니다:</p>
+            \[
+                f(x) = ax^2 + bx + c \quad (a \neq 0)
+            \]
+            <p>이를 미분하면,</p>
+            \[
+                f'(x) = 2ax + b
+            \]
+            <p>조건 \(f'(0) = 1\)을 적용하면 \(b = 1\)임을 바로 얻습니다. 따라서 도함수는 다음과 같습니다:</p>
+            \[
+                f'(x) = 2ax + 1
+            \]
+        </div>
+
+        <div class="step-box">
+            <div class="step-title">단계 3: 항등식에 대입 및 계수비교법</div>
+            <p>\(f(x)\)와 \(f'(x)\)를 주어진 식 \(f(x) = (f'(x))^2 - 4\)에 대입합니다:</p>
+            \[
+                ax^2 + x + c = (2ax + 1)^2 - 4
+            \]
+            <p>우변을 전개하면,</p>
+            \[
+                ax^2 + x + c = 4a^2 x^2 + 4ax + 1 - 4 = 4a^2 x^2 + 4ax - 3
+            \]
+            <p>양변의 계수를 비교합니다:</p>
+            <ol>
+                <li>\(x^2\)의 계수: \(a = 4a^2 \implies a(1 - 4a) = 0\). \(a \neq 0\)이므로 <span class="highlight">\(a = \frac{1}{4}\)</span></li>
+                <li>\(x\)의 계수: <span class="highlight">\(1 = 4a \implies 1 = 4 \times \frac{1}{4} = 1\)</span> (성립)</li>
+                <li>상수항: <span class="highlight">\(c = -3\)</span></li>
+            </ol>
+            <p>따라서 구하고자 하는 다항함수는 다음과 같습니다:</p>
+            \[
+                f(x) = \frac{1}{4}x^2 + x - 3
+            \]
+        </div>
+
+        <div class="step-box">
+            <div class="step-title">단계 4: \(f(4)\)의 값 계산 및 정답 도출</div>
+            <p>\(x = 4\)를 대입합니다:</p>
+            \[
+                f(4) = \frac{1}{4}(4)^2 + 4 - 3 = 4 + 4 - 3 = 5
+            \]
+            <div style="text-align: center;">
+                <span class="answer-badge">정답: ③ 5</span>
+            </div>
+        </div>
+
+        <h2>3. 그래프 시각화 및 파이썬 해석 (Graph & Python Interpretation)</h2>
+        <p>함수 \(f(x) = \frac{1}{4}x^2 + x - 3\)과 도함수 \(f'(x) = \frac{1}{2}x + 1\)을 시각화한 정확한 벡터 SVG 그래프입니다.</p>
+        <div class="graph-container">
+            <svg viewBox="0 0 700 440" width="100%" height="auto" style="background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; font-family: 'Pretendard', sans-serif;">
+              <defs>
+                <pattern id="grid" width="45" height="30" patternUnits="userSpaceOnUse">
+                  <path d="M 45 0 L 0 0 0 30" fill="none" stroke="#f1f5f9" stroke-width="1"/>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+
+              <!-- Axes -->
+              <line x1="30" y1="210" x2="670" y2="210" stroke="#475569" stroke-width="1.5" />
+              <line x1="420" y1="20" x2="420" y2="420" stroke="#475569" stroke-width="1.5" />
+              <text x="660" y="202" font-size="13" fill="#334155" font-weight="bold">x</text>
+              <text x="430" y="32" font-size="13" fill="#334155" font-weight="bold">y</text>
+              <text x="408" y="226" font-size="11" fill="#64748b">0</text>
+
+              <!-- X Ticks -->
+              <line x1="150" y1="206" x2="150" y2="214" stroke="#475569" stroke-width="1" />
+              <text x="150" y="228" font-size="11" fill="#64748b" text-anchor="middle">-6</text>
+              <line x1="240" y1="206" x2="240" y2="214" stroke="#475569" stroke-width="1" />
+              <text x="240" y="228" font-size="11" fill="#64748b" text-anchor="middle">-4</text>
+              <line x1="330" y1="206" x2="330" y2="214" stroke="#475569" stroke-width="1" />
+              <text x="330" y="228" font-size="11" fill="#64748b" text-anchor="middle">-2</text>
+              <line x1="510" y1="206" x2="510" y2="214" stroke="#475569" stroke-width="1" />
+              <text x="510" y="228" font-size="11" fill="#64748b" text-anchor="middle">2</text>
+              <line x1="600" y1="206" x2="600" y2="214" stroke="#475569" stroke-width="1" />
+              <text x="600" y="228" font-size="11" fill="#64748b" text-anchor="middle">4</text>
+
+              <!-- Y Ticks -->
+              <line x1="416" y1="330" x2="424" y2="330" stroke="#475569" stroke-width="1" />
+              <text x="412" y="334" font-size="11" fill="#64748b" text-anchor="end">-4</text>
+              <line x1="416" y1="300" x2="424" y2="300" stroke="#475569" stroke-width="1" />
+              <text x="412" y="304" font-size="11" fill="#64748b" text-anchor="end">-3</text>
+              <line x1="416" y1="180" x2="424" y2="180" stroke="#475569" stroke-width="1" />
+              <text x="412" y="184" font-size="11" fill="#64748b" text-anchor="end">1</text>
+              <line x1="416" y1="120" x2="424" y2="120" stroke="#475569" stroke-width="1" />
+              <text x="412" y="124" font-size="11" fill="#64748b" text-anchor="end">3</text>
+              <line x1="416" y1="60" x2="424" y2="60" stroke="#475569" stroke-width="1" />
+              <text x="412" y="64" font-size="11" fill="#64748b" text-anchor="end">5</text>
+
+              <!-- f(x) Curve (Upward-opening) -->
+              <path d="M 82.5,103.1 L 87.0,111.4 L 91.6,119.5 L 96.1,127.4 L 100.7,135.2 L 105.2,142.8 L 109.7,150.3 L 114.3,157.6 L 118.8,164.7 L 123.4,171.7 L 127.9,178.6 L 132.4,185.2 L 137.0,191.7 L 141.5,198.1 L 146.1,204.3 L 150.6,210.3 L 155.1,216.2 L 159.7,221.9 L 164.2,227.4 L 168.8,232.8 L 173.3,238.0 L 177.8,243.1 L 182.4,248.0 L 186.9,252.7 L 191.5,257.3 L 196.0,261.7 L 200.5,266.0 L 205.1,270.0 L 209.6,274.0 L 214.2,277.7 L 218.7,281.3 L 223.2,284.7 L 227.8,288.0 L 232.3,291.1 L 236.9,294.0 L 241.4,296.8 L 245.9,299.4 L 250.5,301.8 L 255.0,304.1 L 259.6,306.2 L 264.1,308.2 L 268.6,309.9 L 273.2,311.6 L 277.7,313.0 L 282.3,314.3 L 286.8,315.4 L 291.3,316.4 L 295.9,317.2 L 300.4,317.8 L 305.0,318.3 L 309.5,318.6 L 314.0,318.8 L 318.6,318.8 L 323.1,318.6 L 327.7,318.3 L 332.2,317.8 L 336.7,317.2 L 341.3,316.4 L 345.8,315.4 L 350.4,314.3 L 354.9,313.0 L 359.4,311.6 L 364.0,309.9 L 368.5,308.2 L 373.1,306.2 L 377.6,304.1 L 382.1,301.8 L 386.7,299.4 L 391.2,296.8 L 395.8,294.0 L 400.3,291.1 L 404.8,288.0 L 409.4,284.7 L 413.9,281.3 L 418.5,277.7 L 423.0,274.0 L 427.5,270.0 L 432.1,266.0 L 436.6,261.7 L 441.2,257.3 L 445.7,252.7 L 450.2,248.0 L 454.8,243.1 L 459.3,238.0 L 463.9,232.8 L 468.4,227.4 L 472.9,221.9 L 477.5,216.2 L 482.0,210.3 L 486.6,204.3 L 491.1,198.1 L 495.6,191.7 L 500.2,185.2 L 504.7,178.6 L 509.3,171.7 L 513.8,164.7 L 518.3,157.6 L 522.9,150.3 L 527.4,142.8 L 532.0,135.2 L 536.5,127.4 L 541.0,119.5 L 545.6,111.4 L 550.1,103.1 L 554.7,94.7 L 559.2,86.1 L 563.7,77.3 L 568.3,68.4 L 572.8,59.3 L 577.4,50.1 L 581.9,40.7 L 586.4,31.1 C 595.5,12.0 604.5,-7.2 622.5,-45.0" fill="none" stroke="#3182ce" stroke-width="3" />
+
+              <!-- f'(x) Line -->
+              <path d="M 82.5,292.5 L 622.5,127.5" fill="none" stroke="#38a169" stroke-width="2" stroke-dasharray="6,4" />
+
+              <!-- Key Points Guidelines & Dots -->
+              <!-- Vertex (-2, -4) -->
+              <line x1="330" y1="210" x2="330" y2="330" stroke="#e53e3e" stroke-width="1" stroke-dasharray="3,3" />
+              <line x1="420" y1="330" x2="330" y2="330" stroke="#e53e3e" stroke-width="1" stroke-dasharray="3,3" />
+              <circle cx="330" cy="330" r="5" fill="#e53e3e" />
+              <text x="330" y="350" font-size="12" font-weight="bold" fill="#c53030" text-anchor="middle">꼭짓점 (-2, -4)</text>
+
+              <!-- Point (4, 5) -->
+              <line x1="600" y1="210" x2="600" y2="60" stroke="#3182ce" stroke-width="1" stroke-dasharray="3,3" />
+              <line x1="420" y1="60" x2="600" y2="60" stroke="#3182ce" stroke-width="1" stroke-dasharray="3,3" />
+              <circle cx="600" cy="60" r="5" fill="#3182ce" />
+              <text x="610" y="64" font-size="12" font-weight="bold" fill="#2b6cb0">f(4) = 5 (4, 5)</text>
+
+              <!-- Intercepts (-6,0), (2,0), (0,-3) -->
+              <circle cx="150" cy="210" r="4" fill="#3182ce" />
+              <circle cx="510" cy="210" r="4" fill="#3182ce" />
+              <circle cx="420" cy="300" r="4" fill="#3182ce" />
+              <text x="428" y="304" font-size="11" fill="#2b6cb0" font-weight="bold">(0, -3)</text>
+
+              <!-- Legend -->
+              <rect x="40" y="30" width="230" height="65" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" rx="6" />
+              <line x1="55" y1="50" x2="85" y2="50" stroke="#3182ce" stroke-width="3" />
+              <text x="95" y="54" font-size="12" fill="#1e293b" font-weight="bold">f(x) = ¼x² + x - 3</text>
+              <line x1="55" y1="72" x2="85" y2="72" stroke="#38a169" stroke-width="2" stroke-dasharray="5,3" />
+              <text x="95" y="76" font-size="12" fill="#1e293b" font-weight="bold">f'(x) = ½x + 1</text>
+            </svg>
+        </div>
+
+        <p><strong>파이썬 검증 코드 (SymPy):</strong></p>
+        <pre><code>import sympy as sp
+
+# 변수 및 계수 정의
+x = sp.Symbol('x')
+a, b, c = sp.symbols('a b c', real=True)
+
+# 2차 다항함수 f(x) 및 도함수 f'(x)
+f = a*x**2 + b*x + c
+df = sp.diff(f, x)
+
+# 조건 1: f'(0) = 1
+cond1 = sp.Eq(df.subs(x, 0), 1)
+
+# 조건 2: f(x) = (f'(x)+2)(f'(x)-2)
+diff_eq = f - ((df + 2)*(df - 2))
+poly_eq = sp.Poly(diff_eq, x)
+
+# 계수 방정식 생성 및 연립방정식 풀이
+eqs = [cond1] + [sp.Eq(coeff, 0) for coeff in poly_eq.coeffs()]
+sol = sp.solve(eqs, (a, b, c), dict=True)
+
+valid_sol = [s for s in sol if s[a] != 0][0]
+f_expr = valid_sol[a]*x**2 + valid_sol[b]*x + valid_sol[c]
+
+print(f"구한 함수 f(x): {f_expr}")
+print(f"f(4)의 값: {f_expr.subs(x, 4)}")
+# 출력 결과: f(x) = x**2/4 + x - 3, f(4) = 5</code></pre>
+
+        <h2>4. 실생활 활용 예시 (Real-World Applications)</h2>
+        
+        <div class="app-card">
+            <strong>1. 물리학: 속도의 제곱에 비례하는 에너지 및 공기 저항 모델</strong>
+            <p>물체의 위치 또는 에너지가 속도(도함수)의 제곱과 관련되는 미분방정식 구조입니다. 예를 들어 자동차나 항공기의 공기 저항력은 속도의 제곱(\(v^2\))에 비례하며, 역학적 에너지는 속도의 제곱으로 나타납니다. 운동 상태와 가속도, 위치 사이의 관계를 해석하는 근간이 됩니다.</p>
+        </div>
+
+        <div class="app-card">
+            <strong>2. 제어 공학 (Control Engineering)</strong>
+            <p>로보틱스 및 드론 제어에서 시스템의 상태 변화율(도함수)의 제곱을 비용 함수(Cost Function)로 두고 이를 최적화할 때 이와 같은 이차 미분 관계식이 등장합니다.</p>
+        </div>
+
+        <div class="app-card">
+            <strong>3. 경제학: 한계비용 기반 총비용 함수 추정</strong>
+            <p>생산량 \(x\)에 따른 총비용 함수 \(f(x)\)와 한계비용 \(f'(x)\) 사이에서, 한계비용의 제곱에 따라 비용 효율이 변하는 경제 모델의 최적 생산 지점을 산출할 때 활용됩니다.</p>
+        </div>
+
+        <div class="app-card">
+            <strong>4. 광학 및 안테나 설계 (Parabolic Reflector)</strong>
+            <p>2차 함수 포물선은 빛과 파동을 한 점(초점)으로 모으는 성질이 있어, 파라볼라 안테나, 태양열 집열기, 자동차 헤드라이트의 반사경 설계에 직접 활용됩니다.</p>
+        </div>
+    </div>
+</body>
+</html>
