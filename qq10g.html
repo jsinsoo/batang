@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>합성함수와 정적분 10문항 | 수식·그래프·파이썬 통합</title><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["\\[","\\]"]]},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><style>body{font-family:"Malgun Gothic","Noto Sans KR",sans-serif;max-width:1060px;margin:auto;padding:24px;background:#f6f8fc;color:#1e293b;line-height:1.8}h1,h2{color:#163a67}header,.panel{background:white;border-radius:16px;padding:22px;margin:18px 0;box-shadow:0 3px 14px #1d355712}.problem{border-left:5px solid #3478bc}details{background:#eef5fc;border-radius:10px;padding:12px 18px;margin-top:12px}summary,summary{cursor:pointer;font-weight:bold;color:#174c80}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14253b;color:#e7f1ff;padding:18px;border-radius:10px;font-size:14px;line-height:1.6}code{font-family:Consolas,monospace} .tag{background:#dcecff;padding:4px 10px;border-radius:8px}.math{overflow-x:auto;overflow-y:hidden;text-align:center;padding:12px 4px;font-size:1.12rem} mjx-container[display="true"]{margin:0.65em 0!important;min-width:max-content} details p{margin:12px 0} @media(max-width:600px){body{padding:10px}.panel,header{padding:15px}.math{font-size:1rem}} .note{color:#46566a}button{background:#205a98;color:white;border:0;border-radius:9px;padding:10px 16px;cursor:pointer}</style><style>.graph-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}.graph-box{background:#fff;border:1px solid #d7e2f0;border-radius:12px;padding:12px;min-width:0}.graph-box h4{margin:2px 0 8px;color:#1d497a;font-size:15px}.graph-box canvas{display:block;width:100%;height:220px}.graph-note{font-size:13px;color:#536579}.code-graph{font-size:13px} .math{overflow-x:auto} mjx-container{max-width:none} @media print{details{display:block}details>*{display:block}}</style></head><body><header><h1>수능 30번 유형: 합성함수·절댓값 적분 10제</h1><p>원문을 변형한 연습문제 10개 · 단계별 상세해설 · Python 수치 검산</p><p class="note">수식 표시에는 인터넷 연결(MathJax CDN)이 필요합니다. 파이썬 코드는 별도 Python 환경에서 실행하세요.</p><button onclick="document.querySelectorAll('details').forEach(x=&gt;x.open=true)">모든 해설 펼치기</button> <button onclick="document.querySelectorAll('details').forEach(x=&gt;x.open=false)">모든 해설 접기</button></header><section class="panel"><h2>공통 핵심 원리</h2><p>\(g'(f(x))f'(x)=(g\circ f)'(x)\) 이므로 절댓값 정적분은 합성함수의 <b>총변동량</b>을 나타냅니다.</p><div class="math">\[\int_b^{b+1/\sqrt c}f(g(x))g'(x)\,dx=\int_0^1f(u)\,du\]</div><p>이 문제군에서 \(a\)는 양의 정수, \(b,c\)는 자연수입니다. 따라서 합성함수의 총변동량을 계산할 수 있습니다.</p></section><article class="panel problem"><h2>문항 1 <span class="tag">유형 변형 1</span></h2><p>양의 정수 \(a\), 자연수 \(b,c\)에 대하여 두 함수</p><div class="math">\[f(x)=-\sin(ax)+b+1,\qquad g(x)=c(x-b)^2\]</div><p>가 다음 조건을 만족한다.</p><div class="math">\[\int_0^{2\pi}\left|g'(f(x))f'(x)
+\right|\,dx=8,\qquad c=1\]</div><div class="math">\[\int_b^{b+1/\sqrt c}f(g(x))g'(x)\,dx=2+\frac{\cos 1-1}{1}.\]</div><p>위 조건에서 \(f(2\pi)=\frac qp\) (서로소인 자연수 \(p,q\))일 때 \(p+q\)를 구하시오.</p><details><summary>단계별 상세 풀이 및 정답</summary><p><b>1단계.</b> 합성함수는 \(g(f(x))=c(1-\sin(ax))^2\) 입니다.</p><p><b>2단계.</b> 연쇄법칙을 적용하면</p><div class="math">\[g'(f(x))f'(x)=-2ca(1-\sin(ax))\cos(ax).\]</div><p><b>3단계.</b> \(1-\sin(ax)\ge0\)이므로</p><div class="math">\[|g'(f(x))f'(x)|=2ca(1-\sin(ax))|\cos(ax)|.\]</div><p><b>4단계.</b> \(a\)가 양의 정수이면 \(0\le x\le2\pi\)에서 \(\sin(ax)\)는 정확히 \(a\)회 진동합니다.</p><p><b>5단계.</b> 한 주기 동안 \(c(1-\sin(ax))^2\)의 최솟값은 0, 최댓값은 \(4c\)입니다. 한 주기 총변동량은 \(8c\)입니다.</p><p><b>6단계.</b> 따라서 첫 적분은 \(8ca=8\)이고, \(c=1\)를 대입하여 \(a=1\)를 얻습니다.</p><p><b>7단계.</b> 두 번째 적분에 \(u=g(x)=c(x-b)^2\)를 치환하면 \(u\)의 범위는 0부터 1까지입니다.</p><div class="math">\[\int_0^1(-\sin(au)+b+1)\,du=b+1+\frac{\cos a-1}{a}.\]</div><p><b>8단계.</b> 주어진 두 번째 조건과 비교하면 \(b=1\)입니다. (첫 적분으로 구한 \(a\) 사용)</p><p><b>9단계.</b> \(a\)가 정수이므로 \(\sin(2\pi a)=0\)입니다.</p><div class="math">\[f(2\pi)=-\sin(2\pi\cdot 1)+1+1=2=\frac{2}{1}.\]</div><p><b>10단계.</b> \(p=1, q=2\)이므로 <b>정답 \(\boxed{p+q=3}\)</b>입니다.</p></details><details><summary>Python 검산 코드와 예상 출력</summary><pre><code>import math
+
+a, b, c = 1, 1, 1
+def f(x):
+    return -math.sin(a*x) + b + 1
+def g(x):
+    return c*(x-b)**2
+def fp(x):
+    return -a*math.cos(a*x)
+def gp(x):
+    return 2*c*(x-b)
+def simpson(fun, lo, hi, n=20000):
+    h = (hi-lo)/n
+    s = fun(lo)+fun(hi)
+    for k in range(1,n):
+        s += (4 if k%2 else 2)*fun(lo+k*h)
+    return s*h/3
+
+I1 = simpson(lambda x: abs(gp(f(x))*fp(x)), 0, 2*math.pi)
+I2 = simpson(lambda x: f(g(x))*gp(x), b, b+1/math.sqrt(c))
+print('첫째 적분:', round(I1, 7), '이론값:', 8)
+print('둘째 적분:', round(I2, 7))
+print('둘째 적분 이론값:', round(b+1+(math.cos(a)-1)/a, 7))
+print('f(2π):', round(f(2*math.pi), 7))
+print('p+q:', 3)</code></pre><p class="note">Simpson 수치적분으로 두 적분과 최종 답을 확인합니다. 출력값은 부동소수점 오차에 따라 마지막 자리가 달라질 수 있습니다.</p></details><details open=""><summary>관련 함수 그래프 4종 · 그래프 그리는 Python 코드</summary><p>파란색 f(x), 빨간색 합성함수 g(f(x)), 초록색 절댓값 적분의 피적분함수, 보라색 치환적분의 피적분함수입니다. 그래프는 HTML Canvas로 직접 그려 인터넷 없이도 표시됩니다.</p><div class="graph-grid graph-set" data-a="1" data-b="1" data-c="1"><div class="graph-box"><h4>① f(x) = −sin(ax)+b+1</h4><canvas></canvas></div><div class="graph-box"><h4>② g(f(x)) = c(1−sin(ax))²</h4><canvas></canvas></div><div class="graph-box"><h4>③ |g′(f(x)) f′(x)|</h4><canvas></canvas></div><div class="graph-box"><h4>④ f(g(x)) g′(x)</h4><canvas></canvas></div></div><p class="graph-note">③ 그래프 아래 넓이는 첫 번째 적분값이며, ④ 그래프의 부호 있는 넓이는 두 번째 적분값입니다.</p><pre class="code-graph"><code>import numpy as np
+import matplotlib.pyplot as plt
+
+# 문항 1 : 함수와 정적분 그래프
+# 설치: pip install numpy matplotlib
+# 한글 제목 출력 (Windows)
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
+
+a, b, c = 1, 1, 1
+f = lambda x: -np.sin(a*x) + b + 1
+g = lambda x: c*(x-b)**2
+fp = lambda x: -a*np.cos(a*x)
+gp = lambda x: 2*c*(x-b)
+
+x = np.linspace(0, 2*np.pi, 2001)
+t = np.linspace(b, b + 1/np.sqrt(c), 1001)
+y1 = f(x)
+y2 = g(f(x))
+y3 = np.abs(gp(f(x))*fp(x))
+y4 = f(g(t))*gp(t)
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+items = [
+    (axes[0,0], x, y1, 'f(x)', 'royalblue'),
+    (axes[0,1], x, y2, 'g(f(x))', 'crimson'),
+    (axes[1,0], x, y3, '|g\'(f(x)) f\'(x)|', 'seagreen'),
+    (axes[1,1], t, y4, 'f(g(x)) g\'(x)', 'darkviolet'),
+]
+for ax, xx, yy, title, color in items:
+    ax.plot(xx, yy, color=color, linewidth=2)
+    ax.set_title(title)
+    ax.axhline(0, color='gray', linewidth=0.8)
+    ax.grid(alpha=0.25)
+axes[1,0].fill_between(x, 0, y3, alpha=0.18, color='seagreen')
+axes[1,1].fill_between(t, 0, y4, alpha=0.18, color='darkviolet')
+fig.tight_layout()
+plt.savefig('문항01_함수그래프.png', dpi=180, bbox_inches='tight')
+plt.show()
+
+# 수치 적분 확인 (NumPy 2.x에서도 사용 가능)
+print('첫 번째 적분 ≈', np.trapezoid(y3, x))
+print('두 번째 적분 ≈', np.trapezoid(y4, t))
+print('f(2π) ≈', f(2*np.pi))</code></pre></details></article><article class="panel problem"><h2>문항 2 <span class="tag">유형 변형 2</span></h2><p>양의 정수 \(a\), 자연수 \(b,c\)에 대하여 두 함수</p><div class="math">\[f(x)=-\sin(ax)+b+1,\qquad g(x)=c(x-b)^2\]</div><p>가 다음 조건을 만족한다.</p><div class="math">\[\int_0^{2\pi}\left|g'(f(x))f'(x)
+\right|\,dx=16,\qquad c=1\]</div><div class="math">\[\int_b^{b+1/\sqrt c}f(g(x))g'(x)\,dx=3+\frac{\cos 2-1}{2}.\]</div><p>위 조건에서 \(f(2\pi)=\frac qp\) (서로소인 자연수 \(p,q\))일 때 \(p+q\)를 구하시오.</p><details><summary>단계별 상세 풀이 및 정답</summary><p><b>1단계.</b> 합성함수는 \(g(f(x))=c(1-\sin(ax))^2\) 입니다.</p><p><b>2단계.</b> 연쇄법칙을 적용하면</p><div class="math">\[g'(f(x))f'(x)=-2ca(1-\sin(ax))\cos(ax).\]</div><p><b>3단계.</b> \(1-\sin(ax)\ge0\)이므로</p><div class="math">\[|g'(f(x))f'(x)|=2ca(1-\sin(ax))|\cos(ax)|.\]</div><p><b>4단계.</b> \(a\)가 양의 정수이면 \(0\le x\le2\pi\)에서 \(\sin(ax)\)는 정확히 \(a\)회 진동합니다.</p><p><b>5단계.</b> 한 주기 동안 \(c(1-\sin(ax))^2\)의 최솟값은 0, 최댓값은 \(4c\)입니다. 한 주기 총변동량은 \(8c\)입니다.</p><p><b>6단계.</b> 따라서 첫 적분은 \(8ca=16\)이고, \(c=1\)를 대입하여 \(a=2\)를 얻습니다.</p><p><b>7단계.</b> 두 번째 적분에 \(u=g(x)=c(x-b)^2\)를 치환하면 \(u\)의 범위는 0부터 1까지입니다.</p><div class="math">\[\int_0^1(-\sin(au)+b+1)\,du=b+1+\frac{\cos a-1}{a}.\]</div><p><b>8단계.</b> 주어진 두 번째 조건과 비교하면 \(b=2\)입니다. (첫 적분으로 구한 \(a\) 사용)</p><p><b>9단계.</b> \(a\)가 정수이므로 \(\sin(2\pi a)=0\)입니다.</p><div class="math">\[f(2\pi)=-\sin(2\pi\cdot 2)+2+1=3=\frac{3}{1}.\]</div><p><b>10단계.</b> \(p=1, q=3\)이므로 <b>정답 \(\boxed{p+q=4}\)</b>입니다.</p></details><details><summary>Python 검산 코드와 예상 출력</summary><pre><code>import math
+
+a, b, c = 2, 2, 1
+def f(x):
+    return -math.sin(a*x) + b + 1
+def g(x):
+    return c*(x-b)**2
+def fp(x):
+    return -a*math.cos(a*x)
+def gp(x):
+    return 2*c*(x-b)
+def simpson(fun, lo, hi, n=20000):
+    h = (hi-lo)/n
+    s = fun(lo)+fun(hi)
+    for k in range(1,n):
+        s += (4 if k%2 else 2)*fun(lo+k*h)
+    return s*h/3
+
+I1 = simpson(lambda x: abs(gp(f(x))*fp(x)), 0, 2*math.pi)
+I2 = simpson(lambda x: f(g(x))*gp(x), b, b+1/math.sqrt(c))
+print('첫째 적분:', round(I1, 7), '이론값:', 16)
+print('둘째 적분:', round(I2, 7))
+print('둘째 적분 이론값:', round(b+1+(math.cos(a)-1)/a, 7))
+print('f(2π):', round(f(2*math.pi), 7))
+print('p+q:', 4)</code></pre><p class="note">Simpson 수치적분으로 두 적분과 최종 답을 확인합니다. 출력값은 부동소수점 오차에 따라 마지막 자리가 달라질 수 있습니다.</p></details><details open=""><summary>관련 함수 그래프 4종 · 그래프 그리는 Python 코드</summary><p>파란색 f(x), 빨간색 합성함수 g(f(x)), 초록색 절댓값 적분의 피적분함수, 보라색 치환적분의 피적분함수입니다. 그래프는 HTML Canvas로 직접 그려 인터넷 없이도 표시됩니다.</p><div class="graph-grid graph-set" data-a="2" data-b="2" data-c="1"><div class="graph-box"><h4>① f(x) = −sin(ax)+b+1</h4><canvas></canvas></div><div class="graph-box"><h4>② g(f(x)) = c(1−sin(ax))²</h4><canvas></canvas></div><div class="graph-box"><h4>③ |g′(f(x)) f′(x)|</h4><canvas></canvas></div><div class="graph-box"><h4>④ f(g(x)) g′(x)</h4><canvas></canvas></div></div><p class="graph-note">③ 그래프 아래 넓이는 첫 번째 적분값이며, ④ 그래프의 부호 있는 넓이는 두 번째 적분값입니다.</p><pre class="code-graph"><code>import numpy as np
+import matplotlib.pyplot as plt
+
+# 문항 2 : 함수와 정적분 그래프
+# 설치: pip install numpy matplotlib
+# 한글 제목 출력 (Windows)
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
+
+a, b, c = 2, 2, 1
+f = lambda x: -np.sin(a*x) + b + 1
+g = lambda x: c*(x-b)**2
+fp = lambda x: -a*np.cos(a*x)
+gp = lambda x: 2*c*(x-b)
+
+x = np.linspace(0, 2*np.pi, 2001)
+t = np.linspace(b, b + 1/np.sqrt(c), 1001)
+y1 = f(x)
+y2 = g(f(x))
+y3 = np.abs(gp(f(x))*fp(x))
+y4 = f(g(t))*gp(t)
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+items = [
+    (axes[0,0], x, y1, 'f(x)', 'royalblue'),
+    (axes[0,1], x, y2, 'g(f(x))', 'crimson'),
+    (axes[1,0], x, y3, '|g\'(f(x)) f\'(x)|', 'seagreen'),
+    (axes[1,1], t, y4, 'f(g(x)) g\'(x)', 'darkviolet'),
+]
+for ax, xx, yy, title, color in items:
+    ax.plot(xx, yy, color=color, linewidth=2)
+    ax.set_title(title)
+    ax.axhline(0, color='gray', linewidth=0.8)
+    ax.grid(alpha=0.25)
+axes[1,0].fill_between(x, 0, y3, alpha=0.18, color='seagreen')
+axes[1,1].fill_between(t, 0, y4, alpha=0.18, color='darkviolet')
+fig.tight_layout()
+plt.savefig('문항02_함수그래프.png', dpi=180, bbox_inches='tight')
+plt.show()
+
+# 수치 적분 확인 (NumPy 2.x에서도 사용 가능)
+print('첫 번째 적분 ≈', np.trapezoid(y3, x))
+print('두 번째 적분 ≈', np.trapezoid(y4, t))
+print('f(2π) ≈', f(2*np.pi))</code></pre></details></article><article class="panel problem"><h2>문항 3 <span class="tag">유형 변형 3</span></h2><p>양의 정수 \(a\), 자연수 \(b,c\)에 대하여 두 함수</p><div class="math">\[f(x)=-\sin(ax)+b+1,\qquad g(x)=c(x-b)^2\]</div><p>가 다음 조건을 만족한다.</p><div class="math">\[\int_0^{2\pi}\left|g'(f(x))f'(x)
+\right|\,dx=24,\qquad c=1\]</div><div class="math">\[\int_b^{b+1/\sqrt c}f(g(x))g'(x)\,dx=4+\frac{\cos 3-1}{3}.\]</div><p>위 조건에서 \(f(2\pi)=\frac qp\) (서로소인 자연수 \(p,q\))일 때 \(p+q\)를 구하시오.</p><details><summary>단계별 상세 풀이 및 정답</summary><p><b>1단계.</b> 합성함수는 \(g(f(x))=c(1-\sin(ax))^2\) 입니다.</p><p><b>2단계.</b> 연쇄법칙을 적용하면</p><div class="math">\[g'(f(x))f'(x)=-2ca(1-\sin(ax))\cos(ax).\]</div><p><b>3단계.</b> \(1-\sin(ax)\ge0\)이므로</p><div class="math">\[|g'(f(x))f'(x)|=2ca(1-\sin(ax))|\cos(ax)|.\]</div><p><b>4단계.</b> \(a\)가 양의 정수이면 \(0\le x\le2\pi\)에서 \(\sin(ax)\)는 정확히 \(a\)회 진동합니다.</p><p><b>5단계.</b> 한 주기 동안 \(c(1-\sin(ax))^2\)의 최솟값은 0, 최댓값은 \(4c\)입니다. 한 주기 총변동량은 \(8c\)입니다.</p><p><b>6단계.</b> 따라서 첫 적분은 \(8ca=24\)이고, \(c=1\)를 대입하여 \(a=3\)를 얻습니다.</p><p><b>7단계.</b> 두 번째 적분에 \(u=g(x)=c(x-b)^2\)를 치환하면 \(u\)의 범위는 0부터 1까지입니다.</p><div class="math">\[\int_0^1(-\sin(au)+b+1)\,du=b+1+\frac{\cos a-1}{a}.\]</div><p><b>8단계.</b> 주어진 두 번째 조건과 비교하면 \(b=3\)입니다. (첫 적분으로 구한 \(a\) 사용)</p><p><b>9단계.</b> \(a\)가 정수이므로 \(\sin(2\pi a)=0\)입니다.</p><div class="math">\[f(2\pi)=-\sin(2\pi\cdot 3)+3+1=4=\frac{4}{1}.\]</div><p><b>10단계.</b> \(p=1, q=4\)이므로 <b>정답 \(\boxed{p+q=5}\)</b>입니다.</p></details><details><summary>Python 검산 코드와 예상 출력</summary><pre><code>import math
+
+a, b, c = 3, 3, 1
+def f(x):
+    return -math.sin(a*x) + b + 1
+def g(x):
+    return c*(x-b)**2
+def fp(x):
+    return -a*math.cos(a*x)
+def gp(x):
+    return 2*c*(x-b)
+def simpson(fun, lo, hi, n=20000):
+    h = (hi-lo)/n
+    s = fun(lo)+fun(hi)
+    for k in range(1,n):
+        s += (4 if k%2 else 2)*fun(lo+k*h)
+    return s*h/3
+
+I1 = simpson(lambda x: abs(gp(f(x))*fp(x)), 0, 2*math.pi)
+I2 = simpson(lambda x: f(g(x))*gp(x), b, b+1/math.sqrt(c))
+print('첫째 적분:', round(I1, 7), '이론값:', 24)
+print('둘째 적분:', round(I2, 7))
+print('둘째 적분 이론값:', round(b+1+(math.cos(a)-1)/a, 7))
+print('f(2π):', round(f(2*math.pi), 7))
+print('p+q:', 5)</code></pre><p class="note">Simpson 수치적분으로 두 적분과 최종 답을 확인합니다. 출력값은 부동소수점 오차에 따라 마지막 자리가 달라질 수 있습니다.</p></details><details open=""><summary>관련 함수 그래프 4종 · 그래프 그리는 Python 코드</summary><p>파란색 f(x), 빨간색 합성함수 g(f(x)), 초록색 절댓값 적분의 피적분함수, 보라색 치환적분의 피적분함수입니다. 그래프는 HTML Canvas로 직접 그려 인터넷 없이도 표시됩니다.</p><div class="graph-grid graph-set" data-a="3" data-b="3" data-c="1"><div class="graph-box"><h4>① f(x) = −sin(ax)+b+1</h4><canvas></canvas></div><div class="graph-box"><h4>② g(f(x)) = c(1−sin(ax))²</h4><canvas></canvas></div><div class="graph-box"><h4>③ |g′(f(x)) f′(x)|</h4><canvas></canvas></div><div class="graph-box"><h4>④ f(g(x)) g′(x)</h4><canvas></canvas></div></div><p class="graph-note">③ 그래프 아래 넓이는 첫 번째 적분값이며, ④ 그래프의 부호 있는 넓이는 두 번째 적분값입니다.</p><pre class="code-graph"><code>import numpy as np
+import matplotlib.pyplot as plt
+
+# 문항 3 : 함수와 정적분 그래프
+# 설치: pip install numpy matplotlib
+# 한글 제목 출력 (Windows)
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
+
+a, b, c = 3, 3, 1
+f = lambda x: -np.sin(a*x) + b + 1
+g = lambda x: c*(x-b)**2
+fp = lambda x: -a*np.cos(a*x)
+gp = lambda x: 2*c*(x-b)
+
+x = np.linspace(0, 2*np.pi, 2001)
+t = np.linspace(b, b + 1/np.sqrt(c), 1001)
+y1 = f(x)
+y2 = g(f(x))
+y3 = np.abs(gp(f(x))*fp(x))
+y4 = f(g(t))*gp(t)
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+items = [
+    (axes[0,0], x, y1, 'f(x)', 'royalblue'),
+    (axes[0,1], x, y2, 'g(f(x))', 'crimson'),
+    (axes[1,0], x, y3, '|g\'(f(x)) f\'(x)|', 'seagreen'),
+    (axes[1,1], t, y4, 'f(g(x)) g\'(x)', 'darkviolet'),
+]
+for ax, xx, yy, title, color in items:
+    ax.plot(xx, yy, color=color, linewidth=2)
+    ax.set_title(title)
+    ax.axhline(0, color='gray', linewidth=0.8)
+    ax.grid(alpha=0.25)
+axes[1,0].fill_between(x, 0, y3, alpha=0.18, color='seagreen')
+axes[1,1].fill_between(t, 0, y4, alpha=0.18, color='darkviolet')
+fig.tight_layout()
+plt.savefig('문항03_함수그래프.png', dpi=180, bbox_inches='tight')
+plt.show()
+
+# 수치 적분 확인 (NumPy 2.x에서도 사용 가능)
+print('첫 번째 적분 ≈', np.trapezoid(y3, x))
+print('두 번째 적분 ≈', np.trapezoid(y4, t))
+print('f(2π) ≈', f(2*np.pi))</code></pre></details></article><article class="panel problem"><h2>문항 4 <span class="tag">유형 변형 4</span></h2><p>양의 정수 \(a\), 자연수 \(b,c\)에 대하여 두 함수</p><div class="math">\[f(x)=-\sin(ax)+b+1,\qquad g(x)=c(x-b)^2\]</div><p>가 다음 조건을 만족한다.</p><div class="math">\[\int_0^{2\pi}\left|g'(f(x))f'(x)
+\right|\,dx=64,\qquad c=2\]</div><div class="math">\[\int_b^{b+1/\sqrt c}f(g(x))g'(x)\,dx=2+\frac{\cos 4-1}{4}.\]</div><p>위 조건에서 \(f(2\pi)=\frac qp\) (서로소인 자연수 \(p,q\))일 때 \(p+q\)를 구하시오.</p><details><summary>단계별 상세 풀이 및 정답</summary><p><b>1단계.</b> 합성함수는 \(g(f(x))=c(1-\sin(ax))^2\) 입니다.</p><p><b>2단계.</b> 연쇄법칙을 적용하면</p><div class="math">\[g'(f(x))f'(x)=-2ca(1-\sin(ax))\cos(ax).\]</div><p><b>3단계.</b> \(1-\sin(ax)\ge0\)이므로</p><div class="math">\[|g'(f(x))f'(x)|=2ca(1-\sin(ax))|\cos(ax)|.\]</div><p><b>4단계.</b> \(a\)가 양의 정수이면 \(0\le x\le2\pi\)에서 \(\sin(ax)\)는 정확히 \(a\)회 진동합니다.</p><p><b>5단계.</b> 한 주기 동안 \(c(1-\sin(ax))^2\)의 최솟값은 0, 최댓값은 \(4c\)입니다. 한 주기 총변동량은 \(8c\)입니다.</p><p><b>6단계.</b> 따라서 첫 적분은 \(8ca=64\)이고, \(c=2\)를 대입하여 \(a=4\)를 얻습니다.</p><p><b>7단계.</b> 두 번째 적분에 \(u=g(x)=c(x-b)^2\)를 치환하면 \(u\)의 범위는 0부터 1까지입니다.</p><div class="math">\[\int_0^1(-\sin(au)+b+1)\,du=b+1+\frac{\cos a-1}{a}.\]</div><p><b>8단계.</b> 주어진 두 번째 조건과 비교하면 \(b=1\)입니다. (첫 적분으로 구한 \(a\) 사용)</p><p><b>9단계.</b> \(a\)가 정수이므로 \(\sin(2\pi a)=0\)입니다.</p><div class="math">\[f(2\pi)=-\sin(2\pi\cdot 4)+1+1=2=\frac{2}{1}.\]</div><p><b>10단계.</b> \(p=1, q=2\)이므로 <b>정답 \(\boxed{p+q=3}\)</b>입니다.</p></details><details><summary>Python 검산 코드와 예상 출력</summary><pre><code>import math
+
+a, b, c = 4, 1, 2
+def f(x):
+    return -math.sin(a*x) + b + 1
+def g(x):
+    return c*(x-b)**2
+def fp(x):
+    return -a*math.cos(a*x)
+def gp(x):
+    return 2*c*(x-b)
+def simpson(fun, lo, hi, n=20000):
+    h = (hi-lo)/n
+    s = fun(lo)+fun(hi)
+    for k in range(1,n):
+        s += (4 if k%2 else 2)*fun(lo+k*h)
+    return s*h/3
+
+I1 = simpson(lambda x: abs(gp(f(x))*fp(x)), 0, 2*math.pi)
+I2 = simpson(lambda x: f(g(x))*gp(x), b, b+1/math.sqrt(c))
+print('첫째 적분:', round(I1, 7), '이론값:', 64)
+print('둘째 적분:', round(I2, 7))
+print('둘째 적분 이론값:', round(b+1+(math.cos(a)-1)/a, 7))
+print('f(2π):', round(f(2*math.pi), 7))
+print('p+q:', 3)</code></pre><p class="note">Simpson 수치적분으로 두 적분과 최종 답을 확인합니다. 출력값은 부동소수점 오차에 따라 마지막 자리가 달라질 수 있습니다.</p></details><details open=""><summary>관련 함수 그래프 4종 · 그래프 그리는 Python 코드</summary><p>파란색 f(x), 빨간색 합성함수 g(f(x)), 초록색 절댓값 적분의 피적분함수, 보라색 치환적분의 피적분함수입니다. 그래프는 HTML Canvas로 직접 그려 인터넷 없이도 표시됩니다.</p><div class="graph-grid graph-set" data-a="4" data-b="1" data-c="2"><div class="graph-box"><h4>① f(x) = −sin(ax)+b+1</h4><canvas></canvas></div><div class="graph-box"><h4>② g(f(x)) = c(1−sin(ax))²</h4><canvas></canvas></div><div class="graph-box"><h4>③ |g′(f(x)) f′(x)|</h4><canvas></canvas></div><div class="graph-box"><h4>④ f(g(x)) g′(x)</h4><canvas></canvas></div></div><p class="graph-note">③ 그래프 아래 넓이는 첫 번째 적분값이며, ④ 그래프의 부호 있는 넓이는 두 번째 적분값입니다.</p><pre class="code-graph"><code>import numpy as np
+import matplotlib.pyplot as plt
+
+# 문항 4 : 함수와 정적분 그래프
+# 설치: pip install numpy matplotlib
+# 한글 제목 출력 (Windows)
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
+
+a, b, c = 4, 1, 2
+f = lambda x: -np.sin(a*x) + b + 1
+g = lambda x: c*(x-b)**2
+fp = lambda x: -a*np.cos(a*x)
+gp = lambda x: 2*c*(x-b)
+
+x = np.linspace(0, 2*np.pi, 2001)
+t = np.linspace(b, b + 1/np.sqrt(c), 1001)
+y1 = f(x)
+y2 = g(f(x))
+y3 = np.abs(gp(f(x))*fp(x))
+y4 = f(g(t))*gp(t)
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+items = [
+    (axes[0,0], x, y1, 'f(x)', 'royalblue'),
+    (axes[0,1], x, y2, 'g(f(x))', 'crimson'),
+    (axes[1,0], x, y3, '|g\'(f(x)) f\'(x)|', 'seagreen'),
+    (axes[1,1], t, y4, 'f(g(x)) g\'(x)', 'darkviolet'),
+]
+for ax, xx, yy, title, color in items:
+    ax.plot(xx, yy, color=color, linewidth=2)
+    ax.set_title(title)
+    ax.axhline(0, color='gray', linewidth=0.8)
+    ax.grid(alpha=0.25)
+axes[1,0].fill_between(x, 0, y3, alpha=0.18, color='seagreen')
+axes[1,1].fill_between(t, 0, y4, alpha=0.18, color='darkviolet')
+fig.tight_layout()
+plt.savefig('문항04_함수그래프.png', dpi=180, bbox_inches='tight')
+plt.show()
+
+# 수치 적분 확인 (NumPy 2.x에서도 사용 가능)
+print('첫 번째 적분 ≈', np.trapezoid(y3, x))
+print('두 번째 적분 ≈', np.trapezoid(y4, t))
+print('f(2π) ≈', f(2*np.pi))</code></pre></details></article><article class="panel problem"><h2>문항 5 <span class="tag">유형 변형 5</span></h2><p>양의 정수 \(a\), 자연수 \(b,c\)에 대하여 두 함수</p><div class="math">\[f(x)=-\sin(ax)+b+1,\qquad g(x)=c(x-b)^2\]</div><p>가 다음 조건을 만족한다.</p><div class="math">\[\int_0^{2\pi}\left|g'(f(x))f'(x)
+\right|\,dx=80,\qquad c=2\]</div><div class="math">\[\int_b^{b+1/\sqrt c}f(g(x))g'(x)\,dx=3+\frac{\cos 5-1}{5}.\]</div><p>위 조건에서 \(f(2\pi)=\frac qp\) (서로소인 자연수 \(p,q\))일 때 \(p+q\)를 구하시오.</p><details><summary>단계별 상세 풀이 및 정답</summary><p><b>1단계.</b> 합성함수는 \(g(f(x))=c(1-\sin(ax))^2\) 입니다.</p><p><b>2단계.</b> 연쇄법칙을 적용하면</p><div class="math">\[g'(f(x))f'(x)=-2ca(1-\sin(ax))\cos(ax).\]</div><p><b>3단계.</b> \(1-\sin(ax)\ge0\)이므로</p><div class="math">\[|g'(f(x))f'(x)|=2ca(1-\sin(ax))|\cos(ax)|.\]</div><p><b>4단계.</b> \(a\)가 양의 정수이면 \(0\le x\le2\pi\)에서 \(\sin(ax)\)는 정확히 \(a\)회 진동합니다.</p><p><b>5단계.</b> 한 주기 동안 \(c(1-\sin(ax))^2\)의 최솟값은 0, 최댓값은 \(4c\)입니다. 한 주기 총변동량은 \(8c\)입니다.</p><p><b>6단계.</b> 따라서 첫 적분은 \(8ca=80\)이고, \(c=2\)를 대입하여 \(a=5\)를 얻습니다.</p><p><b>7단계.</b> 두 번째 적분에 \(u=g(x)=c(x-b)^2\)를 치환하면 \(u\)의 범위는 0부터 1까지입니다.</p><div class="math">\[\int_0^1(-\sin(au)+b+1)\,du=b+1+\frac{\cos a-1}{a}.\]</div><p><b>8단계.</b> 주어진 두 번째 조건과 비교하면 \(b=2\)입니다. (첫 적분으로 구한 \(a\) 사용)</p><p><b>9단계.</b> \(a\)가 정수이므로 \(\sin(2\pi a)=0\)입니다.</p><div class="math">\[f(2\pi)=-\sin(2\pi\cdot 5)+2+1=3=\frac{3}{1}.\]</div><p><b>10단계.</b> \(p=1, q=3\)이므로 <b>정답 \(\boxed{p+q=4}\)</b>입니다.</p></details><details><summary>Python 검산 코드와 예상 출력</summary><pre><code>import math
+
+a, b, c = 5, 2, 2
+def f(x):
+    return -math.sin(a*x) + b + 1
+def g(x):
+    return c*(x-b)**2
+def fp(x):
+    return -a*math.cos(a*x)
+def gp(x):
+    return 2*c*(x-b)
+def simpson(fun, lo, hi, n=20000):
+    h = (hi-lo)/n
+    s = fun(lo)+fun(hi)
+    for k in range(1,n):
+        s += (4 if k%2 else 2)*fun(lo+k*h)
+    return s*h/3
+
+I1 = simpson(lambda x: abs(gp(f(x))*fp(x)), 0, 2*math.pi)
+I2 = simpson(lambda x: f(g(x))*gp(x), b, b+1/math.sqrt(c))
+print('첫째 적분:', round(I1, 7), '이론값:', 80)
+print('둘째 적분:', round(I2, 7))
+print('둘째 적분 이론값:', round(b+1+(math.cos(a)-1)/a, 7))
+print('f(2π):', round(f(2*math.pi), 7))
+print('p+q:', 4)</code></pre><p class="note">Simpson 수치적분으로 두 적분과 최종 답을 확인합니다. 출력값은 부동소수점 오차에 따라 마지막 자리가 달라질 수 있습니다.</p></details><details open=""><summary>관련 함수 그래프 4종 · 그래프 그리는 Python 코드</summary><p>파란색 f(x), 빨간색 합성함수 g(f(x)), 초록색 절댓값 적분의 피적분함수, 보라색 치환적분의 피적분함수입니다. 그래프는 HTML Canvas로 직접 그려 인터넷 없이도 표시됩니다.</p><div class="graph-grid graph-set" data-a="5" data-b="2" data-c="2"><div class="graph-box"><h4>① f(x) = −sin(ax)+b+1</h4><canvas></canvas></div><div class="graph-box"><h4>② g(f(x)) = c(1−sin(ax))²</h4><canvas></canvas></div><div class="graph-box"><h4>③ |g′(f(x)) f′(x)|</h4><canvas></canvas></div><div class="graph-box"><h4>④ f(g(x)) g′(x)</h4><canvas></canvas></div></div><p class="graph-note">③ 그래프 아래 넓이는 첫 번째 적분값이며, ④ 그래프의 부호 있는 넓이는 두 번째 적분값입니다.</p><pre class="code-graph"><code>import numpy as np
+import matplotlib.pyplot as plt
+
+# 문항 5 : 함수와 정적분 그래프
+# 설치: pip install numpy matplotlib
+# 한글 제목 출력 (Windows)
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
+
+a, b, c = 5, 2, 2
+f = lambda x: -np.sin(a*x) + b + 1
+g = lambda x: c*(x-b)**2
+fp = lambda x: -a*np.cos(a*x)
+gp = lambda x: 2*c*(x-b)
+
+x = np.linspace(0, 2*np.pi, 2001)
+t = np.linspace(b, b + 1/np.sqrt(c), 1001)
+y1 = f(x)
+y2 = g(f(x))
+y3 = np.abs(gp(f(x))*fp(x))
+y4 = f(g(t))*gp(t)
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+items = [
+    (axes[0,0], x, y1, 'f(x)', 'royalblue'),
+    (axes[0,1], x, y2, 'g(f(x))', 'crimson'),
+    (axes[1,0], x, y3, '|g\'(f(x)) f\'(x)|', 'seagreen'),
+    (axes[1,1], t, y4, 'f(g(x)) g\'(x)', 'darkviolet'),
+]
+for ax, xx, yy, title, color in items:
+    ax.plot(xx, yy, color=color, linewidth=2)
+    ax.set_title(title)
+    ax.axhline(0, color='gray', linewidth=0.8)
+    ax.grid(alpha=0.25)
+axes[1,0].fill_between(x, 0, y3, alpha=0.18, color='seagreen')
+axes[1,1].fill_between(t, 0, y4, alpha=0.18, color='darkviolet')
+fig.tight_layout()
+plt.savefig('문항05_함수그래프.png', dpi=180, bbox_inches='tight')
+plt.show()
+
+# 수치 적분 확인 (NumPy 2.x에서도 사용 가능)
+print('첫 번째 적분 ≈', np.trapezoid(y3, x))
+print('두 번째 적분 ≈', np.trapezoid(y4, t))
+print('f(2π) ≈', f(2*np.pi))</code></pre></details></article><article class="panel problem"><h2>문항 6 <span class="tag">유형 변형 6</span></h2><p>양의 정수 \(a\), 자연수 \(b,c\)에 대하여 두 함수</p><div class="math">\[f(x)=-\sin(ax)+b+1,\qquad g(x)=c(x-b)^2\]</div><p>가 다음 조건을 만족한다.</p><div class="math">\[\int_0^{2\pi}\left|g'(f(x))f'(x)
+\right|\,dx=96,\qquad c=2\]</div><div class="math">\[\int_b^{b+1/\sqrt c}f(g(x))g'(x)\,dx=4+\frac{\cos 6-1}{6}.\]</div><p>위 조건에서 \(f(2\pi)=\frac qp\) (서로소인 자연수 \(p,q\))일 때 \(p+q\)를 구하시오.</p><details><summary>단계별 상세 풀이 및 정답</summary><p><b>1단계.</b> 합성함수는 \(g(f(x))=c(1-\sin(ax))^2\) 입니다.</p><p><b>2단계.</b> 연쇄법칙을 적용하면</p><div class="math">\[g'(f(x))f'(x)=-2ca(1-\sin(ax))\cos(ax).\]</div><p><b>3단계.</b> \(1-\sin(ax)\ge0\)이므로</p><div class="math">\[|g'(f(x))f'(x)|=2ca(1-\sin(ax))|\cos(ax)|.\]</div><p><b>4단계.</b> \(a\)가 양의 정수이면 \(0\le x\le2\pi\)에서 \(\sin(ax)\)는 정확히 \(a\)회 진동합니다.</p><p><b>5단계.</b> 한 주기 동안 \(c(1-\sin(ax))^2\)의 최솟값은 0, 최댓값은 \(4c\)입니다. 한 주기 총변동량은 \(8c\)입니다.</p><p><b>6단계.</b> 따라서 첫 적분은 \(8ca=96\)이고, \(c=2\)를 대입하여 \(a=6\)를 얻습니다.</p><p><b>7단계.</b> 두 번째 적분에 \(u=g(x)=c(x-b)^2\)를 치환하면 \(u\)의 범위는 0부터 1까지입니다.</p><div class="math">\[\int_0^1(-\sin(au)+b+1)\,du=b+1+\frac{\cos a-1}{a}.\]</div><p><b>8단계.</b> 주어진 두 번째 조건과 비교하면 \(b=3\)입니다. (첫 적분으로 구한 \(a\) 사용)</p><p><b>9단계.</b> \(a\)가 정수이므로 \(\sin(2\pi a)=0\)입니다.</p><div class="math">\[f(2\pi)=-\sin(2\pi\cdot 6)+3+1=4=\frac{4}{1}.\]</div><p><b>10단계.</b> \(p=1, q=4\)이므로 <b>정답 \(\boxed{p+q=5}\)</b>입니다.</p></details><details><summary>Python 검산 코드와 예상 출력</summary><pre><code>import math
+
+a, b, c = 6, 3, 2
+def f(x):
+    return -math.sin(a*x) + b + 1
+def g(x):
+    return c*(x-b)**2
+def fp(x):
+    return -a*math.cos(a*x)
+def gp(x):
+    return 2*c*(x-b)
+def simpson(fun, lo, hi, n=20000):
+    h = (hi-lo)/n
+    s = fun(lo)+fun(hi)
+    for k in range(1,n):
+        s += (4 if k%2 else 2)*fun(lo+k*h)
+    return s*h/3
+
+I1 = simpson(lambda x: abs(gp(f(x))*fp(x)), 0, 2*math.pi)
+I2 = simpson(lambda x: f(g(x))*gp(x), b, b+1/math.sqrt(c))
+print('첫째 적분:', round(I1, 7), '이론값:', 96)
+print('둘째 적분:', round(I2, 7))
+print('둘째 적분 이론값:', round(b+1+(math.cos(a)-1)/a, 7))
+print('f(2π):', round(f(2*math.pi), 7))
+print('p+q:', 5)</code></pre><p class="note">Simpson 수치적분으로 두 적분과 최종 답을 확인합니다. 출력값은 부동소수점 오차에 따라 마지막 자리가 달라질 수 있습니다.</p></details><details open=""><summary>관련 함수 그래프 4종 · 그래프 그리는 Python 코드</summary><p>파란색 f(x), 빨간색 합성함수 g(f(x)), 초록색 절댓값 적분의 피적분함수, 보라색 치환적분의 피적분함수입니다. 그래프는 HTML Canvas로 직접 그려 인터넷 없이도 표시됩니다.</p><div class="graph-grid graph-set" data-a="6" data-b="3" data-c="2"><div class="graph-box"><h4>① f(x) = −sin(ax)+b+1</h4><canvas></canvas></div><div class="graph-box"><h4>② g(f(x)) = c(1−sin(ax))²</h4><canvas></canvas></div><div class="graph-box"><h4>③ |g′(f(x)) f′(x)|</h4><canvas></canvas></div><div class="graph-box"><h4>④ f(g(x)) g′(x)</h4><canvas></canvas></div></div><p class="graph-note">③ 그래프 아래 넓이는 첫 번째 적분값이며, ④ 그래프의 부호 있는 넓이는 두 번째 적분값입니다.</p><pre class="code-graph"><code>import numpy as np
+import matplotlib.pyplot as plt
+
+# 문항 6 : 함수와 정적분 그래프
+# 설치: pip install numpy matplotlib
+# 한글 제목 출력 (Windows)
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
+
+a, b, c = 6, 3, 2
+f = lambda x: -np.sin(a*x) + b + 1
+g = lambda x: c*(x-b)**2
+fp = lambda x: -a*np.cos(a*x)
+gp = lambda x: 2*c*(x-b)
+
+x = np.linspace(0, 2*np.pi, 2001)
+t = np.linspace(b, b + 1/np.sqrt(c), 1001)
+y1 = f(x)
+y2 = g(f(x))
+y3 = np.abs(gp(f(x))*fp(x))
+y4 = f(g(t))*gp(t)
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+items = [
+    (axes[0,0], x, y1, 'f(x)', 'royalblue'),
+    (axes[0,1], x, y2, 'g(f(x))', 'crimson'),
+    (axes[1,0], x, y3, '|g\'(f(x)) f\'(x)|', 'seagreen'),
+    (axes[1,1], t, y4, 'f(g(x)) g\'(x)', 'darkviolet'),
+]
+for ax, xx, yy, title, color in items:
+    ax.plot(xx, yy, color=color, linewidth=2)
+    ax.set_title(title)
+    ax.axhline(0, color='gray', linewidth=0.8)
+    ax.grid(alpha=0.25)
+axes[1,0].fill_between(x, 0, y3, alpha=0.18, color='seagreen')
+axes[1,1].fill_between(t, 0, y4, alpha=0.18, color='darkviolet')
+fig.tight_layout()
+plt.savefig('문항06_함수그래프.png', dpi=180, bbox_inches='tight')
+plt.show()
+
+# 수치 적분 확인 (NumPy 2.x에서도 사용 가능)
+print('첫 번째 적분 ≈', np.trapezoid(y3, x))
+print('두 번째 적분 ≈', np.trapezoid(y4, t))
+print('f(2π) ≈', f(2*np.pi))</code></pre></details></article><article class="panel problem"><h2>문항 7 <span class="tag">유형 변형 7</span></h2><p>양의 정수 \(a\), 자연수 \(b,c\)에 대하여 두 함수</p><div class="math">\[f(x)=-\sin(ax)+b+1,\qquad g(x)=c(x-b)^2\]</div><p>가 다음 조건을 만족한다.</p><div class="math">\[\int_0^{2\pi}\left|g'(f(x))f'(x)
+\right|\,dx=168,\qquad c=3\]</div><div class="math">\[\int_b^{b+1/\sqrt c}f(g(x))g'(x)\,dx=2+\frac{\cos 7-1}{7}.\]</div><p>위 조건에서 \(f(2\pi)=\frac qp\) (서로소인 자연수 \(p,q\))일 때 \(p+q\)를 구하시오.</p><details><summary>단계별 상세 풀이 및 정답</summary><p><b>1단계.</b> 합성함수는 \(g(f(x))=c(1-\sin(ax))^2\) 입니다.</p><p><b>2단계.</b> 연쇄법칙을 적용하면</p><div class="math">\[g'(f(x))f'(x)=-2ca(1-\sin(ax))\cos(ax).\]</div><p><b>3단계.</b> \(1-\sin(ax)\ge0\)이므로</p><div class="math">\[|g'(f(x))f'(x)|=2ca(1-\sin(ax))|\cos(ax)|.\]</div><p><b>4단계.</b> \(a\)가 양의 정수이면 \(0\le x\le2\pi\)에서 \(\sin(ax)\)는 정확히 \(a\)회 진동합니다.</p><p><b>5단계.</b> 한 주기 동안 \(c(1-\sin(ax))^2\)의 최솟값은 0, 최댓값은 \(4c\)입니다. 한 주기 총변동량은 \(8c\)입니다.</p><p><b>6단계.</b> 따라서 첫 적분은 \(8ca=168\)이고, \(c=3\)를 대입하여 \(a=7\)를 얻습니다.</p><p><b>7단계.</b> 두 번째 적분에 \(u=g(x)=c(x-b)^2\)를 치환하면 \(u\)의 범위는 0부터 1까지입니다.</p><div class="math">\[\int_0^1(-\sin(au)+b+1)\,du=b+1+\frac{\cos a-1}{a}.\]</div><p><b>8단계.</b> 주어진 두 번째 조건과 비교하면 \(b=1\)입니다. (첫 적분으로 구한 \(a\) 사용)</p><p><b>9단계.</b> \(a\)가 정수이므로 \(\sin(2\pi a)=0\)입니다.</p><div class="math">\[f(2\pi)=-\sin(2\pi\cdot 7)+1+1=2=\frac{2}{1}.\]</div><p><b>10단계.</b> \(p=1, q=2\)이므로 <b>정답 \(\boxed{p+q=3}\)</b>입니다.</p></details><details><summary>Python 검산 코드와 예상 출력</summary><pre><code>import math
+
+a, b, c = 7, 1, 3
+def f(x):
+    return -math.sin(a*x) + b + 1
+def g(x):
+    return c*(x-b)**2
+def fp(x):
+    return -a*math.cos(a*x)
+def gp(x):
+    return 2*c*(x-b)
+def simpson(fun, lo, hi, n=20000):
+    h = (hi-lo)/n
+    s = fun(lo)+fun(hi)
+    for k in range(1,n):
+        s += (4 if k%2 else 2)*fun(lo+k*h)
+    return s*h/3
+
+I1 = simpson(lambda x: abs(gp(f(x))*fp(x)), 0, 2*math.pi)
+I2 = simpson(lambda x: f(g(x))*gp(x), b, b+1/math.sqrt(c))
+print('첫째 적분:', round(I1, 7), '이론값:', 168)
+print('둘째 적분:', round(I2, 7))
+print('둘째 적분 이론값:', round(b+1+(math.cos(a)-1)/a, 7))
+print('f(2π):', round(f(2*math.pi), 7))
+print('p+q:', 3)</code></pre><p class="note">Simpson 수치적분으로 두 적분과 최종 답을 확인합니다. 출력값은 부동소수점 오차에 따라 마지막 자리가 달라질 수 있습니다.</p></details><details open=""><summary>관련 함수 그래프 4종 · 그래프 그리는 Python 코드</summary><p>파란색 f(x), 빨간색 합성함수 g(f(x)), 초록색 절댓값 적분의 피적분함수, 보라색 치환적분의 피적분함수입니다. 그래프는 HTML Canvas로 직접 그려 인터넷 없이도 표시됩니다.</p><div class="graph-grid graph-set" data-a="7" data-b="1" data-c="3"><div class="graph-box"><h4>① f(x) = −sin(ax)+b+1</h4><canvas></canvas></div><div class="graph-box"><h4>② g(f(x)) = c(1−sin(ax))²</h4><canvas></canvas></div><div class="graph-box"><h4>③ |g′(f(x)) f′(x)|</h4><canvas></canvas></div><div class="graph-box"><h4>④ f(g(x)) g′(x)</h4><canvas></canvas></div></div><p class="graph-note">③ 그래프 아래 넓이는 첫 번째 적분값이며, ④ 그래프의 부호 있는 넓이는 두 번째 적분값입니다.</p><pre class="code-graph"><code>import numpy as np
+import matplotlib.pyplot as plt
+
+# 문항 7 : 함수와 정적분 그래프
+# 설치: pip install numpy matplotlib
+# 한글 제목 출력 (Windows)
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
+
+a, b, c = 7, 1, 3
+f = lambda x: -np.sin(a*x) + b + 1
+g = lambda x: c*(x-b)**2
+fp = lambda x: -a*np.cos(a*x)
+gp = lambda x: 2*c*(x-b)
+
+x = np.linspace(0, 2*np.pi, 2001)
+t = np.linspace(b, b + 1/np.sqrt(c), 1001)
+y1 = f(x)
+y2 = g(f(x))
+y3 = np.abs(gp(f(x))*fp(x))
+y4 = f(g(t))*gp(t)
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+items = [
+    (axes[0,0], x, y1, 'f(x)', 'royalblue'),
+    (axes[0,1], x, y2, 'g(f(x))', 'crimson'),
+    (axes[1,0], x, y3, '|g\'(f(x)) f\'(x)|', 'seagreen'),
+    (axes[1,1], t, y4, 'f(g(x)) g\'(x)', 'darkviolet'),
+]
+for ax, xx, yy, title, color in items:
+    ax.plot(xx, yy, color=color, linewidth=2)
+    ax.set_title(title)
+    ax.axhline(0, color='gray', linewidth=0.8)
+    ax.grid(alpha=0.25)
+axes[1,0].fill_between(x, 0, y3, alpha=0.18, color='seagreen')
+axes[1,1].fill_between(t, 0, y4, alpha=0.18, color='darkviolet')
+fig.tight_layout()
+plt.savefig('문항07_함수그래프.png', dpi=180, bbox_inches='tight')
+plt.show()
+
+# 수치 적분 확인 (NumPy 2.x에서도 사용 가능)
+print('첫 번째 적분 ≈', np.trapezoid(y3, x))
+print('두 번째 적분 ≈', np.trapezoid(y4, t))
+print('f(2π) ≈', f(2*np.pi))</code></pre></details></article><article class="panel problem"><h2>문항 8 <span class="tag">유형 변형 8</span></h2><p>양의 정수 \(a\), 자연수 \(b,c\)에 대하여 두 함수</p><div class="math">\[f(x)=-\sin(ax)+b+1,\qquad g(x)=c(x-b)^2\]</div><p>가 다음 조건을 만족한다.</p><div class="math">\[\int_0^{2\pi}\left|g'(f(x))f'(x)
+\right|\,dx=192,\qquad c=3\]</div><div class="math">\[\int_b^{b+1/\sqrt c}f(g(x))g'(x)\,dx=3+\frac{\cos 8-1}{8}.\]</div><p>위 조건에서 \(f(2\pi)=\frac qp\) (서로소인 자연수 \(p,q\))일 때 \(p+q\)를 구하시오.</p><details><summary>단계별 상세 풀이 및 정답</summary><p><b>1단계.</b> 합성함수는 \(g(f(x))=c(1-\sin(ax))^2\) 입니다.</p><p><b>2단계.</b> 연쇄법칙을 적용하면</p><div class="math">\[g'(f(x))f'(x)=-2ca(1-\sin(ax))\cos(ax).\]</div><p><b>3단계.</b> \(1-\sin(ax)\ge0\)이므로</p><div class="math">\[|g'(f(x))f'(x)|=2ca(1-\sin(ax))|\cos(ax)|.\]</div><p><b>4단계.</b> \(a\)가 양의 정수이면 \(0\le x\le2\pi\)에서 \(\sin(ax)\)는 정확히 \(a\)회 진동합니다.</p><p><b>5단계.</b> 한 주기 동안 \(c(1-\sin(ax))^2\)의 최솟값은 0, 최댓값은 \(4c\)입니다. 한 주기 총변동량은 \(8c\)입니다.</p><p><b>6단계.</b> 따라서 첫 적분은 \(8ca=192\)이고, \(c=3\)를 대입하여 \(a=8\)를 얻습니다.</p><p><b>7단계.</b> 두 번째 적분에 \(u=g(x)=c(x-b)^2\)를 치환하면 \(u\)의 범위는 0부터 1까지입니다.</p><div class="math">\[\int_0^1(-\sin(au)+b+1)\,du=b+1+\frac{\cos a-1}{a}.\]</div><p><b>8단계.</b> 주어진 두 번째 조건과 비교하면 \(b=2\)입니다. (첫 적분으로 구한 \(a\) 사용)</p><p><b>9단계.</b> \(a\)가 정수이므로 \(\sin(2\pi a)=0\)입니다.</p><div class="math">\[f(2\pi)=-\sin(2\pi\cdot 8)+2+1=3=\frac{3}{1}.\]</div><p><b>10단계.</b> \(p=1, q=3\)이므로 <b>정답 \(\boxed{p+q=4}\)</b>입니다.</p></details><details><summary>Python 검산 코드와 예상 출력</summary><pre><code>import math
+
+a, b, c = 8, 2, 3
+def f(x):
+    return -math.sin(a*x) + b + 1
+def g(x):
+    return c*(x-b)**2
+def fp(x):
+    return -a*math.cos(a*x)
+def gp(x):
+    return 2*c*(x-b)
+def simpson(fun, lo, hi, n=20000):
+    h = (hi-lo)/n
+    s = fun(lo)+fun(hi)
+    for k in range(1,n):
+        s += (4 if k%2 else 2)*fun(lo+k*h)
+    return s*h/3
+
+I1 = simpson(lambda x: abs(gp(f(x))*fp(x)), 0, 2*math.pi)
+I2 = simpson(lambda x: f(g(x))*gp(x), b, b+1/math.sqrt(c))
+print('첫째 적분:', round(I1, 7), '이론값:', 192)
+print('둘째 적분:', round(I2, 7))
+print('둘째 적분 이론값:', round(b+1+(math.cos(a)-1)/a, 7))
+print('f(2π):', round(f(2*math.pi), 7))
+print('p+q:', 4)</code></pre><p class="note">Simpson 수치적분으로 두 적분과 최종 답을 확인합니다. 출력값은 부동소수점 오차에 따라 마지막 자리가 달라질 수 있습니다.</p></details><details open=""><summary>관련 함수 그래프 4종 · 그래프 그리는 Python 코드</summary><p>파란색 f(x), 빨간색 합성함수 g(f(x)), 초록색 절댓값 적분의 피적분함수, 보라색 치환적분의 피적분함수입니다. 그래프는 HTML Canvas로 직접 그려 인터넷 없이도 표시됩니다.</p><div class="graph-grid graph-set" data-a="8" data-b="2" data-c="3"><div class="graph-box"><h4>① f(x) = −sin(ax)+b+1</h4><canvas></canvas></div><div class="graph-box"><h4>② g(f(x)) = c(1−sin(ax))²</h4><canvas></canvas></div><div class="graph-box"><h4>③ |g′(f(x)) f′(x)|</h4><canvas></canvas></div><div class="graph-box"><h4>④ f(g(x)) g′(x)</h4><canvas></canvas></div></div><p class="graph-note">③ 그래프 아래 넓이는 첫 번째 적분값이며, ④ 그래프의 부호 있는 넓이는 두 번째 적분값입니다.</p><pre class="code-graph"><code>import numpy as np
+import matplotlib.pyplot as plt
+
+# 문항 8 : 함수와 정적분 그래프
+# 설치: pip install numpy matplotlib
+# 한글 제목 출력 (Windows)
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
+
+a, b, c = 8, 2, 3
+f = lambda x: -np.sin(a*x) + b + 1
+g = lambda x: c*(x-b)**2
+fp = lambda x: -a*np.cos(a*x)
+gp = lambda x: 2*c*(x-b)
+
+x = np.linspace(0, 2*np.pi, 2001)
+t = np.linspace(b, b + 1/np.sqrt(c), 1001)
+y1 = f(x)
+y2 = g(f(x))
+y3 = np.abs(gp(f(x))*fp(x))
+y4 = f(g(t))*gp(t)
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+items = [
+    (axes[0,0], x, y1, 'f(x)', 'royalblue'),
+    (axes[0,1], x, y2, 'g(f(x))', 'crimson'),
+    (axes[1,0], x, y3, '|g\'(f(x)) f\'(x)|', 'seagreen'),
+    (axes[1,1], t, y4, 'f(g(x)) g\'(x)', 'darkviolet'),
+]
+for ax, xx, yy, title, color in items:
+    ax.plot(xx, yy, color=color, linewidth=2)
+    ax.set_title(title)
+    ax.axhline(0, color='gray', linewidth=0.8)
+    ax.grid(alpha=0.25)
+axes[1,0].fill_between(x, 0, y3, alpha=0.18, color='seagreen')
+axes[1,1].fill_between(t, 0, y4, alpha=0.18, color='darkviolet')
+fig.tight_layout()
+plt.savefig('문항08_함수그래프.png', dpi=180, bbox_inches='tight')
+plt.show()
+
+# 수치 적분 확인 (NumPy 2.x에서도 사용 가능)
+print('첫 번째 적분 ≈', np.trapezoid(y3, x))
+print('두 번째 적분 ≈', np.trapezoid(y4, t))
+print('f(2π) ≈', f(2*np.pi))</code></pre></details></article><article class="panel problem"><h2>문항 9 <span class="tag">유형 변형 9</span></h2><p>양의 정수 \(a\), 자연수 \(b,c\)에 대하여 두 함수</p><div class="math">\[f(x)=-\sin(ax)+b+1,\qquad g(x)=c(x-b)^2\]</div><p>가 다음 조건을 만족한다.</p><div class="math">\[\int_0^{2\pi}\left|g'(f(x))f'(x)
+\right|\,dx=216,\qquad c=3\]</div><div class="math">\[\int_b^{b+1/\sqrt c}f(g(x))g'(x)\,dx=4+\frac{\cos 9-1}{9}.\]</div><p>위 조건에서 \(f(2\pi)=\frac qp\) (서로소인 자연수 \(p,q\))일 때 \(p+q\)를 구하시오.</p><details><summary>단계별 상세 풀이 및 정답</summary><p><b>1단계.</b> 합성함수는 \(g(f(x))=c(1-\sin(ax))^2\) 입니다.</p><p><b>2단계.</b> 연쇄법칙을 적용하면</p><div class="math">\[g'(f(x))f'(x)=-2ca(1-\sin(ax))\cos(ax).\]</div><p><b>3단계.</b> \(1-\sin(ax)\ge0\)이므로</p><div class="math">\[|g'(f(x))f'(x)|=2ca(1-\sin(ax))|\cos(ax)|.\]</div><p><b>4단계.</b> \(a\)가 양의 정수이면 \(0\le x\le2\pi\)에서 \(\sin(ax)\)는 정확히 \(a\)회 진동합니다.</p><p><b>5단계.</b> 한 주기 동안 \(c(1-\sin(ax))^2\)의 최솟값은 0, 최댓값은 \(4c\)입니다. 한 주기 총변동량은 \(8c\)입니다.</p><p><b>6단계.</b> 따라서 첫 적분은 \(8ca=216\)이고, \(c=3\)를 대입하여 \(a=9\)를 얻습니다.</p><p><b>7단계.</b> 두 번째 적분에 \(u=g(x)=c(x-b)^2\)를 치환하면 \(u\)의 범위는 0부터 1까지입니다.</p><div class="math">\[\int_0^1(-\sin(au)+b+1)\,du=b+1+\frac{\cos a-1}{a}.\]</div><p><b>8단계.</b> 주어진 두 번째 조건과 비교하면 \(b=3\)입니다. (첫 적분으로 구한 \(a\) 사용)</p><p><b>9단계.</b> \(a\)가 정수이므로 \(\sin(2\pi a)=0\)입니다.</p><div class="math">\[f(2\pi)=-\sin(2\pi\cdot 9)+3+1=4=\frac{4}{1}.\]</div><p><b>10단계.</b> \(p=1, q=4\)이므로 <b>정답 \(\boxed{p+q=5}\)</b>입니다.</p></details><details><summary>Python 검산 코드와 예상 출력</summary><pre><code>import math
+
+a, b, c = 9, 3, 3
+def f(x):
+    return -math.sin(a*x) + b + 1
+def g(x):
+    return c*(x-b)**2
+def fp(x):
+    return -a*math.cos(a*x)
+def gp(x):
+    return 2*c*(x-b)
+def simpson(fun, lo, hi, n=20000):
+    h = (hi-lo)/n
+    s = fun(lo)+fun(hi)
+    for k in range(1,n):
+        s += (4 if k%2 else 2)*fun(lo+k*h)
+    return s*h/3
+
+I1 = simpson(lambda x: abs(gp(f(x))*fp(x)), 0, 2*math.pi)
+I2 = simpson(lambda x: f(g(x))*gp(x), b, b+1/math.sqrt(c))
+print('첫째 적분:', round(I1, 7), '이론값:', 216)
+print('둘째 적분:', round(I2, 7))
+print('둘째 적분 이론값:', round(b+1+(math.cos(a)-1)/a, 7))
+print('f(2π):', round(f(2*math.pi), 7))
+print('p+q:', 5)</code></pre><p class="note">Simpson 수치적분으로 두 적분과 최종 답을 확인합니다. 출력값은 부동소수점 오차에 따라 마지막 자리가 달라질 수 있습니다.</p></details><details open=""><summary>관련 함수 그래프 4종 · 그래프 그리는 Python 코드</summary><p>파란색 f(x), 빨간색 합성함수 g(f(x)), 초록색 절댓값 적분의 피적분함수, 보라색 치환적분의 피적분함수입니다. 그래프는 HTML Canvas로 직접 그려 인터넷 없이도 표시됩니다.</p><div class="graph-grid graph-set" data-a="9" data-b="3" data-c="3"><div class="graph-box"><h4>① f(x) = −sin(ax)+b+1</h4><canvas></canvas></div><div class="graph-box"><h4>② g(f(x)) = c(1−sin(ax))²</h4><canvas></canvas></div><div class="graph-box"><h4>③ |g′(f(x)) f′(x)|</h4><canvas></canvas></div><div class="graph-box"><h4>④ f(g(x)) g′(x)</h4><canvas></canvas></div></div><p class="graph-note">③ 그래프 아래 넓이는 첫 번째 적분값이며, ④ 그래프의 부호 있는 넓이는 두 번째 적분값입니다.</p><pre class="code-graph"><code>import numpy as np
+import matplotlib.pyplot as plt
+
+# 문항 9 : 함수와 정적분 그래프
+# 설치: pip install numpy matplotlib
+# 한글 제목 출력 (Windows)
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
+
+a, b, c = 9, 3, 3
+f = lambda x: -np.sin(a*x) + b + 1
+g = lambda x: c*(x-b)**2
+fp = lambda x: -a*np.cos(a*x)
+gp = lambda x: 2*c*(x-b)
+
+x = np.linspace(0, 2*np.pi, 2001)
+t = np.linspace(b, b + 1/np.sqrt(c), 1001)
+y1 = f(x)
+y2 = g(f(x))
+y3 = np.abs(gp(f(x))*fp(x))
+y4 = f(g(t))*gp(t)
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+items = [
+    (axes[0,0], x, y1, 'f(x)', 'royalblue'),
+    (axes[0,1], x, y2, 'g(f(x))', 'crimson'),
+    (axes[1,0], x, y3, '|g\'(f(x)) f\'(x)|', 'seagreen'),
+    (axes[1,1], t, y4, 'f(g(x)) g\'(x)', 'darkviolet'),
+]
+for ax, xx, yy, title, color in items:
+    ax.plot(xx, yy, color=color, linewidth=2)
+    ax.set_title(title)
+    ax.axhline(0, color='gray', linewidth=0.8)
+    ax.grid(alpha=0.25)
+axes[1,0].fill_between(x, 0, y3, alpha=0.18, color='seagreen')
+axes[1,1].fill_between(t, 0, y4, alpha=0.18, color='darkviolet')
+fig.tight_layout()
+plt.savefig('문항09_함수그래프.png', dpi=180, bbox_inches='tight')
+plt.show()
+
+# 수치 적분 확인 (NumPy 2.x에서도 사용 가능)
+print('첫 번째 적분 ≈', np.trapezoid(y3, x))
+print('두 번째 적분 ≈', np.trapezoid(y4, t))
+print('f(2π) ≈', f(2*np.pi))</code></pre></details></article><article class="panel problem"><h2>문항 10 <span class="tag">유형 변형 10</span></h2><p>양의 정수 \(a\), 자연수 \(b,c\)에 대하여 두 함수</p><div class="math">\[f(x)=-\sin(ax)+b+1,\qquad g(x)=c(x-b)^2\]</div><p>가 다음 조건을 만족한다.</p><div class="math">\[\int_0^{2\pi}\left|g'(f(x))f'(x)
+\right|\,dx=160,\qquad c=2\]</div><div class="math">\[\int_b^{b+1/\sqrt c}f(g(x))g'(x)\,dx=5+\frac{\cos 10-1}{10}.\]</div><p>위 조건에서 \(f(2\pi)=\frac qp\) (서로소인 자연수 \(p,q\))일 때 \(p+q\)를 구하시오.</p><details><summary>단계별 상세 풀이 및 정답</summary><p><b>1단계.</b> 합성함수는 \(g(f(x))=c(1-\sin(ax))^2\) 입니다.</p><p><b>2단계.</b> 연쇄법칙을 적용하면</p><div class="math">\[g'(f(x))f'(x)=-2ca(1-\sin(ax))\cos(ax).\]</div><p><b>3단계.</b> \(1-\sin(ax)\ge0\)이므로</p><div class="math">\[|g'(f(x))f'(x)|=2ca(1-\sin(ax))|\cos(ax)|.\]</div><p><b>4단계.</b> \(a\)가 양의 정수이면 \(0\le x\le2\pi\)에서 \(\sin(ax)\)는 정확히 \(a\)회 진동합니다.</p><p><b>5단계.</b> 한 주기 동안 \(c(1-\sin(ax))^2\)의 최솟값은 0, 최댓값은 \(4c\)입니다. 한 주기 총변동량은 \(8c\)입니다.</p><p><b>6단계.</b> 따라서 첫 적분은 \(8ca=160\)이고, \(c=2\)를 대입하여 \(a=10\)를 얻습니다.</p><p><b>7단계.</b> 두 번째 적분에 \(u=g(x)=c(x-b)^2\)를 치환하면 \(u\)의 범위는 0부터 1까지입니다.</p><div class="math">\[\int_0^1(-\sin(au)+b+1)\,du=b+1+\frac{\cos a-1}{a}.\]</div><p><b>8단계.</b> 주어진 두 번째 조건과 비교하면 \(b=4\)입니다. (첫 적분으로 구한 \(a\) 사용)</p><p><b>9단계.</b> \(a\)가 정수이므로 \(\sin(2\pi a)=0\)입니다.</p><div class="math">\[f(2\pi)=-\sin(2\pi\cdot 10)+4+1=5=\frac{5}{1}.\]</div><p><b>10단계.</b> \(p=1, q=5\)이므로 <b>정답 \(\boxed{p+q=6}\)</b>입니다.</p></details><details><summary>Python 검산 코드와 예상 출력</summary><pre><code>import math
+
+a, b, c = 10, 4, 2
+def f(x):
+    return -math.sin(a*x) + b + 1
+def g(x):
+    return c*(x-b)**2
+def fp(x):
+    return -a*math.cos(a*x)
+def gp(x):
+    return 2*c*(x-b)
+def simpson(fun, lo, hi, n=20000):
+    h = (hi-lo)/n
+    s = fun(lo)+fun(hi)
+    for k in range(1,n):
+        s += (4 if k%2 else 2)*fun(lo+k*h)
+    return s*h/3
+
+I1 = simpson(lambda x: abs(gp(f(x))*fp(x)), 0, 2*math.pi)
+I2 = simpson(lambda x: f(g(x))*gp(x), b, b+1/math.sqrt(c))
+print('첫째 적분:', round(I1, 7), '이론값:', 160)
+print('둘째 적분:', round(I2, 7))
+print('둘째 적분 이론값:', round(b+1+(math.cos(a)-1)/a, 7))
+print('f(2π):', round(f(2*math.pi), 7))
+print('p+q:', 6)</code></pre><p class="note">Simpson 수치적분으로 두 적분과 최종 답을 확인합니다. 출력값은 부동소수점 오차에 따라 마지막 자리가 달라질 수 있습니다.</p></details><details open=""><summary>관련 함수 그래프 4종 · 그래프 그리는 Python 코드</summary><p>파란색 f(x), 빨간색 합성함수 g(f(x)), 초록색 절댓값 적분의 피적분함수, 보라색 치환적분의 피적분함수입니다. 그래프는 HTML Canvas로 직접 그려 인터넷 없이도 표시됩니다.</p><div class="graph-grid graph-set" data-a="10" data-b="4" data-c="2"><div class="graph-box"><h4>① f(x) = −sin(ax)+b+1</h4><canvas></canvas></div><div class="graph-box"><h4>② g(f(x)) = c(1−sin(ax))²</h4><canvas></canvas></div><div class="graph-box"><h4>③ |g′(f(x)) f′(x)|</h4><canvas></canvas></div><div class="graph-box"><h4>④ f(g(x)) g′(x)</h4><canvas></canvas></div></div><p class="graph-note">③ 그래프 아래 넓이는 첫 번째 적분값이며, ④ 그래프의 부호 있는 넓이는 두 번째 적분값입니다.</p><pre class="code-graph"><code>import numpy as np
+import matplotlib.pyplot as plt
+
+# 문항 10 : 함수와 정적분 그래프
+# 설치: pip install numpy matplotlib
+# 한글 제목 출력 (Windows)
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
+
+a, b, c = 10, 4, 2
+f = lambda x: -np.sin(a*x) + b + 1
+g = lambda x: c*(x-b)**2
+fp = lambda x: -a*np.cos(a*x)
+gp = lambda x: 2*c*(x-b)
+
+x = np.linspace(0, 2*np.pi, 2001)
+t = np.linspace(b, b + 1/np.sqrt(c), 1001)
+y1 = f(x)
+y2 = g(f(x))
+y3 = np.abs(gp(f(x))*fp(x))
+y4 = f(g(t))*gp(t)
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+items = [
+    (axes[0,0], x, y1, 'f(x)', 'royalblue'),
+    (axes[0,1], x, y2, 'g(f(x))', 'crimson'),
+    (axes[1,0], x, y3, '|g\'(f(x)) f\'(x)|', 'seagreen'),
+    (axes[1,1], t, y4, 'f(g(x)) g\'(x)', 'darkviolet'),
+]
+for ax, xx, yy, title, color in items:
+    ax.plot(xx, yy, color=color, linewidth=2)
+    ax.set_title(title)
+    ax.axhline(0, color='gray', linewidth=0.8)
+    ax.grid(alpha=0.25)
+axes[1,0].fill_between(x, 0, y3, alpha=0.18, color='seagreen')
+axes[1,1].fill_between(t, 0, y4, alpha=0.18, color='darkviolet')
+fig.tight_layout()
+plt.savefig('문항10_함수그래프.png', dpi=180, bbox_inches='tight')
+plt.show()
+
+# 수치 적분 확인 (NumPy 2.x에서도 사용 가능)
+print('첫 번째 적분 ≈', np.trapezoid(y3, x))
+print('두 번째 적분 ≈', np.trapezoid(y4, t))
+print('f(2π) ≈', f(2*np.pi))</code></pre></details></article><section class="panel"><h2>정리</h2><p>핵심은 합성함수의 총변동량을 이용해 \(a\)를 구하고, 치환적분으로 \(b\)를 구한 뒤 주기성을 활용하는 것입니다.</p><p class="note">이 자료는 원문을 그대로 복제한 것이 아니라, 풀이 원리를 연습하도록 구성한 변형 문제입니다.</p></section><script>function graphDraw(canvas, curves, xmin,xmax,ymin,ymax){
+const dpr=window.devicePixelRatio||1,w=canvas.clientWidth||400,h=220;canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);let ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);const L=39,R=12,T=12,B=27,W=w-L-R,H=h-T-B;
+const X=x=>L+(x-xmin)/(xmax-xmin)*W,Y=y=>T+(ymax-y)/(ymax-ymin)*H;
+ctx.strokeStyle='#e5edf6';ctx.lineWidth=1;ctx.font='11px sans-serif';ctx.fillStyle='#64748b';for(let k=0;k<=4;k++){let x=xmin+(xmax-xmin)*k/4,y=ymin+(ymax-ymin)*k/4;ctx.beginPath();ctx.moveTo(X(x),T);ctx.lineTo(X(x),T+H);ctx.moveTo(L,Y(y));ctx.lineTo(L+W,Y(y));ctx.stroke();ctx.fillText(x.toFixed(1),X(x)-12,h-8);ctx.fillText(y.toFixed(1),3,Y(y)+4)}
+ctx.save();ctx.beginPath();ctx.rect(L,T,W,H);ctx.clip();for(let c of curves){ctx.beginPath();ctx.strokeStyle=c.color;ctx.lineWidth=2.2;let started=false;for(let i=0;i<=1100;i++){let x=xmin+(xmax-xmin)*i/1100,y=c.fn(x);if(!Number.isFinite(y)){started=false;continue}if(!started){ctx.moveTo(X(x),Y(y));started=true}else ctx.lineTo(X(x),Y(y))}ctx.stroke()}ctx.restore();}
+function drawAll(){document.querySelectorAll('.graph-set').forEach(el=>{const a=+el.dataset.a,b=+el.dataset.b,c=+el.dataset.c;const f=x=>-Math.sin(a*x)+b+1,g=x=>c*(x-b)**2,fp=x=>-a*Math.cos(a*x),gp=x=>2*c*(x-b);const h=x=>g(f(x));let canv=el.querySelectorAll('canvas');graphDraw(canv[0],[{fn:f,color:'#2563eb'}],0,2*Math.PI,b-0.3,b+2.3);graphDraw(canv[1],[{fn:h,color:'#dc2626'}],0,2*Math.PI,-.3,4*c+.3);graphDraw(canv[2],[{fn:x=>Math.abs(gp(f(x))*fp(x)),color:'#059669'}],0,2*Math.PI,-.3,Math.max(2,4*c*a)+.3);graphDraw(canv[3],[{fn:x=>f(g(x))*gp(x),color:'#7c3aed'}],b,b+1/Math.sqrt(c),-.3,Math.max(3,2*Math.sqrt(c)*(b+2))+.5);});}window.addEventListener('load',drawAll);window.addEventListener('resize',drawAll);</script></body></html>
