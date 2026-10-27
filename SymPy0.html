@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>SymPy 라이브러리 함수별 상세 학습</title><style>body{font-family:Arial,"Malgun Gothic",sans-serif;background:#f4f7fb;color:#17243b;margin:0;line-height:1.65}header{background:linear-gradient(120deg,#142c59,#3766a6);color:white;padding:42px max(5%,20px)}main{max-width:1120px;margin:auto;padding:25px 16px}h1{margin:0;font-size:2.3rem}h2{border-bottom:2px solid #c5d7ee;padding-bottom:8px}section,.item{background:white;border:1px solid #dbe4ef;border-radius:16px;padding:22px;margin:18px 0;box-shadow:0 3px 14px #1c37620d}.tag{display:inline-block;background:#e8f1ff;color:#20519a;padding:3px 11px;border-radius:40px;font-size:.83rem}pre{background:#101d31;color:#d7efff;border-radius:10px;padding:16px;overflow:auto;white-space:pre-wrap;line-height:1.55}pre.out{background:#eff7f2;color:#165332} .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}canvas{width:100%;height:300px;border:1px solid #e4e9f1;border-radius:10px;background:#fff}table{width:100%;border-collapse:collapse}td,th{border-bottom:1px solid #e3e9f2;text-align:left;padding:9px}th{background:#eaf1fc}button{background:#245eab;color:white;border:0;border-radius:8px;padding:10px 15px;cursor:pointer} .note{background:#fff8e7;border-left:4px solid #e6a22e;padding:12px;margin-top:12px} .small{color:#57677d;font-size:.91rem}@media(max-width:720px){.cols{grid-template-columns:1fr}h1{font-size:1.65rem}}@media print{button{display:none}section,.item{break-inside:avoid}body{background:white}}</style><style>article.item>h4{margin-top:22px;color:#245eab}article.item>pre{font-size:.86rem;white-space:pre;overflow-x:auto}article.item>p{line-height:1.8}</style><style>.code-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:13px 0 6px}.code-toolbar b,.code-toolbar h4{margin:0}.copy-code{background:#146b82;color:#fff;border:0;border-radius:8px;padding:8px 13px;font-weight:700;cursor:pointer;white-space:nowrap}.copy-code:hover{background:#0c4c60}.copy-code:focus-visible{outline:3px solid #ffb84d;outline-offset:2px}.copy-code.copied{background:#237348}@media print{.copy-code{display:none}}</style></head><body><header><h1>파이썬 SymPy 라이브러리 완전 학습</h1><p>기호 수학 · 방정식 · 미적분 · 행렬 · 정수론 · 그래프 | 함수별 코드·출력·설명</p></header><main><section><h2>SymPy란?</h2><p>SymPy는 수학식을 문자 그대로 다루는 파이썬 오픈소스 기호 계산 라이브러리입니다. 정확한 분수, 방정식의 해, 미분·적분·극한을 기호 형태로 구할 수 있습니다. NumPy의 수치 배열 계산과 구별됩니다.</p><p><b>설치:</b> <code>python -m pip install sympy matplotlib</code></p><p class="note">그래프는 학습을 돕는 브라우저 미리보기이며, 실제 SymPy 그래프 출력은 하단의 파이썬 예제를 실행하세요. 그래프 일부는 시각화를 위한 대표 예시입니다.</p><button onclick="window.print()">인쇄 / PDF 저장</button><p class="note">각 함수 아래에 독립적으로 실행 가능한 관련 그래프 출력 코드 17개를 추가했습니다. 각 코드 실행 시 그래프가 표시되고 PNG 파일로 저장됩니다. NumPy와 Matplotlib도 필요합니다.</p></section><section><h2>함수별 학습 목차</h2><input id="q" oninput="filter()" placeholder="함수 이름이나 개념 검색" style="padding:12px;width:90%;max-width:480px;border:1px solid #c5d4e7;border-radius:9px"/><table><thead><tr><th>번호</th><th>주제</th><th>함수</th></tr></thead><tbody><tr><td>1</td><td>기호 변수</td><td>symbols</td></tr><tr><td>2</td><td>식 정리</td><td>simplify</td></tr><tr><td>3</td><td>전개</td><td>expand</td></tr><tr><td>4</td><td>인수분해</td><td>factor</td></tr><tr><td>5</td><td>방정식</td><td>solve</td></tr><tr><td>6</td><td>해집합</td><td>solveset</td></tr><tr><td>7</td><td>극한</td><td>limit</td></tr><tr><td>8</td><td>미분</td><td>diff</td></tr><tr><td>9</td><td>적분</td><td>integrate</td></tr><tr><td>10</td><td>테일러 급수</td><td>series</td></tr><tr><td>11</td><td>정확한 분수</td><td>Rational</td></tr><tr><td>12</td><td>수치 근사</td><td>N</td></tr><tr><td>13</td><td>행렬</td><td>Matrix / det / inv</td></tr><tr><td>14</td><td>소수 판정</td><td>isprime</td></tr><tr><td>15</td><td>소인수분해</td><td>factorint</td></tr><tr><td>16</td><td>그래프 출력</td><td>plot</td></tr><tr><td>17</td><td>음함수 그래프</td><td>plot_implicit</td></tr></tbody></table></section><article class="item"><span class="tag">01 · 기호 변수</span><h3>symbols</h3><p>기호 변수를 정의하여 숫자를 대입하기 전에도 식을 다룰 수 있습니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+x = sp.symbols("x")
+f = x**2 + 2*x + 1
+print(f)
+print(f.subs(x, 3))</pre><b>예상 출력</b><pre class="out">x**2 + 2*x + 1
+16</pre></div><div><b>관련 그래프</b><canvas data-expr="x**2+2*x+1" id="g1"></canvas><p class="small">이차함수 그래프에서 x=3일 때 함숫값은 16입니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 01</h4><p>기호식과 x=3에서의 점을 표시 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+f = x**2+2*x+1
+fn = sp.lambdify(x, f, 'numpy')
+with np.errstate(divide='ignore', invalid='ignore'):
+    ys = np.asarray(fn(xs), dtype=float)
+plt.plot(xs, ys, label=str(f))
+plt.scatter([3],[16],color='red',label='f(3)=16')
+plt.axhline(0,color='gray',lw=.7)
+plt.axvline(0,color='gray',lw=.7)
+plt.grid(True); plt.legend()
+plt.ylim(-12,20)
+plt.title('SymPy example 01')
+plt.tight_layout()
+plt.savefig('sympy_01.png',dpi=160)
+plt.show()
+print('sympy_01.png 저장 완료')</pre></article><article class="item"><span class="tag">02 · 식 정리</span><h3>simplify</h3><p>분수식과 삼각함수 등 수학적으로 동치인 식을 단순화합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+x = sp.symbols("x")
+f = (x**2 - 1)/(x - 1)
+print(sp.simplify(f))</pre><b>예상 출력</b><pre class="out">x + 1</pre></div><div><b>관련 그래프</b><canvas data-expr="(x**2-1)/(x-1)" id="g2"></canvas><p class="small">원래 식은 x=1에서 정의되지 않습니다. 단순화 후에도 원래 정의역을 기억해야 합니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 02</h4><p>x=1의 제거 가능한 불연속점을 빈 원으로 표시 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+f = (x**2-1)/(x-1)
+fn = sp.lambdify(x, f, 'numpy')
+with np.errstate(divide='ignore', invalid='ignore'):
+    ys = np.asarray(fn(xs), dtype=float)
+plt.plot(xs, ys, label=str(f))
+plt.plot([1],[2],marker='o',ms=9,mfc='white',mec='red',ls='None',label='hole (1, 2)')
+plt.axhline(0,color='gray',lw=.7)
+plt.axvline(0,color='gray',lw=.7)
+plt.grid(True); plt.legend()
+plt.ylim(-12,20)
+plt.title('SymPy example 02')
+plt.tight_layout()
+plt.savefig('sympy_02.png',dpi=160)
+plt.show()
+print('sympy_02.png 저장 완료')</pre></article><article class="item"><span class="tag">03 · 전개</span><h3>expand</h3><p>곱셈 형태의 다항식을 항별 합으로 전개합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+x = sp.symbols("x")
+print(sp.expand((x+2)*(x-3)))</pre><b>예상 출력</b><pre class="out">x**2 - x - 6</pre></div><div><b>관련 그래프</b><canvas data-expr="(x+2)*(x-3)" id="g3"></canvas><p class="small">전개 전후 그래프가 동일합니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 03</h4><p>전개 전후 두 그래프를 비교 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+f = (x+2)*(x-3)
+fn = sp.lambdify(x, f, 'numpy')
+with np.errstate(divide='ignore', invalid='ignore'):
+    ys = np.asarray(fn(xs), dtype=float)
+plt.plot(xs, ys, label=str(f))
+g = sp.expand(f)
+plt.plot(xs, sp.lambdify(x,g,'numpy')(xs),'--',label=str(g))
+plt.axhline(0,color='gray',lw=.7)
+plt.axvline(0,color='gray',lw=.7)
+plt.grid(True); plt.legend()
+plt.ylim(-12,20)
+plt.title('SymPy example 03')
+plt.tight_layout()
+plt.savefig('sympy_03.png',dpi=160)
+plt.show()
+print('sympy_03.png 저장 완료')</pre></article><article class="item"><span class="tag">04 · 인수분해</span><h3>factor</h3><p>다항식을 인수의 곱으로 표현해 근을 찾기 쉽게 합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+x = sp.symbols("x")
+print(sp.factor(x**2 - x - 6))</pre><b>예상 출력</b><pre class="out">(x - 3)*(x + 2)</pre></div><div><b>관련 그래프</b><canvas data-expr="x**2-x-6" id="g4"></canvas><p class="small">영점은 x=-2와 x=3입니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 04</h4><p>인수분해한 식과 영점을 표시 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+f = x**2-x-6
+fn = sp.lambdify(x, f, 'numpy')
+with np.errstate(divide='ignore', invalid='ignore'):
+    ys = np.asarray(fn(xs), dtype=float)
+plt.plot(xs, ys, label=str(f))
+roots = [-2, 3]
+plt.scatter(roots, [0]*len(roots), color='red',zorder=5,label='roots')
+plt.axhline(0,color='gray',lw=.7)
+plt.axvline(0,color='gray',lw=.7)
+plt.grid(True); plt.legend()
+plt.ylim(-12,20)
+plt.title('SymPy example 04')
+plt.tight_layout()
+plt.savefig('sympy_04.png',dpi=160)
+plt.show()
+print('sympy_04.png 저장 완료')</pre></article><article class="item"><span class="tag">05 · 방정식</span><h3>solve</h3><p>방정식의 해를 리스트로 반환합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+x = sp.symbols("x")
+print(sp.solve(sp.Eq(x**2-5*x+6,0), x))</pre><b>예상 출력</b><pre class="out">[2, 3]</pre></div><div><b>관련 그래프</b><canvas data-expr="x**2-5*x+6" id="g5"></canvas><p class="small">그래프가 x축과 만나는 곳이 방정식의 해입니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 05</h4><p>방정식의 두 실근을 표시 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+f = x**2-5*x+6
+fn = sp.lambdify(x, f, 'numpy')
+with np.errstate(divide='ignore', invalid='ignore'):
+    ys = np.asarray(fn(xs), dtype=float)
+plt.plot(xs, ys, label=str(f))
+roots = [2, 3]
+plt.scatter(roots, [0]*len(roots), color='red',zorder=5,label='roots')
+plt.axhline(0,color='gray',lw=.7)
+plt.axvline(0,color='gray',lw=.7)
+plt.grid(True); plt.legend()
+plt.ylim(-12,20)
+plt.title('SymPy example 05')
+plt.tight_layout()
+plt.savefig('sympy_05.png',dpi=160)
+plt.show()
+print('sympy_05.png 저장 완료')</pre></article><article class="item"><span class="tag">06 · 해집합</span><h3>solveset</h3><p>정의역을 지정해 방정식의 해집합을 구합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+x = sp.symbols("x")
+print(sp.solveset(sp.Eq(x**2-4,0), x, domain=sp.S.Reals))</pre><b>예상 출력</b><pre class="out">{-2, 2}</pre></div><div><b>관련 그래프</b><canvas data-expr="x**2-4" id="g6"></canvas><p class="small">실수 범위의 해집합을 구했습니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 06</h4><p>실수 해집합을 x축 교점으로 표시 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+f = x**2-4
+fn = sp.lambdify(x, f, 'numpy')
+with np.errstate(divide='ignore', invalid='ignore'):
+    ys = np.asarray(fn(xs), dtype=float)
+plt.plot(xs, ys, label=str(f))
+roots = [-2, 2]
+plt.scatter(roots, [0]*len(roots), color='red',zorder=5,label='roots')
+plt.axhline(0,color='gray',lw=.7)
+plt.axvline(0,color='gray',lw=.7)
+plt.grid(True); plt.legend()
+plt.ylim(-12,20)
+plt.title('SymPy example 06')
+plt.tight_layout()
+plt.savefig('sympy_06.png',dpi=160)
+plt.show()
+print('sympy_06.png 저장 완료')</pre></article><article class="item"><span class="tag">07 · 극한</span><h3>limit</h3><p>함수가 특정 값에 접근할 때의 극한을 계산합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+x = sp.symbols("x")
+print(sp.limit(sp.sin(x)/x, x, 0))</pre><b>예상 출력</b><pre class="out">1</pre></div><div><b>관련 그래프</b><canvas data-expr="sin(x)/x" id="g7"></canvas><p class="small">x=0에서 식 자체는 정의되지 않지만 극한은 1입니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 07</h4><p>x=0의 극한값과 제거 가능한 불연속점을 표시 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+f = sp.sin(x)/x
+fn = sp.lambdify(x, f, 'numpy')
+with np.errstate(divide='ignore', invalid='ignore'):
+    ys = np.asarray(fn(xs), dtype=float)
+plt.plot(xs, ys, label=str(f))
+plt.scatter([0],[1],facecolors='white',edgecolors='red',s=90,label='limit = 1')
+plt.ylim(-.4,1.2)
+plt.axhline(0,color='gray',lw=.7)
+plt.axvline(0,color='gray',lw=.7)
+plt.grid(True); plt.legend()
+plt.title('SymPy example 07')
+plt.tight_layout()
+plt.savefig('sympy_07.png',dpi=160)
+plt.show()
+print('sympy_07.png 저장 완료')</pre></article><article class="item"><span class="tag">08 · 미분</span><h3>diff</h3><p>도함수를 구해 기울기와 변화율을 분석합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+x = sp.symbols("x")
+f=x**3-3*x
+print(sp.diff(f,x))</pre><b>예상 출력</b><pre class="out">3*x**2 - 3</pre></div><div><b>관련 그래프</b><canvas data-expr="x**3-3*x" id="g8"></canvas><p class="small">도함수의 부호로 증가·감소 구간을 조사합니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 08</h4><p>원함수와 도함수를 함께 표시 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+f = x**3-3*x
+fn = sp.lambdify(x, f, 'numpy')
+with np.errstate(divide='ignore', invalid='ignore'):
+    ys = np.asarray(fn(xs), dtype=float)
+plt.plot(xs, ys, label=str(f))
+df = sp.diff(f,x)
+plt.plot(xs,sp.lambdify(x,df,'numpy')(xs),label='derivative')
+plt.axhline(0,color='gray',lw=.7)
+plt.axvline(0,color='gray',lw=.7)
+plt.grid(True); plt.legend()
+plt.ylim(-12,20)
+plt.title('SymPy example 08')
+plt.tight_layout()
+plt.savefig('sympy_08.png',dpi=160)
+plt.show()
+print('sympy_08.png 저장 완료')</pre></article><article class="item"><span class="tag">09 · 적분</span><h3>integrate</h3><p>부정적분과 정적분을 기호적으로 계산합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+x = sp.symbols("x")
+print(sp.integrate(2*x,x))
+print(sp.integrate(2*x,(x,0,3)))</pre><b>예상 출력</b><pre class="out">x**2
+9</pre></div><div><b>관련 그래프</b><canvas data-expr="2*x" id="g9"></canvas><p class="small">0부터 3까지 곡선 아래의 부호 있는 넓이는 9입니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 09</h4><p>정적분 구간 0~3의 넓이를 채워 표시 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+f = 2*x
+fn = sp.lambdify(x, f, 'numpy')
+with np.errstate(divide='ignore', invalid='ignore'):
+    ys = np.asarray(fn(xs), dtype=float)
+plt.plot(xs, ys, label=str(f))
+area_x = np.linspace(0,3,200)
+plt.fill_between(area_x,0,2*area_x,alpha=.25,label='integral = 9')
+plt.axhline(0,color='gray',lw=.7)
+plt.axvline(0,color='gray',lw=.7)
+plt.grid(True); plt.legend()
+plt.ylim(-12,20)
+plt.title('SymPy example 09')
+plt.tight_layout()
+plt.savefig('sympy_09.png',dpi=160)
+plt.show()
+print('sympy_09.png 저장 완료')</pre></article><article class="item"><span class="tag">10 · 테일러 급수</span><h3>series</h3><p>함수를 특정 점 근처의 다항식으로 근사합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+x = sp.symbols("x")
+print(sp.series(sp.sin(x),x,0,6))</pre><b>예상 출력</b><pre class="out">x - x**3/6 + x**5/120 + O(x**6)</pre></div><div><b>관련 그래프</b><canvas data-expr="sin(x)" id="g10"></canvas><p class="small">0 근처에서 테일러 다항식이 사인함수와 가까워집니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 10</h4><p>sin(x)와 5차 테일러 다항식을 비교 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+f = sp.sin(x)
+fn = sp.lambdify(x, f, 'numpy')
+with np.errstate(divide='ignore', invalid='ignore'):
+    ys = np.asarray(fn(xs), dtype=float)
+plt.plot(xs, ys, label=str(f))
+taylor = sp.series(f,x,0,6).removeO()
+plt.plot(xs,sp.lambdify(x,taylor,'numpy')(xs),'--',label='Taylor degree 5')
+plt.ylim(-2,2)
+plt.axhline(0,color='gray',lw=.7)
+plt.axvline(0,color='gray',lw=.7)
+plt.grid(True); plt.legend()
+plt.title('SymPy example 10')
+plt.tight_layout()
+plt.savefig('sympy_10.png',dpi=160)
+plt.show()
+print('sympy_10.png 저장 완료')</pre></article><article class="item"><span class="tag">11 · 정확한 분수</span><h3>Rational</h3><p>부동소수점 오차 없이 유리수를 표현합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+print(sp.Rational(1,3)+sp.Rational(1,6))</pre><b>예상 출력</b><pre class="out">1/2</pre></div><div><b>관련 그래프</b><canvas data-expr="x/2" id="g11"></canvas><p class="small">유리수 연산을 정확한 형태로 유지합니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 11</h4><p>유리수 1/2의 기울기를 직선으로 표현 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+f = x/2
+fn = sp.lambdify(x, f, 'numpy')
+with np.errstate(divide='ignore', invalid='ignore'):
+    ys = np.asarray(fn(xs), dtype=float)
+plt.plot(xs, ys, label=str(f))
+plt.axhline(0,color='gray',lw=.7)
+plt.axvline(0,color='gray',lw=.7)
+plt.grid(True); plt.legend()
+plt.ylim(-12,20)
+plt.title('SymPy example 11')
+plt.tight_layout()
+plt.savefig('sympy_11.png',dpi=160)
+plt.show()
+print('sympy_11.png 저장 완료')</pre></article><article class="item"><span class="tag">12 · 수치 근사</span><h3>N</h3><p>기호식의 값을 지정한 유효숫자로 근사합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+print(sp.N(sp.pi,10))</pre><b>예상 출력</b><pre class="out">3.141592654</pre></div><div><b>관련 그래프</b><canvas data-expr="sin(x)" id="g12"></canvas><p class="small">기호 상수와 수치 근사를 구분해 사용합니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 12</h4><p>원주율의 근삿값을 수평선으로 표시 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+ys = np.full_like(xs, float(sp.N(sp.pi,10)))
+plt.plot(xs, ys, label='pi (approximation)')
+plt.ylim(2.5,3.8)
+plt.axhline(0,color='gray',lw=.7)
+plt.axvline(0,color='gray',lw=.7)
+plt.grid(True); plt.legend()
+plt.title('SymPy example 12')
+plt.tight_layout()
+plt.savefig('sympy_12.png',dpi=160)
+plt.show()
+print('sympy_12.png 저장 완료')</pre></article><article class="item"><span class="tag">13 · 행렬</span><h3>Matrix / det / inv</h3><p>행렬의 행렬식과 역행렬을 계산합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+A=sp.Matrix([[1,2],[3,5]])
+print(A.det())
+print(A.inv())</pre><b>예상 출력</b><pre class="out">-1
+Matrix([[-5, 2], [3, -1]])</pre></div><div><b>관련 그래프</b><canvas data-expr="x" id="g13"></canvas><p class="small">행렬식이 0이 아니므로 역행렬이 존재합니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 13</h4><p>행렬에 의한 단위 정사각형의 선형변환을 시각화 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+A = sp.Matrix([[1,2],[3,5]])
+vertices = np.array([[0,0],[1,0],[1,1],[0,1],[0,0]])
+transformed = (np.array(A.tolist(), dtype=float) @ vertices.T).T
+plt.plot(vertices[:,0],vertices[:,1], 'o-',label='Original square')
+plt.plot(transformed[:,0],transformed[:,1],'o-',label='A transformed')
+plt.axis('equal'); plt.grid(True); plt.legend()
+plt.title(f'det(A) = {A.det()}')
+</pre></article><article class="item"><span class="tag">14 · 소수 판정</span><h3>isprime</h3><p>주어진 정수가 소수인지 판정합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+print(sp.isprime(29))
+print(sp.isprime(30))</pre><b>예상 출력</b><pre class="out">True
+False</pre></div><div><b>관련 그래프</b><canvas data-expr="x" id="g14"></canvas><p class="small">정수론·암호학 기초 학습에 활용합니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 14</h4><p>1~40의 정수에서 소수만 점으로 표시 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+nums = np.arange(1,41)
+primes = [n for n in nums if sp.isprime(int(n))]
+plt.scatter(primes, [1]*len(primes), s=70)
+plt.yticks([]); plt.xticks(range(0,41,5)); plt.ylim(.7,1.3)
+plt.grid(axis='x'); plt.title('Prime numbers from 1 to 40')
+</pre></article><article class="item"><span class="tag">15 · 소인수분해</span><h3>factorint</h3><p>양의 정수를 소인수와 지수의 사전으로 분해합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+print(sp.factorint(360))</pre><b>예상 출력</b><pre class="out">{2: 3, 3: 2, 5: 1}</pre></div><div><b>관련 그래프</b><canvas data-expr="x" id="g15"></canvas><p class="small">360 = 2³ × 3² × 5입니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 15</h4><p>360의 소인수별 지수를 막대그래프로 표시 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = sp.symbols('x')
+xs = np.linspace(-5, 5, 1200)
+factors = sp.factorint(360)
+plt.bar([str(k) for k in factors], list(factors.values()))
+plt.xlabel('Prime factor'); plt.ylabel('Exponent')
+plt.title('360 = 2^3 * 3^2 * 5')
+</pre></article><article class="item"><span class="tag">16 · 그래프 출력</span><h3>plot</h3><p>SymPy의 plot으로 함수 그래프를 출력합니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+x=sp.symbols("x")
+sp.plot(x**2-4,(x,-4,4),show=True)</pre><b>예상 출력</b><pre class="out">[그래프 창 출력]</pre></div><div><b>관련 그래프</b><canvas data-expr="x**2-4" id="g16"></canvas><p class="small">실행 환경에 따라 그래프 창이 나타납니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 16</h4><p>SymPy plot()의 함수 그래프를 PNG로 저장 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+x = sp.symbols('x')
+p = sp.plot(x**2 - 4, (x, -4, 4), show=False)
+p.save('sympy_16_plot.png')
+print('sympy_16_plot.png 저장 완료')</pre></article><article class="item"><span class="tag">17 · 음함수 그래프</span><h3>plot_implicit</h3><p>x와 y의 관계식으로 원·쌍곡선 등을 그립니다.</p><div class="cols"><div><b>실행 코드</b><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+x,y=sp.symbols("x y")
+sp.plot_implicit(sp.Eq(x**2+y**2,9),(x,-4,4),(y,-4,4),show=True)</pre><b>예상 출력</b><pre class="out">[반지름 3인 원 그래프 출력]</pre></div><div><b>관련 그래프</b><canvas data-expr="circle" id="g17"></canvas><p class="small">x²+y²=9의 그래프는 원점 중심, 반지름 3인 원입니다.</p></div></div><h4>관련 그래프 출력 파이썬 코드 17</h4><p>SymPy plot_implicit()의 원을 PNG로 저장 (그래프 출력 및 PNG 저장)</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+x, y = sp.symbols('x y')
+p = sp.plot_implicit(sp.Eq(x**2+y**2, 9),
+                     (x,-4,4), (y,-4,4), show=False)
+p.save('sympy_17_circle.png')
+print('sympy_17_circle.png 저장 완료')</pre></article><section><h2>실습: 4개 그래프를 실제 PNG로 저장하기</h2><p>아래 코드를 실행하면 함수·도함수·테일러 근사·원 그래프를 각각 PNG로 저장합니다. Matplotlib가 필요합니다.</p><div class="code-toolbar"><b>파이썬 코드 복사</b><button aria-label="이 파이썬 코드 복사" class="copy-code" type="button">📋 코드 복사</button></div><pre>import sympy as sp
+import matplotlib.pyplot as plt
+import numpy as np
+x, y = sp.symbols('x y')
+functions = [x**2-2*x-3, sp.diff(x**3-3*x,x), sp.sin(x), sp.exp(x)]
+xs = np.linspace(-4,4,500)
+for i, f in enumerate(functions,1):
+    fn = sp.lambdify(x,f,'numpy')
+    yy = fn(xs)
+    plt.figure(figsize=(7,4))
+    plt.plot(xs,yy,label=str(f))
+    plt.axhline(0,color='gray',lw=.7)
+    plt.axvline(0,color='gray',lw=.7)
+    plt.ylim(-10,10); plt.grid(True); plt.legend()
+    plt.tight_layout(); plt.savefig(f'sympy_graph_{i}.png',dpi=160)
+    plt.close()
+print('4개 그래프 저장 완료')</pre><pre class="out">4개 그래프 저장 완료</pre><p class="small">참고: 일부 기호식은 정의역·특이점 때문에 그래프를 그릴 때 추가 처리해야 합니다. SymPy의 plot과 plot_implicit도 함수별 예제에서 소개했습니다.</p></section></main><script>function graph(c){let ctx=c.getContext('2d'),w=c.width=650,h=c.height=300;ctx.clearRect(0,0,w,h);let xmin=-5,xmax=5,ymin=-10,ymax=10;function px(x){return (x-xmin)/(xmax-xmin)*w}function py(y){return h-(y-ymin)/(ymax-ymin)*h}ctx.strokeStyle='#dce5f1';ctx.lineWidth=1;for(let x=-5;x<=5;x++){ctx.beginPath();ctx.moveTo(px(x),0);ctx.lineTo(px(x),h);ctx.stroke()}for(let y=-10;y<=10;y+=2){ctx.beginPath();ctx.moveTo(0,py(y));ctx.lineTo(w,py(y));ctx.stroke()}ctx.strokeStyle='#526579';ctx.beginPath();ctx.moveTo(0,py(0));ctx.lineTo(w,py(0));ctx.moveTo(px(0),0);ctx.lineTo(px(0),h);ctx.stroke();let e=c.dataset.expr;ctx.strokeStyle='#2466bd';ctx.lineWidth=2.8;ctx.beginPath();let prev=false;for(let k=0;k<=1200;k++){let x=xmin+(xmax-xmin)*k/1200,y;switch(e){case 'x**2+2*x+1':y=x*x+2*x+1;break;case '(x**2-1)/(x-1)':y=(x*x-1)/(x-1);break;case '(x+2)*(x-3)':case 'x**2-x-6':y=x*x-x-6;break;case 'x**2-5*x+6':y=x*x-5*x+6;break;case 'x**2-4':y=x*x-4;break;case 'sin(x)/x':y=x===0?NaN:Math.sin(x)/x;break;case 'x**3-3*x':y=x*x*x-3*x;break;case '2*x':y=2*x;break;case 'sin(x)':y=Math.sin(x);break;case 'x/2':y=x/2;break;case 'circle':y=NaN;break;default:y=x}let Y=py(y);if(Number.isFinite(Y)&&Y>-h&&Y<2*h){if(!prev)ctx.moveTo(px(x),Y);else ctx.lineTo(px(x),Y);prev=true}else prev=false}ctx.stroke();if(e==='circle'){ctx.beginPath();ctx.ellipse(px(0),py(0),3*w/10,3*h/20,0,0,Math.PI*2);ctx.stroke()}if(e==='sin(x)'){ctx.strokeStyle='#db743c';ctx.beginPath();for(let k=0;k<=800;k++){let x=-5+10*k/800,y=x-x*x*x/6+x*x*x*x*x/120;k?ctx.lineTo(px(x),py(y)):ctx.moveTo(px(x),py(y))}ctx.stroke()}}document.querySelectorAll('canvas').forEach(graph);function filter(){let q=document.getElementById('q').value.toLowerCase();document.querySelectorAll('article.item').forEach(e=>e.style.display=e.textContent.toLowerCase().includes(q)?'':'none')}</script><script>document.addEventListener('click',async function(e){const btn=e.target.closest('.copy-code');if(!btn)return;const pre=btn.parentElement.nextElementSibling;if(!pre||pre.tagName!=='PRE')return;const code=pre.textContent;let ok=false;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(code);ok=true;}}catch(err){}if(!ok){const ta=document.createElement('textarea');ta.value=code;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();try{ok=document.execCommand('copy');}catch(err){}ta.remove();}const previous=btn.textContent;btn.textContent=ok?'✓ 복사 완료':'복사 실패 — 코드 선택';btn.classList.toggle('copied',ok);if(!ok){const range=document.createRange();range.selectNodeContents(pre);const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);}setTimeout(()=>{btn.textContent=previous;btn.classList.remove('copied')},1800);});</script></body></html>
