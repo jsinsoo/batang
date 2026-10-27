@@ -1,0 +1,1522 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pandas의 모든 것 — 함수별 코드와 출력</title><style>body{font-family:Arial,"Malgun Gothic",sans-serif;background:#f4f7fb;color:#18263b;margin:0}header{background:#122a49;color:white;padding:38px 5%}h1{font-size:2.3rem}main{max-width:1280px;margin:auto;padding:24px}nav{position:sticky;top:0;background:white;padding:14px;z-index:2;box-shadow:0 2px 8px #ccd}button,select,input{padding:10px;border:1px solid #b6c5d8;border-radius:7px}button{cursor:pointer;background:#e7f0ff}.card{background:white;border:1px solid #d8e1ed;border-radius:12px;margin:18px 0;padding:20px;break-inside:avoid}.tag{color:#2262a2;font-weight:bold}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#101d31;color:#eaf3ff;border-radius:8px;padding:18px;line-height:1.55;font-size:14px}pre.output{background:#eef4f9;color:#18334c}summary{cursor:pointer;font-weight:bold;font-size:1.2rem}h2{margin-top:35px}small{color:#52657a}footer{padding:40px;text-align:center}@media print{nav,button{display:none}.card{page-break-inside:avoid}}</style></head><body><header><h1>Pandas의 모든 것</h1><p>함수·메서드 101개 | 독립 실행 코드 · 출력 결과 · 핵심 설명</p><p>Python 3 / pandas 2.x 기준 · 실습용 학습 자료</p></header><nav><input id="q" placeholder="함수 검색: groupby, pivot, loc ..." oninput="filter()"><select id="g" onchange="filter()"><option value="">전체 영역</option><option>생성·입출력</option><option>조회·선택</option><option>정리·변환</option><option>결측치·문자열</option><option>통계·집계</option><option>결합·시계열·창</option></select><button onclick="document.querySelectorAll('details').forEach(x=>x.open=true)">모두 펼치기</button><button onclick="document.querySelectorAll('details').forEach(x=>x.open=false)">모두 접기</button><span id="count"></span></nav><main><p>각 항목은 공통 데이터 생성부터 포함하므로 따로 복사하여 실행할 수 있습니다. <code>pip install pandas numpy</code>로 설치하세요. Excel/SQL/그리기 기능은 추가 의존성이 필요할 수 있어 여기서는 대표적인 데이터 분석 함수들을 다룹니다.</p><article class="card" data-group="생성·입출력" data-search="series 생성 생성·입출력"><details open><summary>001. Series 생성 <small>— 생성·입출력</small></summary><p><span class="tag">기능</span> · Series 생성 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.Series([10,20,30], index=[&quot;가&quot;,&quot;나&quot;,&quot;다&quot;])
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">가    10
+나    20
+다    30
+dtype: int64</pre><p><b>해설:</b> 위 코드에서 <code>Series 생성</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="생성·입출력" data-search="dataframe 생성 생성·입출력"><details open><summary>002. DataFrame 생성 <small>— 생성·입출력</small></summary><p><span class="tag">기능</span> · DataFrame 생성 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.DataFrame({&quot;name&quot;:[&quot;Kim&quot;,&quot;Lee&quot;,&quot;Park&quot;],&quot;score&quot;:[90,80,95]})
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score
+0   Kim     90
+1   Lee     80
+2  Park     95</pre><p><b>해설:</b> 위 코드에서 <code>DataFrame 생성</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="생성·입출력" data-search="date_range 생성·입출력"><details open><summary>003. date_range <small>— 생성·입출력</small></summary><p><span class="tag">기능</span> · date_range 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.date_range(&quot;2026-01-01&quot;, periods=4, freq=&quot;D&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">DatetimeIndex([&#x27;2026-01-01&#x27;, &#x27;2026-01-02&#x27;, &#x27;2026-01-03&#x27;, &#x27;2026-01-04&#x27;], dtype=&#x27;datetime64[ns]&#x27;, freq=&#x27;D&#x27;)</pre><p><b>해설:</b> 위 코드에서 <code>date_range</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="생성·입출력" data-search="read_csv 생성·입출력"><details open><summary>004. read_csv <small>— 생성·입출력</small></summary><p><span class="tag">기능</span> · read_csv 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.read_csv(StringIO(&quot;name,score\nKim,90\nLee,80&quot;))
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">  name  score
+0  Kim     90
+1  Lee     80</pre><p><b>해설:</b> 위 코드에서 <code>read_csv</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="생성·입출력" data-search="read_json 생성·입출력"><details open><summary>005. read_json <small>— 생성·입출력</small></summary><p><span class="tag">기능</span> · read_json 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.read_json(StringIO(&#x27;{&quot;name&quot;:{&quot;0&quot;:&quot;Kim&quot;},&quot;score&quot;:{&quot;0&quot;:90}}&#x27;))
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">  name  score
+0  Kim     90</pre><p><b>해설:</b> 위 코드에서 <code>read_json</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="생성·입출력" data-search="json_normalize 생성·입출력"><details open><summary>006. json_normalize <small>— 생성·입출력</small></summary><p><span class="tag">기능</span> · json_normalize 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.json_normalize([{&quot;id&quot;:1,&quot;info&quot;:{&quot;city&quot;:&quot;Seoul&quot;}}])
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   id info.city
+0   1     Seoul</pre><p><b>해설:</b> 위 코드에서 <code>json_normalize</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="생성·입출력" data-search="to_csv 생성·입출력"><details open><summary>007. to_csv <small>— 생성·입출력</small></summary><p><span class="tag">기능</span> · to_csv 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.to_csv(index=False)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">name,score,age,city
+Kim,90,17.0,Seoul
+Lee,80,18.0,Busan
+Park,95,17.0,Seoul
+Choi,85,,Incheon
+</pre><p><b>해설:</b> 위 코드에서 <code>to_csv</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="생성·입출력" data-search="to_json 생성·입출력"><details open><summary>008. to_json <small>— 생성·입출력</small></summary><p><span class="tag">기능</span> · to_json 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.to_json(orient=&quot;records&quot;, force_ascii=False)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">[{&quot;name&quot;:&quot;Kim&quot;,&quot;score&quot;:90,&quot;age&quot;:17.0,&quot;city&quot;:&quot;Seoul&quot;},{&quot;name&quot;:&quot;Lee&quot;,&quot;score&quot;:80,&quot;age&quot;:18.0,&quot;city&quot;:&quot;Busan&quot;},{&quot;name&quot;:&quot;Park&quot;,&quot;score&quot;:95,&quot;age&quot;:17.0,&quot;city&quot;:&quot;Seoul&quot;},{&quot;name&quot;:&quot;Choi&quot;,&quot;score&quot;:85,&quot;age&quot;:null,&quot;city&quot;:&quot;Incheon&quot;}]</pre><p><b>해설:</b> 위 코드에서 <code>to_json</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="생성·입출력" data-search="to_dict 생성·입출력"><details open><summary>009. to_dict <small>— 생성·입출력</small></summary><p><span class="tag">기능</span> · to_dict 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.to_dict(orient=&quot;records&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">[{&#x27;name&#x27;: &#x27;Kim&#x27;, &#x27;score&#x27;: 90, &#x27;age&#x27;: 17.0, &#x27;city&#x27;: &#x27;Seoul&#x27;}, {&#x27;name&#x27;: &#x27;Lee&#x27;, &#x27;score&#x27;: 80, &#x27;age&#x27;: 18.0, &#x27;city&#x27;: &#x27;Busan&#x27;}, {&#x27;name&#x27;: &#x27;Park&#x27;, &#x27;score&#x27;: 95, &#x27;age&#x27;: 17.0, &#x27;city&#x27;: &#x27;Seoul&#x27;}, {&#x27;name&#x27;: &#x27;Choi&#x27;, &#x27;score&#x27;: 85, &#x27;age&#x27;: nan, &#x27;city&#x27;: &#x27;Incheon&#x27;}]</pre><p><b>해설:</b> 위 코드에서 <code>to_dict</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="생성·입출력" data-search="to_numpy 생성·입출력"><details open><summary>010. to_numpy <small>— 생성·입출력</small></summary><p><span class="tag">기능</span> · to_numpy 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.to_numpy()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">[[&#x27;Kim&#x27; 90 17.0 &#x27;Seoul&#x27;]
+ [&#x27;Lee&#x27; 80 18.0 &#x27;Busan&#x27;]
+ [&#x27;Park&#x27; 95 17.0 &#x27;Seoul&#x27;]
+ [&#x27;Choi&#x27; 85 nan &#x27;Incheon&#x27;]]</pre><p><b>해설:</b> 위 코드에서 <code>to_numpy</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="head 조회·선택"><details open><summary>011. head <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · head 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.head(2)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">  name  score   age   city
+0  Kim     90  17.0  Seoul
+1  Lee     80  18.0  Busan</pre><p><b>해설:</b> 위 코드에서 <code>head</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="tail 조회·선택"><details open><summary>012. tail <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · tail 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.tail(2)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city
+2  Park     95  17.0    Seoul
+3  Choi     85   NaN  Incheon</pre><p><b>해설:</b> 위 코드에서 <code>tail</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="sample 조회·선택"><details open><summary>013. sample <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · sample 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.sample(n=2, random_state=42)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city
+1   Lee     80  18.0    Busan
+3  Choi     85   NaN  Incheon</pre><p><b>해설:</b> 위 코드에서 <code>sample</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="info 조회·선택"><details open><summary>014. info <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · info 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.info()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">&lt;class &#x27;pandas.core.frame.DataFrame&#x27;&gt;
+RangeIndex: 4 entries, 0 to 3
+Data columns (total 4 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   name    4 non-null      object 
+ 1   score   4 non-null      int64  
+ 2   age     3 non-null      float64
+ 3   city    4 non-null      object 
+dtypes: float64(1), int64(1), object(2)
+memory usage: 260.0+ bytes
+</pre><p><b>해설:</b> 위 코드에서 <code>info</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="describe 조회·선택"><details open><summary>015. describe <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · describe 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.describe(include=&quot;all&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">       name      score        age   city
+count     4   4.000000   3.000000      4
+unique    4        NaN        NaN      3
+top     Kim        NaN        NaN  Seoul
+freq      1        NaN        NaN      2
+mean    NaN  87.500000  17.333333    NaN
+std     NaN   6.454972   0.577350    NaN
+min     NaN  80.000000  17.000000    NaN
+25%     NaN  83.750000  17.000000    NaN
+50%     NaN  87.500000  17.000000    NaN
+75%     NaN  91.250000  17.500000    NaN
+max     NaN  95.000000  18.000000    NaN</pre><p><b>해설:</b> 위 코드에서 <code>describe</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="dtypes 조회·선택"><details open><summary>016. dtypes <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · dtypes 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.dtypes
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">name      object
+score      int64
+age      float64
+city      object
+dtype: object</pre><p><b>해설:</b> 위 코드에서 <code>dtypes</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="shape 조회·선택"><details open><summary>017. shape <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · shape 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.shape
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">(4, 4)</pre><p><b>해설:</b> 위 코드에서 <code>shape</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="columns 조회·선택"><details open><summary>018. columns <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · columns 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.columns.tolist()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">[&#x27;name&#x27;, &#x27;score&#x27;, &#x27;age&#x27;, &#x27;city&#x27;]</pre><p><b>해설:</b> 위 코드에서 <code>columns</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="index 조회·선택"><details open><summary>019. index <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · index 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.index.tolist()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">[0, 1, 2, 3]</pre><p><b>해설:</b> 위 코드에서 <code>index</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="loc 조회·선택"><details open><summary>020. loc <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · loc 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.loc[df.score &gt;= 85, [&quot;name&quot;,&quot;score&quot;]]
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score
+0   Kim     90
+2  Park     95
+3  Choi     85</pre><p><b>해설:</b> 위 코드에서 <code>loc</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="iloc 조회·선택"><details open><summary>021. iloc <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · iloc 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.iloc[:2, :2]
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">  name  score
+0  Kim     90
+1  Lee     80</pre><p><b>해설:</b> 위 코드에서 <code>iloc</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="at 조회·선택"><details open><summary>022. at <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · at 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.at[0,&quot;score&quot;]
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">90</pre><p><b>해설:</b> 위 코드에서 <code>at</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="iat 조회·선택"><details open><summary>023. iat <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · iat 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.iat[0,1]
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">90</pre><p><b>해설:</b> 위 코드에서 <code>iat</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="query 조회·선택"><details open><summary>024. query <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · query 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.query(&quot;score &gt;= 85&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city
+0   Kim     90  17.0    Seoul
+2  Park     95  17.0    Seoul
+3  Choi     85   NaN  Incheon</pre><p><b>해설:</b> 위 코드에서 <code>query</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="filter 조회·선택"><details open><summary>025. filter <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · filter 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.filter(items=[&quot;name&quot;,&quot;score&quot;])
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score
+0   Kim     90
+1   Lee     80
+2  Park     95
+3  Choi     85</pre><p><b>해설:</b> 위 코드에서 <code>filter</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="isin 조회·선택"><details open><summary>026. isin <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · isin 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df[df.name.isin([&quot;Kim&quot;,&quot;Lee&quot;])]
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">  name  score   age   city
+0  Kim     90  17.0  Seoul
+1  Lee     80  18.0  Busan</pre><p><b>해설:</b> 위 코드에서 <code>isin</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="between 조회·선택"><details open><summary>027. between <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · between 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df[df.score.between(80,90)]
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city
+0   Kim     90  17.0    Seoul
+1   Lee     80  18.0    Busan
+3  Choi     85   NaN  Incheon</pre><p><b>해설:</b> 위 코드에서 <code>between</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="nlargest 조회·선택"><details open><summary>028. nlargest <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · nlargest 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.nlargest(2,&quot;score&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age   city
+2  Park     95  17.0  Seoul
+0   Kim     90  17.0  Seoul</pre><p><b>해설:</b> 위 코드에서 <code>nlargest</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="조회·선택" data-search="nsmallest 조회·선택"><details open><summary>029. nsmallest <small>— 조회·선택</small></summary><p><span class="tag">기능</span> · nsmallest 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.nsmallest(2,&quot;score&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city
+1   Lee     80  18.0    Busan
+3  Choi     85   NaN  Incheon</pre><p><b>해설:</b> 위 코드에서 <code>nsmallest</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="assign 정리·변환"><details open><summary>030. assign <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · assign 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.assign(bonus=df.score+5)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city  bonus
+0   Kim     90  17.0    Seoul     95
+1   Lee     80  18.0    Busan     85
+2  Park     95  17.0    Seoul    100
+3  Choi     85   NaN  Incheon     90</pre><p><b>해설:</b> 위 코드에서 <code>assign</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="rename 정리·변환"><details open><summary>031. rename <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · rename 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.rename(columns={&quot;score&quot;:&quot;점수&quot;})
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  점수   age     city
+0   Kim  90  17.0    Seoul
+1   Lee  80  18.0    Busan
+2  Park  95  17.0    Seoul
+3  Choi  85   NaN  Incheon</pre><p><b>해설:</b> 위 코드에서 <code>rename</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="drop 정리·변환"><details open><summary>032. drop <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · drop 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.drop(columns=&quot;city&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age
+0   Kim     90  17.0
+1   Lee     80  18.0
+2  Park     95  17.0
+3  Choi     85   NaN</pre><p><b>해설:</b> 위 코드에서 <code>drop</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="drop_duplicates 정리·변환"><details open><summary>033. drop_duplicates <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · drop_duplicates 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.drop_duplicates(subset=&quot;city&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city
+0   Kim     90  17.0    Seoul
+1   Lee     80  18.0    Busan
+3  Choi     85   NaN  Incheon</pre><p><b>해설:</b> 위 코드에서 <code>drop_duplicates</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="sort_values 정리·변환"><details open><summary>034. sort_values <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · sort_values 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.sort_values(&quot;score&quot;, ascending=False)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city
+2  Park     95  17.0    Seoul
+0   Kim     90  17.0    Seoul
+3  Choi     85   NaN  Incheon
+1   Lee     80  18.0    Busan</pre><p><b>해설:</b> 위 코드에서 <code>sort_values</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="sort_index 정리·변환"><details open><summary>035. sort_index <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · sort_index 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.sort_index(ascending=False)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city
+3  Choi     85   NaN  Incheon
+2  Park     95  17.0    Seoul
+1   Lee     80  18.0    Busan
+0   Kim     90  17.0    Seoul</pre><p><b>해설:</b> 위 코드에서 <code>sort_index</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="set_index 정리·변환"><details open><summary>036. set_index <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · set_index 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.set_index(&quot;name&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">      score   age     city
+name                      
+Kim      90  17.0    Seoul
+Lee      80  18.0    Busan
+Park     95  17.0    Seoul
+Choi     85   NaN  Incheon</pre><p><b>해설:</b> 위 코드에서 <code>set_index</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="reset_index 정리·변환"><details open><summary>037. reset_index <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · reset_index 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.set_index(&quot;name&quot;).reset_index()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city
+0   Kim     90  17.0    Seoul
+1   Lee     80  18.0    Busan
+2  Park     95  17.0    Seoul
+3  Choi     85   NaN  Incheon</pre><p><b>해설:</b> 위 코드에서 <code>reset_index</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="astype 정리·변환"><details open><summary>038. astype <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · astype 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.astype({&quot;score&quot;:&quot;float64&quot;})
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city
+0   Kim   90.0  17.0    Seoul
+1   Lee   80.0  18.0    Busan
+2  Park   95.0  17.0    Seoul
+3  Choi   85.0   NaN  Incheon</pre><p><b>해설:</b> 위 코드에서 <code>astype</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="replace 정리·변환"><details open><summary>039. replace <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · replace 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.replace({&quot;city&quot;:{&quot;Seoul&quot;:&quot;서울&quot;}})
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city
+0   Kim     90  17.0       서울
+1   Lee     80  18.0    Busan
+2  Park     95  17.0       서울
+3  Choi     85   NaN  Incheon</pre><p><b>해설:</b> 위 코드에서 <code>replace</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="map 정리·변환"><details open><summary>040. map <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · map 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.name.map({&quot;Kim&quot;:&quot;김&quot;,&quot;Lee&quot;:&quot;이&quot;,&quot;Park&quot;:&quot;박&quot;,&quot;Choi&quot;:&quot;최&quot;})
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0    김
+1    이
+2    박
+3    최
+Name: name, dtype: object</pre><p><b>해설:</b> 위 코드에서 <code>map</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="apply 정리·변환"><details open><summary>041. apply <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · apply 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.apply(lambda x: &quot;합격&quot; if x&gt;=85 else &quot;보충&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0    합격
+1    보충
+2    합격
+3    합격
+Name: score, dtype: object</pre><p><b>해설:</b> 위 코드에서 <code>apply</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="pipe 정리·변환"><details open><summary>042. pipe <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · pipe 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.pipe(lambda d: d.assign(double=d.score*2))
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city  double
+0   Kim     90  17.0    Seoul     180
+1   Lee     80  18.0    Busan     160
+2  Park     95  17.0    Seoul     190
+3  Choi     85   NaN  Incheon     170</pre><p><b>해설:</b> 위 코드에서 <code>pipe</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="explode 정리·변환"><details open><summary>043. explode <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · explode 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.DataFrame({&quot;x&quot;:[[1,2],[3]]}).explode(&quot;x&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   x
+0  1
+0  2
+1  3</pre><p><b>해설:</b> 위 코드에서 <code>explode</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="melt 정리·변환"><details open><summary>044. melt <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · melt 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.melt(id_vars=&quot;name&quot;, value_vars=[&quot;score&quot;,&quot;age&quot;])
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name variable  value
+0   Kim    score   90.0
+1   Lee    score   80.0
+2  Park    score   95.0
+3  Choi    score   85.0
+4   Kim      age   17.0
+5   Lee      age   18.0
+6  Park      age   17.0
+7  Choi      age    NaN</pre><p><b>해설:</b> 위 코드에서 <code>melt</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="pivot 정리·변환"><details open><summary>045. pivot <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · pivot 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.pivot(index=&quot;name&quot;,columns=&quot;city&quot;,values=&quot;score&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">city  Busan  Incheon  Seoul
+name                       
+Choi    NaN     85.0    NaN
+Kim     NaN      NaN   90.0
+Lee    80.0      NaN    NaN
+Park    NaN      NaN   95.0</pre><p><b>해설:</b> 위 코드에서 <code>pivot</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="get_dummies 정리·변환"><details open><summary>046. get_dummies <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · get_dummies 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.get_dummies(df.city, dtype=int)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   Busan  Incheon  Seoul
+0      0        0      1
+1      1        0      0
+2      0        0      1
+3      0        1      0</pre><p><b>해설:</b> 위 코드에서 <code>get_dummies</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="cut 정리·변환"><details open><summary>047. cut <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · cut 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.cut(df.score,bins=[0,80,90,100],include_lowest=True)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0      (80.0, 90.0]
+1    (-0.001, 80.0]
+2     (90.0, 100.0]
+3      (80.0, 90.0]
+Name: score, dtype: category
+Categories (3, interval[float64, right]): [(-0.001, 80.0] &lt; (80.0, 90.0] &lt; (90.0, 100.0]]</pre><p><b>해설:</b> 위 코드에서 <code>cut</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="qcut 정리·변환"><details open><summary>048. qcut <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · qcut 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.qcut(df.score,q=2,duplicates=&quot;drop&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0      (87.5, 95.0]
+1    (79.999, 87.5]
+2      (87.5, 95.0]
+3    (79.999, 87.5]
+Name: score, dtype: category
+Categories (2, interval[float64, right]): [(79.999, 87.5] &lt; (87.5, 95.0]]</pre><p><b>해설:</b> 위 코드에서 <code>qcut</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="정리·변환" data-search="rank 정리·변환"><details open><summary>049. rank <small>— 정리·변환</small></summary><p><span class="tag">기능</span> · rank 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.rank(ascending=False)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0    2.0
+1    4.0
+2    1.0
+3    3.0
+Name: score, dtype: float64</pre><p><b>해설:</b> 위 코드에서 <code>rank</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결측치·문자열" data-search="isna 결측치·문자열"><details open><summary>050. isna <small>— 결측치·문자열</small></summary><p><span class="tag">기능</span> · isna 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.isna().sum()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">name     0
+score    0
+age      1
+city     0
+dtype: int64</pre><p><b>해설:</b> 위 코드에서 <code>isna</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결측치·문자열" data-search="notna 결측치·문자열"><details open><summary>051. notna <small>— 결측치·문자열</small></summary><p><span class="tag">기능</span> · notna 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.notna().sum()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">name     4
+score    4
+age      3
+city     4
+dtype: int64</pre><p><b>해설:</b> 위 코드에서 <code>notna</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결측치·문자열" data-search="fillna 결측치·문자열"><details open><summary>052. fillna <small>— 결측치·문자열</small></summary><p><span class="tag">기능</span> · fillna 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.fillna({&quot;age&quot;:0})
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city
+0   Kim     90  17.0    Seoul
+1   Lee     80  18.0    Busan
+2  Park     95  17.0    Seoul
+3  Choi     85   0.0  Incheon</pre><p><b>해설:</b> 위 코드에서 <code>fillna</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결측치·문자열" data-search="dropna 결측치·문자열"><details open><summary>053. dropna <small>— 결측치·문자열</small></summary><p><span class="tag">기능</span> · dropna 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.dropna()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age   city
+0   Kim     90  17.0  Seoul
+1   Lee     80  18.0  Busan
+2  Park     95  17.0  Seoul</pre><p><b>해설:</b> 위 코드에서 <code>dropna</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결측치·문자열" data-search="interpolate 결측치·문자열"><details open><summary>054. interpolate <small>— 결측치·문자열</small></summary><p><span class="tag">기능</span> · interpolate 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.Series([1,None,3]).interpolate()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0    1.0
+1    2.0
+2    3.0
+dtype: float64</pre><p><b>해설:</b> 위 코드에서 <code>interpolate</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결측치·문자열" data-search="str.lower 결측치·문자열"><details open><summary>055. str.lower <small>— 결측치·문자열</small></summary><p><span class="tag">기능</span> · str.lower 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.name.str.lower()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0     kim
+1     lee
+2    park
+3    choi
+Name: name, dtype: object</pre><p><b>해설:</b> 위 코드에서 <code>str.lower</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결측치·문자열" data-search="str.upper 결측치·문자열"><details open><summary>056. str.upper <small>— 결측치·문자열</small></summary><p><span class="tag">기능</span> · str.upper 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.name.str.upper()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0     KIM
+1     LEE
+2    PARK
+3    CHOI
+Name: name, dtype: object</pre><p><b>해설:</b> 위 코드에서 <code>str.upper</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결측치·문자열" data-search="str.contains 결측치·문자열"><details open><summary>057. str.contains <small>— 결측치·문자열</small></summary><p><span class="tag">기능</span> · str.contains 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.name.str.contains(&quot;i&quot;,case=False)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0     True
+1    False
+2    False
+3     True
+Name: name, dtype: bool</pre><p><b>해설:</b> 위 코드에서 <code>str.contains</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결측치·문자열" data-search="str.replace 결측치·문자열"><details open><summary>058. str.replace <small>— 결측치·문자열</small></summary><p><span class="tag">기능</span> · str.replace 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.name.str.replace(&quot;i&quot;,&quot;I&quot;,regex=False)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0     KIm
+1     Lee
+2    Park
+3    ChoI
+Name: name, dtype: object</pre><p><b>해설:</b> 위 코드에서 <code>str.replace</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결측치·문자열" data-search="str.len 결측치·문자열"><details open><summary>059. str.len <small>— 결측치·문자열</small></summary><p><span class="tag">기능</span> · str.len 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.name.str.len()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0    3
+1    3
+2    4
+3    4
+Name: name, dtype: int64</pre><p><b>해설:</b> 위 코드에서 <code>str.len</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결측치·문자열" data-search="str.slice 결측치·문자열"><details open><summary>060. str.slice <small>— 결측치·문자열</small></summary><p><span class="tag">기능</span> · str.slice 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.name.str.slice(0,2)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0    Ki
+1    Le
+2    Pa
+3    Ch
+Name: name, dtype: object</pre><p><b>해설:</b> 위 코드에서 <code>str.slice</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결측치·문자열" data-search="str.split 결측치·문자열"><details open><summary>061. str.split <small>— 결측치·문자열</small></summary><p><span class="tag">기능</span> · str.split 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.Series([&quot;a-b&quot;,&quot;c-d&quot;]).str.split(&quot;-&quot;,expand=True)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   0  1
+0  a  b
+1  c  d</pre><p><b>해설:</b> 위 코드에서 <code>str.split</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결측치·문자열" data-search="str.extract 결측치·문자열"><details open><summary>062. str.extract <small>— 결측치·문자열</small></summary><p><span class="tag">기능</span> · str.extract 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.Series([&quot;A12&quot;,&quot;B34&quot;]).str.extract(r&quot;([A-Z])(\d+)&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   0   1
+0  A  12
+1  B  34</pre><p><b>해설:</b> 위 코드에서 <code>str.extract</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="sum 통계·집계"><details open><summary>063. sum <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · sum 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.sum()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">350</pre><p><b>해설:</b> 위 코드에서 <code>sum</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="mean 통계·집계"><details open><summary>064. mean <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · mean 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.mean()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">87.5</pre><p><b>해설:</b> 위 코드에서 <code>mean</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="median 통계·집계"><details open><summary>065. median <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · median 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.median()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">87.5</pre><p><b>해설:</b> 위 코드에서 <code>median</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="min 통계·집계"><details open><summary>066. min <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · min 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.min()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">80</pre><p><b>해설:</b> 위 코드에서 <code>min</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="max 통계·집계"><details open><summary>067. max <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · max 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.max()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">95</pre><p><b>해설:</b> 위 코드에서 <code>max</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="std 통계·집계"><details open><summary>068. std <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · std 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.std()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">6.454972243679028</pre><p><b>해설:</b> 위 코드에서 <code>std</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="var 통계·집계"><details open><summary>069. var <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · var 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.var()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">41.666666666666664</pre><p><b>해설:</b> 위 코드에서 <code>var</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="count 통계·집계"><details open><summary>070. count <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · count 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.count()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">4</pre><p><b>해설:</b> 위 코드에서 <code>count</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="nunique 통계·집계"><details open><summary>071. nunique <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · nunique 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.city.nunique()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">3</pre><p><b>해설:</b> 위 코드에서 <code>nunique</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="unique 통계·집계"><details open><summary>072. unique <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · unique 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.city.unique()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">[&#x27;Seoul&#x27; &#x27;Busan&#x27; &#x27;Incheon&#x27;]</pre><p><b>해설:</b> 위 코드에서 <code>unique</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="value_counts 통계·집계"><details open><summary>073. value_counts <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · value_counts 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.city.value_counts()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">city
+Seoul      2
+Busan      1
+Incheon    1
+Name: count, dtype: int64</pre><p><b>해설:</b> 위 코드에서 <code>value_counts</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="quantile 통계·집계"><details open><summary>074. quantile <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · quantile 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.quantile([.25,.5,.75])
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0.25    83.75
+0.50    87.50
+0.75    91.25
+Name: score, dtype: float64</pre><p><b>해설:</b> 위 코드에서 <code>quantile</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="corr 통계·집계"><details open><summary>075. corr <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · corr 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df[[&quot;score&quot;,&quot;age&quot;]].corr()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">          score       age
+score  1.000000 -0.944911
+age   -0.944911  1.000000</pre><p><b>해설:</b> 위 코드에서 <code>corr</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="cov 통계·집계"><details open><summary>076. cov <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · cov 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df[[&quot;score&quot;,&quot;age&quot;]].cov()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">           score       age
+score  41.666667 -4.166667
+age    -4.166667  0.333333</pre><p><b>해설:</b> 위 코드에서 <code>cov</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="cumsum 통계·집계"><details open><summary>077. cumsum <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · cumsum 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.cumsum()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0     90
+1    170
+2    265
+3    350
+Name: score, dtype: int64</pre><p><b>해설:</b> 위 코드에서 <code>cumsum</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="cummax 통계·집계"><details open><summary>078. cummax <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · cummax 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.cummax()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0    90
+1    90
+2    95
+3    95
+Name: score, dtype: int64</pre><p><b>해설:</b> 위 코드에서 <code>cummax</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="diff 통계·집계"><details open><summary>079. diff <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · diff 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.diff()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0     NaN
+1   -10.0
+2    15.0
+3   -10.0
+Name: score, dtype: float64</pre><p><b>해설:</b> 위 코드에서 <code>diff</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="pct_change 통계·집계"><details open><summary>080. pct_change <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · pct_change 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.pct_change()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0         NaN
+1   -0.111111
+2    0.187500
+3   -0.105263
+Name: score, dtype: float64</pre><p><b>해설:</b> 위 코드에서 <code>pct_change</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="groupby mean 통계·집계"><details open><summary>081. groupby mean <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · groupby mean 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.groupby(&quot;city&quot;)[&quot;score&quot;].mean()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">city
+Busan      80.0
+Incheon    85.0
+Seoul      92.5
+Name: score, dtype: float64</pre><p><b>해설:</b> 위 코드에서 <code>groupby mean</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="groupby agg 통계·집계"><details open><summary>082. groupby agg <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · groupby agg 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.groupby(&quot;city&quot;).agg(평균=(&quot;score&quot;,&quot;mean&quot;),인원=(&quot;name&quot;,&quot;count&quot;))
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">           평균  인원
+city             
+Busan    80.0   1
+Incheon  85.0   1
+Seoul    92.5   2</pre><p><b>해설:</b> 위 코드에서 <code>groupby agg</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="transform 통계·집계"><details open><summary>083. transform <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · transform 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.groupby(&quot;city&quot;)[&quot;score&quot;].transform(&quot;mean&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0    92.5
+1    80.0
+2    92.5
+3    85.0
+Name: score, dtype: float64</pre><p><b>해설:</b> 위 코드에서 <code>transform</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="pivot_table 통계·집계"><details open><summary>084. pivot_table <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · pivot_table 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.pivot_table(index=&quot;city&quot;,values=&quot;score&quot;,aggfunc=&quot;mean&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">         score
+city          
+Busan     80.0
+Incheon   85.0
+Seoul     92.5</pre><p><b>해설:</b> 위 코드에서 <code>pivot_table</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="통계·집계" data-search="crosstab 통계·집계"><details open><summary>085. crosstab <small>— 통계·집계</small></summary><p><span class="tag">기능</span> · crosstab 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.crosstab(df.city,df.score&gt;=85)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">score    False  True 
+city                 
+Busan        1      0
+Incheon      0      1
+Seoul        0      2</pre><p><b>해설:</b> 위 코드에서 <code>crosstab</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="concat 결합·시계열·창"><details open><summary>086. concat <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · concat 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.concat([df.head(2),df.tail(2)],ignore_index=True)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city
+0   Kim     90  17.0    Seoul
+1   Lee     80  18.0    Busan
+2  Park     95  17.0    Seoul
+3  Choi     85   NaN  Incheon</pre><p><b>해설:</b> 위 코드에서 <code>concat</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="merge 결합·시계열·창"><details open><summary>087. merge <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · merge 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.merge(df, pd.DataFrame({&quot;name&quot;:[&quot;Kim&quot;,&quot;Lee&quot;],&quot;club&quot;:[&quot;A&quot;,&quot;B&quot;]}),on=&quot;name&quot;,how=&quot;left&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">   name  score   age     city club
+0   Kim     90  17.0    Seoul    A
+1   Lee     80  18.0    Busan    B
+2  Park     95  17.0    Seoul  NaN
+3  Choi     85   NaN  Incheon  NaN</pre><p><b>해설:</b> 위 코드에서 <code>merge</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="join 결합·시계열·창"><details open><summary>088. join <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · join 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.set_index(&quot;name&quot;).join(pd.DataFrame({&quot;club&quot;:[&quot;A&quot;,&quot;B&quot;]},index=[&quot;Kim&quot;,&quot;Lee&quot;]))
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">      score   age     city club
+name                           
+Kim      90  17.0    Seoul    A
+Lee      80  18.0    Busan    B
+Park     95  17.0    Seoul  NaN
+Choi     85   NaN  Incheon  NaN</pre><p><b>해설:</b> 위 코드에서 <code>join</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="to_datetime 결합·시계열·창"><details open><summary>089. to_datetime <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · to_datetime 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.to_datetime(pd.Series([&quot;2026-01-01&quot;,&quot;2026-02-03&quot;]))
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0   2026-01-01
+1   2026-02-03
+dtype: datetime64[ns]</pre><p><b>해설:</b> 위 코드에서 <code>to_datetime</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="dt.month 결합·시계열·창"><details open><summary>090. dt.month <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · dt.month 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.to_datetime(pd.Series([&quot;2026-01-01&quot;,&quot;2026-02-03&quot;])).dt.month
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0    1
+1    2
+dtype: int32</pre><p><b>해설:</b> 위 코드에서 <code>dt.month</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="resample 결합·시계열·창"><details open><summary>091. resample <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · resample 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.Series([1,2,3,4],index=pd.date_range(&quot;2026-01-01&quot;,periods=4,freq=&quot;D&quot;)).resample(&quot;2D&quot;).sum()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">2026-01-01    3
+2026-01-03    7
+Freq: 2D, dtype: int64</pre><p><b>해설:</b> 위 코드에서 <code>resample</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="shift 결합·시계열·창"><details open><summary>092. shift <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · shift 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.shift(1)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0     NaN
+1    90.0
+2    80.0
+3    95.0
+Name: score, dtype: float64</pre><p><b>해설:</b> 위 코드에서 <code>shift</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="rolling 결합·시계열·창"><details open><summary>093. rolling <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · rolling 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.rolling(2).mean()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0     NaN
+1    85.0
+2    87.5
+3    90.0
+Name: score, dtype: float64</pre><p><b>해설:</b> 위 코드에서 <code>rolling</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="expanding 결합·시계열·창"><details open><summary>094. expanding <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · expanding 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.expanding().mean()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0    90.000000
+1    85.000000
+2    88.333333
+3    87.500000
+Name: score, dtype: float64</pre><p><b>해설:</b> 위 코드에서 <code>expanding</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="ewm 결합·시계열·창"><details open><summary>095. ewm <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · ewm 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.ewm(span=2).mean()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0    90.000000
+1    82.500000
+2    91.153846
+3    87.000000
+Name: score, dtype: float64</pre><p><b>해설:</b> 위 코드에서 <code>ewm</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="stack 결합·시계열·창"><details open><summary>096. stack <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · stack 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df[[&quot;score&quot;,&quot;age&quot;]].stack()
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0  score    90.0
+   age      17.0
+1  score    80.0
+   age      18.0
+2  score    95.0
+   age      17.0
+3  score    85.0
+dtype: float64</pre><p><b>해설:</b> 위 코드에서 <code>stack</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="unstack 결합·시계열·창"><details open><summary>097. unstack <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · unstack 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.set_index([&quot;city&quot;,&quot;name&quot;])[&quot;score&quot;].unstack(&quot;city&quot;)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">city  Busan  Incheon  Seoul
+name                       
+Choi    NaN     85.0    NaN
+Kim     NaN      NaN   90.0
+Lee    80.0      NaN    NaN
+Park    NaN      NaN   95.0</pre><p><b>해설:</b> 위 코드에서 <code>unstack</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="factorize 결합·시계열·창"><details open><summary>098. factorize <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · factorize 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = pd.factorize(df.city)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">(array([0, 1, 0, 2]), Index([&#x27;Seoul&#x27;, &#x27;Busan&#x27;, &#x27;Incheon&#x27;], dtype=&#x27;object&#x27;))</pre><p><b>해설:</b> 위 코드에서 <code>factorize</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="clip 결합·시계열·창"><details open><summary>099. clip <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · clip 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.clip(lower=80,upper=90)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0    90
+1    80
+2    90
+3    85
+Name: score, dtype: int64</pre><p><b>해설:</b> 위 코드에서 <code>clip</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="where 결합·시계열·창"><details open><summary>100. where <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · where 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.where(df.score&gt;=85,other=0)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0    90
+1     0
+2    95
+3    85
+Name: score, dtype: int64</pre><p><b>해설:</b> 위 코드에서 <code>where</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article><article class="card" data-group="결합·시계열·창" data-search="mask 결합·시계열·창"><details open><summary>101. mask <small>— 결합·시계열·창</small></summary><p><span class="tag">기능</span> · mask 연산을 예제 데이터에 적용하여 결과를 확인합니다. 출력의 인덱스·자료형·결측값 변화도 관찰하세요.</p><h4>실행 가능한 파이썬 코드</h4><pre>import pandas as pd
+from io import StringIO
+import numpy as np
+
+df = pd.DataFrame({
+    &quot;name&quot;: [&quot;Kim&quot;, &quot;Lee&quot;, &quot;Park&quot;, &quot;Choi&quot;],
+    &quot;score&quot;: [90, 80, 95, 85],
+    &quot;age&quot;: [17, 18, 17, np.nan],
+    &quot;city&quot;: [&quot;Seoul&quot;, &quot;Busan&quot;, &quot;Seoul&quot;, &quot;Incheon&quot;]
+})
+
+result = df.score.mask(df.score&lt;85,other=0)
+print(result)</pre><button onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent)">코드 복사</button><h4>실행 결과 (Pandas 환경 기준)</h4><pre class="output">0    90
+1     0
+2    95
+3    85
+Name: score, dtype: int64</pre><p><b>해설:</b> 위 코드에서 <code>mask</code>의 입력과 반환값을 비교하세요. Series와 DataFrame의 인덱스 정렬 및 NaN 처리에 유의합니다.</p></details></article></main><footer>학습용 Pandas 함수 도감 · 실제 출력은 설치 버전에 따라 조금 달라질 수 있습니다.</footer><script>function filter(){let q=document.getElementById('q').value.toLowerCase(),g=document.getElementById('g').value,n=0;document.querySelectorAll('article.card').forEach(a=>{let ok=a.dataset.search.includes(q)&&(!g||a.dataset.group===g);a.hidden=!ok;if(ok)n++});document.getElementById('count').textContent=' '+n+'개 표시'}filter()</script></body></html>
