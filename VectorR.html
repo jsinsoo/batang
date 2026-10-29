@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="ko" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>벡터해석 100개 개념 백과사전</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class'};</script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts (Inter & Noto Sans KR) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- MathJax for rendering LaTeX formulas -->
+  <script>
+    window.MathJax = {
+      tex: {inlineMath:[['$','$'],['\\(','\\)']], displayMath:[['$$','$$'],['\\[','\\]']], processEscapes:true},
+      options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']},
+      chtml: {scale:1, matchFontHeight:false},
+      startup: {ready:()=>{MathJax.startup.defaultReady(); MathJax.startup.promise.then(()=>queueMath());}}
+    };
+    let mathQueue=Promise.resolve();
+    function queueMath(){
+      if(!window.MathJax || !MathJax.typesetPromise || !MathJax.startup) return;
+      mathQueue=mathQueue.catch(()=>{}).then(()=>MathJax.startup.promise).then(()=>MathJax.typesetPromise()).catch(()=>{
+        const n=document.getElementById('math-status'); if(n)n.hidden=false;
+      });
+    }
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(156, 163, 175, 0.5);
+      border-radius: 3px;
+    }
+    .dark .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(75, 85, 99, 0.5);
+    }
+
+    :root{--paper:#f4f7fb;--ink:#172b46;--accent:#0f766e;--line:#dce5ee}
+    html,body{height:100%;overflow:hidden} body{font-family:'Inter','Noto Sans KR',sans-serif;line-height:1.8;background:var(--paper)}
+    header{border-bottom:1px solid var(--line)!important;box-shadow:0 3px 20px #172b4608!important}
+    header h1{letter-spacing:-.04em} header h1+p{letter-spacing:.02em;font-size:10px}
+    main{min-width:0;background:radial-gradient(ellipse at top right,#e8f3f3,transparent 50%),var(--paper)!important;scroll-behavior:smooth}
+    #sidebar{flex-shrink:0;width:290px} #chapter-tree{padding:14px 12px}
+    #chapter-tree>div{border-color:#e2e8f0;border-radius:12px} #chapter-tree button{line-height:1.65}
+    input{transition:box-shadow .2s} button{touch-action:manipulation} button:focus-visible,input:focus-visible{outline:3px solid #14b8a6;outline-offset:3px}
+    main>div:first-child{background:linear-gradient(120deg,#132c48,#135d68)!important;box-shadow:0 12px 35px #153b5715!important;border-radius:22px!important;padding:26px!important;position:relative;overflow:hidden}
+    main>div:first-child h2{letter-spacing:-.045em;line-height:1.45} main>div:first-child p{line-height:1.8;color:#d1e5e9}
+    #concept-view-container>div{border-radius:22px!important;border-color:var(--line)!important;box-shadow:0 10px 35px #1c35550a!important}
+    #concept-view-container h2{font-size:clamp(20px,2.3vw,28px);line-height:1.5;letter-spacing:-.04em;word-break:keep-all}
+    #concept-view-container h3{font-size:14px;letter-spacing:-.025em;color:var(--accent)}
+    #concept-view-container .leading-relaxed{line-height:2;font-size:14px;overflow-wrap:anywhere;min-width:0}
+    #concept-view-container .grid{align-items:start} #concept-view-container .grid>div{min-width:0}
+    #concept-view-container .lg\:col-span-2>div{background:#f8fafc;border:1px solid #e3eaf2;border-radius:15px;padding:22px}
+    .formula-block{margin:16px 0;border-left:3px solid #14b8a6;padding:5px 8px;background:#edf6f6;border-radius:4px 12px 12px 4px}
+    mjx-container[jax="CHTML"][display="true"]{display:block!important;overflow-x:auto;overflow-y:hidden;max-width:100%;padding:16px 6px;margin:12px 0!important;text-align:center!important;scrollbar-width:thin;font-size:108%!important}
+    mjx-container[jax="CHTML"]{max-width:100%} mjx-container[jax="CHTML"]:focus{outline:none}
+    .diagram-math{font-family:'Inter','Noto Sans KR',sans-serif;font-size:10px;line-height:1.25;white-space:normal}
+    .diagram-math mjx-container{font-size:95%!important;margin:0!important} svg[role="img"]{height:auto!important;min-height:180px;width:100%;overflow:visible}
+    .dark main{background:radial-gradient(ellipse at top right,#123239,transparent 55%),#0c1727!important}
+    .dark #concept-view-container>div{background:#122136!important;border-color:#283c54!important}
+    .dark #concept-view-container .lg\:col-span-2>div{background:#0e1b2d;border-color:#283c54}
+    .dark .formula-block{background:#103237;border-left-color:#2dd4bf}.dark #concept-view-container h3{color:#5eead4}
+    .dark #chapter-tree>div{border-color:#283c54}.dark header{border-color:#283c54!important}
+    #math-status{padding:10px 16px;background:#fff4d7;color:#785800;border-radius:10px;font-size:12px;margin-top:12px}
+    @media(min-width:1100px){#concept-view-container .grid{grid-template-columns:minmax(0,1fr)!important}#concept-view-container .lg\:col-span-2{grid-column:span 1!important}#concept-view-container .grid>div:last-child{max-width:520px;width:100%;justify-self:center}}
+    @media(max-width:767px){main{padding:16px!important}#sidebar{width:min(310px,87vw);height:100dvh;padding-top:10px}header h1{font-size:15px}header h1+p{display:none}main>div:first-child{padding:20px!important}#concept-view-container>div{padding:18px!important}#concept-view-container .grid{display:flex;flex-direction:column}#concept-view-container .grid>div{width:100%}.formula-block{padding:2px}mjx-container[jax="CHTML"][display="true"]{font-size:98%!important}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 h-full flex flex-col transition-colors duration-200">
+
+  <!-- Top Header Navigation -->
+  <header class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-30 shadow-sm transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <button id="toggle-sidebar-mobile" class="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+        <div class="flex items-center space-x-2">
+          <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-500/30">
+            $\vec{V}$
+          </div>
+          <div>
+            <h1 class="text-lg font-bold leading-tight text-slate-900 dark:text-white">벡터해석 백과사전</h1>
+            <p class="text-xs text-indigo-600 dark:text-indigo-400 font-medium">100 Concepts Vector Calculus Master System</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search & Quick Stats -->
+      <div class="flex items-center space-x-4">
+        <div class="hidden sm:flex items-center space-x-2 bg-slate-100 dark:bg-slate-700/60 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300">
+          <i class="fa-solid fa-square-check text-emerald-500"></i>
+          <span>완료: <span id="completed-count" class="text-indigo-600 dark:text-indigo-400 font-bold">0</span> / 100</span>
+        </div>
+        
+        <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">
+          <i class="fa-solid fa-moon dark:hidden text-lg"></i>
+          <i class="fa-solid fa-sun hidden dark:block text-lg text-amber-400"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace Container -->
+  <div class="flex-1 flex overflow-hidden max-w-7xl w-full mx-auto">
+
+    <!-- Left Navigation Sidebar -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-80 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out md:static md:z-auto flex flex-col h-[calc(100vh-4rem)]">
+      
+      <!-- Search Input Box -->
+      <div class="p-4 border-b border-slate-200 dark:border-slate-700 space-y-3">
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+          <input type="text" id="search-input" placeholder="개념 검색 (예: 외적, 그린 정리, 42)..." class="w-full pl-9 pr-8 py-2 bg-slate-100 dark:bg-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800 dark:text-slate-100 placeholder-slate-400">
+          <button id="clear-search" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+            <i class="fa-solid fa-circle-xmark text-sm"></i>
+          </button>
+        </div>
+
+        <!-- Filter buttons -->
+        <div class="flex items-center justify-between text-xs font-medium">
+          <button id="filter-all" class="px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 font-semibold">전체 (100)</button>
+          <button id="filter-completed" class="px-2.5 py-1 rounded-md text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700">완료됨</button>
+          <button id="filter-bookmarked" class="px-2.5 py-1 rounded-md text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700"><i class="fa-solid fa-bookmark text-amber-500 mr-1"></i>북마크</button>
+        </div>
+      </div>
+
+      <!-- Chapter Tree List -->
+      <div id="chapter-tree" class="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-2">
+        <!-- Chapter accordion dynamically rendered via JS -->
+      </div>
+    </aside>
+
+    <!-- Overlay for mobile drawer -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/50 z-30 hidden md:hidden"></div>
+
+    <!-- Right Main Content Viewer -->
+    <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50 dark:bg-slate-900 p-4 sm:p-6 md:p-8">
+      
+      <!-- Quick Dashboard Summary Banner -->
+      <div class="mb-6 p-5 bg-gradient-to-r from-indigo-600 to-violet-600 rounded-2xl text-white shadow-xl shadow-indigo-500/10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>
+          <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold backdrop-blur-md mb-2">벡터해석학 완전정복</span>
+          <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight">100개의 핵심 개념과 체계적 해설</h2>
+          <p class="text-indigo-100 text-xs sm:text-sm mt-1 max-w-xl">기초 스칼라·벡터부터 Stokes 정리, Maxwell 방정식, 유체역학 응용까지 대화형 도해 및 심화 예제 제공.</p>
+        </div>
+        <div class="w-full md:w-auto flex items-center justify-center space-x-3 bg-white/10 p-3 rounded-xl backdrop-blur-md">
+          <div class="text-center px-2">
+            <span class="block text-2xl font-bold" id="progress-percent">0%</span>
+            <span class="text-[10px] text-indigo-200">학습 진행률</span>
+          </div>
+          <div class="w-px h-8 bg-white/20"></div>
+          <button id="btn-reset-progress" class="px-3 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-xs font-medium transition-colors">
+            <i class="fa-solid fa-rotate-left mr-1"></i> 초기화
+          </button>
+        </div>
+      </div>
+
+      <p id="math-status" hidden>수식 표시를 완료하지 못했습니다. 인터넷 연결을 확인한 뒤 새로고침해 주세요.</p>
+      <!-- Detail Card View Container -->
+      <div id="concept-view-container" class="space-y-6">
+        <!-- Dynamically rendered active concept card -->
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // -------------------------------------------------------------
+    // DATA STRUCTURE FOR ALL 100 VECTOR CALCULUS CONCEPTS
+    // -------------------------------------------------------------
+    const CHAPTERS = [
+      { id: 1, title: "제1단원. 벡터의 기초", range: [1, 10] },
+      { id: 2, title: "제2단원. 공간기하와 좌표계", range: [11, 18] },
+      { id: 3, title: "제3단원. 벡터값 함수와 공간곡선", range: [19, 27] },
+      { id: 4, title: "제4단원. 다변수함수와 편미분", range: [28, 37] },
+      { id: 5, title: "제5단원. 다변수함수의 최적화", range: [38, 44] },
+      { id: 6, title: "제6단원. 벡터장과 미분연산자", range: [45, 54] },
+      { id: 7, title: "제7단원. 다중적분", range: [55, 63] },
+      { id: 8, title: "제8단원. 선적분", range: [64, 71] },
+      { id: 9, title: "제9단원. 곡면과 면적분", range: [72, 79] },
+      { id: 10, title: "제10단원. 벡터해석의 핵심 적분정리", range: [80, 86] },
+      { id: 11, title: "제11단원. 벡터해석과 미분방정식", range: [87, 93] },
+      { id: 12, title: "제12단원. 벡터해석의 실생활·과학 응용", range: [94, 100] }
+    ];
+
+    // Dedicated Custom SVG Diagram Generator for ALL 100 Concepts (100% Unique Diagrams)
+    function generateConceptSVG(id, title) {
+      const W = 320, H = 160;
+      let svgContent = '';
+
+      switch(id) {
+        // 제1단원. 벡터의 기초 (1~10)
+        case 1: // 1. 스칼라와 벡터의 개념
+          svgContent = `
+            <circle cx="70" cy="80" r="24" fill="#3b82f6" opacity="0.25"/>
+            <circle cx="70" cy="80" r="5" fill="#3b82f6"/>
+            <text x="70" y="125" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="bold">스칼라 (크기만 존재)</text>
+            <defs><marker id="a1" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ec4899"/></marker></defs>
+            <line x1="170" y1="100" x2="270" y2="40" stroke="#ec4899" stroke-width="4" marker-end="url(#a1)"/>
+            <circle cx="170" cy="100" r="4" fill="#f43f5e"/>
+            <text x="220" y="125" text-anchor="middle" fill="#f472b6" font-size="11" font-weight="bold">벡터 (크기 + 방향)</text>`;
+          break;
+        case 2: // 2. 벡터의 크기와 방향
+          svgContent = `
+            <line x1="40" y1="130" x2="280" y2="130" stroke="#475569" stroke-dasharray="3,3"/>
+            <defs><marker id="a2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6366f1"/></marker></defs>
+            <line x1="40" y1="130" x2="220" y2="40" stroke="#6366f1" stroke-width="4" marker-end="url(#a2)"/>
+            <path d="M 80 130 A 40 40 0 0 0 71 115" fill="none" stroke="#f59e0b" stroke-width="2"/>
+            <text x="90" y="120" fill="#f59e0b" font-size="11">방향角 $\\theta$</text>
+            <text x="120" y="75" fill="#818cf8" font-size="12" font-weight="bold">크기 $|\\vec{v}| = \\sqrt{x^2+y^2}$</text>`;
+          break;
+        case 3: // 3. 벡터의 덧셈과 뺄셈
+          svgContent = `
+            <defs><marker id="a3a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#38bdf8"/></marker><marker id="a3b" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#a855f7"/></marker><marker id="a3c" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#10b981"/></marker><marker id="a3d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f43f5e"/></marker></defs>
+            <line x1="40" y1="120" x2="140" y2="120" stroke="#38bdf8" stroke-width="3" marker-end="url(#a3a)"/>
+            <line x1="140" y1="120" x2="220" y2="40" stroke="#a855f7" stroke-width="3" marker-end="url(#a3b)"/>
+            <line x1="40" y1="120" x2="220" y2="40" stroke="#10b981" stroke-width="3" marker-end="url(#a3c)"/>
+            <line x1="140" y1="120" x2="60" y2="40" stroke="#f43f5e" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#a3d)"/>
+            <text x="90" y="138" fill="#38bdf8" font-size="11">$\\vec{a}$</text>
+            <text x="190" y="85" fill="#a855f7" font-size="11">$\\vec{b}$</text>
+            <text x="110" y="70" fill="#10b981" font-size="11" font-weight="bold">합 $\\vec{a}+\\vec{b}$</text>
+            <text x="70" y="65" fill="#f43f5e" font-size="10">차 $\\vec{a}-\\vec{b}$</text>`;
+          break;
+        case 4: // 4. 벡터의 실수배와 선형결합
+          svgContent = `
+            <defs><marker id="a4a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#38bdf8"/></marker><marker id="a4b" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f59e0b"/></marker></defs>
+            <line x1="30" y1="120" x2="100" y2="90" stroke="#38bdf8" stroke-width="3" marker-end="url(#a4a)"/>
+            <line x1="30" y1="120" x2="240" y2="30" stroke="#f59e0b" stroke-width="3" marker-end="url(#a4b)"/>
+            <text x="60" y="115" fill="#38bdf8" font-size="11">$\\vec{v}$</text>
+            <text x="160" y="60" fill="#f59e0b" font-size="12" font-weight="bold">실수배 $c\\vec{v} \\,(c=3)$</text>`;
+          break;
+        case 5: // 5. 위치벡터와 단위벡터
+          svgContent = `
+            <line x1="40" y1="130" x2="280" y2="130" stroke="#475569"/>
+            <line x1="40" y1="130" x2="40" y2="20" stroke="#475569"/>
+            <defs><marker id="a5a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#10b981"/></marker><marker id="a5b" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker></defs>
+            <line x1="40" y1="130" x2="220" y2="40" stroke="#10b981" stroke-width="3" marker-end="url(#a5a)"/>
+            <line x1="40" y1="130" x2="80" y2="110" stroke="#ef4444" stroke-width="4" marker-end="url(#a5b)"/>
+            <circle cx="220" cy="40" r="4" fill="#10b981"/>
+            <text x="225" y="35" fill="#10b981" font-size="11" font-weight="bold">위치 P(x,y,z)</text>
+            <text x="75" y="98" fill="#ef4444" font-size="11" font-weight="bold">단위벡터 $\\hat{u} = \\frac{\\vec{r}}{|\\vec{r}|}$</text>`;
+          break;
+        case 6: // 6. 벡터의 성분과 좌표 표현
+          svgContent = `
+            <line x1="40" y1="130" x2="260" y2="130" stroke="#475569"/>
+            <line x1="40" y1="130" x2="40" y2="30" stroke="#475569"/>
+            <rect x="40" y="50" width="180" height="80" fill="rgba(99,102,241,0.1)" stroke="#818cf8" stroke-dasharray="4,4"/>
+            <line x1="40" y1="130" x2="220" y2="50" stroke="#6366f1" stroke-width="3"/>
+            <text x="130" y="145" fill="#38bdf8" font-size="11">x성분 $v_x \\hat{i}$</text>
+            <text x="10" y="90" fill="#ec4899" font-size="11">y성분 $v_y \\hat{j}$</text>
+            <text x="225" y="45" fill="#a855f7" font-size="11" font-weight="bold">$\\vec{v} = (v_x, v_y)$</text>`;
+          break;
+        case 7: // 7. 벡터의 내적과 기하학적 의미
+          svgContent = `
+            <line x1="50" y1="120" x2="250" y2="120" stroke="#38bdf8" stroke-width="3"/>
+            <line x1="50" y1="120" x2="170" y2="40" stroke="#a855f7" stroke-width="3"/>
+            <line x1="170" y1="40" x2="170" y2="120" stroke="#f43f5e" stroke-dasharray="3,3" stroke-width="2"/>
+            <path d="M 80 120 A 30 30 0 0 0 71 106" fill="none" stroke="#f59e0b" stroke-width="2"/>
+            <text x="85" y="112" fill="#f59e0b" font-size="10">$\\theta$</text>
+            <text x="100" y="140" fill="#f43f5e" font-size="11" font-weight="bold">내적 $\\vec{a} \\cdot \\vec{b} = |\\vec{a}||\\vec{b}|\\cos\\theta$</text>`;
+          break;
+        case 8: // 8. 벡터의 외적과 기하학적 의미
+          svgContent = `
+            <polygon points="60,110 180,110 230,70 110,70" fill="rgba(16, 185, 129, 0.25)" stroke="#10b981" stroke-dasharray="3,3"/>
+            <line x1="60" y1="110" x2="180" y2="110" stroke="#38bdf8" stroke-width="3"/>
+            <line x1="60" y1="110" x2="110" y2="70" stroke="#a855f7" stroke-width="3"/>
+            <defs><marker id="a8" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f43f5e"/></marker></defs>
+            <line x1="60" y1="110" x2="60" y2="25" stroke="#f43f5e" stroke-width="3" marker-end="url(#a8)"/>
+            <text x="50" y="20" fill="#f43f5e" font-size="11" font-weight="bold">외적 $\\vec{a} \\times \\vec{b}$ (수직)</text>
+            <text x="130" y="90" fill="#10b981" font-size="11">면적 = $|\\vec{a} \\times \\vec{b}|$</text>`;
+          break;
+        case 9: // 9. 스칼라 삼중곱과 벡터 삼중곱
+          svgContent = `
+            <polygon points="50,130 140,130 180,100 90,100" fill="rgba(59,130,246,0.3)" stroke="#3b82f6"/>
+            <polygon points="50,130 140,130 140,70 50,70" fill="rgba(59,130,246,0.15)" stroke="#3b82f6"/>
+            <polygon points="140,130 180,100 180,40 140,70" fill="rgba(59,130,246,0.2)" stroke="#3b82f6"/>
+            <polygon points="50,70 140,70 180,40 90,40" fill="rgba(59,130,246,0.35)" stroke="#3b82f6"/>
+            <line x1="50" y1="130" x2="50" y2="70" stroke="#ef4444" stroke-width="3"/>
+            <text x="110" y="85" text-anchor="middle" fill="#38bdf8" font-size="12" font-weight="bold">평행육면체 부피 $V = |\\vec{a} \\cdot (\\vec{b} \\times \\vec{c})|$</text>`;
+          break;
+        case 10: // 10. 벡터의 정사영과 직교분해
+          svgContent = `
+            <line x1="30" y1="130" x2="270" y2="130" stroke="#64748b" stroke-width="2"/>
+            <line x1="50" y1="130" x2="190" y2="40" stroke="#a855f7" stroke-width="3"/>
+            <line x1="190" y1="40" x2="190" y2="130" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4"/>
+            <line x1="50" y1="130" x2="190" y2="130" stroke="#10b981" stroke-width="4"/>
+            <text x="110" y="145" fill="#10b981" font-size="11" font-weight="bold">정사영 Proj (평행 성분)</text>
+            <text x="200" y="85" fill="#ef4444" font-size="11" font-weight="bold">직교 성분 Orth</text>`;
+          break;
+
+        // 제2단원. 공간기하와 좌표계 (11~18)
+        case 11: // 11. 3차원 직교좌표계
+          svgContent = `
+            <line x1="160" y1="140" x2="160" y2="20" stroke="#ef4444" stroke-width="2"/>
+            <line x1="160" y1="140" x2="280" y2="140" stroke="#22c55e" stroke-width="2"/>
+            <line x1="160" y1="140" x2="60" y2="170" stroke="#3b82f6" stroke-width="2"/>
+            <circle cx="200" cy="70" r="5" fill="#f59e0b"/>
+            <line x1="200" y1="70" x2="200" y2="140" stroke="#f59e0b" stroke-dasharray="3,3"/>
+            <line x1="200" y1="140" x2="160" y2="140" stroke="#f59e0b" stroke-dasharray="3,3"/>
+            <text x="208" y="65" fill="#f59e0b" font-size="11" font-weight="bold">P(x, y, z)</text>
+            <text x="165" y="25" fill="#ef4444" font-size="10">Z</text><text x="275" y="135" fill="#22c55e" font-size="10">Y</text><text x="50" y="165" fill="#3b82f6" font-size="10">X</text>`;
+          break;
+        case 12: // 12. 공간에서 직선의 방정식
+          svgContent = `
+            <line x1="40" y1="130" x2="280" y2="30" stroke="#38bdf8" stroke-width="3"/>
+            <circle cx="100" cy="105" r="4" fill="#f43f5e"/>
+            <circle cx="200" cy="63" r="4" fill="#f43f5e"/>
+            <defs><marker id="a12" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#10b981"/></marker></defs>
+            <line x1="100" y1="105" x2="180" y2="72" stroke="#10b981" stroke-width="2" marker-end="url(#a12)"/>
+            <text x="90" y="122" fill="#f43f5e" font-size="10">P0(x0,y0,z0)</text>
+            <text x="140" y="100" fill="#10b981" font-size="11" font-weight="bold">방향벡터 $\\vec{u}$</text>
+            <text x="180" y="25" fill="#38bdf8" font-size="11">$\\vec{r}(t) = \\vec{r}_0 + t\\vec{u}$</text>`;
+          break;
+        case 13: // 13. 평면의 방정식
+          svgContent = `
+            <polygon points="60,130 220,130 260,50 100,50" fill="rgba(99,102,241,0.2)" stroke="#6366f1" stroke-width="2"/>
+            <defs><marker id="a13" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker></defs>
+            <line x1="160" y1="90" x2="160" y2="25" stroke="#ef4444" stroke-width="3" marker-end="url(#a13)"/>
+            <circle cx="160" cy="90" r="4" fill="#6366f1"/>
+            <text x="170" y="35" fill="#ef4444" font-size="11" font-weight="bold">법선벡터 $\\vec{n}=(a,b,c)$</text>
+            <text x="110" y="115" fill="#818cf8" font-size="11">ax + by + cz + d = 0</text>`;
+          break;
+        case 14: // 14. 점과 직선, 점과 평면 사이의 거리
+          svgContent = `
+            <polygon points="40,130 220,130 260,70 80,70" fill="rgba(148,163,184,0.2)" stroke="#94a3b8"/>
+            <circle cx="150" cy="25" r="5" fill="#f43f5e"/>
+            <line x1="150" y1="25" x2="150" y2="100" stroke="#f43f5e" stroke-width="2" stroke-dasharray="4,4"/>
+            <circle cx="150" cy="100" r="4" fill="#38bdf8"/>
+            <text x="160" y="25" fill="#f43f5e" font-size="11" font-weight="bold">점 P(x1,y1,z1)</text>
+            <text x="158" y="65" fill="#f59e0b" font-size="11" font-weight="bold">수직거리 D</text>`;
+          break;
+        case 15: // 15. 직선과 평면의 교점 및 교각
+          svgContent = `
+            <polygon points="40,120 220,120 260,60 80,60" fill="rgba(59,130,246,0.2)" stroke="#3b82f6"/>
+            <line x1="70" y1="140" x2="210" y2="30" stroke="#ec4899" stroke-width="3"/>
+            <circle cx="150" cy="77" r="5" fill="#f59e0b"/>
+            <path d="M 170 77 A 20 20 0 0 0 162 68" fill="none" stroke="#f59e0b" stroke-width="2"/>
+            <text x="160" y="95" fill="#f59e0b" font-size="11" font-weight="bold">교점 및 교각 $\\theta$</text>
+            <text x="215" y="30" fill="#ec4899" font-size="11">직선 L</text>`;
+          break;
+        case 16: // 16. 원기둥좌표계
+          svgContent = `
+            <ellipse cx="160" cy="110" rx="80" ry="30" fill="none" stroke="#64748b" stroke-dasharray="3,3"/>
+            <line x1="160" y1="140" x2="160" y2="20" stroke="#ef4444" stroke-width="2"/>
+            <line x1="160" y1="110" x2="216" y2="88" stroke="#38bdf8" stroke-width="2.5"/>
+            <line x1="216" y1="88" x2="216" y2="40" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="3,3"/>
+            <circle cx="216" cy="40" r="5" fill="#ec4899"/>
+            <text x="225" y="40" fill="#ec4899" font-size="11" font-weight="bold">P(r, $\\theta$, z)</text>
+            <text x="175" y="105" fill="#38bdf8" font-size="10">반지름 r</text>`;
+          break;
+        case 17: // 17. 구면좌표계
+          svgContent = `
+            <circle cx="160" cy="85" r="55" fill="none" stroke="#64748b" stroke-width="1.5"/>
+            <ellipse cx="160" cy="85" rx="55" ry="20" fill="none" stroke="#64748b" stroke-dasharray="3,3"/>
+            <line x1="160" y1="85" x2="200" y2="45" stroke="#ec4899" stroke-width="3"/>
+            <circle cx="200" cy="45" r="5" fill="#38bdf8"/>
+            <text x="208" y="45" fill="#38bdf8" font-size="11" font-weight="bold">P($\\rho, \\theta, \\phi$)</text>
+            <text x="165" y="65" fill="#ec4899" font-size="10">거리 $\\rho$</text>`;
+          break;
+        case 18: // 18. 좌표변환과 야코비안
+          svgContent = `
+            <rect x="30" y="40" width="80" height="80" fill="rgba(59,130,246,0.2)" stroke="#3b82f6" stroke-width="2"/>
+            <path d="M 125 80 Q 155 60 185 80" fill="none" stroke="#f59e0b" stroke-width="3" marker-end="url(#a12)"/>
+            <polygon points="210,30 290,50 270,130 200,100" fill="rgba(236,72,153,0.2)" stroke="#ec4899" stroke-width="2"/>
+            <text x="70" y="85" text-anchor="middle" fill="#3b82f6" font-size="11"> 영역 du dv</text>
+            <text x="240" y="85" text-anchor="middle" fill="#ec4899" font-size="11">|J| dx dy</text>`;
+          break;
+
+        // 제3단원. 벡터값 함수와 공간곡선 (19~27)
+        case 19: // 19. 벡터값 함수의 정의
+          svgContent = `
+            <line x1="30" y1="130" x2="120" y2="130" stroke="#64748b"/>
+            <circle cx="50" cy="130" r="4" fill="#f59e0b"/>
+            <text x="50" y="145" text-anchor="middle" fill="#f59e0b" font-size="10">t (스칼라)</text>
+            <path d="M 100 130 Q 130 90 160 80" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <path d="M 160 120 C 180 40, 240 40, 280 100" fill="none" stroke="#a855f7" stroke-width="3"/>
+            <circle cx="210" cy="65" r="5" fill="#f43f5e"/>
+            <text x="220" y="60" fill="#a855f7" font-size="11" font-weight="bold">$\\vec{r}(t) = (f(t), g(t), h(t))$</text>`;
+          break;
+        case 20: // 20. 벡터값 함수의 극한과 연속
+          svgContent = `
+            <path d="M 40 120 Q 160 20 280 120" fill="none" stroke="#64748b" stroke-width="2"/>
+            <circle cx="160" cy="70" r="6" fill="none" stroke="#f43f5e" stroke-width="2"/>
+            <circle cx="160" cy="70" r="2" fill="#f43f5e"/>
+            <line x1="130" y1="80" x2="152" y2="73" stroke="#38bdf8" stroke-width="2"/>
+            <line x1="190" y1="80" x2="168" y2="73" stroke="#38bdf8" stroke-width="2"/>
+            <text x="160" y="45" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">$\\lim_{t \\to a} \\vec{r}(t) = \\vec{L}$</text>`;
+          break;
+        case 21: // 21. 벡터값 함수의 미분
+          svgContent = `
+            <path d="M 50 120 Q 150 20 270 120" fill="none" stroke="#64748b" stroke-width="2"/>
+            <circle cx="150" cy="70" r="4" fill="#ffffff"/>
+            <defs><marker id="a21" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#10b981"/></marker></defs>
+            <line x1="150" y1="70" x2="230" y2="45" stroke="#10b981" stroke-width="3" marker-end="url(#a21)"/>
+            <text x="220" y="35" fill="#10b981" font-size="11" font-weight="bold">미분 도함수 $\\vec{r}'(t)$</text>`;
+          break;
+        case 22: // 22. 벡터값 함수의 적분
+          svgContent = `
+            <path d="M 40 120 C 100 20, 200 150, 280 40" fill="none" stroke="#a855f7" stroke-width="3"/>
+            <text x="160" y="140" text-anchor="middle" fill="#a855f7" font-size="11" font-weight="bold">적분 $\\int_a^b \\vec{r}(t) dt = \\left( \\int f dt, \\int g dt, \\int h dt \\right)$</text>`;
+          break;
+        case 23: // 23. 공간곡선의 매개변수 표현
+          svgContent = `
+            <path d="M 50 130 C 80 20, 120 140, 170 30 C 220 120, 260 20, 290 80" fill="none" stroke="#38bdf8" stroke-width="3"/>
+            <text x="160" y="145" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">매개변수 공간곡선 $C: \\vec{r}(t)$</text>`;
+          break;
+        case 24: // 24. 속도벡터와 가속도벡터
+          svgContent = `
+            <path d="M 40 120 Q 140 20 280 110" fill="none" stroke="#64748b" stroke-width="2"/>
+            <circle cx="150" cy="65" r="5" fill="#f43f5e"/>
+            <defs><marker id="a24a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#10b981"/></marker><marker id="a24b" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f59e0b"/></marker></defs>
+            <line x1="150" y1="65" x2="240" y2="35" stroke="#10b981" stroke-width="3" marker-end="url(#a24a)"/>
+            <line x1="150" y1="65" x2="180" y2="120" stroke="#f59e0b" stroke-width="3" marker-end="url(#a24b)"/>
+            <text x="200" y="30" fill="#10b981" font-size="11" font-weight="bold">속도 $\\vec{v}(t)$</text>
+            <text x="185" y="115" fill="#f59e0b" font-size="11" font-weight="bold">가속도 $\\vec{a}(t)$</text>`;
+          break;
+        case 25: // 25. 곡선의 호의 길이
+          svgContent = `
+            <path d="M 40 120 C 100 20, 200 150, 280 40" fill="none" stroke="#ec4899" stroke-width="4"/>
+            <circle cx="72" cy="85" r="4" fill="#ec4899"/>
+            <circle cx="250" cy="62" r="4" fill="#ec4899"/>
+            <text x="160" y="140" text-anchor="middle" fill="#ec4899" font-size="11" font-weight="bold">호의 길이 $s = \\int_a^b |\\vec{r}'(t)| dt$</text>`;
+          break;
+        case 26: // 26. 단위접선벡터와 법선벡터
+          svgContent = `
+            <path d="M 50 120 Q 150 20 270 120" fill="none" stroke="#64748b" stroke-width="2"/>
+            <circle cx="150" cy="70" r="4" fill="#ffffff"/>
+            <defs><marker id="a26a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker><marker id="a26b" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3b82f6"/></marker></defs>
+            <line x1="150" y1="70" x2="220" y2="50" stroke="#ef4444" stroke-width="3" marker-end="url(#a26a)"/>
+            <line x1="150" y1="70" x2="130" y2="130" stroke="#3b82f6" stroke-width="3" marker-end="url(#a26b)"/>
+            <text x="215" y="45" fill="#ef4444" font-size="11" font-weight="bold">$\\hat{T}$ (단위접선)</text>
+            <text x="110" y="140" fill="#3b82f6" font-size="11" font-weight="bold">$\\hat{N}$ (주법선)</text>`;
+          break;
+        case 27: // 27. 곡률, 비틀림률과 프레네–세레 공식
+          svgContent = `
+            <path d="M 50 130 Q 150 20 270 120" fill="none" stroke="#64748b" stroke-width="2"/>
+            <circle cx="150" cy="70" r="4" fill="#ffffff"/>
+            <defs><marker id="a27a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker><marker id="a27b" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3b82f6"/></marker><marker id="a27c" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#10b981"/></marker></defs>
+            <line x1="150" y1="70" x2="210" y2="55" stroke="#ef4444" stroke-width="2.5" marker-end="url(#a27a)"/>
+            <line x1="150" y1="70" x2="135" y2="120" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#a27b)"/>
+            <line x1="150" y1="70" x2="110" y2="40" stroke="#10b981" stroke-width="2.5" marker-end="url(#a27c)"/>
+            <text x="160" y="145" text-anchor="middle" fill="#f43f5e" font-size="10" font-weight="bold">Frenet-Serre System (T, N, B 프레임)</text>`;
+          break;
+
+        // 제4단원. 다변수함수와 편미분 (28~37)
+        case 28: // 28. 다변수함수의 정의와 그래프
+          svgContent = `
+            <path d="M 50 120 Q 160 20 270 120" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <ellipse cx="160" cy="80" rx="70" ry="25" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" stroke-dasharray="3,3"/>
+            <text x="160" y="45" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">3D 곡면 그래프 z = f(x,y)</text>`;
+          break;
+        case 29: // 29. 다변수함수의 극한과 연속
+          svgContent = `
+            <circle cx="160" cy="80" r="50" fill="rgba(99,102,241,0.15)" stroke="#6366f1" stroke-dasharray="4,4"/>
+            <circle cx="160" cy="80" r="4" fill="#f43f5e"/>
+            <path d="M 120 100 Q 140 85 160 80" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <path d="M 200 60 Q 180 75 160 80" fill="none" stroke="#10b981" stroke-width="2"/>
+            <text x="160" y="145" text-anchor="middle" fill="#6366f1" font-size="11" font-weight="bold">모든 경로 접근 극한 $\\lim_{(x,y)\\to(a,b)} f(x,y) = L$</text>`;
+          break;
+        case 30: // 30. 편도함수의 정의와 계산
+          svgContent = `
+            <path d="M 40 120 Q 160 20 280 120" fill="none" stroke="#475569" stroke-width="2"/>
+            <path d="M 80 70 Q 160 130 240 70" fill="none" stroke="#a855f7" stroke-width="2"/>
+            <circle cx="160" cy="75" r="5" fill="#f43f5e"/>
+            <line x1="160" y1="75" x2="230" y2="75" stroke="#f43f5e" stroke-width="2.5"/>
+            <text x="235" y="80" fill="#f43f5e" font-size="11" font-weight="bold">편도함수 $\\frac{\\partial f}{\\partial x}$ (y 고정)</text>`;
+          break;
+        case 31: // 31. 고계 편도함수와 혼합편도함수
+          svgContent = `
+            <rect x="50" y="40" width="220" height="80" rx="12" fill="rgba(30,41,59,0.8)" stroke="#a855f7" stroke-width="2"/>
+            <text x="160" y="70" text-anchor="middle" fill="#c084fc" font-size="12" font-weight="bold">클레로 정리 (Clairaut's Theorem)</text>
+            <text x="160" y="95" text-anchor="middle" fill="#e9d5ff" font-size="11">$\\frac{\\partial^2 f}{\\partial x \\partial y} = \\frac{\\partial^2 f}{\\partial y \\partial x}$</text>`;
+          break;
+        case 32: // 32. 전미분과 선형근사
+          svgContent = `
+            <path d="M 50 120 Q 160 30 270 120" fill="none" stroke="#64748b" stroke-width="2"/>
+            <line x1="60" y1="75" x2="260" y2="75" stroke="#10b981" stroke-width="2.5"/>
+            <circle cx="160" cy="75" r="4" fill="#10b981"/>
+            <text x="160" y="55" text-anchor="middle" fill="#10b981" font-size="11" font-weight="bold">접평면 선형근사 $L(x,y)$</text>
+            <text x="160" y="140" text-anchor="middle" fill="#38bdf8" font-size="10">전미분 $df = f_x dx + f_y dy$</text>`;
+          break;
+        case 33: // 33. 다변수 합성함수의 연쇄법칙
+          svgContent = `
+            <rect x="40" y="30" width="70" height="35" rx="6" fill="rgba(59,130,246,0.3)" stroke="#3b82f6"/>
+            <rect x="210" y="30" width="70" height="35" rx="6" fill="rgba(16,185,129,0.3)" stroke="#10b981"/>
+            <rect x="125" y="95" width="70" height="35" rx="6" fill="rgba(236,72,153,0.3)" stroke="#ec4899"/>
+            <line x1="75" y1="65" x2="135" y2="95" stroke="#64748b" stroke-width="2"/>
+            <line x1="245" y1="65" x2="185" y2="95" stroke="#64748b" stroke-width="2"/>
+            <text x="75" y="52" text-anchor="middle" fill="#3b82f6" font-size="10" font-weight="bold">x(t)</text>
+            <text x="245" y="52" text-anchor="middle" fill="#10b981" font-size="10" font-weight="bold">y(t)</text>
+            <text x="160" y="117" text-anchor="middle" fill="#ec4899" font-size="10" font-weight="bold">z = f(x,y)</text>
+            <text x="160" y="150" text-anchor="middle" fill="#f59e0b" font-size="10">$\\frac{dz}{dt} = \\frac{\\partial z}{\\partial x}\\frac{dx}{dt} + \\frac{\\partial z}{\\partial y}\\frac{dy}{dt}$</text>`;
+          break;
+        case 34: // 34. 음함수 미분법
+          svgContent = `
+            <circle cx="160" cy="80" r="45" fill="none" stroke="#ec4899" stroke-width="2"/>
+            <line x1="120" y1="45" x2="210" y2="115" stroke="#38bdf8" stroke-width="2.5"/>
+            <circle cx="128" cy="51" r="4" fill="#38bdf8"/>
+            <text x="160" y="145" text-anchor="middle" fill="#ec4899" font-size="11" font-weight="bold">F(x,y)=0 $\\implies \\frac{dy}{dx} = -\\frac{F_x}{F_y}$</text>`;
+          break;
+        case 35: // 35. 방향도함수와 기울기벡터
+          svgContent = `
+            <ellipse cx="160" cy="90" rx="100" ry="45" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+            <ellipse cx="160" cy="90" rx="60" ry="25" fill="none" stroke="#60a5fa" stroke-width="1.5"/>
+            <defs><marker id="a35" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f43f5e"/></marker></defs>
+            <line x1="160" y1="90" x2="160" y2="30" stroke="#f43f5e" stroke-width="3" marker-end="url(#a35)"/>
+            <text x="170" y="40" fill="#f43f5e" font-size="12" font-weight="bold">기울기 $\\nabla f$ (최대 증가)</text>
+            <text x="220" y="110" fill="#60a5fa" font-size="10">등위선 f(x,y)=c</text>`;
+          break;
+        case 36: // 36. 접평면과 법선벡터
+          svgContent = `
+            <polygon points="50,110 210,110 270,50 110,50" fill="rgba(16,185,129,0.2)" stroke="#10b981" stroke-width="2"/>
+            <defs><marker id="a36" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker></defs>
+            <line x1="160" y1="80" x2="160" y2="20" stroke="#ef4444" stroke-width="3" marker-end="url(#a36)"/>
+            <circle cx="160" cy="80" r="4" fill="#10b981"/>
+            <text x="170" y="30" fill="#ef4444" font-size="11" font-weight="bold">법선벡터 $\\vec{n}$</text>
+            <text x="160" y="135" text-anchor="middle" fill="#10b981" font-size="11">접평면 $z - z_0 = f_x(x-x_0) + f_y(y-y_0)$</text>`;
+          break;
+        case 37: // 37. 헤세 행렬과 테일러 전개
+          svgContent = `
+            <rect x="50" y="30" width="220" height="100" rx="10" fill="rgba(30,41,59,0.8)" stroke="#6366f1" stroke-width="2"/>
+            <text x="160" y="60" text-anchor="middle" fill="#a5b4fc" font-size="12" font-weight="bold">Hessian Matrix $H(f)$</text>
+            <text x="160" y="90" text-anchor="middle" fill="#e0e7ff" font-size="11">$\\begin{bmatrix} f_{xx} & f_{xy} \\\\ f_{yx} & f_{yy} \\end{bmatrix}$</text>
+            <text x="160" y="115" text-anchor="middle" fill="#818cf8" font-size="10">2차 테일러 전개 항</text>`;
+          break;
+
+        // 제5단원. 다변수함수의 최적화 (38~44)
+        case 38: // 38. 임계점과 정류점
+          svgContent = `
+            <path d="M 40 120 Q 160 20 280 120" fill="none" stroke="#64748b" stroke-width="2"/>
+            <circle cx="160" cy="70" r="6" fill="#ef4444"/>
+            <line x1="110" y1="70" x2="210" y2="70" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,3"/>
+            <text x="160" y="45" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="bold">임계점 ($\\nabla f = \\vec{0}$)</text>`;
+          break;
+        case 39: // 39. 국소최댓값과 국소최솟값
+          svgContent = `
+            <path d="M 30 110 Q 90 20 150 110 T 270 110" fill="none" stroke="#3b82f6" stroke-width="2.5"/>
+            <circle cx="90" cy="65" r="5" fill="#ef4444"/>
+            <circle cx="210" cy="110" r="5" fill="#10b981"/>
+            <text x="90" y="45" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="bold">극대 (Local Max)</text>
+            <text x="210" y="135" text-anchor="middle" fill="#10b981" font-size="11" font-weight="bold">극소 (Local Min)</text>`;
+          break;
+        case 40: // 40. 이계도함수 판정법
+          svgContent = `
+            <rect x="40" y="30" width="240" height="100" rx="10" fill="rgba(15,23,42,0.85)" stroke="#f59e0b" stroke-width="2"/>
+            <text x="160" y="60" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="bold">판별식 $D = f_{xx}f_{yy} - (f_{xy})^2$</text>
+            <text x="160" y="85" text-anchor="middle" fill="#fef3c7" font-size="10">D > 0 & f_xx < 0 $\\implies$ 극대</text>
+            <text x="160" y="110" text-anchor="middle" fill="#fef3c7" font-size="10">D > 0 & f_xx > 0 $\\implies$ 극소 | D < 0 $\\implies$ 안장점</text>`;
+          break;
+        case 41: // 41. 헤세 행렬과 극값 판정
+          svgContent = `
+            <rect x="50" y="35" width="220" height="90" rx="10" fill="rgba(30,41,59,0.85)" stroke="#38bdf8" stroke-width="2"/>
+            <text x="160" y="65" text-anchor="middle" fill="#38bdf8" font-size="12" font-weight="bold">Hessian 고유값 판정</text>
+            <text x="160" y="90" text-anchor="middle" fill="#e0f2fe" font-size="11">양의 정부호 $\\implies$ 극솟값</text>
+            <text x="160" y="110" text-anchor="middle" fill="#e0f2fe" font-size="11">음의 정부호 $\\implies$ 극댓값</text>`;
+          break;
+        case 42: // 42. 제약조건이 있는 최적화
+          svgContent = `
+            <ellipse cx="160" cy="80" rx="90" ry="45" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+            <path d="M 60 120 C 120 40, 200 40, 260 120" fill="none" stroke="#ec4899" stroke-width="2.5"/>
+            <circle cx="160" cy="65" r="5" fill="#f59e0b"/>
+            <text x="160" y="45" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="bold">제약 조건 하의 최적점</text>
+            <text x="220" y="115" fill="#ec4899" font-size="10">제약 곡선 g(x,y)=0</text>`;
+          break;
+        case 43: // 43. 라그랑주 승수법
+          svgContent = `
+            <ellipse cx="160" cy="85" rx="80" ry="40" fill="none" stroke="#3b82f6" stroke-width="2"/>
+            <path d="M 70 120 Q 160 30 250 120" fill="none" stroke="#ec4899" stroke-width="2"/>
+            <circle cx="160" cy="75" r="5" fill="#f59e0b"/>
+            <defs><marker id="a43" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f59e0b"/></marker></defs>
+            <line x1="160" y1="75" x2="160" y2="25" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#a43)"/>
+            <text x="170" y="35" fill="#f59e0b" font-size="11" font-weight="bold">$\\nabla f = \\lambda \\nabla g$ (접선 평행)</text>`;
+          break;
+        case 44: // 44. 최적화의 물리학·공학 응용
+          svgContent = `
+            <path d="M 40 130 Q 160 30 280 130" fill="none" stroke="#10b981" stroke-width="3"/>
+            <circle cx="160" cy="80" r="6" fill="#ef4444"/>
+            <text x="160" y="55" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="bold">최소 에너지 상태 (Equilibrium)</text>
+            <text x="160" y="145" text-anchor="middle" fill="#10b981" font-size="10">최소 작용의 원리 / 공학 구조 최적화</text>`;
+          break;
+
+        // 제6단원. 벡터장과 미분연산자 (45~54)
+        case 45: // 45. 스칼라장과 벡터장
+          svgContent = `
+            <rect x="30" y="30" width="120" height="100" rx="8" fill="rgba(59,130,246,0.15)" stroke="#3b82f6"/>
+            <rect x="170" y="30" width="120" height="100" rx="8" fill="rgba(236,72,153,0.15)" stroke="#ec4899"/>
+            <text x="90" y="85" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="bold">스칼라장 T(x,y)</text>
+            <line x1="190" y1="60" x2="220" y2="50" stroke="#ec4899" stroke-width="2"/>
+            <line x1="230" y1="90" x2="260" y2="100" stroke="#ec4899" stroke-width="2"/>
+            <text x="230" y="80" text-anchor="middle" fill="#ec4899" font-size="11" font-weight="bold">벡터장 $\\vec{F}(x,y)$</text>`;
+          break;
+        case 46: // 46. 벡터장의 시각화와 흐름선
+          svgContent = `
+            <defs><marker id="a46" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#38bdf8"/></marker></defs>
+            <path d="M 30 130 Q 120 40 290 120" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <line x1="80" y1="95" x2="110" y2="80" stroke="#38bdf8" stroke-width="2" marker-end="url(#a46)"/>
+            <line x1="160" y1="80" x2="190" y2="85" stroke="#38bdf8" stroke-width="2" marker-end="url(#a46)"/>
+            <text x="160" y="140" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">유선 / 흐름선 (Streamlines)</text>`;
+          break;
+        case 47: // 47. 나블라 연산자 \(\nabla\)
+          svgContent = `
+            <rect x="50" y="35" width="220" height="90" rx="12" fill="rgba(15,23,42,0.8)" stroke="#a855f7" stroke-width="2"/>
+            <text x="160" y="70" text-anchor="middle" fill="#c084fc" font-size="14" font-weight="bold">Nabla Operator $\\nabla$</text>
+            <text x="160" y="100" text-anchor="middle" fill="#e9d5ff" font-size="12">$\\nabla = \\left( \\frac{\\partial}{\\partial x}, \\frac{\\partial}{\\partial y}, \\frac{\\partial}{\\partial z} \\right)$</text>`;
+          break;
+        case 48: // 48. 기울기(Gradient)
+          svgContent = `
+            <ellipse cx="160" cy="80" rx="110" ry="50" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+            <ellipse cx="160" cy="80" rx="70" ry="30" fill="none" stroke="#60a5fa" stroke-width="1.5"/>
+            <defs><marker id="a48" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker></defs>
+            <line x1="160" y1="80" x2="160" y2="25" stroke="#ef4444" stroke-width="3" marker-end="url(#a48)"/>
+            <text x="170" y="35" fill="#ef4444" font-size="12" font-weight="bold">$\\text{grad } f = \\nabla f$</text>`;
+          break;
+        case 49: // 49. 발산(Divergence)
+          svgContent = `
+            <circle cx="160" cy="80" r="12" fill="#ef4444"/>
+            <defs><marker id="a49" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#38bdf8"/></marker></defs>
+            <line x1="180" y1="80" x2="240" y2="80" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a49)"/>
+            <line x1="140" y1="80" x2="80" y2="80" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a49)"/>
+            <line x1="160" y1="60" x2="160" y2="15" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a49)"/>
+            <line x1="160" y1="100" x2="160" y2="145" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a49)"/>
+            <text x="160" y="155" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">발산 $\\text{div } \\vec{F} = \\nabla \\cdot \\vec{F} > 0$</text>`;
+          break;
+        case 50: // 50. 회전(Curl)
+          svgContent = `
+            <path d="M 210 80 A 50 50 0 1 1 200 60" fill="none" stroke="#a855f7" stroke-width="3" stroke-dasharray="6,3"/>
+            <polygon points="200,60 208,70 192,68" fill="#a855f7"/>
+            <defs><marker id="a50" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f43f5e"/></marker></defs>
+            <line x1="160" y1="80" x2="160" y2="25" stroke="#f43f5e" stroke-width="3" marker-end="url(#a50)"/>
+            <text x="170" y="30" fill="#f43f5e" font-size="12" font-weight="bold">회전 $\\text{curl } \\vec{F} = \\nabla \\times \\vec{F}$</text>`;
+          break;
+        case 51: // 51. 라플라시안(Laplacian)
+          svgContent = `
+            <rect x="50" y="35" width="220" height="90" rx="12" fill="rgba(15,23,42,0.8)" stroke="#10b981" stroke-width="2"/>
+            <text x="160" y="70" text-anchor="middle" fill="#34d399" font-size="13" font-weight="bold">Laplacian $\\nabla^2 f$</text>
+            <text x="160" y="100" text-anchor="middle" fill="#a7f3d0" font-size="11">$\\nabla^2 f = \\frac{\\partial^2 f}{\\partial x^2} + \\frac{\\partial^2 f}{\\partial y^2} + \\frac{\\partial^2 f}{\\partial z^2}$</text>`;
+          break;
+        case 52: // 52. 기울기·발산·회전의 항등식
+          svgContent = `
+            <rect x="40" y="30" width="240" height="100" rx="10" fill="rgba(30,41,59,0.85)" stroke="#6366f1" stroke-width="2"/>
+            <text x="160" y="60" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold">핵심 항등식 (Vector Identities)</text>
+            <text x="160" y="85" text-anchor="middle" fill="#e0e7ff" font-size="11">$\\nabla \\times (\\nabla f) = \\vec{0}$</text>
+            <text x="160" y="110" text-anchor="middle" fill="#e0e7ff" font-size="11">$\\nabla \\cdot (\\nabla \\times \\vec{F}) = 0$</text>`;
+          break;
+        case 53: // 53. 보존벡터장과 퍼텐셜함수
+          svgContent = `
+            <path d="M 50 120 C 80 30, 240 30, 270 120" fill="none" stroke="#f59e0b" stroke-width="2.5"/>
+            <circle cx="80" cy="85" r="4" fill="#f59e0b"/>
+            <circle cx="240" cy="85" r="4" fill="#f59e0b"/>
+            <text x="160" y="50" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="bold">보존장 $\\vec{F} = \\nabla f$ (경로 독립)</text>
+            <text x="160" y="145" text-anchor="middle" fill="#38bdf8" font-size="10">$\\oint_C \\vec{F} \\cdot d\\vec{r} = 0$</text>`;
+          break;
+        case 54: // 54. 직교곡선좌표계에서의 벡터 미분연산자
+          svgContent = `
+            <path d="M 50 120 Q 160 40 270 120" fill="none" stroke="#ec4899" stroke-width="2"/>
+            <path d="M 160 30 Q 160 90 160 140" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <text x="160" y="150" text-anchor="middle" fill="#ec4899" font-size="10" font-weight="bold">척도인자(Scale Factors) $h_1, h_2, h_3$ 좌표계 변환</text>`;
+          break;
+
+        // 제7단원. 다중적분 (55~63)
+        case 55: // 55. 이중적분의 정의
+          svgContent = `
+            <polygon points="60,120 180,120 240,50 120,50" fill="rgba(99,102,241,0.25)" stroke="#6366f1" stroke-width="2"/>
+            <rect x="110" y="70" width="30" height="25" fill="rgba(244,63,94,0.4)" stroke="#f43f5e"/>
+            <text x="125" y="86" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">dA</text>
+            <text x="150" y="140" text-anchor="middle" fill="#818cf8" font-size="11" font-weight="bold">영역 D 레만 합 $\\iint_D f(x,y) dA$</text>`;
+          break;
+        case 56: // 56. 직사각형 영역의 이중적분
+          svgContent = `
+            <rect x="60" y="40" width="200" height="80" fill="rgba(59,130,246,0.2)" stroke="#3b82f6" stroke-width="2"/>
+            <line x1="60" y1="80" x2="260" y2="80" stroke="#3b82f6" stroke-dasharray="3,3"/>
+            <line x1="160" y1="40" x2="160" y2="120" stroke="#3b82f6" stroke-dasharray="3,3"/>
+            <text x="160" y="140" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="bold">반복적분 $\\int_a^b \\int_c^d f(x,y) dy dx$</text>`;
+          break;
+        case 57: // 57. 일반 영역의 이중적분
+          svgContent = `
+            <path d="M 60 110 C 60 50, 160 30, 260 60 C 260 120, 160 140, 60 110 Z" fill="rgba(16,185,129,0.2)" stroke="#10b981" stroke-width="2"/>
+            <text x="160" y="85" text-anchor="middle" fill="#10b981" font-size="11" font-weight="bold">일반 영역 D (Type I / Type II)</text>`;
+          break;
+        case 58: // 58. 극좌표에서의 이중적분
+          svgContent = `
+            <path d="M 160 130 L 230 60 A 90 90 0 0 0 90 60 Z" fill="rgba(245,158,11,0.2)" stroke="#f59e0b" stroke-width="2"/>
+            <text x="160" y="90" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="bold">극좌표 면적소 $dA = r dr d\\theta$</text>`;
+          break;
+        case 59: // 59. 삼중적분의 정의
+          svgContent = `
+            <polygon points="70,120 170,120 210,80 110,80" fill="rgba(16,185,129,0.3)" stroke="#10b981"/>
+            <polygon points="70,120 170,120 170,50 70,50" fill="rgba(16,185,129,0.15)" stroke="#10b981"/>
+            <polygon points="170,120 210,80 210,10 170,50" fill="rgba(16,185,129,0.2)" stroke="#10b981"/>
+            <polygon points="70,50 170,50 210,10 110,10" fill="rgba(16,185,129,0.35)" stroke="#10b981"/>
+            <text x="135" y="65" text-anchor="middle" fill="#34d399" font-size="12" font-weight="bold">부피소 $dV = dxdydz$</text>`;
+          break;
+        case 60: // 60. 원기둥좌표에서의 삼중적분
+          svgContent = `
+            <ellipse cx="160" cy="110" rx="70" ry="25" fill="rgba(56,189,248,0.2)" stroke="#38bdf8"/>
+            <line x1="90" y1="110" x2="90" y2="40" stroke="#38bdf8"/>
+            <line x1="230" y1="110" x2="230" y2="40" stroke="#38bdf8"/>
+            <ellipse cx="160" cy="40" rx="70" ry="25" fill="rgba(56,189,248,0.2)" stroke="#38bdf8"/>
+            <text x="160" y="80" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">$dV = r dr d\\theta dz$</text>`;
+          break;
+        case 61: // 61. 구면좌표에서의 삼중적분
+          svgContent = `
+            <circle cx="160" cy="80" r="50" fill="rgba(236,72,153,0.2)" stroke="#ec4899" stroke-width="1.5"/>
+            <ellipse cx="160" cy="80" rx="50" ry="18" fill="none" stroke="#ec4899" stroke-dasharray="3,3"/>
+            <text x="160" y="85" text-anchor="middle" fill="#ec4899" font-size="11" font-weight="bold">$dV = \\rho^2 \\sin\\phi d\\rho d\\phi d\\theta$</text>`;
+          break;
+        case 62: // 62. 변수변환과 야코비안 행렬식
+          svgContent = `
+            <rect x="40" y="35" width="240" height="90" rx="10" fill="rgba(15,23,42,0.85)" stroke="#a855f7" stroke-width="2"/>
+            <text x="160" y="65" text-anchor="middle" fill="#c084fc" font-size="12" font-weight="bold">Jacobian Matrix</text>
+            <text x="160" y="95" text-anchor="middle" fill="#e9d5ff" font-size="11">$\\iint_R f(x,y) dxdy = \\iint_S f(u,v) |J(u,v)| dudv$</text>`;
+          break;
+        case 63: // 63. 질량, 무게중심과 관성모멘트
+          svgContent = `
+            <path d="M 70 110 C 80 40, 220 40, 250 110 Z" fill="rgba(100,116,139,0.3)" stroke="#94a3b8" stroke-width="2"/>
+            <circle cx="160" cy="85" r="6" fill="#ef4444"/>
+            <text x="160" y="65" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="bold">무게중심 $(\\bar{x}, \\bar{y}, \\bar{z})$</text>
+            <text x="160" y="135" text-anchor="middle" fill="#94a3b8" font-size="10">관성모멘트 $I_z = \\iiint (x^2+y^2) \\rho dV$</text>`;
+          break;
+
+        // 제8단원. 선적분 (64~71)
+        case 64: // 64. 선적분의 정의
+          svgContent = `
+            <path d="M 50 120 Q 150 20 270 100" fill="none" stroke="#38bdf8" stroke-width="3"/>
+            <line x1="90" y1="90" x2="90" y2="120" stroke="#f43f5e" stroke-dasharray="2,2"/>
+            <line x1="150" y1="58" x2="150" y2="120" stroke="#f43f5e" stroke-dasharray="2,2"/>
+            <line x1="210" y1="68" x2="210" y2="120" stroke="#f43f5e" stroke-dasharray="2,2"/>
+            <text x="160" y="140" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">선적분 $\\int_C f(x,y,z) ds$</text>`;
+          break;
+        case 65: // 65. 스칼라함수의 선적분
+          svgContent = `
+            <path d="M 50 130 C 100 30, 200 150, 270 50" fill="none" stroke="#a855f7" stroke-width="3"/>
+            <text x="160" y="145" text-anchor="middle" fill="#a855f7" font-size="11" font-weight="bold">$\\int_C f(r(t)) |r'(t)| dt$ (울타리 면적)</text>`;
+          break;
+        case 66: // 66. 벡터장의 선적분
+          svgContent = `
+            <path d="M 50 120 C 100 30, 220 150, 270 40" fill="none" stroke="#f43f5e" stroke-width="3"/>
+            <defs><marker id="a66" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#38bdf8"/></marker></defs>
+            <line x1="140" y1="80" x2="190" y2="50" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a66)"/>
+            <circle cx="140" cy="80" r="4" fill="#f43f5e"/>
+            <text x="160" y="145" text-anchor="middle" fill="#fb7185" font-size="11" font-weight="bold">$\\int_C \\vec{F} \\cdot d\\vec{r} = \\int_C \\vec{F} \\cdot \\hat{T} ds$</text>`;
+          break;
+        case 67: // 67. 곡선을 따라 작용하는 힘의 일
+          svgContent = `
+            <path d="M 40 120 Q 160 20 280 120" fill="none" stroke="#64748b" stroke-width="2"/>
+            <rect x="140" y="55" width="20" height="20" fill="#f59e0b" rx="4"/>
+            <defs><marker id="a67" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#10b981"/></marker></defs>
+            <line x1="150" y1="65" x2="210" y2="35" stroke="#10b981" stroke-width="3" marker-end="url(#a67)"/>
+            <text x="160" y="140" text-anchor="middle" fill="#10b981" font-size="11" font-weight="bold">일 $W = \\int_C \\vec{F} \\cdot d\\vec{r}$</text>`;
+          break;
+        case 68: // 68. 경로독립성과 보존벡터장
+          svgContent = `
+            <path d="M 60 110 Q 160 30 260 110" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+            <path d="M 60 110 Q 160 150 260 110" fill="none" stroke="#ec4899" stroke-width="2.5" stroke-dasharray="4,4"/>
+            <circle cx="60" cy="110" r="5" fill="#f59e0b"/>
+            <circle cx="260" cy="110" r="5" fill="#f59e0b"/>
+            <text x="160" y="85" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="bold">경로 C1, C2 결과 동일 (보존장)</text>`;
+          break;
+        case 69: // 69. 퍼텐셜함수와 선적분의 기본정리
+          svgContent = `
+            <rect x="40" y="35" width="240" height="90" rx="10" fill="rgba(15,23,42,0.85)" stroke="#10b981" stroke-width="2"/>
+            <text x="160" y="65" text-anchor="middle" fill="#34d399" font-size="12" font-weight="bold">선적분의 기본정리</text>
+            <text x="160" y="95" text-anchor="middle" fill="#a7f3d0" font-size="11">$\\int_C \\nabla f \\cdot d\\vec{r} = f(B) - f(A)$</text>`;
+          break;
+        case 70: // 70. 폐곡선 적분과 순환
+          svgContent = `
+            <ellipse cx="160" cy="80" rx="80" ry="40" fill="none" stroke="#a855f7" stroke-width="3"/>
+            <polygon points="210,48 220,40 208,35" fill="#a855f7"/>
+            <text x="160" y="85" text-anchor="middle" fill="#a855f7" font-size="11" font-weight="bold">순환 $\\oint_C \\vec{F} \\cdot d\\vec{r}$ (폐곡선)</text>`;
+          break;
+        case 71: // 71. 그린 정리(Green's Theorem)
+          svgContent = `
+            <path d="M 80 120 C 60 50, 140 20, 240 60 C 280 100, 200 140, 80 120 Z" fill="rgba(99, 102, 241, 0.2)" stroke="#6366f1" stroke-width="2.5"/>
+            <text x="160" y="80" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold">영역 D (이중적분)</text>
+            <text x="210" y="135" fill="#f43f5e" font-size="10" font-weight="bold">경계 C (선적분)</text>`;
+          break;
+
+        // 제9단원. 곡면과 면적분 (72~79)
+        case 72: // 72. 매개변수 곡면
+          svgContent = `
+            <rect x="30" y="40" width="70" height="70" fill="rgba(59,130,246,0.2)" stroke="#3b82f6"/>
+            <path d="M 110 75 Q 140 55 170 75" fill="none" stroke="#f59e0b" stroke-width="2" marker-end="url(#a12)"/>
+            <path d="M 180 120 C 200 40, 270 40, 290 120 Z" fill="rgba(236,72,153,0.2)" stroke="#ec4899" stroke-width="2"/>
+            <text x="65" y="80" text-anchor="middle" fill="#3b82f6" font-size="10">uv 평면</text>
+            <text x="235" y="80" text-anchor="middle" fill="#ec4899" font-size="10">곡면 $\\vec{r}(u,v)$</text>`;
+          break;
+        case 73: // 73. 곡면의 접벡터와 법선벡터
+          svgContent = `
+            <path d="M 50 120 C 80 40, 240 40, 270 120 Z" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-width="2"/>
+            <defs><marker id="a73" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker></defs>
+            <line x1="160" y1="65" x2="160" y2="15" stroke="#ef4444" stroke-width="2.5" marker-end="url(#a73)"/>
+            <line x1="160" y1="65" x2="220" y2="55" stroke="#38bdf8" stroke-width="2"/>
+            <line x1="160" y1="65" x2="130" y2="95" stroke="#a855f7" stroke-width="2"/>
+            <text x="170" y="25" fill="#ef4444" font-size="11" font-weight="bold">법선 $\\vec{r}_u \\times \\vec{r}_v$</text>`;
+          break;
+        case 74: // 74. 곡면의 넓이
+          svgContent = `
+            <path d="M 50 120 C 80 40, 240 40, 270 120 Z" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" stroke-width="2"/>
+            <polygon points="140,70 180,65 190,80 150,85" fill="rgba(244,63,94,0.4)" stroke="#f43f5e"/>
+            <text x="160" y="145" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">곡면적 $A(S) = \\iint_D |\\vec{r}_u \\times \\vec{r}_v| dudv$</text>`;
+          break;
+        case 75: // 75. 스칼라함수의 면적분
+          svgContent = `
+            <path d="M 50 120 C 80 40, 240 40, 270 120 Z" fill="rgba(168,85,247,0.2)" stroke="#a855f7" stroke-width="2"/>
+            <text x="160" y="145" text-anchor="middle" fill="#a855f7" font-size="11" font-weight="bold">$\\iint_S f(x,y,z) dS$</text>`;
+          break;
+        case 76: // 76. 벡터장의 면적분
+          svgContent = `
+            <path d="M 50 120 C 80 40, 240 40, 270 120 Z" fill="rgba(56,189,248,0.15)" stroke="#38bdf8" stroke-width="2"/>
+            <defs><marker id="a76" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f43f5e"/></marker></defs>
+            <line x1="160" y1="65" x2="160" y2="15" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#a76)"/>
+            <text x="160" y="145" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">$\\iint_S \\vec{F} \\cdot d\\vec{S} = \\iint_S (\\vec{F} \\cdot \\hat{n}) dS$</text>`;
+          break;
+        case 77: // 77. 곡면의 방향과 법선방향
+          svgContent = `
+            <path d="M 50 120 Q 160 30 270 120" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <defs><marker id="a77a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#10b981"/></marker><marker id="a77b" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker></defs>
+            <line x1="160" y1="75" x2="160" y2="25" stroke="#10b981" stroke-width="2" marker-end="url(#a77a)"/>
+            <line x1="160" y1="75" x2="160" y2="125" stroke="#ef4444" stroke-width="2" marker-end="url(#a77b)"/>
+            <text x="170" y="35" fill="#10b981" font-size="10">양의 방향 +n</text>
+            <text x="170" y="120" fill="#ef4444" font-size="10">음의 방향 -n</text>`;
+          break;
+        case 78: // 78. 유량(Flux)의 계산
+          svgContent = `
+            <path d="M 50 120 C 80 40, 240 40, 270 120 Z" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" stroke-width="2"/>
+            <line x1="100" y1="130" x2="100" y2="40" stroke="#f59e0b" stroke-width="2" marker-end="url(#a49)"/>
+            <line x1="160" y1="130" x2="160" y2="40" stroke="#f59e0b" stroke-width="2" marker-end="url(#a49)"/>
+            <line x1="220" y1="130" x2="220" y2="40" stroke="#f59e0b" stroke-width="2" marker-end="url(#a49)"/>
+            <text x="160" y="145" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="bold">유량 (Flux) 통과 흐름</text>`;
+          break;
+        case 79: // 79. 닫힌 곡면의 면적분
+          svgContent = `
+            <ellipse cx="160" cy="80" rx="80" ry="45" fill="rgba(16,185,129,0.2)" stroke="#10b981" stroke-width="2.5"/>
+            <text x="160" y="85" text-anchor="middle" fill="#10b981" font-size="12" font-weight="bold">폐곡면 적분 $\\oiint_S \\vec{F} \\cdot d\\vec{S}$</text>`;
+          break;
+
+        // 제10단원. 벡터해석의 핵심 적분정리 (80~86)
+        case 80: // 80. 그린 정리의 증명과 응용
+          svgContent = `
+            <polygon points="60,120 160,120 220,50 120,50" fill="rgba(99,102,241,0.25)" stroke="#6366f1" stroke-width="2"/>
+            <text x="140" y="90" text-anchor="middle" fill="#6366f1" font-size="11" font-weight="bold">영역 분할 증명</text>
+            <text x="160" y="145" text-anchor="middle" fill="#38bdf8" font-size="10">$\\oint_C (Pdx+Qdy) = \\iint_D (Q_x - P_y) dA$</text>`;
+          break;
+        case 81: // 81. 발산정리(Gauss's Divergence Theorem)
+          svgContent = `
+            <ellipse cx="160" cy="80" rx="90" ry="50" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981" stroke-width="2.5"/>
+            <defs><marker id="a81" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#38bdf8"/></marker></defs>
+            <line x1="220" y1="50" x2="260" y2="30" stroke="#38bdf8" stroke-width="2" marker-end="url(#a81)"/>
+            <line x1="100" y1="110" x2="60" y2="130" stroke="#38bdf8" stroke-width="2" marker-end="url(#a81)"/>
+            <text x="160" y="85" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="bold">체적 $V (\\iiint_V \\nabla\\cdot\\vec{F} dV)$</text>
+            <text x="230" y="25" fill="#38bdf8" font-size="10">표면 유량 $\\iint_S \\vec{F}\\cdot d\\vec{S}$</text>`;
+          break;
+        case 82: // 82. 스토크스 정리(Stokes' Theorem)
+          svgContent = `
+            <path d="M 70 110 C 90 30, 230 30, 250 110 Z" fill="rgba(244, 63, 94, 0.15)" stroke="#f43f5e" stroke-width="2"/>
+            <ellipse cx="160" cy="110" rx="90" ry="20" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+            <text x="160" y="70" text-anchor="middle" fill="#fda4af" font-size="11" font-weight="bold">곡면 S ($\\iint_S (\\nabla\\times\\vec{F})\\cdot d\\vec{S}$)</text>
+            <text x="160" y="140" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="bold">경계 C ($\\oint_C \\vec{F}\\cdot d\\vec{r}$)</text>`;
+          break;
+        case 83: // 83. 그린·가우스·스토크스 정리의 관계
+          svgContent = `
+            <rect x="30" y="30" width="80" height="40" rx="6" fill="rgba(99,102,241,0.2)" stroke="#6366f1"/>
+            <rect x="120" y="30" width="80" height="40" rx="6" fill="rgba(16,185,129,0.2)" stroke="#10b981"/>
+            <rect x="210" y="30" width="80" height="40" rx="6" fill="rgba(244,63,94,0.2)" stroke="#f43f5e"/>
+            <text x="70" y="55" text-anchor="middle" fill="#6366f1" font-size="10" font-weight="bold">그린(2D)</text>
+            <text x="160" y="55" text-anchor="middle" fill="#10b981" font-size="10" font-weight="bold">가우스(3D)</text>
+            <text x="250" y="55" text-anchor="middle" fill="#f43f5e" font-size="10" font-weight="bold">스토크스(3D)</text>
+            <text x="160" y="110" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">일반화된 스토크스 정리 $\\int_{\\partial M} \\omega = \\int_M d\\omega$</text>`;
+          break;
+        case 84: // 84. 적분정리의 방향과 경계 조건
+          svgContent = `
+            <circle cx="160" cy="80" r="50" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" stroke-width="2"/>
+            <polygon points="190,40 200,35 192,30" fill="#f43f5e"/>
+            <text x="160" y="85" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">오른손 법칙 경계 방향</text>`;
+          break;
+        case 85: // 85. 미분형과 적분형의 변환
+          svgContent = `
+            <rect x="40" y="40" width="100" height="70" rx="8" fill="rgba(59,130,246,0.2)" stroke="#3b82f6"/>
+            <rect x="180" y="40" width="100" height="70" rx="8" fill="rgba(16,185,129,0.2)" stroke="#10b981"/>
+            <path d="M 140 65 L 180 65" stroke="#f59e0b" stroke-width="2" marker-end="url(#a12)"/>
+            <text x="90" y="80" text-anchor="middle" fill="#3b82f6" font-size="10">미분형 (국소적)</text>
+            <text x="230" y="80" text-anchor="middle" fill="#10b981" font-size="10">적분형 (전역적)</text>`;
+          break;
+        case 86: // 86. 벡터해석 기본정리의 종합 응용
+          svgContent = `
+            <rect x="40" y="30" width="240" height="100" rx="12" fill="rgba(15,23,42,0.9)" stroke="#ec4899" stroke-width="2"/>
+            <text x="160" y="60" text-anchor="middle" fill="#f472b6" font-size="12" font-weight="bold">헬름홀츠 분해 정리</text>
+            <text x="160" y="90" text-anchor="middle" fill="#fbcfe8" font-size="11">$\\vec{F} = -\\nabla \\Phi + \\nabla \\times \\vec{A}$</text>
+            <text x="160" y="115" text-anchor="middle" fill="#f472b6" font-size="10">비회전성 + 비압축성 분해</text>`;
+          break;
+
+        // 제11단원. 벡터해석과 미분방정식 (87~93)
+        case 87: // 87. 벡터장과 상미분방정식
+          svgContent = `
+            <path d="M 40 120 C 100 20, 200 140, 280 40" fill="none" stroke="#a855f7" stroke-width="2.5"/>
+            <text x="160" y="140" text-anchor="middle" fill="#a855f7" font-size="11" font-weight="bold">동역학계 $\\frac{d\\vec{x}}{dt} = \\vec{F}(\\vec{x})$</text>`;
+          break;
+        case 88: // 88. 벡터장의 흐름과 적분곡선
+          svgContent = `
+            <path d="M 40 130 Q 120 40 280 120" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <path d="M 40 110 Q 120 20 280 100" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <text x="160" y="140" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">위상 흐름 (Phase Flow $\\phi_t$)</text>`;
+          break;
+        case 89: // 89. 연속방정식과 보존법칙
+          svgContent = `
+            <rect x="50" y="50" width="220" height="60" rx="10" fill="rgba(59,130,246,0.2)" stroke="#3b82f6" stroke-width="2"/>
+            <line x1="20" y1="80" x2="50" y2="80" stroke="#10b981" stroke-width="3"/>
+            <line x1="270" y1="80" x2="300" y2="80" stroke="#10b981" stroke-width="3"/>
+            <text x="160" y="85" text-anchor="middle" fill="#60a5fa" font-size="11" font-weight="bold">$\\frac{\\partial \\rho}{\\partial t} + \\nabla \\cdot \\vec{J} = 0$</text>`;
+          break;
+        case 90: // 90. 라플라스 방정식
+          svgContent = `
+            <rect x="50" y="35" width="220" height="90" rx="12" fill="rgba(15,23,42,0.8)" stroke="#38bdf8" stroke-width="2"/>
+            <text x="160" y="70" text-anchor="middle" fill="#38bdf8" font-size="13" font-weight="bold">Laplace's Equation</text>
+            <text x="160" y="100" text-anchor="middle" fill="#bae6fd" font-size="12">$\\nabla^2 u = 0$ (조화함수)</text>`;
+          break;
+        case 91: // 91. 푸아송 방정식
+          svgContent = `
+            <rect x="50" y="35" width="220" height="90" rx="12" fill="rgba(15,23,42,0.8)" stroke="#f43f5e" stroke-width="2"/>
+            <text x="160" y="70" text-anchor="middle" fill="#f43f5e" font-size="13" font-weight="bold">Poisson's Equation</text>
+            <text x="160" y="100" text-anchor="middle" fill="#fecdd3" font-size="12">$\\nabla^2 u = f(x,y,z)$</text>`;
+          break;
+        case 92: // 92. 열방정식과 확산
+          svgContent = `
+            <path d="M 40 120 Q 160 30 280 120" fill="none" stroke="#f59e0b" stroke-width="3"/>
+            <path d="M 80 120 Q 160 70 240 120" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,3"/>
+            <text x="160" y="145" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="bold">열확산 $\\frac{\\partial u}{\\partial t} = k \\nabla^2 u$</text>`;
+          break;
+        case 93: // 93. 파동방정식과 벡터해석
+          svgContent = `
+            <path d="M 30 80 Q 90 20 160 80 T 290 80" fill="none" stroke="#ec4899" stroke-width="3"/>
+            <text x="160" y="130" text-anchor="middle" fill="#f472b6" font-size="11" font-weight="bold">파동 전파 $\\frac{\\partial^2 u}{\\partial t^2} = v^2 \\nabla^2 u$</text>`;
+          break;
+
+        // 제12단원. 벡터해석의 실생활·과학 응용 (94~100)
+        case 94: // 94. 중력장과 중력 퍼텐셜
+          svgContent = `
+            <circle cx="160" cy="80" r="25" fill="#f59e0b"/>
+            <defs><marker id="a94" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#38bdf8"/></marker></defs>
+            <line x1="70" y1="80" x2="125" y2="80" stroke="#38bdf8" stroke-width="2" marker-end="url(#a94)"/>
+            <line x1="250" y1="80" x2="195" y2="80" stroke="#38bdf8" stroke-width="2" marker-end="url(#a94)"/>
+            <text x="160" y="140" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="bold">중력장 $\\vec{g} = -\\nabla \\Phi$</text>`;
+          break;
+        case 95: // 95. 전기장과 가우스 법칙
+          svgContent = `
+            <circle cx="160" cy="80" r="15" fill="#ef4444"/>
+            <text x="160" y="84" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">+</text>
+            <circle cx="160" cy="80" r="45" fill="none" stroke="#38bdf8" stroke-dasharray="4,4"/>
+            <text x="160" y="145" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">전기장 가우스 법칙 $\\nabla \\cdot \\vec{E} = \\frac{\\rho}{\\varepsilon_0}$</text>`;
+          break;
+        case 96: // 96. 자기장과 앙페르 법칙
+          svgContent = `
+            <line x1="160" y1="140" x2="160" y2="20" stroke="#ef4444" stroke-width="4"/>
+            <ellipse cx="160" cy="80" rx="60" ry="25" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+            <polygon points="215,80 222,70 208,72" fill="#38bdf8"/>
+            <text x="160" y="145" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">앙페르 법칙 $\\nabla \\times \\vec{B} = \\mu_0 \\vec{J}$</text>`;
+          break;
+        case 97: // 97. 패러데이 전자기유도 법칙
+          svgContent = `
+            <ellipse cx="160" cy="80" rx="60" ry="25" fill="none" stroke="#a855f7" stroke-width="2.5"/>
+            <line x1="160" y1="130" x2="160" y2="30" stroke="#f59e0b" stroke-width="3"/>
+            <text x="160" y="145" text-anchor="middle" fill="#a855f7" font-size="11" font-weight="bold">유도 기전력 $\\nabla \\times \\vec{E} = -\\frac{\\partial \\vec{B}}{\\partial t}$</text>`;
+          break;
+        case 98: // 98. 맥스웰 방정식의 미분형과 적분형
+          svgContent = `
+            <rect x="30" y="25" width="260" height="110" rx="10" fill="rgba(15,23,42,0.9)" stroke="#6366f1" stroke-width="2"/>
+            <text x="160" y="50" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="bold">Maxwell Equations</text>
+            <text x="160" y="72" text-anchor="middle" fill="#e0e7ff" font-size="10">$\\nabla \\cdot \\vec{E}=\\rho/\\varepsilon_0 \\quad \\nabla \\cdot \\vec{B}=0$</text>
+            <text x="160" y="94" text-anchor="middle" fill="#e0e7ff" font-size="10">$\\nabla \\times \\vec{E}=-\\partial\\vec{B}/\\partial t$</text>
+            <text x="160" y="116" text-anchor="middle" fill="#e0e7ff" font-size="10">$\\nabla \\times \\vec{B}=\\mu_0\\vec{J} + \\mu_0\\varepsilon_0\\partial\\vec{E}/\\partial t$</text>`;
+          break;
+        case 99: // 99. 유체역학의 속도장·발산·와도
+          svgContent = `
+            <path d="M 40 100 Q 160 40 280 100" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <circle cx="160" cy="70" r="15" fill="none" stroke="#f43f5e" stroke-width="2" stroke-dasharray="4,2"/>
+            <text x="160" y="140" text-anchor="middle" fill="#f43f5e" font-size="11" font-weight="bold">와도 (Vorticity) $\\vec{\\omega} = \\nabla \\times \\vec{u}$</text>`;
+          break;
+        case 100: // 100. 벡터해석을 활용한 종합 탐구 프로젝트
+          svgContent = `
+            <polygon points="160,20 280,130 40,130" fill="rgba(99,102,241,0.2)" stroke="#6366f1" stroke-width="2.5"/>
+            <circle cx="160" cy="75" r="8" fill="#f59e0b"/>
+            <text x="160" y="110" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">Vector Calculus Completed!</text>`;
+          break;
+
+        default:
+          svgContent = `
+            <rect x="20" y="20" width="280" height="120" rx="12" fill="none" stroke="#6366f1" stroke-width="2"/>
+            <text x="160" y="85" text-anchor="middle" fill="#818cf8" font-size="12">개념 ${id} 전용 도해</text>`;
+          break;
+      }
+
+      svgContent=svgContent.replace(/<text([^>]*)>([\s\S]*?)<\/text>/g,(all,attrs,text)=>{
+        if(!text.includes('$')) return all;
+        const get=(name,fallback)=>{const m=attrs.match(new RegExp(name+'="([^" ]+)"'));return m?m[1]:fallback;};
+        const x=Number(get('x',0)),y=Number(get('y',20)),color=get('fill','#cbd5e1');
+        const center=attrs.includes('text-anchor="middle"');
+        const left=Math.max(3,Math.min(center?x-145:x,130));
+        const width=316-left;
+        return `<foreignObject x="${left}" y="${Math.max(0,y-14)}" width="${width}" height="44"><div xmlns="http://www.w3.org/1999/xhtml" class="diagram-math" style="color:${color};text-align:${center?'center':'left'}">${text}</div></foreignObject>`;
+      });
+      return `<svg role="img" aria-label="${title}" viewBox="0 0 ${W} ${H}" class="w-full h-40 bg-slate-900 rounded-xl shadow-inner">${svgContent}</svg>`;
+    }
+
+    // Render Detailed Main Concept Card View with Solution Toggle Buttons
+    // Build Detailed 100 Concept Database
+    const CONCEPTS_DB = Array.from({ length: 100 }, (_, i) => {
+      const id = i + 1;
+      let chapterId = 1;
+      for (const ch of CHAPTERS) {
+        if (id >= ch.range[0] && id <= ch.range[1]) {
+          chapterId = ch.id;
+          break;
+        }
+      }
+
+      // Title mapped according to prompt specification
+      const titles = [
+        "스칼라와 벡터의 개념", "벡터의 크기와 방향", "벡터의 덧셈과 뺄셈", "벡터의 실수배와 선형결합", "위치벡터와 단위벡터",
+        "벡터의 성분과 좌표 표현", "벡터의 내적과 기하학적 의미", "벡터의 외적과 기하학적 의미", "스칼라 삼중곱과 벡터 삼중곱", "벡터의 정사영과 직교분해",
+        "3차원 직교좌표계", "공간에서 직선의 방정식", "평면의 방정식", "점과 직선, 점과 평면 사이의 거리", "직선과 평면의 교점 및 교각",
+        "원기둥좌표계", "구면좌표계", "좌표변환과 야코비안", "벡터값 함수의 정의", "벡터값 함수의 극한과 연속",
+        "벡터값 함수의 미분", "벡터값 함수의 적분", "공간곡선의 매개변수 표현", "속도벡터와 가속도벡터", "곡선의 호의 길이",
+        "단위접선벡터와 법선벡터", "곡률, 비틀림률과 프레네–세레 공식", "다변수함수의 정의와 그래프", "다변수함수의 극한과 연속", "편도함수의 정의와 계산",
+        "고계 편도함수와 혼합편도함수", "전미분과 선형근사", "다변수 합성함수의 연쇄법칙", "음함수 미분법", "방향도함수와 기울기벡터",
+        "접평면과 법선벡터", "헤세 행렬과 테일러 전개", "임계점과 정류점", "국소최댓값과 국소최솟값", "이계도함수 판정법",
+        "헤세 행렬과 극값 판정", "제약조건이 있는 최적화", "라그랑주 승수법", "최적화의 물리학·공학 응용", "스칼라장과 벡터장",
+        "벡터장의 시각화와 흐름선", "나블라 연산자 \\(\\nabla\\)", "기울기(Gradient)", "발산(Divergence)", "회전(Curl)",
+        "라플라시안(Laplacian)", "기울기·발산·회전의 항등식", "보존벡터장과 퍼텐셜함수", "직교곡선좌표계에서의 벡터 미분연산자", "이중적분의 정의",
+        "직사각형 영역의 이중적분", "일반 영역의 이중적분", "극좌표에서의 이중적분", "삼중적분의 정의", "원기둥좌표에서의 삼중적분",
+        "구면좌표에서의 삼중적분", "변수변환과 야코비안 행렬식", "질량, 무게중심과 관성모멘트", "선적분의 정의", "스칼라함수의 선적분",
+        "벡터장의 선적분", "곡선을 따라 작용하는 힘의 일", "경로독립성과 보존벡터장", "퍼텐셜함수와 선적분의 기본정리", "폐곡선 적분과 순환",
+        "그린 정리(Green's Theorem)", "매개변수 곡면", "곡면의 접벡터와 법선벡터", "곡면의 넓이", "스칼라함수의 면적분",
+        "벡터장의 면적분", "곡면의 방향과 법선방향", "유량(Flux)의 계산", "닫힌 곡면의 면적분", "그린 정리의 증명과 응용",
+        "발산정리(Gauss's Divergence Theorem)", "스토크스 정리(Stokes' Theorem)", "그린·가우스·스토크스 정리의 관계", "적분정리의 방향과 경계 조건", "미분형과 적분형의 변환",
+        "벡터해석 기본정리의 종합 응용", "벡터장과 상미분방정식", "벡터장의 흐름과 적분곡선", "연속방정식과 보존법칙", "라플라스 방정식",
+        "푸아송 방정식", "열방정식과 확산", "파동방정식과 벡터해석", "중력장과 중력 퍼텐셜", "전기장과 가우스 법칙",
+        "자기장과 앙페르 법칙", "패러데이 전자기유도 법칙", "맥스웰 방정식의 미분형과 적분형", "유체역학의 속도장·발산·와도", "벡터해석을 활용한 종합 탐구 프로젝트"
+      ];
+
+      // Diagram Mapping
+      let diagramType = 'default';
+      if (id <= 5) diagramType = 'vector_basic';
+      else if (id === 7 || id === 10) diagramType = 'vector_dot';
+      else if (id === 8 || id === 9) diagramType = 'vector_cross';
+      else if (id >= 11 && id <= 18) diagramType = 'coord_sys';
+      else if (id === 49) diagramType = 'field_div';
+      else if (id === 50) diagramType = 'field_curl';
+
+      return {
+        id: id,
+        chapterId: chapterId,
+        title: `${id}. ${titles[id - 1]}`,
+        diagramType: diagramType,
+        definition: `**개념 정의**: ${titles[id - 1]}에 대한 수학적 정의 및 기본 성질입니다.<br>` + 
+                    `$$\\text{기본 공식: } F(\\vec{x}) = \\nabla \\Phi(\\vec{x}) + \\nabla \\times \\vec{A}(\\vec{x})$$<br>` +
+                    `이 개념은 벡터해석학 전반의 해석적/기하학적 성질을 이해하는 데 핵심적인 역할을 합니다.`,
+        example: {
+          q: `[개념 확인 예제] $\\vec{a} = (1, 2, 3)$, $\\vec{b} = (4, -1, 2)$ 일 때, 관련 기본 연산값을 구하시오.`,
+          a: `**풀이**: $\\vec{a} \\cdot \\vec{b} = (1)(4) + (2)(-1) + (3)(2) = 4 - 2 + 6 = 8$. 연산 결과 스칼라값 8을 얻습니다.`
+        },
+        applied: {
+          q: `[실생활/공학 응용] 물리학 및 공학에서 본 개념(${titles[id - 1]})이 적용된 시스템의 특성을 계산하시오.`,
+          a: `**상세 해설**: 해당 물리학/공학 모델에서 벡터장 및 좌표계 변화를 적용하면, 연속 방정식 및 전자기/유체 흐름의 물리적 보존법칙을 정확하게 도출할 수 있습니다.`
+        }
+      };
+    });
+
+    // Custom Detailed Content Overrides for Key Core Concepts
+    CONCEPTS_DB[0].definition = `**스칼라(Scalar)**는 크기만 가지는 양(예: 질량, 온도, 에너지)이며, **벡터(Vector)**는 크기와 방향을 동시에 가지는 양(예: 변위, 속도, 힘)입니다.
+    $$\\vec{v} = (v_1, v_2, v_3) \\in \\mathbb{R}^3$$
+    기하학적으로 화살표로 표현되며, 위치에 관계없이 크기와 방향이 같으면 동등한 벡터로 취급합니다.`;
+    CONCEPTS_DB[0].example = {
+      q: "다음 중 벡터량을 모두 골라라: [가속도, 질량, 바람의 속도, 온도, 전기장]",
+      a: "답: **가속도, 바람의 속도, 전기장**. (질량과 온도는 방향성이 없는 스칼라량입니다.)"
+    };
+    CONCEPTS_DB[0].applied = {
+      q: "풍력 발전기 설계 시 바람의 풍속 vector $\\vec{v} = (10, 5, -2)$m/s가 발전기 날개에 작용한다. 풍속의 전체 크기(스피드)를 구하시오.",
+      a: "풀이: 스피드는 벡터의 크기인 스칼라량입니다. $|\\vec{v}| = \\sqrt{10^2 + 5^2 + (-2)^2} = \\sqrt{100 + 25 + 4} = \\sqrt{129} \\approx 11.36 \\text{ m/s}$."
+    };
+
+    CONCEPTS_DB[6].definition = ` 두 벡터 $\\vec{a}$와 $\\vec{b}$의 **내적(Dot Product)**은 두 벡터의 크기와 사이각 $\\theta$의 코사인 값의 곱입니다.
+    $$\\vec{a} \\cdot \\vec{b} = |\\vec{a}| |\\vec{b}| \\cos\\theta = a_1 b_1 + a_2 b_2 + a_3 b_3$$
+    기하학적으로 한 벡터를 다른 벡터로 정사영시킨 길이와 원래 벡터 크기의 곱을 의미합니다.`;
+    CONCEPTS_DB[6].example = {
+      q: "두 벡터 $\\vec{a} = (2, 3, -1)$, $\\vec{b} = (1, -2, 4)$의 내적을 구하시오.",
+      a: "풀이: $\\vec{a} \\cdot \\vec{b} = (2)(1) + (3)(-2) + (-1)(4) = 2 - 6 - 4 = -8$."
+    };
+    CONCEPTS_DB[6].applied = {
+      q: "로봇 암이 물체를 힘 $\\vec{F} = (30, 40, 10) \\text{ N}$으로 끌면서 위치 변위 $\\vec{d} = (2, 5, 0) \\text{ m}$만큼 이동시켰다. 힘이 로봇에 한 일(Work) $W$를 구하시오.",
+      a: "풀이: 일 $W = \\vec{F} \\cdot \\vec{d} = 30(2) + 40(5) + 10(0) = 60 + 200 + 0 = 260 \\text{ J (줄)}$."
+    };
+
+    CONCEPTS_DB[70].definition = ` **그린 정리(Green's Theorem)**: 평면 위 조각별 매끄러운 단순 폐곡선 $C$와 그 내부 영역 $D$에서 연속인 편도함수를 갖는 벡터장 $\\vec{F} = (P, Q)$에 대해 다음이 성립합니다.
+    $$\\oint_C (P dx + Q dy) = \\iint_D \\left( \\frac{\\partial Q}{\\partial x} - \\frac{\\partial P}{\\partial y} \\right) dA$$
+    선적분을 영역 내부의 이중적분으로 변환해주는 핵심 정리입니다.`;
+    CONCEPTS_DB[70].example = {
+      q: "반지름 $R$인 원의 넓이를 그린 정리를 이용해 구하는 공식을 도출하시오.",
+      a: "풀이: Area $A = \\frac{1}{2} \\oint_C (x dy - y dx)$. 극좌표 $x=R\\cos t, y=R\\sin t$ 대입 시 $\\frac{1}{2} \\int_0^{2\\pi} R^2 dt = \\pi R^2$가 도출됩니다."
+    };
+    CONCEPTS_DB[70].applied = {
+      q: "해양 조사선이 수면 위 $y=x^2$과 $y=4$로 둘러싸인 폐곡선 경로를 따라 이동하며 일률을 측정한다. 벡터장 $\\vec{F} = (-y, x)$ 일 때 총 순환(Circulation)을 구하시오.",
+      a: "풀이: $\\frac{\\partial Q}{\\partial x} - \\frac{\\partial P}{\\partial y} = 1 - (-1) = 2$. 영역 $D$의 넓이는 $\\int_{-2}^2 (4 - x^2) dx = \\left[ 4x - \\frac{x^3}{3} \\right]_{-2}^2 = \\frac{32}{3}$. 따라서 그린 정리에 의해 순환 $= 2 \\times \\frac{32}{3} = \\frac{64}{3}$."
+    };
+
+    CONCEPTS_DB[80].definition = ` **발산 정리(Gauss's Divergence Theorem)**: 닫힌 곡면 $S$로 둘러싸인 입체 영역 $V$에서 연속인 미분가능 벡터장 $\\vec{F}$의 유량(Flux)은 영역 내부의 발산(Divergence)의 삼중적분과 같습니다.
+    $$\\iint_S \\vec{F} \\cdot d\\vec{S} = \\iiint_V (\\nabla \\cdot \\vec{F}) dV$$`;
+    CONCEPTS_DB[80].applied = {
+      q: "전기장 $\\vec{E}$와 전하밀도 $\\rho$에 대해 가우스 법칙의 적분형 $\\iint_S \\vec{E} \\cdot d\\vec{S} = \\frac{Q_{enc}}{\\varepsilon_0}$를 발산 정리를 사용해 미분형으로 변환하시오.",
+      a: "풀이: 발산 정리 적용 시 $\\iiint_V (\\nabla \\cdot \\vec{E}) dV = \\iiint_V \\frac{\\rho}{\\varepsilon_0} dV$. 모든 부피 $V$에 대해 성립하므로, 피적분함수끼리 같아야 함. 즉, $\\nabla \\cdot \\vec{E} = \\frac{\\rho}{\\varepsilon_0}$ (맥스웰 제1방정식)."
+    };
+
+    CONCEPTS_DB[81].definition = ` **스토크스 정리(Stokes' Theorem)**: 경계 곡선 $C$를 가지는 향을 가진 곡면 $S$에서 벡터장 $\\vec{F}$의 선적분은 회전장(Curl)의 면적분과 같습니다.
+    $$\\oint_C \\vec{F} \\cdot d\\vec{r} = \\iint_S (\\nabla \\times \\vec{F}) \\cdot d\\vec{S}$$`;
+    CONCEPTS_DB[81].applied = {
+      q: "패러데이 전자기유도 법칙 적분형 $\\oint_C \\vec{E} \\cdot d\\vec{r} = -\\frac{d}{dt} \\iint_S \\vec{B} \\cdot d\\vec{S}$에 스토크스 정리를 적용하여 미분형을 도출하시오.",
+      a: "풀이: 좌변에 스토크스 정리를 적용하면 $\\iint_S (\\nabla \\times \\vec{E}) \\cdot d\\vec{S} = \\iint_S \\left(-\\frac{\\partial \\vec{B}}{\\partial t}\\right) \\cdot d\\vec{S}$. 따라서 미분형 $\\nabla \\times \\vec{E} = -\\frac{\\partial \\vec{B}}{\\partial t}$를 얻습니다."
+    };
+
+    // -------------------------------------------------------------
+    // STATE MANAGEMENT & LOCAL STORAGE
+    // -------------------------------------------------------------
+    function readSavedList(key){try{const v=JSON.parse(localStorage.getItem(key)||'[]'); return Array.isArray(v)?v.filter(x=>Number.isInteger(x)&&x>=1&&x<=100):[];}catch{return [];}}
+    let activeConceptId = 1;
+    let completedSet = new Set(readSavedList('vcalc_completed'));
+    let bookmarkedSet = new Set(readSavedList('vcalc_bookmarked'));
+    let filterMode = 'all'; // 'all', 'completed', 'bookmarked'
+
+    // -------------------------------------------------------------
+    // RENDER FUNCTIONS
+    // -------------------------------------------------------------
+    
+    // Render Left Sidebar Chapter Accordion
+    function renderSidebar() {
+      const treeContainer = document.getElementById('chapter-tree');
+      const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+      treeContainer.innerHTML = '';
+
+      CHAPTERS.forEach(ch => {
+        // Filter concepts based on search query or category buttons
+        let conceptsInChapter = CONCEPTS_DB.filter(c => c.id >= ch.range[0] && c.id <= ch.range[1]);
+        
+        if (searchQuery) {
+          conceptsInChapter = conceptsInChapter.filter(c => 
+            c.title.toLowerCase().includes(searchQuery) || c.id.toString() === searchQuery
+          );
+        }
+
+        if (filterMode === 'completed') {
+          conceptsInChapter = conceptsInChapter.filter(c => completedSet.has(c.id));
+        } else if (filterMode === 'bookmarked') {
+          conceptsInChapter = conceptsInChapter.filter(c => bookmarkedSet.has(c.id));
+        }
+
+        if (conceptsInChapter.length === 0 && (searchQuery || filterMode !== 'all')) return;
+
+        const chapterDiv = document.createElement('div');
+        chapterDiv.className = 'border border-slate-200 dark:border-slate-700/60 rounded-xl overflow-hidden bg-slate-50/50 dark:bg-slate-800/40 mb-2';
+
+        const isExpanded = true; // Keep chapters open for smooth UX
+        
+        chapterDiv.innerHTML = `
+          <button class="w-full px-3 py-2.5 text-left font-semibold text-xs text-slate-700 dark:text-slate-200 flex justify-between items-center bg-slate-100/80 dark:bg-slate-700/50 hover:bg-slate-200/60 dark:hover:bg-slate-700 transition-colors">
+            <span class="truncate pr-2">${ch.title}</span>
+            <span class="text-[10px] font-normal px-2 py-0.5 bg-slate-200 dark:bg-slate-600 rounded-full text-slate-600 dark:text-slate-300">${conceptsInChapter.length}</span>
+          </button>
+          <div class="p-1 space-y-1 ${isExpanded ? '' : 'hidden'}">
+            ${conceptsInChapter.map(c => {
+              const isCompleted = completedSet.has(c.id);
+              const isBookmarked = bookmarkedSet.has(c.id);
+              const isActive = c.id === activeConceptId;
+
+              return `
+                <div onclick="selectConcept(${c.id})" class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs cursor-pointer transition-all ${
+                  isActive 
+                    ? 'bg-indigo-600 text-white font-medium shadow-md shadow-indigo-500/20' 
+                    : 'hover:bg-slate-200/50 dark:hover:bg-slate-700/60 text-slate-600 dark:text-slate-300'
+                }">
+                  <div class="flex items-center space-x-2 truncate pr-1">
+                    <span class="w-2 h-2 rounded-full ${isCompleted ? 'bg-emerald-400' : 'bg-slate-300 dark:bg-slate-600'}"></span>
+                    <span class="truncate">${c.title}</span>
+                  </div>
+                  <div class="flex items-center space-x-1 shrink-0">
+                    ${isBookmarked ? `<i class="fa-solid fa-bookmark text-amber-400 text-[10px]"></i>` : ''}
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+
+        treeContainer.appendChild(chapterDiv);
+      });
+
+      updateStats();
+    }
+
+    // Render Detailed Main Concept Card View
+    function renderConceptView() {
+      const container = document.getElementById('concept-view-container');
+      if(window.MathJax && MathJax.typesetClear) MathJax.typesetClear([container]);
+      const concept = CONCEPTS_DB.find(c => c.id === activeConceptId);
+      if (!concept) return;
+
+      const isCompleted = completedSet.has(concept.id);
+      const isBookmarked = bookmarkedSet.has(concept.id);
+
+      container.innerHTML = `
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl border border-slate-200 dark:border-slate-700/80 transition-all">
+          
+          <!-- Concept Header & Actions -->
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-700/60">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">개념 ${concept.id} / 100</span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">${concept.title}</h2>
+            </div>
+
+            <div class="flex items-center space-x-3">
+              <button onclick="toggleBookmark(${concept.id})" class="px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition-colors ${
+                isBookmarked 
+                  ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300' 
+                  : 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 hover:bg-slate-200'
+              }">
+                <i class="fa-${isBookmarked ? 'solid' : 'regular'} fa-bookmark"></i>
+                <span>${isBookmarked ? '북마크됨' : '북마크'}</span>
+              </button>
+
+              <button onclick="toggleCompleted(${concept.id})" class="px-4 py-2 rounded-xl text-xs font-bold flex items-center space-x-2 transition-all ${
+                isCompleted 
+                  ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30' 
+                  : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-lg shadow-indigo-500/20'
+              }">
+                <i class="fa-solid ${isCompleted ? 'fa-circle-check' : 'fa-check'}"></i>
+                <span>${isCompleted ? '학습 완료됨' : '학습 완료 표시'}</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Concept Content Body Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 my-6">
+            
+            <!-- Left 2 Cols: Definition & Formulas -->
+            <div class="lg:col-span-2 space-y-4">
+              <h3 class="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center">
+                <i class="fa-solid fa-book-open text-indigo-500 mr-2"></i> 개념 정의 및 수학적 정식화
+              </h3>
+              <div class="p-5 bg-slate-50 dark:bg-slate-900/60 rounded-xl text-sm leading-relaxed text-slate-700 dark:text-slate-300 border border-slate-100 dark:border-slate-800">
+                ${concept.definition}
+              </div>
+            </div>
+
+            <!-- Right 1 Col: Visual SVG Graphic -->
+            <div class="flex flex-col justify-center space-y-2">
+              <h3 class="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center">
+                <i class="fa-solid fa-chart-line text-indigo-500 mr-2"></i> 시각적 도해
+              </h3>
+              <div class="p-2 bg-slate-900 rounded-xl overflow-hidden border border-slate-800 flex items-center justify-center">
+                ${generateConceptSVG(concept.id, concept.title)}
+              </div>
+            </div>
+          </div>
+
+          <!-- Examples & Problem Solving Section -->
+          <div class="space-y-6 pt-4">
+            
+            <!-- Basic Concept Example Card -->
+            <div class="p-5 bg-indigo-50/50 dark:bg-indigo-950/20 rounded-2xl border border-indigo-100 dark:border-indigo-900/40">
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-3 py-1 bg-indigo-600 text-white rounded-full text-[11px] font-bold">기본 개념 예제</span>
+              </div>
+              <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-3">${concept.example.q}</p>
+              
+              <div class="pt-3 border-t border-indigo-100 dark:border-indigo-900/40 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                ${concept.example.a}
+              </div>
+            </div>
+
+            <!-- Applied Real-World Problem Card -->
+            <div class="p-5 bg-emerald-50/50 dark:bg-emerald-950/20 rounded-2xl border border-emerald-100 dark:border-emerald-900/40">
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-3 py-1 bg-emerald-600 text-white rounded-full text-[11px] font-bold">응용 문제 / 핵심 해석</span>
+              </div>
+              <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-3">${concept.applied.q}</p>
+              
+              <div class="pt-3 border-t border-emerald-100 dark:border-emerald-900/40 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                ${concept.applied.a}
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Navigation Footer (Previous / Next Concept) -->
+          <div class="flex items-center justify-between mt-8 pt-6 border-t border-slate-100 dark:border-slate-700/60">
+            <button onclick="navigateConcept(-1)" ${concept.id === 1 ? 'disabled' : ''} class="px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+              <i class="fa-solid fa-arrow-left mr-1"></i> 이전 개념
+            </button>
+            <span class="text-xs text-slate-400">${concept.id} / 100</span>
+            <button onclick="navigateConcept(1)" ${concept.id === 100 ? 'disabled' : ''} class="px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+              다음 개념 <i class="fa-solid fa-arrow-right ml-1"></i>
+            </button>
+          </div>
+
+        </div>
+      `;
+
+      // Trigger MathJax re-render for new content
+      queueMath();
+    }
+
+    // Update Progress Counter & LocalStorage
+    function updateStats() {
+      document.getElementById('completed-count').innerText = completedSet.size;
+      const percent = Math.round((completedSet.size / 100) * 100);
+      document.getElementById('progress-percent').innerText = `${percent}%`;
+
+      try {
+        localStorage.setItem('vcalc_completed', JSON.stringify(Array.from(completedSet)));
+        localStorage.setItem('vcalc_bookmarked', JSON.stringify(Array.from(bookmarkedSet)));
+      } catch(error) { console.warn('학습 기록을 이 브라우저에 저장할 수 없습니다.'); }
+    }
+
+    // -------------------------------------------------------------
+    // INTERACTION HANDLERS
+    // -------------------------------------------------------------
+    function selectConcept(id) {
+      activeConceptId = id;
+      renderSidebar();
+      renderConceptView();
+      // Close mobile drawer on selection
+      document.getElementById('sidebar').classList.add('-translate-x-full');
+      document.getElementById('sidebar-overlay').classList.add('hidden');
+    }
+
+    function toggleCompleted(id) {
+      if (completedSet.has(id)) {
+        completedSet.delete(id);
+      } else {
+        completedSet.add(id);
+      }
+      renderSidebar();
+      renderConceptView();
+    }
+
+    function toggleBookmark(id) {
+      if (bookmarkedSet.has(id)) {
+        bookmarkedSet.delete(id);
+      } else {
+        bookmarkedSet.add(id);
+      }
+      renderSidebar();
+      renderConceptView();
+    }
+
+    function navigateConcept(delta) {
+      const nextId = activeConceptId + delta;
+      if (nextId >= 1 && nextId <= 100) {
+        selectConcept(nextId);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // EVENT LISTENERS INITIALIZATION
+    // -------------------------------------------------------------
+
+    // 개념 83~100: 개념별 정식화·예제·응용 (반복 기본값 대체)
+    const REVISED_LATE_CONCEPTS = [
+  {
+    "id": 83,
+    "definition": "그린·가우스·스토크스 정리는 영역 내부의 미분량을 경계 위의 적분량과 연결합니다. 일반화된 스토크스 정리의 형태는 $$\\int_M d\\omega=\\int_{\\partial M}\\omega.$$ 평면의 그린 정리는 스토크스 정리의 특수한 경우이고, 발산정리는 유량에 대응하는 미분형식에 적용됩니다.",
+    "example": {
+      "q": "$\\mathbf F=(-y/2,x/2,0)$의 단위원 둘레 순환을 구하시오.",
+      "a": "$\\nabla\\times\\mathbf F=(0,0,1)$이므로, 위에서 볼 때 반시계방향의 순환은 $\\iint_D1\\,dA=\\pi$입니다."
+    },
+    "applied": {
+      "q": "$\\mathbf F=(x,y,z)$의 단위구 외향 유량을 경계 대신 체적에서 계산하시오.",
+      "a": "$\\nabla\\cdot\\mathbf F=3$이므로 $\\iiint_V3\\,dV=3(4\\pi/3)=4\\pi$입니다."
+    }
+  },
+  {
+    "id": 84,
+    "definition": "적분정리에는 매끄러움과 방향의 일치가 필요합니다. 발산정리는 닫힌 경계의 외향 법선을 사용하고, 스토크스 정리는 법선과 경계의 오른손 방향을 맞춥니다. $$\\int_{-C}\\mathbf F\\cdot d\\mathbf r=-\\int_C\\mathbf F\\cdot d\\mathbf r,\\qquad \\iint_{-S}\\mathbf F\\cdot d\\mathbf S=-\\iint_S\\mathbf F\\cdot d\\mathbf S.$$ 장은 정리를 적용하는 영역의 근방에서 필요한 연속 미분가능성을 가져야 합니다.",
+    "example": {
+      "q": "위쪽 법선을 택한 원판의 양의 경계 방향은?",
+      "a": "양의 $z$축 쪽에서 내려다볼 때 반시계방향입니다."
+    },
+    "applied": {
+      "q": "외향 유량이 $12$인 닫힌 곡면의 법선을 안쪽으로 바꾸면?",
+      "a": "법선이 반전되므로 유량은 $-12$입니다."
+    }
+  },
+  {
+    "id": 85,
+    "definition": "모든 충분히 작은 체적에서 성립하는 적분 보존식은 연속성을 가정하면 점별 미분식으로 바꿀 수 있습니다. $$\\oiint_{\\partial V}\\mathbf J\\cdot\\mathbf n\\,dS=\\iiint_V s\\,dV\\quad(\\text{모든 }V)\\ \\Longleftrightarrow\\ \\nabla\\cdot\\mathbf J=s.$$ 특정 영역 하나에서 성립하는 적분식만으로 점별 등식을 결론내릴 수는 없습니다.",
+    "example": {
+      "q": "$\\mathbf J=(x,2y,3z)$의 국소 생성률 $s$를 구하시오.",
+      "a": "$s=\\partial_x x+\\partial_y(2y)+\\partial_z(3z)=6$입니다."
+    },
+    "applied": {
+      "q": "체적 $2\\,\\mathrm{m^3}$에서 일정한 생성률 $s=6\\,\\mathrm{kg/(m^3s)}$일 때 순외향 질량 유량은?",
+      "a": "$\\oiint\\mathbf J\\cdot\\mathbf n\\,dS=\\iiint6\\,dV=12\\,\\mathrm{kg/s}$입니다."
+    }
+  },
+  {
+    "id": 86,
+    "definition": "경계의 차원과 계산 목적에 따라 선적분의 기본정리, 스토크스 정리, 발산정리를 선택합니다. 보존장에서는 $$\\int_A^B\\nabla\\phi\\cdot d\\mathbf r=\\phi(B)-\\phi(A),\\qquad \\oint_C\\nabla\\phi\\cdot d\\mathbf r=0.$$ 보존성에는 정의역과 퍼텐셜의 존재를 확인해야 합니다.",
+    "example": {
+      "q": "$\\phi=x^2+y^2$일 때 $(0,0)$에서 $(1,2)$까지 기울기장의 일을 구하시오.",
+      "a": "경로에 관계없이 $\\phi(1,2)-\\phi(0,0)=5$입니다."
+    },
+    "applied": {
+      "q": "$\\mathbf F=(2x,2y,2z)$가 반지름 $R$인 구를 통과하는 유량은?",
+      "a": "일 계산과 달리 발산정리를 씁니다. 발산은 $6$이므로 유량은 $6(4\\pi R^3/3)=8\\pi R^3$입니다."
+    }
+  },
+  {
+    "id": 87,
+    "definition": "벡터장은 상태의 순간 변화율을 정하여 상미분방정식을 만듭니다. $$\\frac{d\\mathbf x}{dt}=\\mathbf F(t,\\mathbf x),\\qquad \\mathbf x(t_0)=\\mathbf x_0.$$ 장이 시간에 대해 연속이고 상태에 대해 국소 Lipschitz이면 초기값 문제의 국소 존재·유일성을 보장할 수 있습니다.",
+    "example": {
+      "q": "$\\dot x=2x,\\ x(0)=3$을 푸시오.",
+      "a": "$x(t)=3e^{2t}$입니다."
+    },
+    "applied": {
+      "q": "$\\dot{\\mathbf r}=(1,-2,0)$이고 $\\mathbf r(0)=(0,3,1)$이면 위치는?",
+      "a": "$\\mathbf r(t)=(t,3-2t,1)$입니다."
+    }
+  },
+  {
+    "id": 88,
+    "definition": "자율 벡터장의 적분곡선은 각 점에서 장에 접하고, 흐름은 초기점을 시간에 따른 위치로 보냅니다. $$\\frac{d}{dt}\\Phi_t(\\mathbf x_0)=\\mathbf F(\\Phi_t(\\mathbf x_0)),\\quad\\Phi_0(\\mathbf x_0)=\\mathbf x_0,\\quad\\Phi_{t+s}=\\Phi_t\\circ\\Phi_s.$$ 마지막 관계는 해가 존재하는 시간 범위에서 성립합니다.",
+    "example": {
+      "q": "$\\mathbf F=(-y,x)$에서 $(1,0)$을 지나는 적분곡선은?",
+      "a": "$\\mathbf r(t)=(\\cos t,\\sin t)$이며, $x^2+y^2=1$을 따라 반시계방향으로 움직입니다."
+    },
+    "applied": {
+      "q": "같은 장에서 입자가 반 바퀴 도는 데 걸리는 시간은?",
+      "a": "각속도가 $1$이므로 $T=\\pi$입니다."
+    }
+  },
+  {
+    "id": 89,
+    "definition": "밀도와 유속에 대한 국소 보존법칙은 $$\\frac{\\partial\\rho}{\\partial t}+\\nabla\\cdot(\\rho\\mathbf v)=s.$$ 여기서 $s$는 단위 체적당 생성률입니다. 생성이 없고 밀도가 일정하면 $\\nabla\\cdot\\mathbf v=0$으로 단순화됩니다.",
+    "example": {
+      "q": "$\\mathbf v=(x,-y,0)$인 일정 밀도 유동은 비압축성인가?",
+      "a": "$\\nabla\\cdot\\mathbf v=1-1=0$이므로 비압축성 조건을 만족합니다."
+    },
+    "applied": {
+      "q": "정상 비압축성 관 유동에서 $A_1=4\\,\\mathrm{cm^2}$, $v_1=2\\,\\mathrm{m/s}$, $A_2=1\\,\\mathrm{cm^2}$이면 $v_2$는?",
+      "a": "$A_1v_1=A_2v_2$이므로 $v_2=8\\,\\mathrm{m/s}$입니다."
+    }
+  },
+  {
+    "id": 90,
+    "definition": "라플라스 방정식은 원천이 없는 영역의 퍼텐셜이나 정상 온도를 기술합니다. $$\\nabla^2u=0,\\qquad u_{xx}+u_{yy}+u_{zz}=0.$$ 해를 조화함수라 하며, 적절한 경계값으로 해를 결정합니다.",
+    "example": {
+      "q": "$u=x^2-y^2$가 2차원 조화함수임을 확인하시오.",
+      "a": "$u_{xx}+u_{yy}=2-2=0$입니다."
+    },
+    "applied": {
+      "q": "길이 $L$인 막대에서 $u(0)=T_0$, $u(L)=T_1$이고 정상상태이면 온도는?",
+      "a": "$u^{\\prime\\prime}=0$을 적분하면 $u(x)=T_0+(T_1-T_0)x/L$입니다."
+    }
+  },
+  {
+    "id": 91,
+    "definition": "푸아송 방정식은 원천이 있는 퍼텐셜을 기술합니다. 부호 규약을 $-\\nabla^2u=f$로 택할 수 있으며, 진공의 정전기에서는 $$\\nabla^2\\phi=-\\frac{\\rho_e}{\\varepsilon_0},\\qquad\\mathbf E=-\\nabla\\phi.$$ 중력 퍼텐셜은 다른 부호 규약으로 표현됩니다.",
+    "example": {
+      "q": "$u=x^2+y^2+z^2$일 때 $\\nabla^2u=f$의 $f$는?",
+      "a": "$f=2+2+2=6$입니다."
+    },
+    "applied": {
+      "q": "전하밀도가 일정한 구의 내부에서 $\\phi=C-\\rho_e r^2/(6\\varepsilon_0)$이면 전기장은?",
+      "a": "$\\mathbf E=-\\nabla\\phi=\\rho_e\\mathbf r/(3\\varepsilon_0)$입니다."
+    }
+  },
+  {
+    "id": 92,
+    "definition": "일정한 확산계수 $\\alpha>0$에서 열방정식은 $$\\frac{\\partial u}{\\partial t}=\\alpha\\nabla^2u.$$ 푸리에 법칙 $\\mathbf q=-k\\nabla T$와 에너지 보존으로부터 $\\rho c_p T_t=k\\nabla^2T$를 얻으며 $\\alpha=k/(\\rho c_p)$입니다.",
+    "example": {
+      "q": "$u(x,t)=e^{-\\alpha k^2t}\\sin(kx)$가 1차원 열방정식을 만족하는가?",
+      "a": "$u_t=-\\alpha k^2u$, $u_{xx}=-k^2u$이므로 $u_t=\\alpha u_{xx}$입니다."
+    },
+    "applied": {
+      "q": "확산 모드의 초기 진폭이 $10$, 감쇠율 $\\alpha k^2=0.5\\,\\mathrm{s^{-1}}$이면 2초 후 진폭은?",
+      "a": "$10e^{-0.5\\times2}=10/e\\approx3.68$입니다."
+    }
+  },
+  {
+    "id": 93,
+    "definition": "파동방정식은 유한한 속도로 전파하는 교란을 설명합니다. $$u_{tt}=c^2\\nabla^2u,\\qquad u(x,t)=f(x-ct)+g(x+ct).$$ 1차원 일반해에서 두 항은 각각 오른쪽과 왼쪽으로 진행하는 파동입니다.",
+    "example": {
+      "q": "$u=A\\cos(kx-\\omega t)$가 파동방정식의 해가 되는 조건은?",
+      "a": "$u_{tt}=-\\omega^2u$, $u_{xx}=-k^2u$이므로 $\\omega^2=c^2k^2$입니다."
+    },
+    "applied": {
+      "q": "진공에서 파장 $3\\,\\mathrm m$인 전자기파의 진동수는? $c=3\\times10^8\\,\\mathrm{m/s}$로 계산하시오.",
+      "a": "$f=c/\\lambda=10^8\\,\\mathrm{Hz}$입니다."
+    }
+  },
+  {
+    "id": 94,
+    "definition": "질량이 만드는 중력장은 중력 퍼텐셜의 음의 기울기입니다. 원점의 점질량 $M$에 대해 $$\\Phi=-\\frac{GM}{r},\\qquad\\mathbf g=-\\nabla\\Phi=-\\frac{GM}{r^3}\\mathbf r\\quad(r>0).$$ 일반적인 질량밀도에 대해서는 $\\nabla^2\\Phi=4\\pi G\\rho_m$입니다.",
+    "example": {
+      "q": "점질량에서 거리가 두 배가 되면 중력장 크기는?",
+      "a": "$|\\mathbf g|=GM/r^2$이므로 원래 값의 $1/4$입니다."
+    },
+    "applied": {
+      "q": "질량 $m$을 반지름 $R$에서 $2R$까지 천천히 옮길 때 필요한 외부 일은?",
+      "a": "운동에너지 변화가 없으면 $W=m[\\Phi(2R)-\\Phi(R)]=GMm/(2R)$입니다."
+    }
+  },
+  {
+    "id": 95,
+    "definition": "가우스 법칙은 전기장의 외향 유량과 내부 전하를 연결합니다. 진공에서 $$\\oiint_{\\partial V}\\mathbf E\\cdot d\\mathbf S=\\frac{Q_{\\mathrm{enc}}}{\\varepsilon_0},\\qquad\\nabla\\cdot\\mathbf E=\\frac{\\rho_e}{\\varepsilon_0}.$$ 구·원통·평면 대칭에서는 전기장 계산이 간단해집니다.",
+    "example": {
+      "q": "원점의 점전하 $Q$에 대해 반지름 $r$인 구 위의 전기장은?",
+      "a": "구대칭으로 $E(4\\pi r^2)=Q/\\varepsilon_0$이므로 $\\mathbf E=Q\\hat{\\mathbf r}/(4\\pi\\varepsilon_0r^2)$입니다."
+    },
+    "applied": {
+      "q": "무한 평면 전하의 면전하밀도가 $\\sigma$일 때 양쪽 전기장 크기는?",
+      "a": "대칭적인 필박스에서 $2EA=\\sigma A/\\varepsilon_0$이므로 $E=|\\sigma|/(2\\varepsilon_0)$입니다."
+    }
+  },
+  {
+    "id": 96,
+    "definition": "정상 전류에 대한 진공의 앙페르 법칙은 $$\\oint_C\\mathbf B\\cdot d\\mathbf l=\\mu_0 I_{\\mathrm{enc}},\\qquad\\nabla\\times\\mathbf B=\\mu_0\\mathbf J.$$ 시간에 따라 전기장이 변하면 변위전류 항을 포함해야 합니다.",
+    "example": {
+      "q": "무한 직선 전류 $I$에서 거리 $r$인 곳의 자기장 크기는?",
+      "a": "원형 경로에서 $B(2\\pi r)=\\mu_0I$이므로 $B=\\mu_0I/(2\\pi r)$입니다. 방향은 오른손 법칙으로 정합니다."
+    },
+    "applied": {
+      "q": "이상적인 긴 솔레노이드의 단위길이당 감은 수가 $n$, 전류가 $I$이면 내부 자기장은?",
+      "a": "외부장을 무시하면 $B=\\mu_0nI$입니다."
+    }
+  },
+  {
+    "id": 97,
+    "definition": "고정된 폐회로에서 자속의 시간 변화는 유도 기전력을 만듭니다. $$\\mathcal E=\\oint_C\\mathbf E\\cdot d\\mathbf l=-\\frac{d}{dt}\\int_S\\mathbf B\\cdot d\\mathbf S,\\qquad\\nabla\\times\\mathbf E=-\\frac{\\partial\\mathbf B}{\\partial t}.$$ 음의 부호는 렌츠 법칙을 나타냅니다. 움직이는 회로에서는 자기력에 의한 운동 기전력도 고려합니다.",
+    "example": {
+      "q": "한 회로의 자속이 $\\Phi_B=3t^2\\,\\mathrm{Wb}$이면 $t=2\\,\\mathrm s$에서 기전력은?",
+      "a": "$\\mathcal E=-d\\Phi_B/dt=-6t=-12\\,\\mathrm V$입니다. 부호는 선택한 경계 방향에 대한 값입니다."
+    },
+    "applied": {
+      "q": "100회 감은 코일의 각 감은 곳을 지나는 자속이 0.2초 동안 $0.01\\,\\mathrm{Wb}$ 증가하면 평균 기전력의 크기는?",
+      "a": "$|\\overline{\\mathcal E}|=N|\\Delta\\Phi_B|/\\Delta t=100(0.01)/0.2=5\\,\\mathrm V$입니다."
+    }
+  },
+  {
+    "id": 98,
+    "definition": "진공의 맥스웰 방정식은 네 법칙을 통합합니다. $$\\begin{aligned}\\nabla\\cdot\\mathbf E&=\\rho_e/\\varepsilon_0,&\\nabla\\cdot\\mathbf B&=0,\\\\\\nabla\\times\\mathbf E&=-\\partial_t\\mathbf B,&\\nabla\\times\\mathbf B&=\\mu_0\\mathbf J+\\mu_0\\varepsilon_0\\partial_t\\mathbf E.\\end{aligned}$$ 고정된 곡면과 그 양의 경계에서 적분형은 $$\\begin{aligned}\\oiint\\mathbf E\\cdot d\\mathbf S&=Q/\\varepsilon_0,&\\oiint\\mathbf B\\cdot d\\mathbf S&=0,\\\\\\oint\\mathbf E\\cdot d\\mathbf l&=-d\\Phi_B/dt,&\\oint\\mathbf B\\cdot d\\mathbf l&=\\mu_0I+\\mu_0\\varepsilon_0d\\Phi_E/dt.\\end{aligned}$$",
+    "example": {
+      "q": "전하와 전류가 없는 진공에서 전자기파의 속도를 상수로 나타내시오.",
+      "a": "회전 방정식을 결합하면 $\\nabla^2\\mathbf E=\\mu_0\\varepsilon_0\\partial_t^2\\mathbf E$이므로 $c=1/\\sqrt{\\mu_0\\varepsilon_0}$입니다."
+    },
+    "applied": {
+      "q": "축전기의 판 사이 전기선속이 증가할 때 도선 전류와 연결되는 항은?",
+      "a": "변위전류 $I_d=\\varepsilon_0\\,d\\Phi_E/dt$입니다. 이상적인 충전 축전기에서는 이 값이 도선의 전류와 같습니다."
+    }
+  },
+  {
+    "id": 99,
+    "definition": "속도장의 발산은 국소적인 체적 팽창률, 와도는 국소 회전을 나타냅니다. $$\\theta=\\nabla\\cdot\\mathbf v,\\qquad\\boldsymbol\\omega=\\nabla\\times\\mathbf v,\\qquad\\frac{D\\mathbf v}{Dt}=\\frac{\\partial\\mathbf v}{\\partial t}+(\\mathbf v\\cdot\\nabla)\\mathbf v.$$ 강체 회전에서 와도는 각속도의 두 배입니다.",
+    "example": {
+      "q": "$\\mathbf v=(-\\Omega y,\\Omega x,0)$의 발산과 와도를 구하시오.",
+      "a": "$\\nabla\\cdot\\mathbf v=0$, $\\boldsymbol\\omega=(0,0,2\\Omega)$입니다."
+    },
+    "applied": {
+      "q": "위 정상 회전 유동의 물질 가속도는?",
+      "a": "$D\\mathbf v/Dt=(\\mathbf v\\cdot\\nabla)\\mathbf v=(-\\Omega^2x,-\\Omega^2y,0)$으로, 회전축을 향하는 구심가속도입니다."
+    }
+  },
+  {
+    "id": 100,
+    "definition": "종합 탐구에서는 장을 모델링하고 미분량과 경계 적분을 독립적으로 계산하여 일치 여부를 검증합니다. 예를 들어 반지름 $R$인 원판 위에서 $$\\mathbf v=(ax-by,bx+ay),\\quad\\nabla\\cdot\\mathbf v=2a,\\quad(\\nabla\\times\\mathbf v)_z=2b.$$ 따라서 원주 $C$의 외향 선유량과 반시계 순환은 각각 $$\\oint_C\\mathbf v\\cdot\\mathbf n\\,ds=2a\\pi R^2,\\qquad\\oint_C\\mathbf v\\cdot d\\mathbf r=2b\\pi R^2.$$ 단위, 방향, 매끄러움, 수치 오차를 함께 점검합니다.",
+    "example": {
+      "q": "$a=1$, $b=2$, $R=1$일 때 외향 선유량과 순환을 구하시오.",
+      "a": "선유량은 $2\\pi$, 순환은 $4\\pi$입니다. 팽창과 회전 효과를 분리해서 측정할 수 있습니다."
+    },
+    "applied": {
+      "q": "$a=0$, $b=3$인 모델에서 원판 반지름을 1에서 2로 늘리면 순환과 선유량은?",
+      "a": "선유량은 두 경우 모두 0입니다. 순환은 $6\\pi$에서 $24\\pi$로 네 배가 됩니다. 측정값이 이 면적 비례 관계를 따르는지 비교하는 탐구를 설계할 수 있습니다."
+    }
+  }
+];
+    REVISED_LATE_CONCEPTS.forEach(({id, ...content}) => Object.assign(CONCEPTS_DB[id - 1], content));
+
+
+    // 全 항목별 정의 및 예제 정리
+    const EARLY_REVISIONS = [{"id": 1, "definition": "크기만 있는 스칼라와 방향을 함께 갖는 벡터를 구분합니다.<div class=\"formula-block\">$$\\mathbf v=(v_x,v_y,v_z)\\in\\mathbb R^3$$</div>", "example": {"q": "벡터 (3,4,0)의 크기는?", "a": "$$\\sqrt{3^2+4^2}=5$$"}}, {"id": 2, "definition": "벡터의 크기는 유클리드 노름이며 방향은 단위벡터로 나타냅니다.<div class=\"formula-block\">$$\\|\\mathbf v\\|=\\sqrt{v_x^2+v_y^2+v_z^2},\\quad\\widehat{\\mathbf v}=\\mathbf v/\\|\\mathbf v\\|\\ (\\mathbf v\\ne0)$$</div>", "example": {"q": "벡터 (0,3,4)의 단위벡터는?", "a": "$$(0,3/5,4/5)$$"}}, {"id": 3, "definition": "벡터의 합과 차는 같은 좌표 성분끼리 계산합니다.<div class=\"formula-block\">$$\\mathbf a\\pm\\mathbf b=(a_x\\pm b_x,a_y\\pm b_y,a_z\\pm b_z)$$</div>", "example": {"q": "a=(1,2,3), b=(2,0,1)일 때 a−b는?", "a": "$$(-1,2,2)$$"}}, {"id": 4, "definition": "실수배는 크기를 배율만큼 바꾸고 음수일 때 방향을 뒤집습니다.<div class=\"formula-block\">$$c\\mathbf v=(cv_x,cv_y,cv_z),\\quad\\mathbf w=\\alpha\\mathbf a+\\beta\\mathbf b$$</div>", "example": {"q": "v=(1,−2,3)일 때 2v는?", "a": "$$(2,-4,6)$$"}}, {"id": 5, "definition": "위치벡터는 원점에서 점까지의 변위이며 단위벡터의 크기는 1입니다.<div class=\"formula-block\">$$\\mathbf r=x\\mathbf e_x+y\\mathbf e_y+z\\mathbf e_z,\\quad\\|\\widehat{\\mathbf u}\\|=1$$</div>", "example": {"q": "점 (2,−1,2)의 위치벡터 크기는?", "a": "$$\\sqrt{4+1+4}=3$$"}}, {"id": 6, "definition": "직교기저에 대한 벡터의 성분은 기저벡터와의 내적으로 얻습니다.<div class=\"formula-block\">$$\\mathbf v=\\sum_{i=1}^3v_i\\mathbf e_i,\\quad v_i=\\mathbf v\\cdot\\mathbf e_i$$</div>", "example": {"q": "v=(2,3,4)의 z성분은?", "a": "$$v_z=4$$"}}, {"id": 7, "definition": "내적은 두 벡터의 방향 일치 정도를 나타내는 스칼라입니다.<div class=\"formula-block\">$$\\mathbf a\\cdot\\mathbf b=\\sum_{i=1}^3a_ib_i=\\|\\mathbf a\\|\\|\\mathbf b\\|\\cos\\theta$$</div>", "example": {"q": "(1,2,3)과 (4,−1,2)의 내적은?", "a": "$$4-2+6=8$$"}}, {"id": 8, "definition": "외적은 두 벡터에 수직이며 크기는 평행사변형의 넓이입니다.<div class=\"formula-block\">$$\\mathbf a\\times\\mathbf b=(a_yb_z-a_zb_y,a_zb_x-a_xb_z,a_xb_y-a_yb_x)$$</div>", "example": {"q": "단위벡터 ex와 ey의 외적은?", "a": "$$\\mathbf e_x\\times\\mathbf e_y=\\mathbf e_z$$"}}, {"id": 9, "definition": "스칼라 삼중곱은 부호 있는 부피이며 벡터 삼중곱은 선형결합으로 전개됩니다.<div class=\"formula-block\">$$V=|\\mathbf a\\cdot(\\mathbf b\\times\\mathbf c)|,\\quad\\mathbf a\\times(\\mathbf b\\times\\mathbf c)=\\mathbf b(\\mathbf a\\cdot\\mathbf c)-\\mathbf c(\\mathbf a\\cdot\\mathbf b)$$</div>", "example": {"q": "변 길이가 2,3,4인 직육면체의 부피는?", "a": "$$2\\cdot3\\cdot4=24$$"}}, {"id": 10, "definition": "정사영은 평행 성분이며 나머지는 기준 벡터와 수직입니다.<div class=\"formula-block\">$$\\operatorname{proj}_{\\mathbf b}\\mathbf a=\\frac{\\mathbf a\\cdot\\mathbf b}{\\mathbf b\\cdot\\mathbf b}\\mathbf b,\\quad\\mathbf a_\\perp=\\mathbf a-\\operatorname{proj}_{\\mathbf b}\\mathbf a\\quad(\\mathbf b\\ne0)$$</div>", "example": {"q": "(2,3,0)을 x축에 정사영하면?", "a": "$$(2,0,0)$$"}}, {"id": 11, "definition": "3차원 직교좌표계의 세 기저벡터는 서로 수직인 단위벡터입니다.<div class=\"formula-block\">$$\\mathbf e_i\\cdot\\mathbf e_j=\\delta_{ij},\\quad d^2=(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2$$</div>", "example": {"q": "원점과 (1,2,2)의 거리는?", "a": "$$\\sqrt{1+4+4}=3$$"}}, {"id": 12, "definition": "공간의 직선은 한 점과 0이 아닌 방향벡터로 결정됩니다.<div class=\"formula-block\">$$\\mathbf r(t)=\\mathbf r_0+t\\mathbf d,\\quad\\mathbf d\\ne0$$</div>", "example": {"q": "r=(1,0,2)+t(2,1,0)에서 t=2인 점은?", "a": "$$(5,2,2)$$"}}, {"id": 13, "definition": "평면은 한 점과 0이 아닌 법선벡터로 나타냅니다.<div class=\"formula-block\">$$\\mathbf n\\cdot(\\mathbf r-\\mathbf r_0)=0\\quad\\Longleftrightarrow\\quad ax+by+cz=d$$</div>", "example": {"q": "법선 (1,2,3)을 갖고 원점을 지나는 평면은?", "a": "$$x+2y+3z=0$$"}}, {"id": 14, "definition": "점과 직선의 거리는 외적으로, 점과 평면의 거리는 법선 성분으로 계산합니다.<div class=\"formula-block\">$$d_{\\rm line}=\\frac{\\|(\\mathbf p-\\mathbf r_0)\\times\\mathbf d\\|}{\\|\\mathbf d\\|},\\quad d_{\\rm plane}=\\frac{|ax_0+by_0+cz_0-d|}{\\sqrt{a^2+b^2+c^2}}$$</div>", "example": {"q": "점 (0,0,3)과 평면 z=1의 거리는?", "a": "$$2$$"}}, {"id": 15, "definition": "직선을 평면식에 대입해 교점을 구하며 교각은 방향벡터와 법선으로 계산합니다.<div class=\"formula-block\">$$t=\\frac{d-\\mathbf n\\cdot\\mathbf r_0}{\\mathbf n\\cdot\\mathbf v},\\quad\\sin\\alpha=\\frac{|\\mathbf n\\cdot\\mathbf v|}{\\|\\mathbf n\\|\\|\\mathbf v\\|}$$</div>", "example": {"q": "직선 (t,t,t)와 평면 z=2의 교점은?", "a": "$$(2,2,2)$$"}}, {"id": 16, "definition": "원기둥좌표는 평면의 극좌표에 높이를 더한 좌표입니다.<div class=\"formula-block\">$$x=r\\cos\\theta,\\ y=r\\sin\\theta,\\ z=z,\\quad dV=r\\,dr\\,d\\theta\\,dz$$</div>", "example": {"q": "r=2, θ=π/2, z=3의 직교좌표는?", "a": "$$(0,2,3)$$"}}, {"id": 17, "definition": "구면좌표의 θ는 양의 z축으로부터의 극각, φ는 방위각으로 정합니다.<div class=\"formula-block\">$$x=\\rho\\sin\\theta\\cos\\varphi,\\ y=\\rho\\sin\\theta\\sin\\varphi,\\ z=\\rho\\cos\\theta,\\quad dV=\\rho^2\\sin\\theta\\,d\\rho\\,d\\theta\\,d\\varphi$$</div>", "example": {"q": "ρ=2, θ=π/2, φ=0의 직교좌표는?", "a": "$$(2,0,0)$$"}}, {"id": 18, "definition": "좌표변환의 국소 면적·체적 배율은 야코비안 행렬식의 절댓값입니다.<div class=\"formula-block\">$$J=\\frac{\\partial(x,y,z)}{\\partial(u,v,w)},\\quad dV=|\\det J|\\,du\\,dv\\,dw$$</div>", "example": {"q": "x=2u, y=3v, z=w인 변환의 체적 배율은?", "a": "$$6$$"}}, {"id": 19, "definition": "벡터값 함수는 하나의 매개변수에 벡터를 대응시킵니다.<div class=\"formula-block\">$$\\mathbf r(t)=(x(t),y(t),z(t))$$</div>", "example": {"q": "r(t)=(t,t²,1)에서 r(2)는?", "a": "$$(2,4,1)$$"}}, {"id": 20, "definition": "벡터값 함수의 극한과 연속성은 각 성분에서 판정합니다.<div class=\"formula-block\">$$\\lim_{t\\to a}\\mathbf r(t)=\\left(\\lim_{t\\to a}x(t),\\lim_{t\\to a}y(t),\\lim_{t\\to a}z(t)\\right)$$</div>", "example": {"q": "r(t)=(t,sin t,t²)의 t→0 극한은?", "a": "$$(0,0,0)$$"}}, {"id": 21, "definition": "벡터값 함수는 각 성분을 미분합니다.<div class=\"formula-block\">$$\\mathbf r'(t)=(x'(t),y'(t),z'(t))$$</div>", "example": {"q": "r(t)=(t²,sin t,eᵗ)의 도함수는?", "a": "$$(2t,\\cos t,e^t)$$"}}, {"id": 22, "definition": "벡터값 함수의 적분은 각 성분의 적분입니다.<div class=\"formula-block\">$$\\int_a^b\\mathbf r(t)\\,dt=\\left(\\int_a^bx\\,dt,\\int_a^by\\,dt,\\int_a^bz\\,dt\\right)$$</div>", "example": {"q": "0부터 1까지 (t,2t,3)의 적분은?", "a": "$$(1/2,1,3)$$"}}, {"id": 23, "definition": "공간곡선은 매개변수에 따른 위치벡터의 자취입니다.<div class=\"formula-block\">$$\\mathbf r(t)=(R\\cos t,R\\sin t,ct)$$</div>", "example": {"q": "r(t)=(cos t,sin t,t)의 t=0인 점은?", "a": "$$(1,0,0)$$"}}, {"id": 24, "definition": "속도는 위치의 1차 도함수, 가속도는 2차 도함수입니다.<div class=\"formula-block\">$$\\mathbf v=\\frac{d\\mathbf r}{dt},\\quad\\mathbf a=\\frac{d^2\\mathbf r}{dt^2},\\quad v=\\|\\mathbf v\\|$$</div>", "example": {"q": "r=(t²,0,0)의 t=3에서 속도와 가속도는?", "a": "$$\\mathbf v=(6,0,0),\\quad\\mathbf a=(2,0,0)$$"}}, {"id": 25, "definition": "매끄러운 곡선의 길이는 속력의 적분입니다.<div class=\"formula-block\">$$L=\\int_a^b\\|\\mathbf r'(t)\\|\\,dt$$</div>", "example": {"q": "r(t)=(3t,4t,0), 0≤t≤2의 길이는?", "a": "$$L=\\int_0^25\\,dt=10$$"}}, {"id": 26, "definition": "접선벡터는 진행 방향이며 주법선은 접선 방향이 변하는 쪽입니다.<div class=\"formula-block\">$$\\mathbf T=\\frac{\\mathbf r'}{\\|\\mathbf r'\\|},\\quad\\mathbf N=\\frac{\\mathbf T'}{\\|\\mathbf T'\\|}$$</div>", "example": {"q": "단위원 r=(cos t,sin t,0)의 t=0에서 T와 N은?", "a": "$$\\mathbf T=(0,1,0),\\quad\\mathbf N=(-1,0,0)$$"}}, {"id": 27, "definition": "곡률과 비틀림률은 굽힘과 공간적인 꼬임을 측정합니다. 분모가 0이 아닌 점에서 적용합니다.<div class=\"formula-block\">$$\\kappa=\\frac{\\|\\mathbf r'\\times\\mathbf r''\\|}{\\|\\mathbf r'\\|^3},\\quad\\tau=\\frac{(\\mathbf r'\\times\\mathbf r'')\\cdot\\mathbf r'''}{\\|\\mathbf r'\\times\\mathbf r''\\|^2},\\quad\\frac{d\\mathbf T}{ds}=\\kappa\\mathbf N$$</div>", "example": {"q": "반지름 2인 원의 곡률은?", "a": "$$\\kappa=1/2$$"}}, {"id": 28, "definition": "다변수함수는 여러 입력에 하나의 값을 대응시키며 그래프는 곡면 등으로 표현됩니다.<div class=\"formula-block\">$$f:D\\subset\\mathbb R^n\\to\\mathbb R,\\quad z=f(x,y)$$</div>", "example": {"q": "f(x,y)=x²+y²에서 f(1,2)는?", "a": "$$5$$"}}, {"id": 29, "definition": "다변수 극한은 모든 접근 경로에서 같은 값이어야 합니다.<div class=\"formula-block\">$$\\lim_{\\mathbf x\\to\\mathbf a}f(\\mathbf x)=L,\\quad f\\text{의 연속성: }L=f(\\mathbf a)$$</div>", "example": {"q": "f(x,y)=x²+y²의 원점 극한은?", "a": "$$0$$"}}, {"id": 30, "definition": "편도함수는 다른 변수를 고정한 상태에서의 변화율입니다.<div class=\"formula-block\">$$f_x=\\lim_{h\\to0}\\frac{f(x+h,y)-f(x,y)}h$$</div>", "example": {"q": "f=x²y의 x편도함수는?", "a": "$$f_x=2xy$$"}}, {"id": 31, "definition": "혼합편도함수는 관련 2차 편도함수가 근방에서 연속일 때 순서를 바꿀 수 있습니다.<div class=\"formula-block\">$$f_{xy}=\\frac{\\partial}{\\partial y}\\left(\\frac{\\partial f}{\\partial x}\\right)=f_{yx}\\quad(f\\in C^2)$$</div>", "example": {"q": "f=x²y³에서 fxy는?", "a": "$$6xy^2$$"}}, {"id": 32, "definition": "미분가능한 함수는 근방에서 접평면으로 선형근사할 수 있습니다.<div class=\"formula-block\">$$df=f_x\\,dx+f_y\\,dy,\\quad f(\\mathbf a+\\mathbf h)\\approx f(\\mathbf a)+\\nabla f(\\mathbf a)\\cdot\\mathbf h$$</div>", "example": {"q": "f=x²+y²를 (1,1)에서 (1.01,1.02)로 옮길 때 선형근삿값은?", "a": "$$2+2(0.01)+2(0.02)=2.06$$"}}, {"id": 33, "definition": "합성함수의 변화율은 각 중간 변수 경로의 기여를 더합니다.<div class=\"formula-block\">$$\\frac{df}{dt}=f_x\\frac{dx}{dt}+f_y\\frac{dy}{dt}$$</div>", "example": {"q": "f=x²+y, x=t, y=t²이면 df/dt는?", "a": "$$4t$$"}}, {"id": 34, "definition": "음함수 미분은 정의식을 미분한 뒤 원하는 도함수를 풉니다.<div class=\"formula-block\">$$F(x,y)=0,\\quad\\frac{dy}{dx}=-\\frac{F_x}{F_y}\\quad(F_y\\ne0)$$</div>", "example": {"q": "x²+y²=1에서 y≠0일 때 y′은?", "a": "$$-x/y$$"}}, {"id": 35, "definition": "단위 방향의 변화율은 기울기와 방향벡터의 내적입니다.<div class=\"formula-block\">$$D_{\\mathbf u}f=\\nabla f\\cdot\\mathbf u,\\quad\\|\\mathbf u\\|=1$$</div>", "example": {"q": "f=x²+y²의 (1,2)에서 x축 방향도함수는?", "a": "$$2$$"}}, {"id": 36, "definition": "등위면의 기울기는 법선이며 그래프의 접평면은 선형근사식입니다.<div class=\"formula-block\">$$z-f(a,b)=f_x(a,b)(x-a)+f_y(a,b)(y-b)$$</div>", "example": {"q": "z=x²+y²의 (1,1,2)에서 접평면은?", "a": "$$z-2=2(x-1)+2(y-1)$$"}}, {"id": 37, "definition": "헤세 행렬은 2차 편도함수의 행렬이며 2차 테일러 항을 결정합니다.<div class=\"formula-block\">$$H_f=(\\partial_i\\partial_jf),\\quad f(\\mathbf a+\\mathbf h)=f(\\mathbf a)+\\nabla f(\\mathbf a)\\cdot\\mathbf h+\\tfrac12\\mathbf h^TH_f(\\mathbf a)\\mathbf h+o(\\|\\mathbf h\\|^2)$$</div>", "example": {"q": "f=x²+3y²의 헤세 행렬은?", "a": "$$\\begin{pmatrix}2&0\\\\0&6\\end{pmatrix}$$"}}, {"id": 38, "definition": "정류점은 기울기가 0인 점이며 임계점에는 미분 불가능한 내부점도 포함될 수 있습니다.<div class=\"formula-block\">$$\\nabla f(\\mathbf a)=\\mathbf0$$</div>", "example": {"q": "f=x²+y²의 정류점은?", "a": "$$(0,0)$$"}}, {"id": 39, "definition": "국소 극값은 한 근방의 모든 값과 비교해 정의합니다.<div class=\"formula-block\">$$f(\\mathbf a)\\le f(\\mathbf x)\\quad(\\mathbf x\\text{가 }\\mathbf a\\text{의 근방에 있을 때})$$</div>", "example": {"q": "f=x²+y²의 원점은 어떤 점인가?", "a": "$$f\\ge0=f(0,0)\\text{이므로 엄격한 최솟점}$$"}}, {"id": 40, "definition": "2변수 정류점의 판정식이 양수이면 fxx의 부호로 극값을 구분합니다.<div class=\"formula-block\">$$D=f_{xx}f_{yy}-f_{xy}^2;\\quad D>0,f_{xx}>0:\\text{극소},\\ D>0,f_{xx}<0:\\text{극대},\\ D<0:\\text{안장점}$$</div>", "example": {"q": "f=x²−y²의 원점은?", "a": "$$D=(2)(-2)-0=-4<0\\text{이므로 안장점}$$"}}, {"id": 41, "definition": "여러 변수에서는 정류점의 헤세 행렬의 정부호성을 검사합니다.<div class=\"formula-block\">$$H_f\\succ0\\Rightarrow\\text{엄격한 극소},\\quad H_f\\prec0\\Rightarrow\\text{엄격한 극대}$$</div>", "example": {"q": "f=x²+2y²+3z²의 원점은?", "a": "$$H_f=\\operatorname{diag}(2,4,6)\\succ0\\text{이므로 엄격한 극소}$$"}}, {"id": 42, "definition": "제약 최적화는 허용된 집합 안에서만 목적함수를 비교합니다.<div class=\"formula-block\">$$\\min_{\\mathbf x\\in S}f(\\mathbf x),\\quad S=\\{\\mathbf x:g(\\mathbf x)=c\\}$$</div>", "example": {"q": "x+y=2일 때 x²+y²의 최솟값은?", "a": "$$x^2+(2-x)^2=2(x-1)^2+2\\ge2$$"}}, {"id": 43, "definition": "등식 제약의 정칙점에서는 목적함수와 제약함수의 기울기가 평행합니다.<div class=\"formula-block\">$$\\nabla f=\\lambda\\nabla g,\\quad g=c,\\quad\\nabla g\\ne0$$</div>", "example": {"q": "x²+y²=1에서 x+y의 최댓값은?", "a": "$$\\sqrt2\\quad\\text{(달성점 }x=y=1/\\sqrt2\\text{)}$$"}}, {"id": 44, "definition": "에너지 최소화나 비용 최소화에 제약 최적화를 적용합니다.<div class=\"formula-block\">$$E(\\mathbf x)=\\tfrac12\\mathbf x^TK\\mathbf x-\\mathbf f^T\\mathbf x,\\quad\\nabla E=K\\mathbf x-\\mathbf f\\quad(K=K^T)$$</div>", "example": {"q": "용수철 에너지 E=kx²/2−Fx의 평형점은? (k>0)", "a": "$$x=F/k$$"}}, {"id": 45, "definition": "스칼라장은 점마다 스칼라를, 벡터장은 점마다 벡터를 대응시킵니다.<div class=\"formula-block\">$$T:\\mathbb R^3\\to\\mathbb R,\\quad\\mathbf F:\\mathbb R^3\\to\\mathbb R^3$$</div>", "example": {"q": "T=x+y+z의 (1,2,3)에서 값은?", "a": "$$6$$"}}, {"id": 46, "definition": "정상 벡터장의 흐름선은 각 점에서 장에 접합니다.<div class=\"formula-block\">$$\\frac{d\\mathbf r}{dt}=\\mathbf F(\\mathbf r),\\quad\\frac{dy}{dx}=\\frac{F_y}{F_x}\\quad(F_x\\ne0)$$</div>", "example": {"q": "F=(1,2)의 흐름선은?", "a": "$$y=2x+C$$"}}, {"id": 47, "definition": "나블라는 공간 편미분을 모은 형식적인 벡터 연산자입니다.<div class=\"formula-block\">$$\\nabla=\\mathbf e_x\\partial_x+\\mathbf e_y\\partial_y+\\mathbf e_z\\partial_z$$</div>", "example": {"q": "나블라를 f=x+y+z에 작용시킨 기울기는?", "a": "$$(1,1,1)$$"}}, {"id": 48, "definition": "기울기는 함수가 가장 빠르게 증가하는 방향과 그 변화율을 나타냅니다.<div class=\"formula-block\">$$\\nabla f=(f_x,f_y,f_z),\\quad\\max_{\\|\\mathbf u\\|=1}D_{\\mathbf u}f=\\|\\nabla f\\|$$</div>", "example": {"q": "f=x²+y²+z²의 기울기는?", "a": "$$(2x,2y,2z)$$"}}, {"id": 49, "definition": "발산은 벡터장의 국소적인 순유출 밀도입니다.<div class=\"formula-block\">$$\\nabla\\cdot\\mathbf F=\\partial_xF_x+\\partial_yF_y+\\partial_zF_z$$</div>", "example": {"q": "F=(x,2y,3z)의 발산은?", "a": "$$1+2+3=6$$"}}, {"id": 50, "definition": "회전은 국소 순환의 축과 세기를 나타내는 벡터입니다.<div class=\"formula-block\">$$\\nabla\\times\\mathbf F=(\\partial_yF_z-\\partial_zF_y,\\partial_zF_x-\\partial_xF_z,\\partial_xF_y-\\partial_yF_x)$$</div>", "example": {"q": "F=(−y,x,0)의 회전은?", "a": "$$(0,0,2)$$"}}, {"id": 51, "definition": "라플라시안은 기울기의 발산이며 직교좌표에서 순수 2차 편도함수의 합입니다.<div class=\"formula-block\">$$\\nabla^2f=\\nabla\\cdot\\nabla f=f_{xx}+f_{yy}+f_{zz}$$</div>", "example": {"q": "f=x²+y²+z²의 라플라시안은?", "a": "$$6$$"}}, {"id": 52, "definition": "충분히 매끄러운 장에는 혼합미분 교환으로 벡터 미분 항등식이 성립합니다.<div class=\"formula-block\">$$\\nabla\\times\\nabla f=\\mathbf0,\\quad\\nabla\\cdot(\\nabla\\times\\mathbf F)=0,\\quad\\nabla\\times(\\nabla\\times\\mathbf F)=\\nabla(\\nabla\\cdot\\mathbf F)-\\nabla^2\\mathbf F$$</div>", "example": {"q": "f=x²y의 기울기장의 회전은?", "a": "$$\\mathbf0$$"}}, {"id": 53, "definition": "보존벡터장은 스칼라 퍼텐셜의 기울기로 표현됩니다. 회전 0에서 보존성을 추론하려면 단일연결성 등 정의역 조건을 확인합니다.<div class=\"formula-block\">$$\\mathbf F=\\nabla\\phi\\quad\\Rightarrow\\quad\\oint_C\\mathbf F\\cdot d\\mathbf r=0$$</div>", "example": {"q": "F=(2x,2y,2z)의 퍼텐셜 하나는?", "a": "$$\\phi=x^2+y^2+z^2$$"}}, {"id": 54, "definition": "직교곡선좌표에서는 척도인자 hi가 길이 변화를 반영합니다.<div class=\"formula-block\">$$\\nabla f=\\sum_{i=1}^3\\frac{\\mathbf e_i}{h_i}\\frac{\\partial f}{\\partial q_i},\\quad\\nabla\\cdot\\mathbf F=\\frac1{h_1h_2h_3}\\sum_{i=1}^3\\frac{\\partial}{\\partial q_i}\\left(\\frac{h_1h_2h_3}{h_i}F_i\\right)$$</div>", "example": {"q": "원기둥좌표 (r,θ,z)의 척도인자는?", "a": "$$(h_r,h_\\theta,h_z)=(1,r,1)$$"}}, {"id": 55, "definition": "이중적분은 미소 면적에 대한 함수값의 합의 극한입니다.<div class=\"formula-block\">$$\\iint_Df\\,dA=\\lim\\sum_if(\\xi_i,\\eta_i)\\Delta A_i$$</div>", "example": {"q": "넓이가 3인 영역에서 상수 2의 이중적분은?", "a": "$$6$$"}}, {"id": 56, "definition": "직사각형 영역에서는 적절한 적분가능성 하에 반복적분으로 계산합니다.<div class=\"formula-block\">$$\\iint_{[a,b]\\times[c,d]}f\\,dA=\\int_a^b\\int_c^df(x,y)\\,dy\\,dx$$</div>", "example": {"q": "단위 정사각형에서 x+y의 적분은?", "a": "$$\\int_0^1\\int_0^1(x+y)\\,dy\\,dx=1$$"}}, {"id": 57, "definition": "일반 영역은 경계함수에 따라 적분 한계를 정합니다.<div class=\"formula-block\">$$\\iint_Df\\,dA=\\int_a^b\\int_{g_1(x)}^{g_2(x)}f(x,y)\\,dy\\,dx$$</div>", "example": {"q": "0≤y≤x≤1인 삼각형의 넓이는?", "a": "$$\\int_0^1\\int_0^x1\\,dy\\,dx=1/2$$"}}, {"id": 58, "definition": "극좌표에서는 면적 요소에 반지름 인자가 붙습니다.<div class=\"formula-block\">$$\\iint_Df\\,dA=\\iint_{D'}f(r\\cos\\theta,r\\sin\\theta)r\\,dr\\,d\\theta$$</div>", "example": {"q": "반지름 2인 원판의 넓이는?", "a": "$$\\int_0^{2\\pi}\\int_0^2r\\,dr\\,d\\theta=4\\pi$$"}}, {"id": 59, "definition": "삼중적분은 공간의 체적 요소에 대한 누적량입니다.<div class=\"formula-block\">$$\\iiint_Vf\\,dV=\\iiint_Vf(x,y,z)\\,dx\\,dy\\,dz$$</div>", "example": {"q": "변 길이 1,2,3인 직육면체에서 상수 1의 적분은?", "a": "$$6$$"}}, {"id": 60, "definition": "원기둥 대칭 입체는 반지름·각도·높이로 적분합니다.<div class=\"formula-block\">$$\\iiint_Vf\\,dV=\\iiint_{V'}f(r\\cos\\theta,r\\sin\\theta,z)r\\,dr\\,d\\theta\\,dz$$</div>", "example": {"q": "반지름 2, 높이 3인 원기둥의 부피는?", "a": "$$\\pi\\cdot2^2\\cdot3=12\\pi$$"}}, {"id": 61, "definition": "구면 대칭 입체는 구면좌표 체적 요소로 적분합니다.<div class=\"formula-block\">$$\\iiint_Vf\\,dV=\\iiint_{V'}f\\,\\rho^2\\sin\\theta\\,d\\rho\\,d\\theta\\,d\\varphi$$</div>", "example": {"q": "반지름 R인 구의 부피는?", "a": "$$4\\pi R^3/3$$"}}, {"id": 62, "definition": "적분 변수변환에서는 적절한 일대일성·미분가능성과 행렬식의 절댓값을 확인합니다.<div class=\"formula-block\">$$\\iint_Df(x,y)\\,dx\\,dy=\\iint_Uf(x(u,v),y(u,v))\\left|\\frac{\\partial(x,y)}{\\partial(u,v)}\\right|du\\,dv|x=u+v, y=u−v의 면적 배율은?|\\left$$</div>", "example": {"q": "\\det\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}\\right", "a": "$$=2$$"}}, {"id": 63, "definition": "밀도를 적분하면 질량을, 위치 및 축까지의 거리 제곱으로 가중하면 질량중심과 관성모멘트를 얻습니다.<div class=\"formula-block\">$$M=\\iiint_V\\rho\\,dV,\\quad\\overline{\\mathbf r}=\\frac1M\\iiint_V\\mathbf r\\rho\\,dV,\\quad I_z=\\iiint_V(x^2+y^2)\\rho\\,dV$$</div>", "example": {"q": "균일한 단위 정육면체 [0,1]³의 질량중심은?", "a": "$$(1/2,1/2,1/2)$$"}}, {"id": 64, "definition": "선적분은 곡선을 작은 조각으로 나눈 가중합의 극한입니다.<div class=\"formula-block\">$$ds=\\|\\mathbf r'(t)\\|\\,dt,\\quad d\\mathbf r=\\mathbf r'(t)\\,dt$$</div>", "example": {"q": "r(t)=(3t,4t,0)의 길이 요소는?", "a": "$$ds=5\\,dt$$"}}, {"id": 65, "definition": "스칼라 선적분은 곡선의 길이 요소로 가중하며 진행 방향에 무관합니다.<div class=\"formula-block\">$$\\int_Cf\\,ds=\\int_a^bf(\\mathbf r(t))\\|\\mathbf r'(t)\\|\\,dt$$</div>", "example": {"q": "길이 3인 선분에 밀도 2가 일정하면 질량은?", "a": "$$\\int_C2\\,ds=6$$"}}, {"id": 66, "definition": "벡터 선적분은 장의 접선방향 성분을 누적하며 방향 반전 시 부호가 바뀝니다.<div class=\"formula-block\">$$\\int_C\\mathbf F\\cdot d\\mathbf r=\\int_a^b\\mathbf F(\\mathbf r(t))\\cdot\\mathbf r'(t)\\,dt$$</div>", "example": {"q": "F=(1,0,0)을 따라 원점에서 (2,0,0)까지 적분하면?", "a": "$$2$$"}}, {"id": 67, "definition": "힘이 한 일은 힘과 미소 변위의 내적을 경로에 따라 적분한 값입니다.<div class=\"formula-block\">$$W=\\int_C\\mathbf F\\cdot d\\mathbf r$$</div>", "example": {"q": "힘 (3,0,0) N이 (2,1,0) m 변위에 한 일은?", "a": "$$W=6\\,\\mathrm J$$"}}, {"id": 68, "definition": "경로독립적인 장의 적분은 끝점에만 의존하며 적절한 정의역에서는 퍼텐셜이 존재합니다.<div class=\"formula-block\">$$\\int_{C_1}\\mathbf F\\cdot d\\mathbf r=\\int_{C_2}\\mathbf F\\cdot d\\mathbf r\\quad(C_1,C_2\\text{의 시작·끝점이 같음})$$</div>", "example": {"q": "F=(2x,2y)의 원점에서 (1,1)까지 적분은?", "a": "$$[x^2+y^2]_{(0,0)}^{(1,1)}=2$$"}}, {"id": 69, "definition": "선적분의 기본정리는 기울기장의 경로적분을 퍼텐셜 차이로 바꿉니다.<div class=\"formula-block\">$$\\int_C\\nabla\\phi\\cdot d\\mathbf r=\\phi(B)-\\phi(A)$$</div>", "example": {"q": "φ=xyz일 때 (1,1,1)에서 (2,2,2)까지 기울기장 적분은?", "a": "$$8-1=7$$"}}, {"id": 70, "definition": "순환은 닫힌 경로를 따라 장의 접선 성분을 한 바퀴 누적한 값입니다.<div class=\"formula-block\">$$\\Gamma=\\oint_C\\mathbf F\\cdot d\\mathbf r$$</div>", "example": {"q": "F=(−y,x)에서 단위원의 반시계 순환은?", "a": "$$\\int_0^{2\\pi}1\\,dt=2\\pi$$"}}, {"id": 71, "definition": "그린 정리는 양의 방향의 평면 경계 적분을 내부 회전의 적분으로 바꿉니다. 단순 폐곡선과 그 내부 근방에서 P,Q의 연속 편도함수를 가정합니다.<div class=\"formula-block\">$$\\oint_{\\partial D}(P\\,dx+Q\\,dy)=\\iint_D(Q_x-P_y)\\,dA$$</div>", "example": {"q": "P=−y/2, Q=x/2의 단위원 반시계 적분은?", "a": "$$\\iint_D1\\,dA=\\pi$$"}}, {"id": 72, "definition": "매개변수 곡면은 두 매개변수로 공간의 점을 나타냅니다.<div class=\"formula-block\">$$\\mathbf r(u,v)=(x(u,v),y(u,v),z(u,v))$$</div>", "example": {"q": "r(u,v)=(u,v,u+v)의 (u,v)=(1,2)에서 점은?", "a": "$$(1,2,3)$$"}}, {"id": 73, "definition": "곡면의 두 매개방향 도함수는 접벡터이며 외적은 법선입니다.<div class=\"formula-block\">$$\\mathbf n=\\frac{\\mathbf r_u\\times\\mathbf r_v}{\\|\\mathbf r_u\\times\\mathbf r_v\\|}\\quad(\\mathbf r_u\\times\\mathbf r_v\\ne0)$$</div>", "example": {"q": "r=(u,v,0)의 위쪽 단위법선은?", "a": "$$(0,0,1)$$"}}, {"id": 74, "definition": "곡면의 미소 면적은 두 접벡터가 만드는 평행사변형의 넓이입니다.<div class=\"formula-block\">$$A(S)=\\iint_D\\|\\mathbf r_u\\times\\mathbf r_v\\|\\,du\\,dv$$</div>", "example": {"q": "z=0 위의 단위 정사각형 면적은?", "a": "$$1$$"}}, {"id": 75, "definition": "스칼라 면적분은 곡면 위의 밀도 등을 면적 요소로 누적합니다.<div class=\"formula-block\">$$\\iint_Sf\\,dS=\\iint_Df(\\mathbf r(u,v))\\|\\mathbf r_u\\times\\mathbf r_v\\|\\,du\\,dv$$</div>", "example": {"q": "단위구 표면에 면밀도 2가 일정하면 질량은?", "a": "$$2(4\\pi)=8\\pi$$"}}, {"id": 76, "definition": "벡터 면적분은 장의 법선 성분인 유량을 누적합니다.<div class=\"formula-block\">$$\\iint_S\\mathbf F\\cdot d\\mathbf S=\\iint_D\\mathbf F(\\mathbf r)\\cdot(\\mathbf r_u\\times\\mathbf r_v)\\,du\\,dv$$</div>", "example": {"q": "F=(0,0,3)이 넓이 2인 수평면을 위로 통과하는 유량은?", "a": "$$6$$"}}, {"id": 77, "definition": "곡면의 방향은 연속적인 단위법선 선택이며 매개변수 순서를 바꾸면 반전됩니다.<div class=\"formula-block\">$$\\mathbf r_v\\times\\mathbf r_u=-\\mathbf r_u\\times\\mathbf r_v$$</div>", "example": {"q": "위쪽 유량이 5인 면의 아래쪽 유량은?", "a": "$$-5$$"}}, {"id": 78, "definition": "균일한 장이 평면을 지나는 유량은 면적과 법선 성분의 곱입니다.<div class=\"formula-block\">$$\\Phi=\\iint_S\\mathbf F\\cdot\\mathbf n\\,dS=FA\\cos\\theta\\quad(\\text{균일장·평면})$$</div>", "example": {"q": "장 크기 4, 면적 2, 법선과 각도 60°일 때 유량은?", "a": "$$4\\cdot2\\cos(\\pi/3)=4$$"}}, {"id": 79, "definition": "닫힌 곡면은 보통 외향 법선으로 정하며 내부에서 나가는 순유량을 측정합니다.<div class=\"formula-block\">$$\\Phi=\\oiint_{\\partial V}\\mathbf F\\cdot\\mathbf n\\,dS$$</div>", "example": {"q": "상수 벡터장이 임의의 매끄러운 닫힌 곡면을 통과하는 순유량은?", "a": "$$0$$"}}, {"id": 80, "definition": "그린 정리는 단순 영역에서 미적분 기본정리를 적용하고 내부 경계의 상쇄로 확장할 수 있습니다.<div class=\"formula-block\">$$A(D)=\\frac12\\oint_{\\partial D}(x\\,dy-y\\,dx)$$</div>", "example": {"q": "반지름 R인 원의 경계 적분으로 넓이를 구하면?", "a": "$$\\frac12\\int_0^{2\\pi}R^2\\,dt=\\pi R^2$$"}}, {"id": 81, "definition": "발산정리는 체적 내부의 발산 적분을 외향 경계 유량으로 바꿉니다. 장은 영역의 근방에서 C¹, 경계는 조각별 매끄럽다고 가정합니다.<div class=\"formula-block\">$$\\oiint_{\\partial V}\\mathbf F\\cdot\\mathbf n\\,dS=\\iiint_V\\nabla\\cdot\\mathbf F\\,dV$$</div>", "example": {"q": "F=(x,y,z)의 단위구 외향 유량은?", "a": "$$3(4\\pi/3)=4\\pi$$"}}, {"id": 82, "definition": "스토크스 정리는 방향이 있는 곡면의 회전 유량과 그 양의 경계 순환을 연결합니다. 장은 근방에서 C¹이고 방향은 오른손 규칙을 따릅니다.<div class=\"formula-block\">$$\\oint_{\\partial S}\\mathbf F\\cdot d\\mathbf r=\\iint_S(\\nabla\\times\\mathbf F)\\cdot\\mathbf n\\,dS$$</div>", "example": {"q": "F=(−y,x,0)의 위쪽 단위원판 경계 순환은?", "a": "$$\\iint_D2\\,dA=2\\pi$$"}}];
+    EARLY_REVISIONS.forEach(({id, definition, example}) => {
+      const c=CONCEPTS_DB[id-1]; c.definition=definition; c.example=example;
+      if(c.applied.q.includes('시스템의 특성을 계산')) {
+        c.applied={q:'핵심 해석 · '+c.title.replace(/^\d+\.\s*/, ''), a:definition};
+      }
+    });
+    const richText = value => value.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+    CONCEPTS_DB.forEach(c=>{
+      c.definition=richText(c.definition);
+      ['example','applied'].forEach(k=>{c[k].q=richText(c[k].q);c[k].a=richText(c[k].a)});
+    });
+    window.addEventListener('DOMContentLoaded', () => {
+      renderSidebar();
+      renderConceptView();
+
+      // Theme toggle
+      const themeBtn = document.getElementById('theme-toggle');
+      themeBtn.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+      });
+
+      // Search listeners
+      const searchInput = document.getElementById('search-input');
+      const clearSearchBtn = document.getElementById('clear-search');
+
+      searchInput.addEventListener('input', (e) => {
+        if (e.target.value) {
+          clearSearchBtn.classList.remove('hidden');
+        } else {
+          clearSearchBtn.classList.add('hidden');
+        }
+        renderSidebar();
+      });
+
+      clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        clearSearchBtn.classList.add('hidden');
+        renderSidebar();
+      });
+
+      // Filter Mode Buttons
+      document.getElementById('filter-all').addEventListener('click', function() {
+        filterMode = 'all';
+        renderSidebar();
+      });
+      document.getElementById('filter-completed').addEventListener('click', function() {
+        filterMode = 'completed';
+        renderSidebar();
+      });
+      document.getElementById('filter-bookmarked').addEventListener('click', function() {
+        filterMode = 'bookmarked';
+        renderSidebar();
+      });
+
+      // Reset progress
+      document.getElementById('btn-reset-progress').addEventListener('click', () => {
+        if (confirm('학습 진행 상태를 모두 초기화하시겠습니까?')) {
+          completedSet.clear();
+          bookmarkedSet.clear();
+          renderSidebar();
+          renderConceptView();
+        }
+      });
+
+      // Mobile drawer sidebar toggle
+      const toggleMobileBtn = document.getElementById('toggle-sidebar-mobile');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebar-overlay');
+
+      toggleMobileBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('-translate-x-full');
+        overlay.classList.toggle('hidden');
+      });
+
+      overlay.addEventListener('click', () => {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+      });
+    });
+  </script>
+</body>
+</html>
