@@ -1,0 +1,746 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>star03 정보과학3 50문항 통합평가</title><style>body{margin:0;background:#f3f6fb;color:#1a2940;font-family:"Malgun Gothic",Arial,sans-serif;line-height:1.6}main{max-width:1050px;margin:auto;padding:20px}header,.question,.toolbar{background:white;border:1px solid #dce4f0;border-radius:13px;padding:22px;margin:16px 0}h1{color:#173c77}h2{font-size:1.16rem;color:#183e75}.sector{background:#e7efff;border-left:5px solid #235cc0;padding:14px 18px;margin-top:28px;border-radius:7px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#15243a;color:#f6f8ff;border-radius:9px;padding:16px;font:14px/1.55 Consolas,monospace}.option{display:block;padding:10px 12px;border:1px solid #d7e0ed;border-radius:8px;margin:7px 0;cursor:pointer}.option:hover{background:#f1f6ff}.option input{margin-right:9px}.feedback{display:none;background:#f1f6fc;border-radius:8px;padding:14px;margin-top:12px}.ok{color:#14713c}.no{color:#b32436}.toolbar{position:sticky;bottom:0;box-shadow:0 -4px 20px #13294a18;z-index:2}button{border:0;background:#205cc1;color:white;border-radius:8px;padding:12px 18px;cursor:pointer;margin:4px;font-weight:bold}button.secondary{background:#687b94}input[type=text]{padding:11px;border:1px solid #b9c8dc;border-radius:7px;margin:5px;width:170px}small{color:#53647d}.score{font-size:1.25rem;font-weight:bold}</style></head><body><main><header><h1>정보과학3 · 50문항 통합 평가</h1><p>b01~b10, 10개 Sector × 5문항 · 옳은 것 1개 선택 · 원점수 127점, 100점 환산점수 함께 제공</p><label>학번 <input id="studentId" type="text" placeholder="예: 1209" autocomplete="off"></label><label>이름 <input id="studentName" type="text" placeholder="이름" autocomplete="off"></label><p><small>채점 후 TXT 결과를 저장합니다. 모든 문항과 보기는 이 파일에 포함되어 있습니다.</small></p></header><h2 class="sector">Sector 01 · 재귀 이진 문자열 (5문항)</h2><section class="question" id="q0"><h2>문항 01 · 기본 이진 문자열 생성 (3점)</h2><pre>def binary(s, n):
+    if len(s) == n:
+        print(s)
+        return
+    binary(s + &quot;0&quot;, n)
+    binary(s + &quot;1&quot;, n)
+
+binary(&quot;&quot;, 3)</pre><p><b>위 프로그램의 실행 과정과 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q0" value="0"> ① 길이가 3인 문자열을 출력한 후에도 같은 호출에서 재귀를 계속 진행한다.</label><label class="option"><input type="radio" name="q0" value="1"> ② 출력되는 문자열은 모두 6개이다.</label><label class="option"><input type="radio" name="q0" value="2"> ③ 가장 먼저 출력되는 문자열은 111이다.</label><label class="option"><input type="radio" name="q0" value="3"> ④ 각 단계에서 현재 문자열에 0 또는 1을 붙여 다음 상태를 만든다.</label><label class="option"><input type="radio" name="q0" value="4"> ⑤ binary(s + &quot;0&quot;, n)은 문자열 s를 직접 수정한다.</label><div class="feedback" id="feedback0"></div></section><section class="question" id="q1"><h2>문항 02 · 호출 순서 바꾸기 (3점)</h2><pre>def binary(s, n):
+    if len(s) == n:
+        print(s)
+        return
+    binary(s + &quot;1&quot;, n)
+    binary(s + &quot;0&quot;, n)
+
+binary(&quot;&quot;, 2)</pre><p><b>위 프로그램의 실행 과정과 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q1" value="0"> ① 가장 먼저 출력되는 문자열은 11이다.</label><label class="option"><input type="radio" name="q1" value="1"> ② 가장 마지막에 출력되는 문자열은 11이다.</label><label class="option"><input type="radio" name="q1" value="2"> ③ 출력되는 문자열은 총 8개이다.</label><label class="option"><input type="radio" name="q1" value="3"> ④ 길이가 2가 되면 다시 두 번 재귀 호출한다.</label><label class="option"><input type="radio" name="q1" value="4"> ⑤ binary(s + &quot;1&quot;, n)은 기존 문자열 s를 직접 변경한다.</label><div class="feedback" id="feedback1"></div></section><section class="question" id="q2"><h2>문항 03 · 세 문자로 확장하기 (3점)</h2><pre>def make(s, n):
+    if len(s) == n:
+        print(s)
+        return
+    for ch in &quot;ABC&quot;:
+        make(s + ch, n)
+
+make(&quot;&quot;, 2)</pre><p><b>위 프로그램의 실행 과정과 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q2" value="0"> ① 출력되는 문자열은 총 6개이다.</label><label class="option"><input type="radio" name="q2" value="1"> ② 처음 출력되는 문자열은 BA이다.</label><label class="option"><input type="radio" name="q2" value="2"> ③ for문은 각 단계에서 A, B, C를 차례대로 추가한다.</label><label class="option"><input type="radio" name="q2" value="3"> ④ 마지막 출력 문자열은 AB이다.</label><label class="option"><input type="radio" name="q2" value="4"> ⑤ 길이 2에 도달해도 for문을 실행한다.</label><div class="feedback" id="feedback2"></div></section><section class="question" id="q3"><h2>문항 04 · 1의 개수 세기 (3점)</h2><pre>def binary(s, n):
+    if len(s) == n:
+        if s.count(&quot;1&quot;) == 2:
+            print(s)
+        return
+    binary(s + &quot;0&quot;, n)
+    binary(s + &quot;1&quot;, n)
+
+binary(&quot;&quot;, 3)</pre><p><b>위 프로그램의 실행 과정과 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q3" value="0"> ① 출력되는 문자열은 001, 010, 100이다.</label><label class="option"><input type="radio" name="q3" value="1"> ② 길이가 3이고 1이 정확히 두 개인 문자열만 출력한다.</label><label class="option"><input type="radio" name="q3" value="2"> ③ 출력되는 문자열은 총 8개이다.</label><label class="option"><input type="radio" name="q3" value="3"> ④ s.count(&quot;1&quot;)은 문자열 길이를 반환한다.</label><label class="option"><input type="radio" name="q3" value="4"> ⑤ 처음 출력되는 문자열은 111이다.</label><div class="feedback" id="feedback3"></div></section><section class="question" id="q4"><h2>문항 05 · 중복 없는 이진 문자열 (3점)</h2><pre>def make(s, n):
+    if len(s) == n:
+        print(s)
+        return
+    for ch in &quot;01&quot;:
+        if ch not in s:
+            make(s + ch, n)
+
+make(&quot;&quot;, 2)</pre><p><b>위 프로그램의 실행 과정과 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q4" value="0"> ① 00과 11도 출력된다.</label><label class="option"><input type="radio" name="q4" value="1"> ② 출력되는 문자열은 총 4개이다.</label><label class="option"><input type="radio" name="q4" value="2"> ③ ch not in s는 이미 사용한 문자를 다시 고르기 위한 조건이다.</label><label class="option"><input type="radio" name="q4" value="3"> ④ 문자열 길이가 2가 되면 무조건 빈 문자열을 출력한다.</label><label class="option"><input type="radio" name="q4" value="4"> ⑤ 출력 결과는 01과 10, 총 두 줄이다.</label><div class="feedback" id="feedback4"></div></section><h2 class="sector">Sector 02 · Tkinter 버튼 계산기 (5문항)</h2><section class="question" id="q5"><h2>문항 06 · 문항 01 · 계산기 입력 및 초기화 (2.9점) (2.9점)</h2><pre>import tkinter as tk
+root = tk.Tk()
+exp = &quot;&quot;
+display = tk.StringVar(value=&quot;0&quot;)
+def click(x):
+    global exp
+    if x in (&quot;AC&quot;, &quot;C&quot;):
+        exp = &quot;&quot;
+    elif x == &quot;=&quot;:
+        try:
+            exp = str(eval(exp))
+        except:
+            exp = &quot;Error&quot;
+    else:
+        if exp == &quot;Error&quot;:
+            exp = &quot;&quot;
+        exp += x
+    display.set(exp or &quot;0&quot;)</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q5" value="0"> ① AC를 누르면 exp가 빈 문자열로 초기화되고 표시창에는 0이 나타난다.</label><label class="option"><input type="radio" name="q5" value="1"> ② AC를 누르면 exp에 문자열 &quot;0&quot;이 저장된다.</label><label class="option"><input type="radio" name="q5" value="2"> ③ =를 누르면 모든 경우에 계산이 성공한다.</label><label class="option"><input type="radio" name="q5" value="3"> ④ Error 상태에서 숫자를 누르면 Error 뒤에 숫자가 붙는다.</label><label class="option"><input type="radio" name="q5" value="4"> ⑤ display.set()은 버튼의 배경색을 바꾼다.</label><div class="feedback" id="feedback5"></div></section><section class="question" id="q6"><h2>문항 07 · 문항 02 · 버튼의 명령 연결 (2.9점) (2.9점)</h2><pre>import tkinter as tk
+root = tk.Tk()
+pressed = []
+def click(x):
+    pressed.append(x)
+keys = [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;+&quot;]
+for i, x in enumerate(keys):
+    tk.Button(root, text=x,
+              command=lambda x=x: click(x)).grid(
+              row=i//2, column=i%2)
+root.mainloop()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q6" value="0"> ① lambda x=x는 각 버튼이 생성될 때의 x 값을 기본 인수에 저장한다.</label><label class="option"><input type="radio" name="q6" value="1"> ② i//2는 버튼의 열 번호를 결정한다.</label><label class="option"><input type="radio" name="q6" value="2"> ③ i%2는 버튼의 행 번호를 결정한다.</label><label class="option"><input type="radio" name="q6" value="3"> ④ 버튼을 생성하면 click 함수가 즉시 실행된다.</label><label class="option"><input type="radio" name="q6" value="4"> ⑤ pressed는 버튼을 누르기 전부터 모든 keys를 담는다.</label><div class="feedback" id="feedback6"></div></section><section class="question" id="q7"><h2>문항 08 · 문항 03 · 표시창 갱신 (2.9점) (2.9점)</h2><pre>import tkinter as tk
+root = tk.Tk()
+exp = &quot;&quot;
+display = tk.StringVar(value=&quot;0&quot;)
+def click(x):
+    global exp
+    exp += x
+    display.set(exp or &quot;0&quot;)
+tk.Entry(root, textvariable=display).pack()
+click(&quot;7&quot;)
+click(&quot;+&quot;)
+click(&quot;3&quot;)</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q7" value="0"> ① 세 번의 click 호출 후 display의 값은 &quot;7+3&quot;이다.</label><label class="option"><input type="radio" name="q7" value="1"> ② display는 정수형 변수이므로 +를 저장하지 못한다.</label><label class="option"><input type="radio" name="q7" value="2"> ③ click(&quot;+&quot;)가 실행되면 덧셈이 즉시 계산된다.</label><label class="option"><input type="radio" name="q7" value="3"> ④ global exp는 지역변수 exp를 새로 만든다.</label><label class="option"><input type="radio" name="q7" value="4"> ⑤ Entry의 textvariable은 버튼 위치를 정한다.</label><div class="feedback" id="feedback7"></div></section><section class="question" id="q8"><h2>문항 09 · 문항 04 · 예외 처리와 계산 (2.9점) (2.9점)</h2><pre>exp = &quot;8/0&quot;
+try:
+    exp = str(eval(exp))
+except:
+    exp = &quot;Error&quot;
+print(exp)
+exp = &quot;6*2&quot;
+try:
+    exp = str(eval(exp))
+except:
+    exp = &quot;Error&quot;
+print(exp)</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q8" value="0"> ① 프로그램은 첫 줄에 Error, 둘째 줄에 12를 출력한다.</label><label class="option"><input type="radio" name="q8" value="1"> ② 첫 번째 eval은 문자열 &quot;0&quot;을 반환한다.</label><label class="option"><input type="radio" name="q8" value="2"> ③ except는 오류가 없는 경우에만 실행된다.</label><label class="option"><input type="radio" name="q8" value="3"> ④ 두 번째 계산 결과는 정수 12로 exp에 저장된다.</label><label class="option"><input type="radio" name="q8" value="4"> ⑤ 첫 번째 오류가 발생하면 두 번째 try문은 실행되지 않는다.</label><div class="feedback" id="feedback8"></div></section><section class="question" id="q9"><h2>문항 10 · 문항 05 · 계산기 배치 (2.9점) (2.9점)</h2><pre>import tkinter as tk
+root = tk.Tk()
+keys = [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;+&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;-&quot;]
+frame = tk.Frame(root)
+frame.pack()
+for i, x in enumerate(keys):
+    tk.Button(frame, text=x).grid(
+        row=i//4, column=i%4)
+root.mainloop()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q9" value="0"> ① 버튼 &quot;5&quot;는 row=1, column=1 위치에 배치된다.</label><label class="option"><input type="radio" name="q9" value="1"> ② 버튼 &quot;7&quot;은 row=1, column=0에 배치된다.</label><label class="option"><input type="radio" name="q9" value="2"> ③ 버튼 &quot;+&quot;는 row=0, column=0에 배치된다.</label><label class="option"><input type="radio" name="q9" value="3"> ④ i%4는 버튼의 행 번호를 계산한다.</label><label class="option"><input type="radio" name="q9" value="4"> ⑤ frame.pack()은 모든 버튼의 grid 배치를 금지한다.</label><div class="feedback" id="feedback9"></div></section><h2 class="sector">Sector 03 · Tkinter 사칙연산 계산기 (5문항)</h2><section class="question" id="q10"><h2>문항 11 · 문항 01 · 입력값 읽기와 계산 (2.8점) (2.8점)</h2><pre>import tkinter as tk
+root = tk.Tk()
+entry = tk.Entry(root)
+entry.pack()
+result = tk.Label(root, text=&quot;대기&quot;)
+result.pack()
+def calculate():
+    expression = entry.get()
+    answer = eval(expression)
+    result.config(text=&quot;결과: &quot; + str(answer))
+tk.Button(root, text=&quot;계산&quot;, command=calculate).pack()
+root.mainloop()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q10" value="0"> ① entry.get()은 입력창의 문자열을 읽어 온다.</label><label class="option"><input type="radio" name="q10" value="1"> ② entry.get()은 입력창의 수식을 자동으로 계산한 정수를 반환한다.</label><label class="option"><input type="radio" name="q10" value="2"> ③ eval(expression)은 입력창에 적힌 내용을 모두 삭제한다.</label><label class="option"><input type="radio" name="q10" value="3"> ④ result.config(text=...)는 새로운 Entry 위젯을 생성한다.</label><label class="option"><input type="radio" name="q10" value="4"> ⑤ command=calculate는 프로그램 시작 즉시 calculate()를 실행한다.</label><div class="feedback" id="feedback10"></div></section><section class="question" id="q11"><h2>문항 12 · 문항 02 · 초기화 버튼 (2.8점) (2.8점)</h2><pre>import tkinter as tk
+root = tk.Tk()
+entry = tk.Entry(root)
+entry.pack()
+result = tk.Label(root, text=&quot;준비&quot;)
+result.pack()
+def reset():
+    entry.delete(0, tk.END)
+    result.config(text=&quot;초기화 완료&quot;)
+tk.Button(root, text=&quot;초기화&quot;, command=reset).pack()
+root.mainloop()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q11" value="0"> ① entry.delete(0, tk.END)는 입력창을 읽기 전용으로 만든다.</label><label class="option"><input type="radio" name="q11" value="1"> ② reset()은 입력창의 내용을 지우고 결과 라벨의 문구를 바꾼다.</label><label class="option"><input type="radio" name="q11" value="2"> ③ result.config(text=...)는 root 창의 제목을 변경한다.</label><label class="option"><input type="radio" name="q11" value="3"> ④ command=reset은 버튼 클릭과 무관하게 매초 reset()을 실행한다.</label><label class="option"><input type="radio" name="q11" value="4"> ⑤ entry.delete(0, tk.END)는 프로그램을 종료한다.</label><div class="feedback" id="feedback11"></div></section><section class="question" id="q12"><h2>문항 13 · 문항 03 · 버튼과 함수 연결 (2.8점) (2.8점)</h2><pre>import tkinter as tk
+root = tk.Tk()
+entry = tk.Entry(root)
+entry.pack()
+result = tk.Label(root, text=&quot;&quot;)
+result.pack()
+def double():
+    value = int(entry.get())
+    result.config(text=str(value * 2))
+tk.Button(root, text=&quot;두 배&quot;, command=double).pack()
+root.mainloop()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q12" value="0"> ① command=double()로 바꾸어도 버튼을 누를 때까지 함수가 실행되지 않는다.</label><label class="option"><input type="radio" name="q12" value="1"> ② int(entry.get())은 입력창의 글자를 항상 실수형으로 변환한다.</label><label class="option"><input type="radio" name="q12" value="2"> ③ 버튼을 클릭하면 double()이 호출되어 입력한 정수의 두 배를 라벨에 표시한다.</label><label class="option"><input type="radio" name="q12" value="3"> ④ pack()은 Entry에 입력된 숫자를 자동으로 정렬한다.</label><label class="option"><input type="radio" name="q12" value="4"> ⑤ root.mainloop()는 버튼을 한 번 누를 때마다 새 창을 만든다.</label><div class="feedback" id="feedback12"></div></section><section class="question" id="q13"><h2>문항 14 · 문항 04 · 예외 처리 (2.8점) (2.8점)</h2><pre>import tkinter as tk
+root = tk.Tk()
+entry = tk.Entry(root)
+entry.pack()
+result = tk.Label(root, text=&quot;&quot;)
+result.pack()
+def calculate():
+    try:
+        answer = eval(entry.get())
+        result.config(text=str(answer))
+    except Exception:
+        result.config(text=&quot;오류&quot;)
+tk.Button(root, text=&quot;계산&quot;, command=calculate).pack()
+root.mainloop()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q13" value="0"> ① 잘못된 수식은 언제나 0으로 계산된다.</label><label class="option"><input type="radio" name="q13" value="1"> ② except Exception은 계산이 성공한 경우에만 실행된다.</label><label class="option"><input type="radio" name="q13" value="2"> ③ entry.get()은 라벨에 표시된 글자를 읽는다.</label><label class="option"><input type="radio" name="q13" value="3"> ④ 계산 중 예외가 발생하면 결과 라벨에 &quot;오류&quot;를 표시한다.</label><label class="option"><input type="radio" name="q13" value="4"> ⑤ eval()은 임의의 입력에 대해 항상 안전하므로 제한 없이 사용해도 된다.</label><div class="feedback" id="feedback13"></div></section><section class="question" id="q14"><h2>문항 15 · 문항 05 · 라벨과 창 제목 (2.8점) (2.8점)</h2><pre>import tkinter as tk
+root = tk.Tk()
+root.title(&quot;사칙연산&quot;)
+entry = tk.Entry(root)
+entry.pack()
+result = tk.Label(root, text=&quot;결과 없음&quot;)
+result.pack()
+def show():
+    result.config(text=entry.get())
+tk.Button(root, text=&quot;표시&quot;, command=show).pack()
+root.mainloop()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q14" value="0"> ① root.title(&quot;사칙연산&quot;)은 Entry의 기본 입력값을 지정한다.</label><label class="option"><input type="radio" name="q14" value="1"> ② entry.pack()은 입력창의 문자열을 지운다.</label><label class="option"><input type="radio" name="q14" value="2"> ③ result.config(text=entry.get())는 입력창을 삭제한다.</label><label class="option"><input type="radio" name="q14" value="3"> ④ root.mainloop()는 결과 라벨을 문자열로 반환한다.</label><label class="option"><input type="radio" name="q14" value="4"> ⑤ 표시 버튼을 누르면 입력창의 문자열을 결과 라벨에 그대로 보여 준다.</label><div class="feedback" id="feedback14"></div></section><h2 class="sector">Sector 04 · 리사주 곡선 (5문항)</h2><section class="question" id="q15"><h2>문항 16 · 문항 01 · 리사주 곡선의 기본 프레임 (2.7점) (2.7점)</h2><pre>import turtle, math
+s = turtle.Screen()
+s.tracer(0)
+p = turtle.Turtle()
+p.hideturtle()
+phase = 0
+while True:
+    p.clear()
+    p.penup()
+    for i in range(601):
+        t = 2 * math.pi * i / 500
+        p.goto(270*math.sin(3*t+phase),
+               190*math.sin(2*t))
+        if i == 0:
+            p.pendown()
+    phase += 0.03
+    s.update()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q15" value="0"> ① 600개</label><label class="option"><input type="radio" name="q15" value="1"> ② 601개</label><label class="option"><input type="radio" name="q15" value="2"> ③ 602개</label><label class="option"><input type="radio" name="q15" value="3"> ④ 599개</label><label class="option"><input type="radio" name="q15" value="4"> ⑤ 0개</label><div class="feedback" id="feedback15"></div></section><section class="question" id="q16"><h2>문항 17 · 문항 02 · 반복 횟수 변경 (2.7점) (2.7점)</h2><pre>import turtle, math
+s = turtle.Screen()
+s.tracer(0)
+p = turtle.Turtle()
+p.penup()
+while True:
+    p.clear()
+    p.penup()
+    for i in range(401):
+        t = 2 * math.pi * i / 400
+        p.goto(200*math.sin(2*t), 150*math.cos(3*t))
+        if i == 0:
+            p.pendown()
+    s.update()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q16" value="0"> ① 401개</label><label class="option"><input type="radio" name="q16" value="1"> ② 399개</label><label class="option"><input type="radio" name="q16" value="2"> ③ 400개</label><label class="option"><input type="radio" name="q16" value="3"> ④ 402개</label><label class="option"><input type="radio" name="q16" value="4"> ⑤ 200개</label><div class="feedback" id="feedback16"></div></section><section class="question" id="q17"><h2>문항 18 · 문항 03 · 펜을 내리는 시점 (2.7점) (2.7점)</h2><pre>import turtle, math
+p = turtle.Turtle()
+p.penup()
+for i in range(101):
+    t = 2 * math.pi * i / 100
+    p.goto(100*math.sin(3*t), 80*math.sin(2*t))
+    if i == 2:
+        p.pendown()
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q17" value="0"> ① 100개</label><label class="option"><input type="radio" name="q17" value="1"> ② 99개</label><label class="option"><input type="radio" name="q17" value="2"> ③ 98개</label><label class="option"><input type="radio" name="q17" value="3"> ④ 101개</label><label class="option"><input type="radio" name="q17" value="4"> ⑤ 97개</label><div class="feedback" id="feedback17"></div></section><section class="question" id="q18"><h2>문항 19 · 문항 04 · 반복 도중 펜 올리기 (2.7점) (2.7점)</h2><pre>import turtle, math
+p = turtle.Turtle()
+p.penup()
+for i in range(11):
+    t = 2 * math.pi * i / 10
+    p.goto(100*math.sin(t), 100*math.cos(t))
+    if i == 0:
+        p.pendown()
+    if i == 5:
+        p.penup()
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q18" value="0"> ① 10개</label><label class="option"><input type="radio" name="q18" value="1"> ② 5개</label><label class="option"><input type="radio" name="q18" value="2"> ③ 6개</label><label class="option"><input type="radio" name="q18" value="3"> ④ 4개</label><label class="option"><input type="radio" name="q18" value="4"> ⑤ 11개</label><div class="feedback" id="feedback18"></div></section><section class="question" id="q19"><h2>문항 20 · 문항 05 · 펜 내리기 전 초기 이동 (2.7점) (2.7점)</h2><pre>import turtle, math
+p = turtle.Turtle()
+p.penup()
+for i in range(51):
+    t = 2 * math.pi * i / 50
+    p.goto(120*math.sin(4*t), 90*math.sin(3*t))
+    if i == 0:
+        p.pendown()
+    if i == 25:
+        p.penup()
+    if i == 30:
+        p.pendown()
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q19" value="0"> ① 44개</label><label class="option"><input type="radio" name="q19" value="1"> ② 45개</label><label class="option"><input type="radio" name="q19" value="2"> ③ 46개</label><label class="option"><input type="radio" name="q19" value="3"> ④ 50개</label><label class="option"><input type="radio" name="q19" value="4"> ⑤ 49개</label><div class="feedback" id="feedback19"></div></section><h2 class="sector">Sector 05 · 회전 도형 선분 개수 (5문항)</h2><section class="question" id="q20"><h2>문항 21 · 문항 01 2.6점 (2.6점)</h2><pre>import turtle, math
+
+t = turtle.Turtle()
+t.speed(0)
+t.hideturtle()
+
+def rot(x, y, deg):
+    a = math.radians(deg)
+    return (x*math.cos(a)-y*math.sin(a),
+            x*math.sin(a)+y*math.cos(a))
+
+n = 24
+s = 170
+
+for ang in range(0, 360, 18):
+    for i in range(n + 1):
+        a = s*i/n
+        b = s*(n-i)/n
+        p1 = rot(a, 0, ang)
+        p2 = rot(0, b, ang)
+        t.penup()
+        t.goto(p1)
+        t.pendown()
+        t.goto(p2)
+
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q20" value="0"> ① 480개</label><label class="option"><input type="radio" name="q20" value="1"> ② 500개</label><label class="option"><input type="radio" name="q20" value="2"> ③ 499개</label><label class="option"><input type="radio" name="q20" value="3"> ④ 501개</label><label class="option"><input type="radio" name="q20" value="4"> ⑤ 540개</label><div class="feedback" id="feedback20"></div></section><section class="question" id="q21"><h2>문항 22 · 문항 02 2.6점 (2.6점)</h2><pre>import turtle, math
+
+t = turtle.Turtle()
+t.speed(0)
+t.hideturtle()
+
+def rot(x, y, deg):
+    a = math.radians(deg)
+    return (x*math.cos(a)-y*math.sin(a),
+            x*math.sin(a)+y*math.cos(a))
+
+n = 16
+s = 140
+
+for ang in range(0, 360, 24):
+    for i in range(n + 1):
+        a = s*i/n
+        b = s*(n-i)/n
+        p1 = rot(a, 0, ang)
+        p2 = rot(0, b, ang)
+        t.penup()
+        t.goto(p1)
+        t.pendown()
+        t.goto(p2)
+
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q21" value="0"> ① 240개</label><label class="option"><input type="radio" name="q21" value="1"> ② 270개</label><label class="option"><input type="radio" name="q21" value="2"> ③ 254개</label><label class="option"><input type="radio" name="q21" value="3"> ④ 255개</label><label class="option"><input type="radio" name="q21" value="4"> ⑤ 285개</label><div class="feedback" id="feedback21"></div></section><section class="question" id="q22"><h2>문항 23 · 문항 03 2.6점 (2.6점)</h2><pre>import turtle, math
+
+t = turtle.Turtle()
+t.speed(0)
+t.hideturtle()
+
+def rot(x, y, deg):
+    a = math.radians(deg)
+    return (x*math.cos(a)-y*math.sin(a),
+            x*math.sin(a)+y*math.cos(a))
+
+n = 12
+s = 160
+
+for ang in range(0, 360, 30):
+    for i in range(n + 1):
+        a = s*i/n
+        b = s*(n-i)/n
+        p1 = rot(a, 0, ang)
+        p2 = rot(0, b, ang)
+        t.penup()
+        t.goto(p1)
+        t.pendown()
+        t.goto(p2)
+
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q22" value="0"> ① 156개</label><label class="option"><input type="radio" name="q22" value="1"> ② 168개</label><label class="option"><input type="radio" name="q22" value="2"> ③ 155개</label><label class="option"><input type="radio" name="q22" value="3"> ④ 157개</label><label class="option"><input type="radio" name="q22" value="4"> ⑤ 180개</label><div class="feedback" id="feedback22"></div></section><section class="question" id="q23"><h2>문항 24 · 문항 04 2.6점 (2.6점)</h2><pre>import turtle, math
+
+t = turtle.Turtle()
+t.speed(0)
+t.hideturtle()
+
+def rot(x, y, deg):
+    a = math.radians(deg)
+    return (x*math.cos(a)-y*math.sin(a),
+            x*math.sin(a)+y*math.cos(a))
+
+n = 20
+s = 180
+
+for ang in range(0, 360, 15):
+    for i in range(n + 1):
+        a = s*i/n
+        b = s*(n-i)/n
+        p1 = rot(a, 0, ang)
+        p2 = rot(0, b, ang)
+        t.penup()
+        t.goto(p1)
+        t.pendown()
+        t.goto(p2)
+
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q23" value="0"> ① 480개</label><label class="option"><input type="radio" name="q23" value="1"> ② 528개</label><label class="option"><input type="radio" name="q23" value="2"> ③ 503개</label><label class="option"><input type="radio" name="q23" value="3"> ④ 505개</label><label class="option"><input type="radio" name="q23" value="4"> ⑤ 504개</label><div class="feedback" id="feedback23"></div></section><section class="question" id="q24"><h2>문항 25 · 문항 05 2.6점 (2.6점)</h2><pre>import turtle, math
+
+t = turtle.Turtle()
+t.speed(0)
+t.hideturtle()
+
+def rot(x, y, deg):
+    a = math.radians(deg)
+    return (x*math.cos(a)-y*math.sin(a),
+            x*math.sin(a)+y*math.cos(a))
+
+n = 18
+s = 150
+
+for ang in range(0, 360, 20):
+    for i in range(n + 1):
+        a = s*i/n
+        b = s*(n-i)/n
+        p1 = rot(a, 0, ang)
+        p2 = rot(0, b, ang)
+        t.penup()
+        t.goto(p1)
+        t.pendown()
+        t.goto(p2)
+
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q24" value="0"> ① 324개</label><label class="option"><input type="radio" name="q24" value="1"> ② 360개</label><label class="option"><input type="radio" name="q24" value="2"> ③ 342개</label><label class="option"><input type="radio" name="q24" value="3"> ④ 343개</label><label class="option"><input type="radio" name="q24" value="4"> ⑤ 378개</label><div class="feedback" id="feedback24"></div></section><h2 class="sector">Sector 06 · 코흐 곡선 재귀 (5문항)</h2><section class="question" id="q25"><h2>문항 26 · 문항 01 · 기본 코흐 눈송이 (2.5점) (2.5점)</h2><pre>import turtle
+
+t = turtle.Turtle()
+t.speed(0)
+t.pensize(2)
+t.penup()
+t.goto(-200, 100)
+t.pendown()
+
+def koch(n, d):
+    if d == 0:
+        t.forward(n)
+    else:
+        for angle in [60, -120, 60, 0]:
+            koch(n / 3, d - 1)
+            t.left(angle)
+
+for _ in range(3):
+    koch(240, 3)
+    t.right(360 / 3)
+
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q25" value="0"> ① 3 × 3^3 = 81개</label><label class="option"><input type="radio" name="q25" value="1"> ② 4 × 4^3 = 256개</label><label class="option"><input type="radio" name="q25" value="2"> ③ 3 × 4^3 = 192개</label><label class="option"><input type="radio" name="q25" value="3"> ④ 3 × 4^2 = 48개</label><label class="option"><input type="radio" name="q25" value="4"> ⑤ 3 × (3+1) = 12개</label><div class="feedback" id="feedback25"></div></section><section class="question" id="q26"><h2>문항 27 · 문항 02 · 정사각형 코흐 변형 (2.5점) (2.5점)</h2><pre>import turtle
+
+t = turtle.Turtle()
+t.speed(0)
+t.pensize(2)
+t.penup()
+t.goto(-200, 100)
+t.pendown()
+
+def koch(n, d):
+    if d == 0:
+        t.forward(n)
+    else:
+        for angle in [60, -120, 60, 0]:
+            koch(n / 3, d - 1)
+            t.left(angle)
+
+for _ in range(4):
+    koch(180, 2)
+    t.right(360 / 4)
+
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q26" value="0"> ① 4 × 3^2 = 36개</label><label class="option"><input type="radio" name="q26" value="1"> ② 4 × 4^1 = 16개</label><label class="option"><input type="radio" name="q26" value="2"> ③ 4 × (2+1) = 12개</label><label class="option"><input type="radio" name="q26" value="3"> ④ 68 = 68개</label><label class="option"><input type="radio" name="q26" value="4"> ⑤ 4 × 4^2 = 64개</label><div class="feedback" id="feedback26"></div></section><section class="question" id="q27"><h2>문항 28 · 문항 03 · 오각형 코흐 변형 (2.5점) (2.5점)</h2><pre>import turtle
+
+t = turtle.Turtle()
+t.speed(0)
+t.pensize(2)
+t.penup()
+t.goto(-200, 100)
+t.pendown()
+
+def koch(n, d):
+    if d == 0:
+        t.forward(n)
+    else:
+        for angle in [60, -120, 60, 0]:
+            koch(n / 3, d - 1)
+            t.left(angle)
+
+for _ in range(5):
+    koch(200, 3)
+    t.right(360 / 5)
+
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q27" value="0"> ① 5 × 3^3 = 135개</label><label class="option"><input type="radio" name="q27" value="1"> ② 5 × 4^3 = 320개</label><label class="option"><input type="radio" name="q27" value="2"> ③ 4 × 4^3 = 256개</label><label class="option"><input type="radio" name="q27" value="3"> ④ 5 × 4^2 = 80개</label><label class="option"><input type="radio" name="q27" value="4"> ⑤ 5 × (3+1) = 20개</label><div class="feedback" id="feedback27"></div></section><section class="question" id="q28"><h2>문항 29 · 문항 04 · 4단계 코흐 눈송이 (2.5점) (2.5점)</h2><pre>import turtle
+
+t = turtle.Turtle()
+t.speed(0)
+t.pensize(2)
+t.penup()
+t.goto(-200, 100)
+t.pendown()
+
+def koch(n, d):
+    if d == 0:
+        t.forward(n)
+    else:
+        for angle in [60, -120, 60, 0]:
+            koch(n / 3, d - 1)
+            t.left(angle)
+
+for _ in range(3):
+    koch(300, 4)
+    t.right(360 / 3)
+
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q28" value="0"> ① 3 × 3^4 = 243개</label><label class="option"><input type="radio" name="q28" value="1"> ② 4 × 4^4 = 1,024개</label><label class="option"><input type="radio" name="q28" value="2"> ③ 3 × 4^3 = 192개</label><label class="option"><input type="radio" name="q28" value="3"> ④ 3 × 4^4 = 768개</label><label class="option"><input type="radio" name="q28" value="4"> ⑤ 3 × (4+1) = 15개</label><div class="feedback" id="feedback28"></div></section><section class="question" id="q29"><h2>문항 30 · 문항 05 · 육각형 코흐 변형 (2.5점) (2.5점)</h2><pre>import turtle
+
+t = turtle.Turtle()
+t.speed(0)
+t.pensize(2)
+t.penup()
+t.goto(-200, 100)
+t.pendown()
+
+def koch(n, d):
+    if d == 0:
+        t.forward(n)
+    else:
+        for angle in [60, -120, 60, 0]:
+            koch(n / 3, d - 1)
+            t.left(angle)
+
+for _ in range(6):
+    koch(150, 2)
+    t.right(360 / 6)
+
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q29" value="0"> ① 6 × 4^2 = 96개</label><label class="option"><input type="radio" name="q29" value="1"> ② 6 × 3^2 = 54개</label><label class="option"><input type="radio" name="q29" value="2"> ③ 4 × 4^2 = 64개</label><label class="option"><input type="radio" name="q29" value="3"> ④ 6 × 4^1 = 24개</label><label class="option"><input type="radio" name="q29" value="4"> ⑤ 6 × (2+1) = 18개</label><div class="feedback" id="feedback29"></div></section><h2 class="sector">Sector 07 · 중위·후위 순회 (5문항)</h2><section class="question" id="q30"><h2>문항 31 · 문항 01 · 기본 이진트리의 중위·후위 순회 2.4점 (2.4점)</h2><pre>left = {&#x27;A&#x27;: &#x27;B&#x27;, &#x27;B&#x27;: &#x27;D&#x27;, &#x27;C&#x27;: &#x27;F&#x27;}
+right = {&#x27;A&#x27;: &#x27;C&#x27;, &#x27;B&#x27;: &#x27;E&#x27;, &#x27;C&#x27;: &#x27;G&#x27;}
+
+def inorder(node):
+    if node in left:
+        inorder(left[node])
+    print(node, end=&quot; &quot;)
+    if node in right:
+        inorder(right[node])
+
+def postorder(node):
+    if node in left:
+        postorder(left[node])
+    if node in right:
+        postorder(right[node])
+    print(node, end=&quot; &quot;)
+
+print(&quot;중위&quot;, end=&quot; &quot;)
+inorder(&quot;A&quot;)
+print(&quot;후위&quot;, end=&quot; &quot;)
+postorder(&quot;A&quot;)</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q30" value="0"> ① 중위 D E B F G C A / 후위 D B E A F C G</label><label class="option"><input type="radio" name="q30" value="1"> ② 중위 G C F A E B D / 후위 D E B F G C A</label><label class="option"><input type="radio" name="q30" value="2"> ③ 중위 D B E A F C G / 후위 D E B F G C A</label><label class="option"><input type="radio" name="q30" value="3"> ④ 중위 D E B F G C A / 후위 D E B F G C A</label><label class="option"><input type="radio" name="q30" value="4"> ⑤ 중위 D B E A F C G / 후위 A C G F B E D</label><div class="feedback" id="feedback30"></div></section><section class="question" id="q31"><h2>문항 32 · 문항 02 · 왼쪽으로 치우친 트리 2.4점 (2.4점)</h2><pre>left = {&#x27;M&#x27;: &#x27;L&#x27;, &#x27;L&#x27;: &#x27;K&#x27;, &#x27;K&#x27;: &#x27;J&#x27;}
+right = {}
+
+def inorder(node):
+    if node in left:
+        inorder(left[node])
+    print(node, end=&quot; &quot;)
+    if node in right:
+        inorder(right[node])
+
+def postorder(node):
+    if node in left:
+        postorder(left[node])
+    if node in right:
+        postorder(right[node])
+    print(node, end=&quot; &quot;)
+
+print(&quot;중위&quot;, end=&quot; &quot;)
+inorder(&quot;M&quot;)
+print(&quot;후위&quot;, end=&quot; &quot;)
+postorder(&quot;M&quot;)</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q31" value="0"> ① 중위 J K L M / 후위 M L K J</label><label class="option"><input type="radio" name="q31" value="1"> ② 중위 M L K J / 후위 J K L M</label><label class="option"><input type="radio" name="q31" value="2"> ③ 중위 J K L M / 후위 J K L M</label><label class="option"><input type="radio" name="q31" value="3"> ④ 중위 M L K J / 후위 M L K J</label><label class="option"><input type="radio" name="q31" value="4"> ⑤ 중위 J K M L / 후위 J K M L</label><div class="feedback" id="feedback31"></div></section><section class="question" id="q32"><h2>문항 33 · 문항 03 · 오른쪽 가지가 긴 트리 2.4점 (2.4점)</h2><pre>left = {&#x27;P&#x27;: &#x27;Q&#x27;, &#x27;Q&#x27;: &#x27;S&#x27;, &#x27;T&#x27;: &#x27;U&#x27;}
+right = {&#x27;P&#x27;: &#x27;R&#x27;, &#x27;R&#x27;: &#x27;T&#x27;}
+
+def inorder(node):
+    if node in left:
+        inorder(left[node])
+    print(node, end=&quot; &quot;)
+    if node in right:
+        inorder(right[node])
+
+def postorder(node):
+    if node in left:
+        postorder(left[node])
+    if node in right:
+        postorder(right[node])
+    print(node, end=&quot; &quot;)
+
+print(&quot;중위&quot;, end=&quot; &quot;)
+inorder(&quot;P&quot;)
+print(&quot;후위&quot;, end=&quot; &quot;)
+postorder(&quot;P&quot;)</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q32" value="0"> ① 중위 S Q U T R P / 후위 S Q P R U T</label><label class="option"><input type="radio" name="q32" value="1"> ② 중위 S Q P R U T / 후위 S Q U T R P</label><label class="option"><input type="radio" name="q32" value="2"> ③ 중위 S Q U T R P / 후위 S Q U T R P</label><label class="option"><input type="radio" name="q32" value="3"> ④ 중위 T U R P Q S / 후위 S Q U T R P</label><label class="option"><input type="radio" name="q32" value="4"> ⑤ 중위 S Q P R U T / 후위 P R T U Q S</label><div class="feedback" id="feedback32"></div></section><section class="question" id="q33"><h2>문항 34 · 문항 04 · 완전 이진트리의 순회 2.4점 (2.4점)</h2><pre>left = {&#x27;H&#x27;: &#x27;D&#x27;, &#x27;D&#x27;: &#x27;B&#x27;, &#x27;L&#x27;: &#x27;J&#x27;, &#x27;B&#x27;: &#x27;A&#x27;, &#x27;F&#x27;: &#x27;E&#x27;}
+right = {&#x27;H&#x27;: &#x27;L&#x27;, &#x27;D&#x27;: &#x27;F&#x27;, &#x27;L&#x27;: &#x27;N&#x27;, &#x27;B&#x27;: &#x27;C&#x27;, &#x27;F&#x27;: &#x27;G&#x27;}
+
+def inorder(node):
+    if node in left:
+        inorder(left[node])
+    print(node, end=&quot; &quot;)
+    if node in right:
+        inorder(right[node])
+
+def postorder(node):
+    if node in left:
+        postorder(left[node])
+    if node in right:
+        postorder(right[node])
+    print(node, end=&quot; &quot;)
+
+print(&quot;중위&quot;, end=&quot; &quot;)
+inorder(&quot;H&quot;)
+print(&quot;후위&quot;, end=&quot; &quot;)
+postorder(&quot;H&quot;)</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q33" value="0"> ① 중위 A B C D E F G H J L N / 후위 H L N J D F G E B C A</label><label class="option"><input type="radio" name="q33" value="1"> ② 중위 N L J H G F E D C B A / 후위 A C B E G F D J N L H</label><label class="option"><input type="radio" name="q33" value="2"> ③ 중위 A C B E G F D J N L H / 후위 A C B E G F D J N L H</label><label class="option"><input type="radio" name="q33" value="3"> ④ 중위 A B C D E F G H J L N / 후위 A C B E G F D J N L H</label><label class="option"><input type="radio" name="q33" value="4"> ⑤ 중위 A C B E G F D J N L H / 후위 A B C D E F G H J L N</label><div class="feedback" id="feedback33"></div></section><section class="question" id="q34"><h2>문항 35 · 문항 05 · 서로 다른 모양의 서브트리 2.4점 (2.4점)</h2><pre>left = {&#x27;X&#x27;: &#x27;Y&#x27;, &#x27;W&#x27;: &#x27;V&#x27;, &#x27;Z&#x27;: &#x27;T&#x27;}
+right = {&#x27;X&#x27;: &#x27;Z&#x27;, &#x27;Y&#x27;: &#x27;W&#x27;, &#x27;Z&#x27;: &#x27;U&#x27;, &#x27;T&#x27;: &#x27;S&#x27;}
+
+def inorder(node):
+    if node in left:
+        inorder(left[node])
+    print(node, end=&quot; &quot;)
+    if node in right:
+        inorder(right[node])
+
+def postorder(node):
+    if node in left:
+        postorder(left[node])
+    if node in right:
+        postorder(right[node])
+    print(node, end=&quot; &quot;)
+
+print(&quot;중위&quot;, end=&quot; &quot;)
+inorder(&quot;X&quot;)
+print(&quot;후위&quot;, end=&quot; &quot;)
+postorder(&quot;X&quot;)</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q34" value="0"> ① 중위 Y V W X T S Z U / 후위 X Z U T S Y W V</label><label class="option"><input type="radio" name="q34" value="1"> ② 중위 V W Y S T U Z X / 후위 V W Y S T U Z X</label><label class="option"><input type="radio" name="q34" value="2"> ③ 중위 Y V W X T S Z U / 후위 V W Y S T U Z X</label><label class="option"><input type="radio" name="q34" value="3"> ④ 중위 V W Y S T U Z X / 후위 Y V W X T S Z U</label><label class="option"><input type="radio" name="q34" value="4"> ⑤ 중위 U Z S T X W V Y / 후위 V W Y S T U Z X</label><div class="feedback" id="feedback34"></div></section><h2 class="sector">Sector 08 · 전위 순회 (5문항)</h2><section class="question" id="q35"><h2>문항 36 · 문항 01 · 기본 전위 순회 (2.3점) (2.3점)</h2><pre>tree = {
+    &#x27;A&#x27;: [&#x27;C&#x27;, &#x27;B&#x27;],
+    &#x27;B&#x27;: [&#x27;E&#x27;, &#x27;D&#x27;],
+    &#x27;C&#x27;: [&#x27;G&#x27;, &#x27;F&#x27;],
+    &#x27;D&#x27;: [],
+    &#x27;E&#x27;: [],
+    &#x27;F&#x27;: [],
+    &#x27;G&#x27;: [],
+}
+
+def preorder(node):
+    print(node, end=&quot; &quot;)
+    for child in tree[node]:
+        preorder(child)
+
+print(&quot;전위순회:&quot;, end=&quot; &quot;)
+preorder(&#x27;A&#x27;)</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q35" value="0"> ① 전위순회: A B E D C G F</label><label class="option"><input type="radio" name="q35" value="1"> ② 전위순회: A C G F B E D</label><label class="option"><input type="radio" name="q35" value="2"> ③ 전위순회: A C F G B E D</label><label class="option"><input type="radio" name="q35" value="3"> ④ 전위순회: G F C E D B A</label><label class="option"><input type="radio" name="q35" value="4"> ⑤ 전위순회: A C F G B D E</label><div class="feedback" id="feedback35"></div></section><section class="question" id="q36"><h2>문항 37 · 문항 02 · 왼쪽 가지가 긴 트리 (2.3점) (2.3점)</h2><pre>tree = {
+    &#x27;M&#x27;: [&#x27;H&#x27;, &#x27;T&#x27;],
+    &#x27;H&#x27;: [&#x27;D&#x27;, &#x27;J&#x27;],
+    &#x27;D&#x27;: [&#x27;B&#x27;],
+    &#x27;B&#x27;: [],
+    &#x27;J&#x27;: [],
+    &#x27;T&#x27;: [&#x27;Z&#x27;],
+    &#x27;Z&#x27;: [],
+}
+
+def preorder(node):
+    print(node, end=&quot; &quot;)
+    for child in tree[node]:
+        preorder(child)
+
+print(&quot;전위순회:&quot;, end=&quot; &quot;)
+preorder(&#x27;M&#x27;)</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q36" value="0"> ① 전위순회: M H D B J T Z</label><label class="option"><input type="radio" name="q36" value="1"> ② 전위순회: M H B D J T Z</label><label class="option"><input type="radio" name="q36" value="2"> ③ 전위순회: B D H J M T Z</label><label class="option"><input type="radio" name="q36" value="3"> ④ 전위순회: M T Z H D B J</label><label class="option"><input type="radio" name="q36" value="4"> ⑤ 전위순회: M H D J B T Z</label><div class="feedback" id="feedback36"></div></section><section class="question" id="q37"><h2>문항 38 · 문항 03 · 오른쪽 부분트리가 먼저 나열된 트리 (2.3점) (2.3점)</h2><pre>tree = {
+    &#x27;P&#x27;: [&#x27;R&#x27;, &#x27;L&#x27;],
+    &#x27;R&#x27;: [&#x27;S&#x27;, &#x27;Q&#x27;],
+    &#x27;L&#x27;: [&#x27;N&#x27;],
+    &#x27;S&#x27;: [],
+    &#x27;Q&#x27;: [],
+    &#x27;N&#x27;: [],
+}
+
+def preorder(node):
+    print(node, end=&quot; &quot;)
+    for child in tree[node]:
+        preorder(child)
+
+print(&quot;전위순회:&quot;, end=&quot; &quot;)
+preorder(&#x27;P&#x27;)</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q37" value="0"> ① 전위순회: P L N R S Q</label><label class="option"><input type="radio" name="q37" value="1"> ② 전위순회: P R Q S L N</label><label class="option"><input type="radio" name="q37" value="2"> ③ 전위순회: P R S Q L N</label><label class="option"><input type="radio" name="q37" value="3"> ④ 전위순회: S R Q P N L</label><label class="option"><input type="radio" name="q37" value="4"> ⑤ 전위순회: P R S L Q N</label><div class="feedback" id="feedback37"></div></section><section class="question" id="q38"><h2>문항 39 · 문항 04 · 깊이가 다른 부분트리 (2.3점) (2.3점)</h2><pre>tree = {
+    &#x27;K&#x27;: [&#x27;B&#x27;, &#x27;V&#x27;],
+    &#x27;B&#x27;: [&#x27;A&#x27;, &#x27;D&#x27;],
+    &#x27;A&#x27;: [],
+    &#x27;D&#x27;: [&#x27;C&#x27;],
+    &#x27;C&#x27;: [],
+    &#x27;V&#x27;: [&#x27;T&#x27;, &#x27;Z&#x27;],
+    &#x27;T&#x27;: [],
+    &#x27;Z&#x27;: [],
+}
+
+def preorder(node):
+    print(node, end=&quot; &quot;)
+    for child in tree[node]:
+        preorder(child)
+
+print(&quot;전위순회:&quot;, end=&quot; &quot;)
+preorder(&#x27;K&#x27;)</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q38" value="0"> ① 전위순회: K B A D C V T Z</label><label class="option"><input type="radio" name="q38" value="1"> ② 전위순회: K B D C A V T Z</label><label class="option"><input type="radio" name="q38" value="2"> ③ 전위순회: A B C D K T V Z</label><label class="option"><input type="radio" name="q38" value="3"> ④ 전위순회: K V T Z B A D C</label><label class="option"><input type="radio" name="q38" value="4"> ⑤ 전위순회: K B A C D V Z T</label><div class="feedback" id="feedback38"></div></section><section class="question" id="q39"><h2>문항 40 · 문항 05 · 자식이 하나인 노드가 섞인 트리 (2.3점) (2.3점)</h2><pre>tree = {
+    &#x27;X&#x27;: [&#x27;Y&#x27;, &#x27;Z&#x27;],
+    &#x27;Y&#x27;: [&#x27;U&#x27;],
+    &#x27;U&#x27;: [&#x27;W&#x27;],
+    &#x27;W&#x27;: [],
+    &#x27;Z&#x27;: [&#x27;P&#x27;, &#x27;Q&#x27;],
+    &#x27;P&#x27;: [],
+    &#x27;Q&#x27;: [],
+}
+
+def preorder(node):
+    print(node, end=&quot; &quot;)
+    for child in tree[node]:
+        preorder(child)
+
+print(&quot;전위순회:&quot;, end=&quot; &quot;)
+preorder(&#x27;X&#x27;)</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q39" value="0"> ① 전위순회: X Y U W Z P Q</label><label class="option"><input type="radio" name="q39" value="1"> ② 전위순회: X Y W U Z P Q</label><label class="option"><input type="radio" name="q39" value="2"> ③ 전위순회: X Z P Q Y U W</label><label class="option"><input type="radio" name="q39" value="3"> ④ 전위순회: W U Y X P Z Q</label><label class="option"><input type="radio" name="q39" value="4"> ⑤ 전위순회: X Y U W Z Q P</label><div class="feedback" id="feedback39"></div></section><h2 class="sector">Sector 09 · Turtle 재귀 도형 (5문항)</h2><section class="question" id="q40"><h2>문항 41 · 문항 01 (2.1점) (2.1점)</h2><pre>import turtle
+
+t = turtle.Turtle()
+t.speed(5)
+
+def draw_pattern(n):
+    if n == 0:
+        return
+    t.forward(120)
+    t.left(144)
+    draw_pattern(n - 1)
+
+draw_pattern(5)
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q40" value="0"> ① 앞으로 120만큼 이동하고 왼쪽으로 144도 회전하는 동작이 각각 5회 실행된다.</label><label class="option"><input type="radio" name="q40" value="1"> ② 종료 조건 n == 0에서 이동과 회전을 한 번 더 수행한다.</label><label class="option"><input type="radio" name="q40" value="2"> ③ 재귀 호출이 진행될수록 n은 1씩 증가한다.</label><label class="option"><input type="radio" name="q40" value="3"> ④ t.left(144)는 거북이를 오른쪽으로 회전시킨다.</label><label class="option"><input type="radio" name="q40" value="4"> ⑤ draw_pattern(5)을 실행하면 종료 조건 호출을 포함해 함수가 총 5회 호출된다.</label><div class="feedback" id="feedback40"></div></section><section class="question" id="q41"><h2>문항 42 · 문항 02 (2.1점) (2.1점)</h2><pre>import turtle
+
+t = turtle.Turtle()
+t.speed(5)
+
+def draw_pattern(n):
+    if n == 0:
+        return
+    t.forward(90)
+    t.right(60)
+    draw_pattern(n - 1)
+
+draw_pattern(6)
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q41" value="0"> ① 종료 조건 n == 0에서 이동과 회전을 한 번 더 수행한다.</label><label class="option"><input type="radio" name="q41" value="1"> ② 재귀 호출이 진행될수록 n은 1씩 증가한다.</label><label class="option"><input type="radio" name="q41" value="2"> ③ 앞으로 90만큼 이동하고 오른쪽으로 60도 회전하는 동작이 각각 6회 실행된다.</label><label class="option"><input type="radio" name="q41" value="3"> ④ t.right(60)는 거북이를 왼쪽으로 회전시킨다.</label><label class="option"><input type="radio" name="q41" value="4"> ⑤ draw_pattern(6)을 실행하면 종료 조건 호출을 포함해 함수가 총 6회 호출된다.</label><div class="feedback" id="feedback41"></div></section><section class="question" id="q42"><h2>문항 43 · 문항 03 (2.1점) (2.1점)</h2><pre>import turtle
+
+t = turtle.Turtle()
+t.speed(5)
+
+def draw_pattern(n):
+    if n == 0:
+        return
+    t.forward(150)
+    t.left(90)
+    draw_pattern(n - 1)
+
+draw_pattern(4)
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q42" value="0"> ① 종료 조건 n == 0에서 이동과 회전을 한 번 더 수행한다.</label><label class="option"><input type="radio" name="q42" value="1"> ② 재귀 호출이 진행될수록 n은 1씩 증가한다.</label><label class="option"><input type="radio" name="q42" value="2"> ③ t.left(90)는 거북이를 오른쪽으로 회전시킨다.</label><label class="option"><input type="radio" name="q42" value="3"> ④ draw_pattern(4)을 실행하면 종료 조건 호출을 포함해 함수가 총 4회 호출된다.</label><label class="option"><input type="radio" name="q42" value="4"> ⑤ 앞으로 150만큼 이동하고 왼쪽으로 90도 회전하는 동작이 각각 4회 실행된다.</label><div class="feedback" id="feedback42"></div></section><section class="question" id="q43"><h2>문항 44 · 문항 04 (2.1점) (2.1점)</h2><pre>import turtle
+
+t = turtle.Turtle()
+t.speed(5)
+
+def draw_pattern(n):
+    if n == 0:
+        return
+    t.forward(70)
+    t.right(120)
+    draw_pattern(n - 1)
+
+draw_pattern(7)
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q43" value="0"> ① 종료 조건 n == 0에서 이동과 회전을 한 번 더 수행한다.</label><label class="option"><input type="radio" name="q43" value="1"> ② 앞으로 70만큼 이동하고 오른쪽으로 120도 회전하는 동작이 각각 7회 실행된다.</label><label class="option"><input type="radio" name="q43" value="2"> ③ 재귀 호출이 진행될수록 n은 1씩 증가한다.</label><label class="option"><input type="radio" name="q43" value="3"> ④ t.right(120)는 거북이를 왼쪽으로 회전시킨다.</label><label class="option"><input type="radio" name="q43" value="4"> ⑤ draw_pattern(7)을 실행하면 종료 조건 호출을 포함해 함수가 총 7회 호출된다.</label><div class="feedback" id="feedback43"></div></section><section class="question" id="q44"><h2>문항 45 · 문항 05 (2.1점) (2.1점)</h2><pre>import turtle
+
+t = turtle.Turtle()
+t.speed(5)
+
+def draw_pattern(n):
+    if n == 0:
+        return
+    t.forward(55)
+    t.left(135)
+    draw_pattern(n - 1)
+
+draw_pattern(8)
+turtle.done()</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q44" value="0"> ① 종료 조건 n == 0에서 이동과 회전을 한 번 더 수행한다.</label><label class="option"><input type="radio" name="q44" value="1"> ② 재귀 호출이 진행될수록 n은 1씩 증가한다.</label><label class="option"><input type="radio" name="q44" value="2"> ③ t.left(135)는 거북이를 오른쪽으로 회전시킨다.</label><label class="option"><input type="radio" name="q44" value="3"> ④ 앞으로 55만큼 이동하고 왼쪽으로 135도 회전하는 동작이 각각 8회 실행된다.</label><label class="option"><input type="radio" name="q44" value="4"> ⑤ draw_pattern(8)을 실행하면 종료 조건 호출을 포함해 함수가 총 8회 호출된다.</label><div class="feedback" id="feedback44"></div></section><h2 class="sector">Sector 10 · 그래프 차수와 가중치 (5문항)</h2><section class="question" id="q45"><h2>문항 46 · 문항 01 · 기본 무방향 그래프와 가중치 (2.1점) (2.1점)</h2><pre>vertices = list(range(5))
+edges = [(0, 1), (0, 3), (1, 2), (1, 4), (2, 3)]
+degree = [0] * len(vertices)
+for a, b in edges:
+    degree[a] += 1
+    degree[b] += 1
+
+graph = {&#x27;A&#x27;: [(&#x27;B&#x27;, 5), (&#x27;D&#x27;, 3)]}
+result = [str(degree)]
+for target, weight in graph[&#x27;A&#x27;]:
+    result.append(f&quot;A -&gt; {target} 가중치 {weight}&quot;)
+print(&quot; / &quot;.join(result))</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q45" value="0"> ① [2, 3, 2, 2, 1] / A -&gt; B 가중치 5 / A -&gt; D 가중치 3</label><label class="option"><input type="radio" name="q45" value="1"> ② [3, 3, 2, 2, 1] / A -&gt; B 가중치 5 / A -&gt; D 가중치 3</label><label class="option"><input type="radio" name="q45" value="2"> ③ [2, 3, 2, 2, 1] / A -&gt; B 가중치 6 / A -&gt; D 가중치 3</label><label class="option"><input type="radio" name="q45" value="3"> ④ [2, 3, 2, 2, 1] / A -&gt; D 가중치 3 / A -&gt; B 가중치 5</label><label class="option"><input type="radio" name="q45" value="4"> ⑤ [2, 3, 2, 2, 1] / A -&gt; D 가중치 5 / A -&gt; B 가중치 3</label><div class="feedback" id="feedback45"></div></section><section class="question" id="q46"><h2>문항 47 · 문항 02 · 정점 6개의 차수와 간선 표시 (2.1점) (2.1점)</h2><pre>vertices = list(range(6))
+edges = [(0, 2), (0, 4), (1, 2), (1, 3), (2, 5), (3, 4)]
+degree = [0] * len(vertices)
+for a, b in edges:
+    degree[a] += 1
+    degree[b] += 1
+
+graph = {&#x27;A&#x27;: [(&#x27;C&#x27;, 7), (&#x27;E&#x27;, 2)]}
+result = [str(degree)]
+for target, weight in graph[&#x27;A&#x27;]:
+    result.append(f&quot;A -&gt; {target} 가중치 {weight}&quot;)
+print(&quot; / &quot;.join(result))</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q46" value="0"> ① [3, 2, 3, 2, 2, 1] / A -&gt; C 가중치 7 / A -&gt; E 가중치 2</label><label class="option"><input type="radio" name="q46" value="1"> ② [2, 2, 3, 2, 2, 1] / A -&gt; C 가중치 7 / A -&gt; E 가중치 2</label><label class="option"><input type="radio" name="q46" value="2"> ③ [2, 2, 3, 2, 2, 1] / A -&gt; C 가중치 8 / A -&gt; E 가중치 2</label><label class="option"><input type="radio" name="q46" value="3"> ④ [2, 2, 3, 2, 2, 1] / A -&gt; E 가중치 2 / A -&gt; C 가중치 7</label><label class="option"><input type="radio" name="q46" value="4"> ⑤ [2, 2, 3, 2, 2, 1] / A -&gt; E 가중치 7 / A -&gt; C 가중치 2</label><div class="feedback" id="feedback46"></div></section><section class="question" id="q47"><h2>문항 48 · 문항 03 · 연결된 그래프의 차수 계산 (2.1점) (2.1점)</h2><pre>vertices = list(range(4))
+edges = [(0, 1), (0, 2), (0, 3), (1, 2), (2, 3)]
+degree = [0] * len(vertices)
+for a, b in edges:
+    degree[a] += 1
+    degree[b] += 1
+
+graph = {&#x27;B&#x27;: [(&#x27;A&#x27;, 4), (&#x27;D&#x27;, 9)]}
+result = [str(degree)]
+for target, weight in graph[&#x27;B&#x27;]:
+    result.append(f&quot;B -&gt; {target} 가중치 {weight}&quot;)
+print(&quot; / &quot;.join(result))</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q47" value="0"> ① [4, 2, 3, 2] / B -&gt; A 가중치 4 / B -&gt; D 가중치 9</label><label class="option"><input type="radio" name="q47" value="1"> ② [3, 2, 3, 2] / B -&gt; A 가중치 5 / B -&gt; D 가중치 9</label><label class="option"><input type="radio" name="q47" value="2"> ③ [3, 2, 3, 2] / B -&gt; A 가중치 4 / B -&gt; D 가중치 9</label><label class="option"><input type="radio" name="q47" value="3"> ④ [3, 2, 3, 2] / B -&gt; D 가중치 9 / B -&gt; A 가중치 4</label><label class="option"><input type="radio" name="q47" value="4"> ⑤ [3, 2, 3, 2] / B -&gt; D 가중치 4 / B -&gt; A 가중치 9</label><div class="feedback" id="feedback47"></div></section><section class="question" id="q48"><h2>문항 49 · 문항 04 · 가중치 목록 순서 확인 (2.1점) (2.1점)</h2><pre>vertices = list(range(5))
+edges = [(0, 1), (1, 2), (1, 3), (2, 4)]
+degree = [0] * len(vertices)
+for a, b in edges:
+    degree[a] += 1
+    degree[b] += 1
+
+graph = {&#x27;A&#x27;: [(&#x27;D&#x27;, 8), (&#x27;B&#x27;, 6)]}
+result = [str(degree)]
+for target, weight in graph[&#x27;A&#x27;]:
+    result.append(f&quot;A -&gt; {target} 가중치 {weight}&quot;)
+print(&quot; / &quot;.join(result))</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q48" value="0"> ① [2, 3, 2, 1, 1] / A -&gt; D 가중치 8 / A -&gt; B 가중치 6</label><label class="option"><input type="radio" name="q48" value="1"> ② [1, 3, 2, 1, 1] / A -&gt; D 가중치 9 / A -&gt; B 가중치 6</label><label class="option"><input type="radio" name="q48" value="2"> ③ [1, 3, 2, 1, 1] / A -&gt; B 가중치 6 / A -&gt; D 가중치 8</label><label class="option"><input type="radio" name="q48" value="3"> ④ [1, 3, 2, 1, 1] / A -&gt; D 가중치 8 / A -&gt; B 가중치 6</label><label class="option"><input type="radio" name="q48" value="4"> ⑤ [1, 3, 2, 1, 1] / A -&gt; B 가중치 8 / A -&gt; D 가중치 6</label><div class="feedback" id="feedback48"></div></section><section class="question" id="q49"><h2>문항 50 · 문항 05 · 차수와 인접 가중치 종합 (2.1점) (2.1점)</h2><pre>vertices = list(range(6))
+edges = [(0, 1), (0, 5), (1, 2), (1, 3), (2, 4), (3, 4), (4, 5)]
+degree = [0] * len(vertices)
+for a, b in edges:
+    degree[a] += 1
+    degree[b] += 1
+
+graph = {&#x27;A&#x27;: [(&#x27;F&#x27;, 10), (&#x27;C&#x27;, 1)]}
+result = [str(degree)]
+for target, weight in graph[&#x27;A&#x27;]:
+    result.append(f&quot;A -&gt; {target} 가중치 {weight}&quot;)
+print(&quot; / &quot;.join(result))</pre><p><b>위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?</b></p><label class="option"><input type="radio" name="q49" value="0"> ① [3, 3, 2, 2, 3, 2] / A -&gt; F 가중치 10 / A -&gt; C 가중치 1</label><label class="option"><input type="radio" name="q49" value="1"> ② [2, 3, 2, 2, 3, 2] / A -&gt; F 가중치 11 / A -&gt; C 가중치 1</label><label class="option"><input type="radio" name="q49" value="2"> ③ [2, 3, 2, 2, 3, 2] / A -&gt; C 가중치 1 / A -&gt; F 가중치 10</label><label class="option"><input type="radio" name="q49" value="3"> ④ [2, 3, 2, 2, 3, 2] / A -&gt; C 가중치 10 / A -&gt; F 가중치 1</label><label class="option"><input type="radio" name="q49" value="4"> ⑤ [2, 3, 2, 2, 3, 2] / A -&gt; F 가중치 10 / A -&gt; C 가중치 1</label><div class="feedback" id="feedback49"></div></section><div class="toolbar"><button type="button" onclick="grade()">전체 채점 및 해설</button><button type="button" onclick="downloadReport()">TXT 결과 저장</button><button type="button" class="secondary" onclick="resetAll()">다시 풀기</button><div class="score" id="score" aria-live="polite"></div></div><script>const QUESTIONS=[{"sector": 1, "title": "기본 이진 문자열 생성", "code": "def binary(s, n):\n    if len(s) == n:\n        print(s)\n        return\n    binary(s + \"0\", n)\n    binary(s + \"1\", n)\n\nbinary(\"\", 3)", "prompt": "위 프로그램의 실행 과정과 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["길이가 3인 문자열을 출력한 후에도 같은 호출에서 재귀를 계속 진행한다.", "출력되는 문자열은 모두 6개이다.", "가장 먼저 출력되는 문자열은 111이다.", "각 단계에서 현재 문자열에 0 또는 1을 붙여 다음 상태를 만든다.", "binary(s + \"0\", n)은 문자열 s를 직접 수정한다."], "answer": 3, "explanation": "문자열을 새로 만들어 0 분기와 1 분기로 재귀 호출합니다. 길이 3에서 출력하고 return하므로 000부터 111까지 총 8개가 출력됩니다.", "points": 3}, {"sector": 1, "title": "호출 순서 바꾸기", "code": "def binary(s, n):\n    if len(s) == n:\n        print(s)\n        return\n    binary(s + \"1\", n)\n    binary(s + \"0\", n)\n\nbinary(\"\", 2)", "prompt": "위 프로그램의 실행 과정과 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["가장 먼저 출력되는 문자열은 11이다.", "가장 마지막에 출력되는 문자열은 11이다.", "출력되는 문자열은 총 8개이다.", "길이가 2가 되면 다시 두 번 재귀 호출한다.", "binary(s + \"1\", n)은 기존 문자열 s를 직접 변경한다."], "answer": 0, "explanation": "1을 붙이는 분기를 먼저 방문하므로 11, 10, 01, 00 순서로 총 4개가 출력됩니다.", "points": 3}, {"sector": 1, "title": "세 문자로 확장하기", "code": "def make(s, n):\n    if len(s) == n:\n        print(s)\n        return\n    for ch in \"ABC\":\n        make(s + ch, n)\n\nmake(\"\", 2)", "prompt": "위 프로그램의 실행 과정과 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["출력되는 문자열은 총 6개이다.", "처음 출력되는 문자열은 BA이다.", "for문은 각 단계에서 A, B, C를 차례대로 추가한다.", "마지막 출력 문자열은 AB이다.", "길이 2에 도달해도 for문을 실행한다."], "answer": 2, "explanation": "각 위치마다 A, B, C 세 가지 선택지가 있어 3²=9개를 출력합니다. 처음 AA, 마지막 CC입니다.", "points": 3}, {"sector": 1, "title": "1의 개수 세기", "code": "def binary(s, n):\n    if len(s) == n:\n        if s.count(\"1\") == 2:\n            print(s)\n        return\n    binary(s + \"0\", n)\n    binary(s + \"1\", n)\n\nbinary(\"\", 3)", "prompt": "위 프로그램의 실행 과정과 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["출력되는 문자열은 001, 010, 100이다.", "길이가 3이고 1이 정확히 두 개인 문자열만 출력한다.", "출력되는 문자열은 총 8개이다.", "s.count(\"1\")은 문자열 길이를 반환한다.", "처음 출력되는 문자열은 111이다."], "answer": 1, "explanation": "길이 3인 이진 문자열 중 1이 정확히 2개인 011, 101, 110만 출력합니다.", "points": 3}, {"sector": 1, "title": "중복 없는 이진 문자열", "code": "def make(s, n):\n    if len(s) == n:\n        print(s)\n        return\n    for ch in \"01\":\n        if ch not in s:\n            make(s + ch, n)\n\nmake(\"\", 2)", "prompt": "위 프로그램의 실행 과정과 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["00과 11도 출력된다.", "출력되는 문자열은 총 4개이다.", "ch not in s는 이미 사용한 문자를 다시 고르기 위한 조건이다.", "문자열 길이가 2가 되면 무조건 빈 문자열을 출력한다.", "출력 결과는 01과 10, 총 두 줄이다."], "answer": 4, "explanation": "이미 포함된 문자를 다시 선택하지 않으므로 길이 2의 결과는 01과 10입니다.", "points": 3}, {"sector": 2, "title": "문항 01 · 계산기 입력 및 초기화 (2.9점)", "code": "import tkinter as tk\nroot = tk.Tk()\nexp = \"\"\ndisplay = tk.StringVar(value=\"0\")\ndef click(x):\n    global exp\n    if x in (\"AC\", \"C\"):\n        exp = \"\"\n    elif x == \"=\":\n        try:\n            exp = str(eval(exp))\n        except:\n            exp = \"Error\"\n    else:\n        if exp == \"Error\":\n            exp = \"\"\n        exp += x\n    display.set(exp or \"0\")", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["AC를 누르면 exp가 빈 문자열로 초기화되고 표시창에는 0이 나타난다.", "AC를 누르면 exp에 문자열 \"0\"이 저장된다.", "=를 누르면 모든 경우에 계산이 성공한다.", "Error 상태에서 숫자를 누르면 Error 뒤에 숫자가 붙는다.", "display.set()은 버튼의 배경색을 바꾼다."], "answer": 0, "explanation": "정답 근거: AC는 exp를 비우고 exp or \"0\"에 의해 0을 표시합니다. / 보기별 설명: 1번 AC는 exp를 비우고 exp or \"0\"에 의해 0을 표시합니다.; 2번 exp에는 빈 문자열이 저장됩니다.; 3번 잘못된 식은 예외 처리되어 Error가 됩니다.; 4번 Error 상태는 먼저 빈 문자열로 초기화됩니다.; 5번 StringVar의 표시 값을 바꿉니다.", "points": 2.9}, {"sector": 2, "title": "문항 02 · 버튼의 명령 연결 (2.9점)", "code": "import tkinter as tk\nroot = tk.Tk()\npressed = []\ndef click(x):\n    pressed.append(x)\nkeys = [\"1\", \"2\", \"3\", \"+\"]\nfor i, x in enumerate(keys):\n    tk.Button(root, text=x,\n              command=lambda x=x: click(x)).grid(\n              row=i//2, column=i%2)\nroot.mainloop()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["lambda x=x는 각 버튼이 생성될 때의 x 값을 기본 인수에 저장한다.", "i//2는 버튼의 열 번호를 결정한다.", "i%2는 버튼의 행 번호를 결정한다.", "버튼을 생성하면 click 함수가 즉시 실행된다.", "pressed는 버튼을 누르기 전부터 모든 keys를 담는다."], "answer": 0, "explanation": "정답 근거: 반복 시점의 x를 기본 인수에 고정합니다. / 보기별 설명: 1번 반복 시점의 x를 기본 인수에 고정합니다.; 2번 행 번호를 결정합니다.; 3번 열 번호를 결정합니다.; 4번 버튼을 누를 때 실행됩니다.; 5번 초기에는 빈 리스트입니다.", "points": 2.9}, {"sector": 2, "title": "문항 03 · 표시창 갱신 (2.9점)", "code": "import tkinter as tk\nroot = tk.Tk()\nexp = \"\"\ndisplay = tk.StringVar(value=\"0\")\ndef click(x):\n    global exp\n    exp += x\n    display.set(exp or \"0\")\ntk.Entry(root, textvariable=display).pack()\nclick(\"7\")\nclick(\"+\")\nclick(\"3\")", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["세 번의 click 호출 후 display의 값은 \"7+3\"이다.", "display는 정수형 변수이므로 +를 저장하지 못한다.", "click(\"+\")가 실행되면 덧셈이 즉시 계산된다.", "global exp는 지역변수 exp를 새로 만든다.", "Entry의 textvariable은 버튼 위치를 정한다."], "answer": 0, "explanation": "정답 근거: 문자열을 순서대로 연결하므로 7+3입니다. / 보기별 설명: 1번 문자열을 순서대로 연결하므로 7+3입니다.; 2번 StringVar이므로 문자열을 저장합니다.; 3번 이 코드는 문자열을 이어 붙일 뿐입니다.; 4번 전역 exp에 대입하기 위해 선언합니다.; 5번 표시 내용과 StringVar를 연결합니다.", "points": 2.9}, {"sector": 2, "title": "문항 04 · 예외 처리와 계산 (2.9점)", "code": "exp = \"8/0\"\ntry:\n    exp = str(eval(exp))\nexcept:\n    exp = \"Error\"\nprint(exp)\nexp = \"6*2\"\ntry:\n    exp = str(eval(exp))\nexcept:\n    exp = \"Error\"\nprint(exp)", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["프로그램은 첫 줄에 Error, 둘째 줄에 12를 출력한다.", "첫 번째 eval은 문자열 \"0\"을 반환한다.", "except는 오류가 없는 경우에만 실행된다.", "두 번째 계산 결과는 정수 12로 exp에 저장된다.", "첫 번째 오류가 발생하면 두 번째 try문은 실행되지 않는다."], "answer": 0, "explanation": "정답 근거: 0으로 나누기는 예외이고 6*2는 12입니다. / 보기별 설명: 1번 0으로 나누기는 예외이고 6*2는 12입니다.; 2번 ZeroDivisionError가 발생합니다.; 3번 try 블록에서 예외가 발생할 때 실행됩니다.; 4번 str(eval(...))로 문자열 \"12\"가 저장됩니다.; 5번 예외가 처리되므로 다음 코드도 실행됩니다.", "points": 2.9}, {"sector": 2, "title": "문항 05 · 계산기 배치 (2.9점)", "code": "import tkinter as tk\nroot = tk.Tk()\nkeys = [\"7\", \"8\", \"9\", \"+\", \"4\", \"5\", \"6\", \"-\"]\nframe = tk.Frame(root)\nframe.pack()\nfor i, x in enumerate(keys):\n    tk.Button(frame, text=x).grid(\n        row=i//4, column=i%4)\nroot.mainloop()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["버튼 \"5\"는 row=1, column=1 위치에 배치된다.", "버튼 \"7\"은 row=1, column=0에 배치된다.", "버튼 \"+\"는 row=0, column=0에 배치된다.", "i%4는 버튼의 행 번호를 계산한다.", "frame.pack()은 모든 버튼의 grid 배치를 금지한다."], "answer": 0, "explanation": "정답 근거: 5의 인덱스는 5이므로 5//4=1, 5%4=1입니다. / 보기별 설명: 1번 5의 인덱스는 5이므로 5//4=1, 5%4=1입니다.; 2번 7의 인덱스는 0이므로 row=0입니다.; 3번 +의 인덱스는 3이므로 column=3입니다.; 4번 열 번호를 계산합니다.; 5번 부모 root에는 pack, 자식 frame 내부에는 grid를 사용할 수 있습니다.", "points": 2.9}, {"sector": 3, "title": "문항 01 · 입력값 읽기와 계산 (2.8점)", "code": "import tkinter as tk\nroot = tk.Tk()\nentry = tk.Entry(root)\nentry.pack()\nresult = tk.Label(root, text=\"대기\")\nresult.pack()\ndef calculate():\n    expression = entry.get()\n    answer = eval(expression)\n    result.config(text=\"결과: \" + str(answer))\ntk.Button(root, text=\"계산\", command=calculate).pack()\nroot.mainloop()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["entry.get()은 입력창의 문자열을 읽어 온다.", "entry.get()은 입력창의 수식을 자동으로 계산한 정수를 반환한다.", "eval(expression)은 입력창에 적힌 내용을 모두 삭제한다.", "result.config(text=...)는 새로운 Entry 위젯을 생성한다.", "command=calculate는 프로그램 시작 즉시 calculate()를 실행한다."], "answer": 0, "explanation": "정답: ① ① 정답. get()은 Entry의 현재 입력 문자열을 반환합니다. ② get()은 계산을 수행하지 않으며 문자열을 반환합니다. ③ eval()은 표현식을 평가하며 삭제 기능이 아닙니다. ④ config()는 기존 Label의 옵션을 수정합니다. ⑤ 괄호 없는 함수 참조를 command에 넘기면 클릭 시 호출됩니다.", "points": 2.8}, {"sector": 3, "title": "문항 02 · 초기화 버튼 (2.8점)", "code": "import tkinter as tk\nroot = tk.Tk()\nentry = tk.Entry(root)\nentry.pack()\nresult = tk.Label(root, text=\"준비\")\nresult.pack()\ndef reset():\n    entry.delete(0, tk.END)\n    result.config(text=\"초기화 완료\")\ntk.Button(root, text=\"초기화\", command=reset).pack()\nroot.mainloop()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["entry.delete(0, tk.END)는 입력창을 읽기 전용으로 만든다.", "reset()은 입력창의 내용을 지우고 결과 라벨의 문구를 바꾼다.", "result.config(text=...)는 root 창의 제목을 변경한다.", "command=reset은 버튼 클릭과 무관하게 매초 reset()을 실행한다.", "entry.delete(0, tk.END)는 프로그램을 종료한다."], "answer": 1, "explanation": "정답: ② ① delete(0, END)는 입력창 내용을 삭제합니다. ② 정답. Entry의 내용 삭제와 Label 문구 변경이 순서대로 수행됩니다. ③ Label의 text를 바꾸며 창 제목은 title()로 설정합니다. ④ command는 클릭 이벤트에 함수 참조를 연결합니다. ⑤ delete()는 Entry 내용을 지울 뿐 프로그램을 종료하지 않습니다.", "points": 2.8}, {"sector": 3, "title": "문항 03 · 버튼과 함수 연결 (2.8점)", "code": "import tkinter as tk\nroot = tk.Tk()\nentry = tk.Entry(root)\nentry.pack()\nresult = tk.Label(root, text=\"\")\nresult.pack()\ndef double():\n    value = int(entry.get())\n    result.config(text=str(value * 2))\ntk.Button(root, text=\"두 배\", command=double).pack()\nroot.mainloop()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["command=double()로 바꾸어도 버튼을 누를 때까지 함수가 실행되지 않는다.", "int(entry.get())은 입력창의 글자를 항상 실수형으로 변환한다.", "버튼을 클릭하면 double()이 호출되어 입력한 정수의 두 배를 라벨에 표시한다.", "pack()은 Entry에 입력된 숫자를 자동으로 정렬한다.", "root.mainloop()는 버튼을 한 번 누를 때마다 새 창을 만든다."], "answer": 2, "explanation": "정답: ③ ① command=double()은 버튼 생성 시 함수 호출을 시도합니다. ② int()는 정수형으로 변환합니다. ③ 정답. 버튼 클릭 후 문자열을 정수로 바꾸고 2배를 표시합니다. ④ pack()은 위젯을 배치하는 지오메트리 관리자입니다. ⑤ mainloop()는 GUI 이벤트 루프를 실행합니다.", "points": 2.8}, {"sector": 3, "title": "문항 04 · 예외 처리 (2.8점)", "code": "import tkinter as tk\nroot = tk.Tk()\nentry = tk.Entry(root)\nentry.pack()\nresult = tk.Label(root, text=\"\")\nresult.pack()\ndef calculate():\n    try:\n        answer = eval(entry.get())\n        result.config(text=str(answer))\n    except Exception:\n        result.config(text=\"오류\")\ntk.Button(root, text=\"계산\", command=calculate).pack()\nroot.mainloop()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["잘못된 수식은 언제나 0으로 계산된다.", "except Exception은 계산이 성공한 경우에만 실행된다.", "entry.get()은 라벨에 표시된 글자를 읽는다.", "계산 중 예외가 발생하면 결과 라벨에 \"오류\"를 표시한다.", "eval()은 임의의 입력에 대해 항상 안전하므로 제한 없이 사용해도 된다."], "answer": 3, "explanation": "정답: ④ ① 예외가 발생하면 0이 아닌 오류 문구를 표시합니다. ② except는 try 블록에서 예외가 발생했을 때 실행됩니다. ③ Entry의 get()은 입력창 내용을 읽습니다. ④ 정답. 예외가 발생하면 except 블록에서 라벨의 text를 오류로 변경합니다. ⑤ eval()은 신뢰할 수 없는 입력에 사용하면 위험합니다.", "points": 2.8}, {"sector": 3, "title": "문항 05 · 라벨과 창 제목 (2.8점)", "code": "import tkinter as tk\nroot = tk.Tk()\nroot.title(\"사칙연산\")\nentry = tk.Entry(root)\nentry.pack()\nresult = tk.Label(root, text=\"결과 없음\")\nresult.pack()\ndef show():\n    result.config(text=entry.get())\ntk.Button(root, text=\"표시\", command=show).pack()\nroot.mainloop()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["root.title(\"사칙연산\")은 Entry의 기본 입력값을 지정한다.", "entry.pack()은 입력창의 문자열을 지운다.", "result.config(text=entry.get())는 입력창을 삭제한다.", "root.mainloop()는 결과 라벨을 문자열로 반환한다.", "표시 버튼을 누르면 입력창의 문자열을 결과 라벨에 그대로 보여 준다."], "answer": 4, "explanation": "정답: ⑤ ① title()은 창 제목을 지정합니다. ② pack()은 위젯 배치 기능입니다. ③ config()는 기존 라벨의 표시 문구를 변경합니다. ④ mainloop()는 이벤트 루프를 실행하며 라벨 문자열을 반환하지 않습니다. ⑤ 정답. show()는 입력 문자열을 읽어 결과 Label에 표시합니다.", "points": 2.8}, {"sector": 4, "title": "문항 01 · 리사주 곡선의 기본 프레임 (2.7점)", "code": "import turtle, math\ns = turtle.Screen()\ns.tracer(0)\np = turtle.Turtle()\np.hideturtle()\nphase = 0\nwhile True:\n    p.clear()\n    p.penup()\n    for i in range(601):\n        t = 2 * math.pi * i / 500\n        p.goto(270*math.sin(3*t+phase),\n               190*math.sin(2*t))\n        if i == 0:\n            p.pendown()\n    phase += 0.03\n    s.update()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["600개", "601개", "602개", "599개", "0개"], "answer": 0, "explanation": "정답: ① 600개 range(601)은 601번 이동하지만 첫 번째 goto는 penup 상태에서 실행됩니다. i=0 이후 pendown()이므로 나머지 600번 이동에서 선분이 그려집니다.", "points": 2.7}, {"sector": 4, "title": "문항 02 · 반복 횟수 변경 (2.7점)", "code": "import turtle, math\ns = turtle.Screen()\ns.tracer(0)\np = turtle.Turtle()\np.penup()\nwhile True:\n    p.clear()\n    p.penup()\n    for i in range(401):\n        t = 2 * math.pi * i / 400\n        p.goto(200*math.sin(2*t), 150*math.cos(3*t))\n        if i == 0:\n            p.pendown()\n    s.update()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["401개", "399개", "400개", "402개", "200개"], "answer": 2, "explanation": "정답: ③ 400개 401개의 좌표 중 첫 좌표는 펜을 든 상태로 이동합니다. 이후 400개의 이동에서 400개의 선분을 그립니다.", "points": 2.7}, {"sector": 4, "title": "문항 03 · 펜을 내리는 시점 (2.7점)", "code": "import turtle, math\np = turtle.Turtle()\np.penup()\nfor i in range(101):\n    t = 2 * math.pi * i / 100\n    p.goto(100*math.sin(3*t), 80*math.sin(2*t))\n    if i == 2:\n        p.pendown()\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["100개", "99개", "98개", "101개", "97개"], "answer": 2, "explanation": "정답: ③ 98개 i=0,1,2에서 goto를 실행할 때 펜은 올라가 있습니다. i=2 이동 후 펜을 내리므로 i=3~100의 98번 이동이 선분을 만듭니다.", "points": 2.7}, {"sector": 4, "title": "문항 04 · 반복 도중 펜 올리기 (2.7점)", "code": "import turtle, math\np = turtle.Turtle()\np.penup()\nfor i in range(11):\n    t = 2 * math.pi * i / 10\n    p.goto(100*math.sin(t), 100*math.cos(t))\n    if i == 0:\n        p.pendown()\n    if i == 5:\n        p.penup()\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["10개", "5개", "6개", "4개", "11개"], "answer": 1, "explanation": "정답: ② 5개 i=0 이동 후 펜을 내려 i=1~5의 다섯 이동에서만 선을 그립니다. i=5 이동 후 펜을 올려 이후 이동은 그리지 않습니다.", "points": 2.7}, {"sector": 4, "title": "문항 05 · 펜 내리기 전 초기 이동 (2.7점)", "code": "import turtle, math\np = turtle.Turtle()\np.penup()\nfor i in range(51):\n    t = 2 * math.pi * i / 50\n    p.goto(120*math.sin(4*t), 90*math.sin(3*t))\n    if i == 0:\n        p.pendown()\n    if i == 25:\n        p.penup()\n    if i == 30:\n        p.pendown()\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["44개", "45개", "46개", "50개", "49개"], "answer": 1, "explanation": "정답: ② 45개 i=1~25에서 25개, i=31~50에서 20개의 선분을 그립니다. i=26~30의 5번 이동은 펜을 든 상태입니다. 합계 45개입니다.", "points": 2.7}, {"sector": 5, "title": "문항 01 2.6점", "code": "import turtle, math\n\nt = turtle.Turtle()\nt.speed(0)\nt.hideturtle()\n\ndef rot(x, y, deg):\n    a = math.radians(deg)\n    return (x*math.cos(a)-y*math.sin(a),\n            x*math.sin(a)+y*math.cos(a))\n\nn = 24\ns = 170\n\nfor ang in range(0, 360, 18):\n    for i in range(n + 1):\n        a = s*i/n\n        b = s*(n-i)/n\n        p1 = rot(a, 0, ang)\n        p2 = rot(0, b, ang)\n        t.penup()\n        t.goto(p1)\n        t.pendown()\n        t.goto(p2)\n\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["480개", "500개", "499개", "501개", "540개"], "answer": 1, "explanation": "정답: ② 500개 range(0, 360, 18)은 20회 반복하고, range(n + 1)은 25회 반복합니다. 내부 반복마다 penup()으로 시작점까지 선 없이 이동하고 pendown() 이후 goto(p2)에서 선분 1개를 그리므로 20 × 25 = 500개입니다.", "points": 2.6}, {"sector": 5, "title": "문항 02 2.6점", "code": "import turtle, math\n\nt = turtle.Turtle()\nt.speed(0)\nt.hideturtle()\n\ndef rot(x, y, deg):\n    a = math.radians(deg)\n    return (x*math.cos(a)-y*math.sin(a),\n            x*math.sin(a)+y*math.cos(a))\n\nn = 16\ns = 140\n\nfor ang in range(0, 360, 24):\n    for i in range(n + 1):\n        a = s*i/n\n        b = s*(n-i)/n\n        p1 = rot(a, 0, ang)\n        p2 = rot(0, b, ang)\n        t.penup()\n        t.goto(p1)\n        t.pendown()\n        t.goto(p2)\n\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["240개", "270개", "254개", "255개", "285개"], "answer": 3, "explanation": "정답: ④ 255개 range(0, 360, 24)은 15회 반복하고, range(n + 1)은 17회 반복합니다. 내부 반복마다 penup()으로 시작점까지 선 없이 이동하고 pendown() 이후 goto(p2)에서 선분 1개를 그리므로 15 × 17 = 255개입니다.", "points": 2.6}, {"sector": 5, "title": "문항 03 2.6점", "code": "import turtle, math\n\nt = turtle.Turtle()\nt.speed(0)\nt.hideturtle()\n\ndef rot(x, y, deg):\n    a = math.radians(deg)\n    return (x*math.cos(a)-y*math.sin(a),\n            x*math.sin(a)+y*math.cos(a))\n\nn = 12\ns = 160\n\nfor ang in range(0, 360, 30):\n    for i in range(n + 1):\n        a = s*i/n\n        b = s*(n-i)/n\n        p1 = rot(a, 0, ang)\n        p2 = rot(0, b, ang)\n        t.penup()\n        t.goto(p1)\n        t.pendown()\n        t.goto(p2)\n\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["156개", "168개", "155개", "157개", "180개"], "answer": 0, "explanation": "정답: ① 156개 range(0, 360, 30)은 12회 반복하고, range(n + 1)은 13회 반복합니다. 내부 반복마다 penup()으로 시작점까지 선 없이 이동하고 pendown() 이후 goto(p2)에서 선분 1개를 그리므로 12 × 13 = 156개입니다.", "points": 2.6}, {"sector": 5, "title": "문항 04 2.6점", "code": "import turtle, math\n\nt = turtle.Turtle()\nt.speed(0)\nt.hideturtle()\n\ndef rot(x, y, deg):\n    a = math.radians(deg)\n    return (x*math.cos(a)-y*math.sin(a),\n            x*math.sin(a)+y*math.cos(a))\n\nn = 20\ns = 180\n\nfor ang in range(0, 360, 15):\n    for i in range(n + 1):\n        a = s*i/n\n        b = s*(n-i)/n\n        p1 = rot(a, 0, ang)\n        p2 = rot(0, b, ang)\n        t.penup()\n        t.goto(p1)\n        t.pendown()\n        t.goto(p2)\n\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["480개", "528개", "503개", "505개", "504개"], "answer": 4, "explanation": "정답: ⑤ 504개 range(0, 360, 15)은 24회 반복하고, range(n + 1)은 21회 반복합니다. 내부 반복마다 penup()으로 시작점까지 선 없이 이동하고 pendown() 이후 goto(p2)에서 선분 1개를 그리므로 24 × 21 = 504개입니다.", "points": 2.6}, {"sector": 5, "title": "문항 05 2.6점", "code": "import turtle, math\n\nt = turtle.Turtle()\nt.speed(0)\nt.hideturtle()\n\ndef rot(x, y, deg):\n    a = math.radians(deg)\n    return (x*math.cos(a)-y*math.sin(a),\n            x*math.sin(a)+y*math.cos(a))\n\nn = 18\ns = 150\n\nfor ang in range(0, 360, 20):\n    for i in range(n + 1):\n        a = s*i/n\n        b = s*(n-i)/n\n        p1 = rot(a, 0, ang)\n        p2 = rot(0, b, ang)\n        t.penup()\n        t.goto(p1)\n        t.pendown()\n        t.goto(p2)\n\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["324개", "360개", "342개", "343개", "378개"], "answer": 2, "explanation": "정답: ③ 342개 range(0, 360, 20)은 18회 반복하고, range(n + 1)은 19회 반복합니다. 내부 반복마다 penup()으로 시작점까지 선 없이 이동하고 pendown() 이후 goto(p2)에서 선분 1개를 그리므로 18 × 19 = 342개입니다.", "points": 2.6}, {"sector": 6, "title": "문항 01 · 기본 코흐 눈송이 (2.5점)", "code": "import turtle\n\nt = turtle.Turtle()\nt.speed(0)\nt.pensize(2)\nt.penup()\nt.goto(-200, 100)\nt.pendown()\n\ndef koch(n, d):\n    if d == 0:\n        t.forward(n)\n    else:\n        for angle in [60, -120, 60, 0]:\n            koch(n / 3, d - 1)\n            t.left(angle)\n\nfor _ in range(3):\n    koch(240, 3)\n    t.right(360 / 3)\n\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["3 × 3^3 = 81개", "4 × 4^3 = 256개", "3 × 4^3 = 192개", "3 × 4^2 = 48개", "3 × (3+1) = 12개"], "answer": 2, "explanation": "정답: ③ — 3 × 4 3 = 192개. 기본 단계(d=0)는 선분 1개를 그립니다. 재귀 단계마다 koch(n/3, d-1) 를 4번 호출하므로 한 변의 선분 수는 4 3 개입니다. 바깥 반복문은 3번 실행되어 전체 선분 수는 192개입니다. t.left(angle) , t.right(...) 는 방향만 바꾸고 선분을 추가하지 않습니다.", "points": 2.5}, {"sector": 6, "title": "문항 02 · 정사각형 코흐 변형 (2.5점)", "code": "import turtle\n\nt = turtle.Turtle()\nt.speed(0)\nt.pensize(2)\nt.penup()\nt.goto(-200, 100)\nt.pendown()\n\ndef koch(n, d):\n    if d == 0:\n        t.forward(n)\n    else:\n        for angle in [60, -120, 60, 0]:\n            koch(n / 3, d - 1)\n            t.left(angle)\n\nfor _ in range(4):\n    koch(180, 2)\n    t.right(360 / 4)\n\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["4 × 3^2 = 36개", "4 × 4^1 = 16개", "4 × (2+1) = 12개", "68 = 68개", "4 × 4^2 = 64개"], "answer": 4, "explanation": "정답: ⑤ — 4 × 4 2 = 64개. 기본 단계(d=0)는 선분 1개를 그립니다. 재귀 단계마다 koch(n/3, d-1) 를 4번 호출하므로 한 변의 선분 수는 4 2 개입니다. 바깥 반복문은 4번 실행되어 전체 선분 수는 64개입니다. t.left(angle) , t.right(...) 는 방향만 바꾸고 선분을 추가하지 않습니다.", "points": 2.5}, {"sector": 6, "title": "문항 03 · 오각형 코흐 변형 (2.5점)", "code": "import turtle\n\nt = turtle.Turtle()\nt.speed(0)\nt.pensize(2)\nt.penup()\nt.goto(-200, 100)\nt.pendown()\n\ndef koch(n, d):\n    if d == 0:\n        t.forward(n)\n    else:\n        for angle in [60, -120, 60, 0]:\n            koch(n / 3, d - 1)\n            t.left(angle)\n\nfor _ in range(5):\n    koch(200, 3)\n    t.right(360 / 5)\n\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["5 × 3^3 = 135개", "5 × 4^3 = 320개", "4 × 4^3 = 256개", "5 × 4^2 = 80개", "5 × (3+1) = 20개"], "answer": 1, "explanation": "정답: ② — 5 × 4 3 = 320개. 기본 단계(d=0)는 선분 1개를 그립니다. 재귀 단계마다 koch(n/3, d-1) 를 4번 호출하므로 한 변의 선분 수는 4 3 개입니다. 바깥 반복문은 5번 실행되어 전체 선분 수는 320개입니다. t.left(angle) , t.right(...) 는 방향만 바꾸고 선분을 추가하지 않습니다.", "points": 2.5}, {"sector": 6, "title": "문항 04 · 4단계 코흐 눈송이 (2.5점)", "code": "import turtle\n\nt = turtle.Turtle()\nt.speed(0)\nt.pensize(2)\nt.penup()\nt.goto(-200, 100)\nt.pendown()\n\ndef koch(n, d):\n    if d == 0:\n        t.forward(n)\n    else:\n        for angle in [60, -120, 60, 0]:\n            koch(n / 3, d - 1)\n            t.left(angle)\n\nfor _ in range(3):\n    koch(300, 4)\n    t.right(360 / 3)\n\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["3 × 3^4 = 243개", "4 × 4^4 = 1,024개", "3 × 4^3 = 192개", "3 × 4^4 = 768개", "3 × (4+1) = 15개"], "answer": 3, "explanation": "정답: ④ — 3 × 4 4 = 768개. 기본 단계(d=0)는 선분 1개를 그립니다. 재귀 단계마다 koch(n/3, d-1) 를 4번 호출하므로 한 변의 선분 수는 4 4 개입니다. 바깥 반복문은 3번 실행되어 전체 선분 수는 768개입니다. t.left(angle) , t.right(...) 는 방향만 바꾸고 선분을 추가하지 않습니다.", "points": 2.5}, {"sector": 6, "title": "문항 05 · 육각형 코흐 변형 (2.5점)", "code": "import turtle\n\nt = turtle.Turtle()\nt.speed(0)\nt.pensize(2)\nt.penup()\nt.goto(-200, 100)\nt.pendown()\n\ndef koch(n, d):\n    if d == 0:\n        t.forward(n)\n    else:\n        for angle in [60, -120, 60, 0]:\n            koch(n / 3, d - 1)\n            t.left(angle)\n\nfor _ in range(6):\n    koch(150, 2)\n    t.right(360 / 6)\n\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["6 × 4^2 = 96개", "6 × 3^2 = 54개", "4 × 4^2 = 64개", "6 × 4^1 = 24개", "6 × (2+1) = 18개"], "answer": 0, "explanation": "정답: ① — 6 × 4 2 = 96개. 기본 단계(d=0)는 선분 1개를 그립니다. 재귀 단계마다 koch(n/3, d-1) 를 4번 호출하므로 한 변의 선분 수는 4 2 개입니다. 바깥 반복문은 6번 실행되어 전체 선분 수는 96개입니다. t.left(angle) , t.right(...) 는 방향만 바꾸고 선분을 추가하지 않습니다.", "points": 2.5}, {"sector": 7, "title": "문항 01 · 기본 이진트리의 중위·후위 순회 2.4점", "code": "left = {'A': 'B', 'B': 'D', 'C': 'F'}\nright = {'A': 'C', 'B': 'E', 'C': 'G'}\n\ndef inorder(node):\n    if node in left:\n        inorder(left[node])\n    print(node, end=\" \")\n    if node in right:\n        inorder(right[node])\n\ndef postorder(node):\n    if node in left:\n        postorder(left[node])\n    if node in right:\n        postorder(right[node])\n    print(node, end=\" \")\n\nprint(\"중위\", end=\" \")\ninorder(\"A\")\nprint(\"후위\", end=\" \")\npostorder(\"A\")", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["중위 D E B F G C A / 후위 D B E A F C G", "중위 G C F A E B D / 후위 D E B F G C A", "중위 D B E A F C G / 후위 D E B F G C A", "중위 D E B F G C A / 후위 D E B F G C A", "중위 D B E A F C G / 후위 A C G F B E D"], "answer": 2, "explanation": "정답: ③ 중위 순회는 왼쪽 → 현재 노드 → 오른쪽 순서로 방문하므로 D B E A F C G입니다. 후위 순회는 왼쪽 → 오른쪽 → 현재 노드 순서이므로 D E B F G C A입니다.", "points": 2.4}, {"sector": 7, "title": "문항 02 · 왼쪽으로 치우친 트리 2.4점", "code": "left = {'M': 'L', 'L': 'K', 'K': 'J'}\nright = {}\n\ndef inorder(node):\n    if node in left:\n        inorder(left[node])\n    print(node, end=\" \")\n    if node in right:\n        inorder(right[node])\n\ndef postorder(node):\n    if node in left:\n        postorder(left[node])\n    if node in right:\n        postorder(right[node])\n    print(node, end=\" \")\n\nprint(\"중위\", end=\" \")\ninorder(\"M\")\nprint(\"후위\", end=\" \")\npostorder(\"M\")", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["중위 J K L M / 후위 M L K J", "중위 M L K J / 후위 J K L M", "중위 J K L M / 후위 J K L M", "중위 M L K J / 후위 M L K J", "중위 J K M L / 후위 J K M L"], "answer": 2, "explanation": "정답: ③ 중위 순회는 왼쪽 → 현재 노드 → 오른쪽 순서로 방문하므로 J K L M입니다. 후위 순회는 왼쪽 → 오른쪽 → 현재 노드 순서이므로 J K L M입니다.", "points": 2.4}, {"sector": 7, "title": "문항 03 · 오른쪽 가지가 긴 트리 2.4점", "code": "left = {'P': 'Q', 'Q': 'S', 'T': 'U'}\nright = {'P': 'R', 'R': 'T'}\n\ndef inorder(node):\n    if node in left:\n        inorder(left[node])\n    print(node, end=\" \")\n    if node in right:\n        inorder(right[node])\n\ndef postorder(node):\n    if node in left:\n        postorder(left[node])\n    if node in right:\n        postorder(right[node])\n    print(node, end=\" \")\n\nprint(\"중위\", end=\" \")\ninorder(\"P\")\nprint(\"후위\", end=\" \")\npostorder(\"P\")", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["중위 S Q U T R P / 후위 S Q P R U T", "중위 S Q P R U T / 후위 S Q U T R P", "중위 S Q U T R P / 후위 S Q U T R P", "중위 T U R P Q S / 후위 S Q U T R P", "중위 S Q P R U T / 후위 P R T U Q S"], "answer": 1, "explanation": "정답: ② 중위 순회는 왼쪽 → 현재 노드 → 오른쪽 순서로 방문하므로 S Q P R U T입니다. 후위 순회는 왼쪽 → 오른쪽 → 현재 노드 순서이므로 S Q U T R P입니다.", "points": 2.4}, {"sector": 7, "title": "문항 04 · 완전 이진트리의 순회 2.4점", "code": "left = {'H': 'D', 'D': 'B', 'L': 'J', 'B': 'A', 'F': 'E'}\nright = {'H': 'L', 'D': 'F', 'L': 'N', 'B': 'C', 'F': 'G'}\n\ndef inorder(node):\n    if node in left:\n        inorder(left[node])\n    print(node, end=\" \")\n    if node in right:\n        inorder(right[node])\n\ndef postorder(node):\n    if node in left:\n        postorder(left[node])\n    if node in right:\n        postorder(right[node])\n    print(node, end=\" \")\n\nprint(\"중위\", end=\" \")\ninorder(\"H\")\nprint(\"후위\", end=\" \")\npostorder(\"H\")", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["중위 A B C D E F G H J L N / 후위 H L N J D F G E B C A", "중위 N L J H G F E D C B A / 후위 A C B E G F D J N L H", "중위 A C B E G F D J N L H / 후위 A C B E G F D J N L H", "중위 A B C D E F G H J L N / 후위 A C B E G F D J N L H", "중위 A C B E G F D J N L H / 후위 A B C D E F G H J L N"], "answer": 3, "explanation": "정답: ④ 중위 순회는 왼쪽 → 현재 노드 → 오른쪽 순서로 방문하므로 A B C D E F G H J L N입니다. 후위 순회는 왼쪽 → 오른쪽 → 현재 노드 순서이므로 A C B E G F D J N L H입니다.", "points": 2.4}, {"sector": 7, "title": "문항 05 · 서로 다른 모양의 서브트리 2.4점", "code": "left = {'X': 'Y', 'W': 'V', 'Z': 'T'}\nright = {'X': 'Z', 'Y': 'W', 'Z': 'U', 'T': 'S'}\n\ndef inorder(node):\n    if node in left:\n        inorder(left[node])\n    print(node, end=\" \")\n    if node in right:\n        inorder(right[node])\n\ndef postorder(node):\n    if node in left:\n        postorder(left[node])\n    if node in right:\n        postorder(right[node])\n    print(node, end=\" \")\n\nprint(\"중위\", end=\" \")\ninorder(\"X\")\nprint(\"후위\", end=\" \")\npostorder(\"X\")", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["중위 Y V W X T S Z U / 후위 X Z U T S Y W V", "중위 V W Y S T U Z X / 후위 V W Y S T U Z X", "중위 Y V W X T S Z U / 후위 V W Y S T U Z X", "중위 V W Y S T U Z X / 후위 Y V W X T S Z U", "중위 U Z S T X W V Y / 후위 V W Y S T U Z X"], "answer": 2, "explanation": "정답: ③ 중위 순회는 왼쪽 → 현재 노드 → 오른쪽 순서로 방문하므로 Y V W X T S Z U입니다. 후위 순회는 왼쪽 → 오른쪽 → 현재 노드 순서이므로 V W Y S T U Z X입니다.", "points": 2.4}, {"sector": 8, "title": "문항 01 · 기본 전위 순회 (2.3점)", "code": "tree = {\n    'A': ['C', 'B'],\n    'B': ['E', 'D'],\n    'C': ['G', 'F'],\n    'D': [],\n    'E': [],\n    'F': [],\n    'G': [],\n}\n\ndef preorder(node):\n    print(node, end=\" \")\n    for child in tree[node]:\n        preorder(child)\n\nprint(\"전위순회:\", end=\" \")\npreorder('A')", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["전위순회: A B E D C G F", "전위순회: A C G F B E D", "전위순회: A C F G B E D", "전위순회: G F C E D B A", "전위순회: A C F G B D E"], "answer": 1, "explanation": "정답: ② 전위 순회는 현재 노드 → 자식 리스트에 적힌 순서대로 각 자식의 부분트리를 재귀 방문합니다. 따라서 방문 순서는 A C G F B E D입니다. 보기별 해설 ① A B E D C G F — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ② A C G F B E D — 정확한 전위 순회 순서입니다. ③ A C F G B E D — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ④ G F C E D B A — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ⑤ A C F G B D E — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다.", "points": 2.3}, {"sector": 8, "title": "문항 02 · 왼쪽 가지가 긴 트리 (2.3점)", "code": "tree = {\n    'M': ['H', 'T'],\n    'H': ['D', 'J'],\n    'D': ['B'],\n    'B': [],\n    'J': [],\n    'T': ['Z'],\n    'Z': [],\n}\n\ndef preorder(node):\n    print(node, end=\" \")\n    for child in tree[node]:\n        preorder(child)\n\nprint(\"전위순회:\", end=\" \")\npreorder('M')", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["전위순회: M H D B J T Z", "전위순회: M H B D J T Z", "전위순회: B D H J M T Z", "전위순회: M T Z H D B J", "전위순회: M H D J B T Z"], "answer": 0, "explanation": "정답: ① 전위 순회는 현재 노드 → 자식 리스트에 적힌 순서대로 각 자식의 부분트리를 재귀 방문합니다. 따라서 방문 순서는 M H D B J T Z입니다. 보기별 해설 ① M H D B J T Z — 정확한 전위 순회 순서입니다. ② M H B D J T Z — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ③ B D H J M T Z — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ④ M T Z H D B J — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ⑤ M H D J B T Z — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다.", "points": 2.3}, {"sector": 8, "title": "문항 03 · 오른쪽 부분트리가 먼저 나열된 트리 (2.3점)", "code": "tree = {\n    'P': ['R', 'L'],\n    'R': ['S', 'Q'],\n    'L': ['N'],\n    'S': [],\n    'Q': [],\n    'N': [],\n}\n\ndef preorder(node):\n    print(node, end=\" \")\n    for child in tree[node]:\n        preorder(child)\n\nprint(\"전위순회:\", end=\" \")\npreorder('P')", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["전위순회: P L N R S Q", "전위순회: P R Q S L N", "전위순회: P R S Q L N", "전위순회: S R Q P N L", "전위순회: P R S L Q N"], "answer": 2, "explanation": "정답: ③ 전위 순회는 현재 노드 → 자식 리스트에 적힌 순서대로 각 자식의 부분트리를 재귀 방문합니다. 따라서 방문 순서는 P R S Q L N입니다. 보기별 해설 ① P L N R S Q — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ② P R Q S L N — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ③ P R S Q L N — 정확한 전위 순회 순서입니다. ④ S R Q P N L — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ⑤ P R S L Q N — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다.", "points": 2.3}, {"sector": 8, "title": "문항 04 · 깊이가 다른 부분트리 (2.3점)", "code": "tree = {\n    'K': ['B', 'V'],\n    'B': ['A', 'D'],\n    'A': [],\n    'D': ['C'],\n    'C': [],\n    'V': ['T', 'Z'],\n    'T': [],\n    'Z': [],\n}\n\ndef preorder(node):\n    print(node, end=\" \")\n    for child in tree[node]:\n        preorder(child)\n\nprint(\"전위순회:\", end=\" \")\npreorder('K')", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["전위순회: K B A D C V T Z", "전위순회: K B D C A V T Z", "전위순회: A B C D K T V Z", "전위순회: K V T Z B A D C", "전위순회: K B A C D V Z T"], "answer": 0, "explanation": "정답: ① 전위 순회는 현재 노드 → 자식 리스트에 적힌 순서대로 각 자식의 부분트리를 재귀 방문합니다. 따라서 방문 순서는 K B A D C V T Z입니다. 보기별 해설 ① K B A D C V T Z — 정확한 전위 순회 순서입니다. ② K B D C A V T Z — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ③ A B C D K T V Z — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ④ K V T Z B A D C — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ⑤ K B A C D V Z T — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다.", "points": 2.3}, {"sector": 8, "title": "문항 05 · 자식이 하나인 노드가 섞인 트리 (2.3점)", "code": "tree = {\n    'X': ['Y', 'Z'],\n    'Y': ['U'],\n    'U': ['W'],\n    'W': [],\n    'Z': ['P', 'Q'],\n    'P': [],\n    'Q': [],\n}\n\ndef preorder(node):\n    print(node, end=\" \")\n    for child in tree[node]:\n        preorder(child)\n\nprint(\"전위순회:\", end=\" \")\npreorder('X')", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["전위순회: X Y U W Z P Q", "전위순회: X Y W U Z P Q", "전위순회: X Z P Q Y U W", "전위순회: W U Y X P Z Q", "전위순회: X Y U W Z Q P"], "answer": 0, "explanation": "정답: ① 전위 순회는 현재 노드 → 자식 리스트에 적힌 순서대로 각 자식의 부분트리를 재귀 방문합니다. 따라서 방문 순서는 X Y U W Z P Q입니다. 보기별 해설 ① X Y U W Z P Q — 정확한 전위 순회 순서입니다. ② X Y W U Z P Q — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ③ X Z P Q Y U W — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ④ W U Y X P Z Q — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다. ⑤ X Y U W Z Q P — 노드 방문 순서가 실제 전위 순회 결과와 다릅니다.", "points": 2.3}, {"sector": 9, "title": "문항 01 (2.1점)", "code": "import turtle\n\nt = turtle.Turtle()\nt.speed(5)\n\ndef draw_pattern(n):\n    if n == 0:\n        return\n    t.forward(120)\n    t.left(144)\n    draw_pattern(n - 1)\n\ndraw_pattern(5)\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["앞으로 120만큼 이동하고 왼쪽으로 144도 회전하는 동작이 각각 5회 실행된다.", "종료 조건 n == 0에서 이동과 회전을 한 번 더 수행한다.", "재귀 호출이 진행될수록 n은 1씩 증가한다.", "t.left(144)는 거북이를 오른쪽으로 회전시킨다.", "draw_pattern(5)을 실행하면 종료 조건 호출을 포함해 함수가 총 5회 호출된다."], "answer": 0, "explanation": "함수는 n=5부터 n=0까지 호출되므로 전체 호출 횟수는 6회입니다. n=0에서는 즉시 반환하고, 실제 forward(120) 및 left(144) 실행 횟수는 각각 5회입니다. left는 왼쪽 회전입니다.", "points": 2.1}, {"sector": 9, "title": "문항 02 (2.1점)", "code": "import turtle\n\nt = turtle.Turtle()\nt.speed(5)\n\ndef draw_pattern(n):\n    if n == 0:\n        return\n    t.forward(90)\n    t.right(60)\n    draw_pattern(n - 1)\n\ndraw_pattern(6)\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["종료 조건 n == 0에서 이동과 회전을 한 번 더 수행한다.", "재귀 호출이 진행될수록 n은 1씩 증가한다.", "앞으로 90만큼 이동하고 오른쪽으로 60도 회전하는 동작이 각각 6회 실행된다.", "t.right(60)는 거북이를 왼쪽으로 회전시킨다.", "draw_pattern(6)을 실행하면 종료 조건 호출을 포함해 함수가 총 6회 호출된다."], "answer": 2, "explanation": "함수는 n=6부터 n=0까지 호출되므로 전체 호출 횟수는 7회입니다. n=0에서는 즉시 반환하고, 실제 forward(90) 및 right(60) 실행 횟수는 각각 6회입니다. right는 오른쪽 회전입니다.", "points": 2.1}, {"sector": 9, "title": "문항 03 (2.1점)", "code": "import turtle\n\nt = turtle.Turtle()\nt.speed(5)\n\ndef draw_pattern(n):\n    if n == 0:\n        return\n    t.forward(150)\n    t.left(90)\n    draw_pattern(n - 1)\n\ndraw_pattern(4)\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["종료 조건 n == 0에서 이동과 회전을 한 번 더 수행한다.", "재귀 호출이 진행될수록 n은 1씩 증가한다.", "t.left(90)는 거북이를 오른쪽으로 회전시킨다.", "draw_pattern(4)을 실행하면 종료 조건 호출을 포함해 함수가 총 4회 호출된다.", "앞으로 150만큼 이동하고 왼쪽으로 90도 회전하는 동작이 각각 4회 실행된다."], "answer": 4, "explanation": "함수는 n=4부터 n=0까지 호출되므로 전체 호출 횟수는 5회입니다. n=0에서는 즉시 반환하고, 실제 forward(150) 및 left(90) 실행 횟수는 각각 4회입니다. left는 왼쪽 회전입니다.", "points": 2.1}, {"sector": 9, "title": "문항 04 (2.1점)", "code": "import turtle\n\nt = turtle.Turtle()\nt.speed(5)\n\ndef draw_pattern(n):\n    if n == 0:\n        return\n    t.forward(70)\n    t.right(120)\n    draw_pattern(n - 1)\n\ndraw_pattern(7)\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["종료 조건 n == 0에서 이동과 회전을 한 번 더 수행한다.", "앞으로 70만큼 이동하고 오른쪽으로 120도 회전하는 동작이 각각 7회 실행된다.", "재귀 호출이 진행될수록 n은 1씩 증가한다.", "t.right(120)는 거북이를 왼쪽으로 회전시킨다.", "draw_pattern(7)을 실행하면 종료 조건 호출을 포함해 함수가 총 7회 호출된다."], "answer": 1, "explanation": "함수는 n=7부터 n=0까지 호출되므로 전체 호출 횟수는 8회입니다. n=0에서는 즉시 반환하고, 실제 forward(70) 및 right(120) 실행 횟수는 각각 7회입니다. right는 오른쪽 회전입니다.", "points": 2.1}, {"sector": 9, "title": "문항 05 (2.1점)", "code": "import turtle\n\nt = turtle.Turtle()\nt.speed(5)\n\ndef draw_pattern(n):\n    if n == 0:\n        return\n    t.forward(55)\n    t.left(135)\n    draw_pattern(n - 1)\n\ndraw_pattern(8)\nturtle.done()", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["종료 조건 n == 0에서 이동과 회전을 한 번 더 수행한다.", "재귀 호출이 진행될수록 n은 1씩 증가한다.", "t.left(135)는 거북이를 오른쪽으로 회전시킨다.", "앞으로 55만큼 이동하고 왼쪽으로 135도 회전하는 동작이 각각 8회 실행된다.", "draw_pattern(8)을 실행하면 종료 조건 호출을 포함해 함수가 총 8회 호출된다."], "answer": 3, "explanation": "함수는 n=8부터 n=0까지 호출되므로 전체 호출 횟수는 9회입니다. n=0에서는 즉시 반환하고, 실제 forward(55) 및 left(135) 실행 횟수는 각각 8회입니다. left는 왼쪽 회전입니다.", "points": 2.1}, {"sector": 10, "title": "문항 01 · 기본 무방향 그래프와 가중치 (2.1점)", "code": "vertices = list(range(5))\nedges = [(0, 1), (0, 3), (1, 2), (1, 4), (2, 3)]\ndegree = [0] * len(vertices)\nfor a, b in edges:\n    degree[a] += 1\n    degree[b] += 1\n\ngraph = {'A': [('B', 5), ('D', 3)]}\nresult = [str(degree)]\nfor target, weight in graph['A']:\n    result.append(f\"A -> {target} 가중치 {weight}\")\nprint(\" / \".join(result))", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["[2, 3, 2, 2, 1] / A -> B 가중치 5 / A -> D 가중치 3", "[3, 3, 2, 2, 1] / A -> B 가중치 5 / A -> D 가중치 3", "[2, 3, 2, 2, 1] / A -> B 가중치 6 / A -> D 가중치 3", "[2, 3, 2, 2, 1] / A -> D 가중치 3 / A -> B 가중치 5", "[2, 3, 2, 2, 1] / A -> D 가중치 5 / A -> B 가중치 3"], "answer": 0, "explanation": "정답: ① 무방향 간선 5개는 양 끝 정점의 차수를 각각 1씩 증가시킵니다. 따라서 차수 리스트는 [2, 3, 2, 2, 1]입니다. graph['A']의 항목은 입력된 순서대로 출력되며, 올바른 전체 출력은 [2, 3, 2, 2, 1] / A -> B 가중치 5 / A -> D 가중치 3입니다.", "points": 2.1}, {"sector": 10, "title": "문항 02 · 정점 6개의 차수와 간선 표시 (2.1점)", "code": "vertices = list(range(6))\nedges = [(0, 2), (0, 4), (1, 2), (1, 3), (2, 5), (3, 4)]\ndegree = [0] * len(vertices)\nfor a, b in edges:\n    degree[a] += 1\n    degree[b] += 1\n\ngraph = {'A': [('C', 7), ('E', 2)]}\nresult = [str(degree)]\nfor target, weight in graph['A']:\n    result.append(f\"A -> {target} 가중치 {weight}\")\nprint(\" / \".join(result))", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["[3, 2, 3, 2, 2, 1] / A -> C 가중치 7 / A -> E 가중치 2", "[2, 2, 3, 2, 2, 1] / A -> C 가중치 7 / A -> E 가중치 2", "[2, 2, 3, 2, 2, 1] / A -> C 가중치 8 / A -> E 가중치 2", "[2, 2, 3, 2, 2, 1] / A -> E 가중치 2 / A -> C 가중치 7", "[2, 2, 3, 2, 2, 1] / A -> E 가중치 7 / A -> C 가중치 2"], "answer": 1, "explanation": "정답: ② 무방향 간선 6개는 양 끝 정점의 차수를 각각 1씩 증가시킵니다. 따라서 차수 리스트는 [2, 2, 3, 2, 2, 1]입니다. graph['A']의 항목은 입력된 순서대로 출력되며, 올바른 전체 출력은 [2, 2, 3, 2, 2, 1] / A -> C 가중치 7 / A -> E 가중치 2입니다.", "points": 2.1}, {"sector": 10, "title": "문항 03 · 연결된 그래프의 차수 계산 (2.1점)", "code": "vertices = list(range(4))\nedges = [(0, 1), (0, 2), (0, 3), (1, 2), (2, 3)]\ndegree = [0] * len(vertices)\nfor a, b in edges:\n    degree[a] += 1\n    degree[b] += 1\n\ngraph = {'B': [('A', 4), ('D', 9)]}\nresult = [str(degree)]\nfor target, weight in graph['B']:\n    result.append(f\"B -> {target} 가중치 {weight}\")\nprint(\" / \".join(result))", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["[4, 2, 3, 2] / B -> A 가중치 4 / B -> D 가중치 9", "[3, 2, 3, 2] / B -> A 가중치 5 / B -> D 가중치 9", "[3, 2, 3, 2] / B -> A 가중치 4 / B -> D 가중치 9", "[3, 2, 3, 2] / B -> D 가중치 9 / B -> A 가중치 4", "[3, 2, 3, 2] / B -> D 가중치 4 / B -> A 가중치 9"], "answer": 2, "explanation": "정답: ③ 무방향 간선 5개는 양 끝 정점의 차수를 각각 1씩 증가시킵니다. 따라서 차수 리스트는 [3, 2, 3, 2]입니다. graph['B']의 항목은 입력된 순서대로 출력되며, 올바른 전체 출력은 [3, 2, 3, 2] / B -> A 가중치 4 / B -> D 가중치 9입니다.", "points": 2.1}, {"sector": 10, "title": "문항 04 · 가중치 목록 순서 확인 (2.1점)", "code": "vertices = list(range(5))\nedges = [(0, 1), (1, 2), (1, 3), (2, 4)]\ndegree = [0] * len(vertices)\nfor a, b in edges:\n    degree[a] += 1\n    degree[b] += 1\n\ngraph = {'A': [('D', 8), ('B', 6)]}\nresult = [str(degree)]\nfor target, weight in graph['A']:\n    result.append(f\"A -> {target} 가중치 {weight}\")\nprint(\" / \".join(result))", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["[2, 3, 2, 1, 1] / A -> D 가중치 8 / A -> B 가중치 6", "[1, 3, 2, 1, 1] / A -> D 가중치 9 / A -> B 가중치 6", "[1, 3, 2, 1, 1] / A -> B 가중치 6 / A -> D 가중치 8", "[1, 3, 2, 1, 1] / A -> D 가중치 8 / A -> B 가중치 6", "[1, 3, 2, 1, 1] / A -> B 가중치 8 / A -> D 가중치 6"], "answer": 3, "explanation": "정답: ④ 무방향 간선 4개는 양 끝 정점의 차수를 각각 1씩 증가시킵니다. 따라서 차수 리스트는 [1, 3, 2, 1, 1]입니다. graph['A']의 항목은 입력된 순서대로 출력되며, 올바른 전체 출력은 [1, 3, 2, 1, 1] / A -> D 가중치 8 / A -> B 가중치 6입니다.", "points": 2.1}, {"sector": 10, "title": "문항 05 · 차수와 인접 가중치 종합 (2.1점)", "code": "vertices = list(range(6))\nedges = [(0, 1), (0, 5), (1, 2), (1, 3), (2, 4), (3, 4), (4, 5)]\ndegree = [0] * len(vertices)\nfor a, b in edges:\n    degree[a] += 1\n    degree[b] += 1\n\ngraph = {'A': [('F', 10), ('C', 1)]}\nresult = [str(degree)]\nfor target, weight in graph['A']:\n    result.append(f\"A -> {target} 가중치 {weight}\")\nprint(\" / \".join(result))", "prompt": "위 프로그램의 실행 결과 또는 코드의 역할에 대한 설명으로 옳은 것은?", "options": ["[3, 3, 2, 2, 3, 2] / A -> F 가중치 10 / A -> C 가중치 1", "[2, 3, 2, 2, 3, 2] / A -> F 가중치 11 / A -> C 가중치 1", "[2, 3, 2, 2, 3, 2] / A -> C 가중치 1 / A -> F 가중치 10", "[2, 3, 2, 2, 3, 2] / A -> C 가중치 10 / A -> F 가중치 1", "[2, 3, 2, 2, 3, 2] / A -> F 가중치 10 / A -> C 가중치 1"], "answer": 4, "explanation": "정답: ⑤ 무방향 간선 7개는 양 끝 정점의 차수를 각각 1씩 증가시킵니다. 따라서 차수 리스트는 [2, 3, 2, 2, 3, 2]입니다. graph['A']의 항목은 입력된 순서대로 출력되며, 올바른 전체 출력은 [2, 3, 2, 2, 3, 2] / A -> F 가중치 10 / A -> C 가중치 1입니다.", "points": 2.1}];
+const MAX=QUESTIONS.reduce((s,q)=>s+q.points,0);
+let result=null;
+function getAnswers(){return QUESTIONS.map((q,i)=>{const e=document.querySelector('input[name="q'+i+'"]:checked');return e?Number(e.value):null;});}
+function grade(){const answers=getAnswers();let total=0;const rows=QUESTIONS.map((q,i)=>{const a=answers[i],correct=a===q.answer,earned=correct?q.points:0;total+=earned;const fb=document.getElementById('feedback'+i);fb.style.display='block';fb.textContent='';const head=document.createElement('strong');head.className=correct?'ok':'no';head.textContent=(correct?'정답':'오답 또는 미응답')+' · 내 답: '+(a===null?'미응답':'①②③④⑤'[a])+' · 정답: '+'①②③④⑤'[q.answer]+' · '+earned+' / '+q.points+'점';fb.appendChild(head);const p=document.createElement('p');p.textContent='상세 풀이: '+q.explanation;fb.appendChild(p);return {answer:a,correct,earned};});const converted=total/MAX*100;result={answers,rows,total,converted,time:new Date()};document.getElementById('score').textContent='원점수 '+total.toFixed(1)+' / '+MAX.toFixed(1)+'점 · 100점 환산 '+converted.toFixed(2)+'점';return result;}
+function safeName(x){return x.trim().replace(/[\\/:*?"<>|\x00-\x1f]/g,'_').replace(/\s+/g,'_').slice(0,60);}
+function downloadReport(){const id=document.getElementById('studentId').value.trim(),name=document.getElementById('studentName').value.trim();if(!id||!name){alert('학번과 이름을 모두 입력해 주세요.');return;}const r=grade();const stamp=d=>{const pad=n=>String(n).padStart(2,'0');return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'_'+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds());};const lines=['정보과학3 · 50문항 통합평가 결과','학번: '+id,'이름: '+name,'응시시각: '+r.time.toLocaleString('ko-KR'),'원점수: '+r.total.toFixed(1)+' / '+MAX.toFixed(1),'100점 환산: '+r.converted.toFixed(2),''];QUESTIONS.forEach((q,i)=>{const a=r.rows[i].answer;lines.push('='.repeat(62),'Sector '+String(q.sector).padStart(2,'0')+' / 문항 '+String(i+1).padStart(2,'0')+' / '+q.title,'배점: '+q.points+'점 / 획득: '+r.rows[i].earned+'점','판정: '+(r.rows[i].correct?'정답':'오답 또는 미응답'),'선택 답안: '+(a===null?'미응답':'①②③④⑤'[a]+' '+q.options[a]),'정답: '+'①②③④⑤'[q.answer]+' '+q.options[q.answer],'[문제 코드]',q.code||'(코드 없음)','[보기]',...q.options.map((o,k)=>'①②③④⑤'[k]+' '+o),'[상세 풀이]',q.explanation,'');});const blob=new Blob(['\ufeff'+lines.join('\n')],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=safeName(id)+'_'+safeName(name)+'_'+r.converted.toFixed(2)+'_정보과학3_'+stamp(r.time)+'.txt';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);}
+function resetAll(){document.querySelectorAll('input[type=radio]').forEach(e=>e.checked=false);document.querySelectorAll('.feedback').forEach(e=>{e.style.display='none';e.textContent='';});document.getElementById('score').textContent='';result=null;window.scrollTo(0,0);}
+</script></main></body></html>
