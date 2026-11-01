@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>star01 · 파이썬 10개 섹터 50문항 통합 학습</title><style>*{box-sizing:border-box}body{margin:0;background:#eef3fa;color:#172942;font-family:'Malgun Gothic',Arial,sans-serif}header{background:linear-gradient(110deg,#123867,#2269ad);color:white;padding:32px max(18px,calc((100vw - 1160px)/2))}h1{margin:0 0 10px;font-size:30px}header p{margin:0;line-height:1.7}main{max-width:1200px;margin:auto;padding:22px 16px}.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px;margin-bottom:20px}.tab{border:1px solid #ccdbed;border-radius:10px;background:white;color:#163f73;padding:13px 10px;font-weight:bold;text-align:left;cursor:pointer}.tab.active{background:#1556a1;color:white;border-color:#1556a1}.sector{background:white;border:1px solid #d9e4f1;border-radius:15px;overflow:hidden;box-shadow:0 3px 18px #173d6812}.sectitle{padding:18px 22px;border-bottom:1px solid #e0e8f2;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.sectitle h2{margin:0;font-size:20px}.sectitle span{color:#53677e;font-size:13px}iframe{width:100%;height:76vh;min-height:660px;border:0;background:white}footer{font-size:13px;color:#51657e;margin:16px 0 30px}@media(max-width:600px){h1{font-size:24px}.tabs{grid-template-columns:repeat(2,1fr)}.tab{font-size:12px;padding:10px 8px}}</style><style>.identity{margin-top:20px;padding:16px;background:#ffffff16;border:1px solid #ffffff40;border-radius:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.identity label{font-weight:700}.identity input{margin-left:7px;padding:10px;border-radius:7px;border:1px solid #cad8e9;max-width:160px}.identity button{padding:12px 18px;border:0;border-radius:8px;background:#ffdf79;color:#19324d;font-weight:800;cursor:pointer}.identity p{flex-basis:100%;margin:0;font-size:13px}</style></head><body><header><h1>파이썬 코드 분석 · 50문항 통합 학습</h1><p>10개 Sector × 각 5문항 · 빈칸 메우기와 전체 출력 결과 작성<br/>상단에서 섹터를 선택하세요. 각 섹터의 기존 채점 및 해설 기능을 유지했습니다.</p><div class="identity"><label>학번 <input autocomplete="off" id="studentId" placeholder=""/></label><label>이름 <input autocomplete="off" id="studentName" placeholder=""/></label><button id="exportBtn" type="button">전체 채점 · TXT 결과 다운로드</button><p aria-live="polite" id="exportStatus">전체 50문항을 채점하고 문항별 정오답·정답·상세해설을 TXT로 저장합니다.</p></div></header><main><nav aria-label="섹터 선택" class="tabs"><button class="tab" id="tab1" onclick="show(1)">01 · 그래프·DFS·BFS</button><button class="tab" id="tab2" onclick="show(2)">02 · 완전탐색과 가지치기</button><button class="tab" id="tab3" onclick="show(3)">03 · 재귀 프랙털</button><button class="tab" id="tab4" onclick="show(4)">04 · 후위 표기식 출력</button><button class="tab" id="tab5" onclick="show(5)">05 · 분할 정복 출력</button><button class="tab" id="tab6" onclick="show(6)">06 · 재귀 문자열 출력</button><button class="tab" id="tab7" onclick="show(7)">07 · 재귀 호출과 복귀</button><button class="tab" id="tab8" onclick="show(8)">08 · 재귀 별 패턴</button><button class="tab" id="tab9" onclick="show(9)">09 · 병합 알고리즘</button><button class="tab" id="tab10" onclick="show(10)">10 · 거북이 별 그리기</button></nav><section class="sector" hidden="" id="sector1"><div class="sectitle"><h2>Sector 01 · 그래프·DFS·BFS</h2><span>원본 5문항</span></div><iframe loading="eager" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ko&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;01 · 그래프 코드 빈칸 메우기 5문항&lt;/title&gt;&lt;style&gt;body{font-family:'Malgun Gothic',Arial,sans-serif;background:#f3f6fb;color:#18263c;margin:0}main{max-width:1000px;margin:auto;padding:28px 16px}h1{color:#153d73}.intro,.problem{background:white;border:1px solid #dbe4f0;border-radius:16px;padding:22px;margin:18px 0;box-shadow:0 3px 12px #1c39630a}pre{background:#102039;color:#eaf2ff;padding:20px;border-radius:12px;overflow:auto;font:15px/1.85 Consolas,monospace;white-space:pre}input{font:14px Consolas,monospace;padding:9px;border:1px solid #9eafc7;border-radius:7px;width:min(94%,480px)}.blank{display:grid;grid-template-columns:70px 1fr;gap:10px;align-items:center;margin:9px 0}button{border:0;border-radius:8px;background:#1557a5;color:white;padding:11px 16px;cursor:pointer;margin:5px 6px 5px 0;font-weight:bold}.secondary{background:#53677f}.result{margin-top:12px;line-height:1.8}.correct{color:#087343}.wrong{color:#b72d36}details{background:#edf4ff;padding:12px;border-radius:8px;margin-top:14px}summary{cursor:pointer;font-weight:bold}.muted{color:#52647b}footer{margin:35px 0;color:#52647b}@media print{button{display:none}.problem{break-inside:avoid}body{background:white}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;main&gt;&lt;h1&gt;01 · 파이썬 그래프 빈칸 메우기&lt;/h1&gt;&lt;section class=&quot;intro&quot;&gt;&lt;b&gt;유사 유형 5문항 · 총 30개 빈칸&lt;/b&gt;&lt;p&gt;인접행렬, 인접리스트, DFS, BFS, 연결 요소를 연습합니다. 각 빈칸에 파이썬 코드를 입력하고 &lt;b&gt;채점하기&lt;/b&gt;를 누르세요. 공백 차이는 무시하며, 정답·해설은 문제별로 확인할 수 있습니다.&lt;/p&gt;&lt;p class=&quot;muted&quot;&gt;각 문제 6개 빈칸, 총 30점. 코드의 들여쓰기는 이미 제시된 것으로 가정합니다.&lt;/p&gt;&lt;button onclick=&quot;gradeAll()&quot;&gt;전체 채점&lt;/button&gt;&lt;button class=&quot;secondary&quot; onclick=&quot;resetAll()&quot;&gt;전체 초기화&lt;/button&gt;&lt;span id=&quot;total&quot;&gt;&lt;/span&gt;&lt;/section&gt;&lt;div id=&quot;questions&quot;&gt;&lt;/div&gt;&lt;footer&gt;학습용 자료 · Python 3&lt;/footer&gt;&lt;/main&gt;&lt;script&gt;
+const questions=[
+{title:'문항 1 · 무방향 그래프의 인접행렬과 인접리스트',desc:'정점 6개와 간선 목록을 이용하여 인접행렬과 인접리스트를 완성하시오.',code:`n = 6
+edges = [(0, 1), (0, 3), (1, 2), (3, 4), (4, 5)]
+
+matrix = [[0] * n for _ in range(n)]
+for a, b in edges:
+    (가)
+    (나)
+print(&quot;인접행렬&quot;, matrix)
+
+graph = [[] for _ in range(n)]
+for a, b in edges:
+    (다)
+    (라)
+
+print(&quot;0번의 이웃&quot;, (마))
+print(&quot;4번의 차수&quot;, (바))`,answers:['matrix[a][b] = 1','matrix[b][a] = 1','graph[a].append(b)','graph[b].append(a)','graph[0]','len(graph[4])'],why:'무방향 간선 (a, b)는 행렬의 [a][b], [b][a]를 모두 1로 설정합니다. 인접리스트에도 양쪽 방향을 추가합니다. 정점의 차수는 이웃 리스트 길이입니다.',output:'0번의 이웃 [1, 3]\n4번의 차수 2'},
+{title:'문항 2 · 스택을 이용한 DFS와 부모 기록',desc:'0번 정점에서 시작하여 방문한 정점의 부모와 방문 순서를 기록하시오.',code:`n = 5
+edges = [(0, 1), (0, 2), (1, 3), (2, 4)]
+graph = [[] for _ in range(n)]
+for a, b in edges:
+    graph[a].append(b)
+    (가)
+
+parent = [-1] * n
+parent[0] = 0
+stack = (나)
+order = []
+
+while stack:
+    v = (다)
+    order.append(v)
+    for nxt in graph[v]:
+        if (라):
+            (마)
+            (바)
+print(&quot;방문&quot;, order)
+print(&quot;부모&quot;, parent)`,answers:['graph[b].append(a)','[0]','stack.pop()','parent[nxt] == -1','parent[nxt] = v','stack.append(nxt)'],why:'DFS는 후입선출(LIFO) 스택을 사용합니다. 부모가 -1인 정점은 아직 발견되지 않은 정점입니다. 발견 즉시 부모를 기록해 중복 추가를 막습니다.',output:'방문 [0, 2, 4, 1, 3]\n부모 [0, 0, 0, 1, 2]'},
+{title:'문항 3 · 큐를 이용한 BFS와 최단 거리',desc:'0번 정점으로부터 각 정점까지의 최단 간선 수를 구하시오.',code:`from collections import deque
+
+n = 6
+edges = [(0, 1), (0, 2), (1, 3), (2, 4), (4, 5)]
+graph = [[] for _ in range(n)]
+for a, b in edges:
+    graph[a].append(b)
+    (가)
+
+dist = [-1] * n
+dist[0] = (나)
+q = (다)
+
+while q:
+    v = (라)
+    for nxt in graph[v]:
+        if dist[nxt] == -1:
+            (마)
+            (바)
+print(&quot;거리&quot;, dist)`,answers:['graph[b].append(a)','0','deque([0])','q.popleft()','dist[nxt] = dist[v] + 1','q.append(nxt)'],why:'BFS는 선입선출(FIFO) 큐를 사용합니다. 처음 발견한 정점까지의 거리는 현재 정점의 거리보다 1 큽니다. 무가중치 그래프에서는 이것이 최단 거리입니다.',output:'거리 [0, 1, 1, 2, 2, 3]'},
+{title:'문항 4 · 인접행렬을 이용한 연결 여부와 차수',desc:'주어진 무방향 그래프의 간선을 행렬에 표시하고, 연결 여부와 차수를 출력하시오.',code:`n = 5
+edges = [(0, 1), (0, 2), (1, 3), (3, 4)]
+matrix = [[0] * n for _ in range(n)]
+
+for a, b in edges:
+    (가)
+    (나)
+
+def connected(a, b):
+    return (다)
+
+def degree(v):
+    return (라)
+
+print(&quot;0-2 연결&quot;, (마))
+print(&quot;3번 차수&quot;, (바))`,answers:['matrix[a][b] = 1','matrix[b][a] = 1','matrix[a][b] == 1','sum(matrix[v])','connected(0, 2)','degree(3)'],why:'인접행렬의 값이 1이면 두 정점 사이에 직접 간선이 있습니다. 행렬의 한 행을 합하면 해당 정점의 차수를 구할 수 있습니다.',output:'0-2 연결 True\n3번 차수 2'},
+{title:'문항 5 · DFS로 연결 요소의 개수 세기',desc:'서로 연결된 정점들의 묶음(연결 요소)이 몇 개인지 구하시오.',code:`n = 7
+edges = [(0, 1), (1, 2), (3, 4), (5, 6)]
+graph = [[] for _ in range(n)]
+for a, b in edges:
+    (가)
+    (나)
+
+visited = [False] * n
+count = 0
+for start in range(n):
+    if not visited[start]:
+        count += 1
+        stack = (다)
+        visited[start] = True
+        while stack:
+            v = (라)
+            for nxt in graph[v]:
+                if (마):
+                    visited[nxt] = True
+                    (바)
+print(&quot;연결 요소&quot;, count)`,answers:['graph[a].append(b)','graph[b].append(a)','[start]','stack.pop()','not visited[nxt]','stack.append(nxt)'],why:'아직 방문하지 않은 정점을 발견할 때마다 새로운 연결 요소가 시작됩니다. DFS로 그 요소의 모든 정점을 방문 처리합니다. 이 예제의 연결 요소는 {0,1,2}, {3,4}, {5,6}입니다.',output:'연결 요소 3'}];
+const labels=['가','나','다','라','마','바'];const root=document.getElementById('questions');
+function esc(s){return s.replaceAll('&amp;','&amp;amp;').replaceAll('&lt;','&amp;lt;').replaceAll('&gt;','&amp;gt;')}
+questions.forEach((q,i)=&gt;{const section=document.createElement('section');section.className='problem';section.innerHTML=`&lt;h2&gt;${i+1}. ${q.title}&lt;/h2&gt;&lt;p&gt;${q.desc}&lt;/p&gt;&lt;pre&gt;${esc(q.code)}&lt;/pre&gt;&lt;h3&gt;빈칸 입력&lt;/h3&gt;${q.answers.map((a,j)=&gt;`&lt;label class=&quot;blank&quot;&gt;&lt;b&gt;(${labels[j]})&lt;/b&gt;&lt;input id=&quot;q${i}a${j}&quot; aria-label=&quot;문항 ${i+1} ${labels[j]} 빈칸&quot; autocomplete=&quot;off&quot; spellcheck=&quot;false&quot; placeholder=&quot;파이썬 코드 입력&quot;&gt;&lt;/label&gt;`).join('')}&lt;button onclick=&quot;grade(${i})&quot;&gt;문항 채점&lt;/button&gt;&lt;button class=&quot;secondary&quot; onclick=&quot;clearQ(${i})&quot;&gt;입력 지우기&lt;/button&gt;&lt;div class=&quot;result&quot; id=&quot;result${i}&quot; aria-live=&quot;polite&quot;&gt;&lt;/div&gt;&lt;details&gt;&lt;summary&gt;정답 · 상세 해설 · 예상 출력 보기&lt;/summary&gt;&lt;div&gt;${q.answers.map((a,j)=&gt;`&lt;p&gt;&lt;b&gt;(${labels[j]})&lt;/b&gt; &lt;code&gt;${esc(a)}&lt;/code&gt;&lt;/p&gt;`).join('')}&lt;/div&gt;&lt;p&gt;${q.why}&lt;/p&gt;&lt;b&gt;주요 출력&lt;/b&gt;&lt;pre&gt;${esc(q.output)}&lt;/pre&gt;&lt;/details&gt;`;root.appendChild(section)});
+function norm(s){return s.replace(/\s+/g,'').replace(/;$/,'').replace(/\bTrue\b/g,'True')}
+function grade(i){const q=questions[i];let score=0;let html='';q.answers.forEach((a,j)=&gt;{const value=document.getElementById(`q${i}a${j}`).value;const ok=norm(value)===norm(a);if(ok)score++;html+=`&lt;span class=&quot;${ok?'correct':'wrong'}&quot;&gt;(${labels[j]}) ${ok?'정답':'오답'}&lt;/span&gt;　`});document.getElementById(`result${i}`).innerHTML=`&lt;strong&gt;${score} / 6점&lt;/strong&gt;&lt;p&gt;${html}&lt;/p&gt;`;return score}
+function gradeAll(){let total=0;questions.forEach((_,i)=&gt;total+=grade(i));document.getElementById('total').textContent=`전체 점수: ${total} / 30점`}
+function clearQ(i){for(let j=0;j&lt;6;j++)document.getElementById(`q${i}a${j}`).value='';document.getElementById(`result${i}`).innerHTML='';document.getElementById('total').textContent=''}
+function resetAll(){questions.forEach((_,i)=&gt;clearQ(i))}
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+" title="Sector 01"></iframe></section><section class="sector" hidden="" id="sector2"><div class="sectitle"><h2>Sector 02 · 완전탐색과 가지치기</h2><span>원본 5문항</span></div><iframe loading="eager" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ko&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;02 · 완전탐색과 가지치기 빈칸 5문항&lt;/title&gt;&lt;style&gt;body{font-family:'Malgun Gothic',sans-serif;background:#f3f6fb;color:#17243a;margin:0}main{max-width:1050px;margin:auto;padding:26px}h1{color:#173d78}.q{background:white;padding:22px;margin:22px 0;border-radius:15px;box-shadow:0 2px 12px #ccd5e555}pre{background:#101d32;color:#eaf3ff;padding:18px;overflow:auto;border-radius:9px;line-height:2;font-size:15px;white-space:pre-wrap}input{width:340px;max-width:85%;font-family:Consolas,monospace;font-size:14px;padding:7px;border:2px solid #6da2f0;border-radius:5px;background:#fff}button{padding:10px 15px;background:#1c579f;color:white;border:0;border-radius:8px;cursor:pointer;margin:5px}.answer{display:none;background:#edf6ff;border-left:4px solid #2470bd;padding:14px;white-space:pre-wrap;line-height:1.8}.feedback{font-weight:bold}.small{color:#56677c}code{font-family:Consolas,monospace} &lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;main&gt;&lt;h1&gt;02 · 완전탐색과 가지치기 빈칸 메우기&lt;/h1&gt;&lt;p&gt;원본과 닮은 유형의 파이썬 재귀 탐색 문제 5개 · 문항별 빈칸 5개 · 총 25점. 각 빈칸에 파이썬 코드를 입력하세요. 공백 차이는 무시합니다.&lt;/p&gt;&lt;div id=&quot;questions&quot;&gt;&lt;/div&gt;&lt;button onclick=&quot;gradeAll()&quot;&gt;전체 채점 (25점)&lt;/button&gt;&lt;button onclick=&quot;document.querySelectorAll('.answer').forEach(e=&gt;e.style.display='block')&quot;&gt;전체 정답·해설 보기&lt;/button&gt;&lt;h2 id=&quot;total&quot;&gt;&lt;/h2&gt;&lt;/main&gt;&lt;script&gt;
+const questions=[
+{title:'01. 부분집합 합계 찾기: 완전탐색',desc:'nums에서 몇 개를 선택해 합계 11을 만드는 첫 번째 경로를 찾는다.',code:`nums = [2, 7, 4, 9]\ntarget = 11\ncount = 0\n\ndef search(i, total, path):\n    global count\n    count += 1\n    {{0}}\n        return path if total == target else None\n\n    chosen = search(i + 1, {{1}}, path + [nums[i]])\n    {{2}}\n        return chosen\n\n    skipped = search({{3}}, total, path)\n    {{4}}\n\nprint(search(0, 0, []))\nprint('방문:', count)`,answers:['if i == len(nums):','total + nums[i]','if chosen is not None:','i + 1','return skipped'],output:'[2, 9]\n방문: 8',explain:'종료 조건에서 목표 합계를 검사한다. 선택 분기와 제외 분기를 차례로 호출하며, 성공 결과가 있으면 즉시 반환한다.'},
+{title:'02. 가지치기: 목표 합계를 넘으면 중단',desc:'양의 정수만 있으므로 목표 8을 초과한 경로는 더 탐색할 필요가 없다.',code:`nums = [3, 6, 5, 2]\ntarget = 8\nvisits = 0\n\ndef dfs(i, total, path):\n    global visits\n    visits += 1\n    if {{0}}:\n        return path\n    if {{1}}:\n        return None\n\n    result = dfs(i + 1, {{2}}, path + [nums[i]])\n    if result is not None:\n        {{3}}\n    return dfs({{4}}, total, path)\n\nprint(dfs(0, 0, []))\nprint('방문:', visits)`,answers:['total == target','total &gt; target or i == len(nums)','total + nums[i]','return result','i + 1'],output:'[3, 5]\n방문: 7',explain:'목표 달성 시 즉시 반환한다. 목표 초과 또는 모든 원소 검사 완료 시 중단한다. 선택 분기가 실패하면 제외 분기를 시도한다.'},
+{title:'03. 남은 합계로 가지치기',desc:'남은 모든 수를 더해도 목표 12에 못 미치면 탐색을 중단한다.',code:`nums = [2, 5, 7, 3]\ntarget = 12\nsuffix = [0] * (len(nums) + 1)\nfor i in range(len(nums) - 1, -1, -1):\n    suffix[i] = {{0}}\n\ndef find(i, total, path):\n    if total == target:\n        return path\n    if total &gt; target or {{1}}:\n        return None\n    if {{2}}:\n        return None\n\n    got = find(i + 1, total + nums[i], {{3}})\n    if got is not None:\n        return got\n    return {{4}}\n\nprint(find(0, 0, []))`,answers:['nums[i] + suffix[i + 1]','i == len(nums)','total + suffix[i] &lt; target','path + [nums[i]]','find(i + 1, total, path)'],output:'[2, 7, 3]',explain:'suffix[i]는 i번부터 끝까지 남은 수의 합이다. 현재 합과 남은 합의 합이 목표보다 작으면 그 분기는 불가능하다.'},
+{title:'04. 부분집합 개수 세기: 가지치기',desc:'합계가 6인 부분집합의 개수를 센다. 성공 시 1, 실패 시 0을 반환한다.',code:`nums = [1, 2, 3, 4]\ntarget = 6\n\ndef count_ways(i, total):\n    if total == target:\n        {{0}}\n    if total &gt; target:\n        {{1}}\n    if i == {{2}}:\n        return 0\n\n    take = count_ways(i + 1, {{3}})\n    skip = count_ways(i + 1, total)\n    return {{4}}\n\nprint('경우의 수:', count_ways(0, 0))`,answers:['return 1','return 0','len(nums)','total + nums[i]','take + skip'],output:'경우의 수: 2',explain:'목표를 달성하면 한 가지 성공으로 센다. 선택/제외 분기에서 얻은 경우의 수를 더한다. 가능한 부분집합은 [1,2,3], [2,4]다.'},
+{title:'05. 완전탐색과 가지치기 방문 횟수 비교',desc:'같은 입력에 대해 전체 탐색과 가지치기 탐색의 재귀 호출 횟수를 비교한다.',code:`nums = [1, 9, 5, 4]\ntarget = 10\nfull_count = 0\nprune_count = 0\n\ndef full(i, total):\n    global full_count\n    full_count += 1\n    if i == len(nums):\n        return total == target\n    return full(i + 1, total + nums[i]) or {{0}}\n\ndef pruned(i, total):\n    global prune_count\n    prune_count += 1\n    if total == target:\n        {{1}}\n    if {{2}}:\n        return False\n    return pruned(i + 1, total + nums[i]) or {{3}}\n\na = full(0, 0)\nb = pruned(0, 0)\nprint('성공:', a, b)\nprint('방문:', full_count, prune_count)\nprint('감소:', {{4}})`,answers:['full(i + 1, total)','return True','total &gt; target or i == len(nums)','pruned(i + 1, total)','full_count - prune_count'],output:'성공: True True\n방문: 8 3\n감소: 5',explain:'or는 왼쪽이 참이면 오른쪽 호출을 생략하는 단락 평가를 한다. 따라서 이 코드는 모든 부분집합을 끝까지 세는 것이 아니라 첫 성공까지 탐색한다.'}
+];
+const root=document.getElementById('questions');
+questions.forEach((q,qi)=&gt;{const el=document.createElement('section');el.className='q';let idx=0;const html=q.code.replace(/{{(\d+)}}/g,(_,n)=&gt;`&lt;input aria-label=&quot;${qi+1}번 문제 빈칸 ${+n+1}&quot; data-q=&quot;${qi}&quot; data-i=&quot;${n}&quot; placeholder=&quot;(${String.fromCharCode(44032+Number(n))}) 코드 입력&quot;&gt;`);el.innerHTML=`&lt;h2&gt;${q.title}&lt;/h2&gt;&lt;p&gt;${q.desc}&lt;/p&gt;&lt;pre&gt;${html}&lt;/pre&gt;&lt;button onclick=&quot;grade(${qi})&quot;&gt;문항 채점&lt;/button&gt;&lt;button onclick=&quot;toggle(${qi})&quot;&gt;정답·해설 보기/숨기기&lt;/button&gt;&lt;p class=&quot;feedback&quot; id=&quot;f${qi}&quot;&gt;&lt;/p&gt;&lt;div class=&quot;answer&quot; id=&quot;a${qi}&quot;&gt;&lt;b&gt;정답&lt;/b&gt;\n${q.answers.map((a,i)=&gt;`(${i+1}) ${a}`).join('\n')}\n\n&lt;b&gt;예상 출력&lt;/b&gt;\n${q.output}\n\n&lt;b&gt;상세 해설&lt;/b&gt;\n${q.explain}&lt;/div&gt;`;root.appendChild(el)});
+function norm(s){return s.replace(/\s+/g,'').replace(/;$/,'').replace(/\(\s*/g,'(').replace(/\s*\)/g,')')}
+function grade(i){const q=questions[i];let score=0;document.querySelectorAll(`input[data-q=&quot;${i}&quot;]`).forEach(el=&gt;{let ok=norm(el.value)===norm(q.answers[+el.dataset.i]);score+=ok?1:0;el.style.borderColor=ok?'#18864d':'#d44a4a'});document.getElementById('f'+i).textContent=`${score} / 5점`;return score}
+function gradeAll(){let s=questions.reduce((a,_,i)=&gt;a+grade(i),0);document.getElementById('total').textContent=`총점 ${s} / 25점`}
+function toggle(i){const e=document.getElementById('a'+i);e.style.display=e.style.display==='block'?'none':'block'}
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+" title="Sector 02"></iframe></section><section class="sector" hidden="" id="sector3"><div class="sectitle"><h2>Sector 03 · 재귀 프랙털</h2><span>원본 5문항</span></div><iframe loading="eager" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ko&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;03 · Turtle 재귀 프랙털 빈칸 채우기&lt;/title&gt;&lt;style&gt;body{font-family:'Malgun Gothic',sans-serif;background:#f3f6fb;color:#18243a;margin:0}main{max-width:1050px;margin:auto;padding:28px}h1{color:#173d75}.card{background:white;border:1px solid #dce4ef;border-radius:15px;padding:22px;margin:20px 0;box-shadow:0 3px 10px #15294a0b}pre{background:#101d32;color:#e9f2ff;padding:18px;border-radius:10px;overflow:auto;line-height:2;font-size:15px;white-space:pre-wrap}input{font-family:Consolas,monospace;width:300px;max-width:85%;padding:8px;border:2px solid #9db9e6;border-radius:5px;background:#fff;color:#122b52;font-size:14px}button{background:#215ba8;color:white;border:0;padding:10px 15px;border-radius:7px;cursor:pointer;margin:5px}button:hover{background:#123f7b}.feedback{font-weight:bold;white-space:pre-wrap}.answer{display:none;background:#eff8f1;padding:15px;border-radius:8px;white-space:pre-wrap;line-height:1.7}.small{color:#52627b}svg{background:white;max-width:100%;height:auto;border:1px solid #dce4ef;border-radius:8px}.ok{color:#16733e}.bad{color:#bd352b}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;main&gt;&lt;h1&gt;03 · 파이썬 Turtle 재귀 프랙털 빈칸 메우기&lt;/h1&gt;&lt;p&gt;시에르핀스키 삼각형과 닮은 재귀 그래픽 문제 5개 · 문항별 2개 빈칸 · 총 10점&lt;/p&gt;&lt;p class=&quot;small&quot;&gt;빈칸에는 파이썬 코드를 입력하세요. 띄어쓰기는 채점에 영향을 주지 않습니다. 정답과 해설을 확인할 수 있습니다.&lt;/p&gt;&lt;div id=&quot;questions&quot;&gt;&lt;/div&gt;&lt;section class=&quot;card&quot;&gt;&lt;button onclick=&quot;gradeAll()&quot;&gt;전체 채점 (10점)&lt;/button&gt;&lt;button onclick=&quot;showAll()&quot;&gt;전체 정답·해설 보기&lt;/button&gt;&lt;button onclick=&quot;resetAll()&quot;&gt;다시 풀기&lt;/button&gt;&lt;h2 id=&quot;total&quot;&gt;&lt;/h2&gt;&lt;/section&gt;&lt;/main&gt;&lt;script&gt;
+const qs=[
+{title:'01. 코흐 곡선',desc:'선분을 세 부분으로 나누어 가운데에 삼각형 돌기를 만드는 재귀 프랙털입니다.',code:['import turtle as t','t.speed(0)','def koch(size, depth):','    [A]','        t.forward(size)','        return','    for angle in [60, -120, 60, 0]:','        [B]','        t.left(angle)','','koch(243, 3)','t.done()'],ans:['if depth == 0:','koch(size/3, depth-1)'],ex:'종료 조건에서 직선을 그립니다. 한 단계 깊어질 때 길이 size/3인 코흐 곡선 네 개를 재귀적으로 그립니다.',shape:'koch'},
+{title:'02. 이진 재귀 나무',desc:'각 가지 끝에서 왼쪽과 오른쪽으로 두 가지를 뻗는 재귀 나무입니다.',code:['import turtle as t','t.speed(0)','t.left(90)','def tree(size, depth):','    [A]','        return','    t.forward(size)','    t.left(30)','    [B]','    t.right(60)','    tree(size*0.7, depth-1)','    t.left(30)','    t.backward(size)','','tree(90, 5)','t.done()'],ans:['if depth == 0:','tree(size*0.7, depth-1)'],ex:'깊이 0이면 종료합니다. 왼쪽 가지와 오른쪽 가지를 모두 현재 길이의 70%로 줄여 재귀 호출합니다.',shape:'tree'},
+{title:'03. 정사각형 재귀 패턴',desc:'큰 정사각형의 네 모서리에 절반 크기의 정사각형을 반복해서 그립니다.',code:['import turtle as t','t.speed(0)','def square(size):','    for _ in range(4):','        t.forward(size)','        t.left(90)','def pattern(size, depth):','    [A]','        square(size)','        return','    for _ in range(4):','        [B]','        t.forward(size)','        t.left(90)','','pattern(180, 3)','t.done()'],ans:['if depth == 0:','pattern(size/2, depth-1)'],ex:'각 단계에서 현재 위치를 기준으로 크기가 절반인 패턴을 4번 호출합니다. 이동과 회전을 반복해 모서리를 따라 배치합니다.',shape:'square'},
+{title:'04. 재귀 원 패턴',desc:'원을 그린 뒤 반지름을 줄여 양쪽으로 회전하며 반복하는 패턴입니다.',code:['import turtle as t','t.speed(0)','def circles(radius, depth):','    [A]','        return','    t.circle(radius)','    t.left(30)','    [B]','    t.right(60)','    circles(radius*0.65, depth-1)','    t.left(30)','','circles(100, 4)','t.done()'],ans:['if depth == 0:','circles(radius*0.65, depth-1)'],ex:'종료 조건을 두고, 재귀 호출 때 반지름을 0.65배로 축소합니다. 방향을 되돌려 두 번째 재귀 분기를 그립니다.',shape:'circles'},
+{title:'05. 시에르핀스키 삼각형 변형',desc:'기본 삼각형을 그리고, 세 꼭짓점 방향으로 작은 삼각형을 반복 배치합니다.',code:['import turtle as t','t.speed(0)','def tri(size):','    for _ in range(3):','        t.forward(size)','        t.left(120)','def fractal(size, depth):','    [A]','        tri(size)','        return','    for _ in range(3):','        [B]','        t.forward(size)','        t.left(120)','','fractal(240, 3)','t.done()'],ans:['if depth == 0:','fractal(size/2, depth-1)'],ex:'기저 조건에서 삼각형을 그리고, 세 꼭짓점마다 한 변 길이가 절반인 삼각형을 재귀적으로 생성합니다.',shape:'tri'}];
+function art(type){let s='&lt;svg viewBox=&quot;0 0 300 190&quot; width=&quot;300&quot; role=&quot;img&quot; aria-label=&quot;프랙털 개념도&quot;&gt;';const line=(x,y,X,Y)=&gt;{s+=`&lt;line x1=&quot;${x}&quot; y1=&quot;${y}&quot; x2=&quot;${X}&quot; y2=&quot;${Y}&quot; stroke=&quot;#2563a6&quot; stroke-width=&quot;1.4&quot;/&gt;`};if(type==='koch'){function k(x,y,X,Y,d){if(!d){line(x,y,X,Y);return}let dx=(X-x)/3,dy=(Y-y)/3,ax=x+dx,ay=y+dy,bx=x+2*dx,by=y+2*dy,cx=ax+dx*.5-dy*Math.sqrt(3)/2,cy=ay+dy*.5+dx*Math.sqrt(3)/2;k(x,y,ax,ay,d-1);k(ax,ay,cx,cy,d-1);k(cx,cy,bx,by,d-1);k(bx,by,X,Y,d-1)}k(20,130,280,130,3)}else if(type==='tree'){function branch(x,y,a,len,d){if(!d)return;let X=x+Math.cos(a)*len,Y=y-Math.sin(a)*len;line(x,y,X,Y);branch(X,Y,a+.52,len*.7,d-1);branch(X,Y,a-.52,len*.7,d-1)}branch(150,180,Math.PI/2,58,6)}else if(type==='square'){function sq(x,y,z,d){if(!d){s+=`&lt;rect x=&quot;${x}&quot; y=&quot;${y}&quot; width=&quot;${z}&quot; height=&quot;${z}&quot; fill=&quot;none&quot; stroke=&quot;#2563a6&quot; stroke-width=&quot;1&quot;/&gt;`;return}for(let [u,v] of [[0,0],[.5,0],[0,.5],[.5,.5]])sq(x+z*u,y+z*v,z/2,d-1)}sq(72,17,155,3)}else if(type==='circles'){for(let j=0;j&lt;5;j++){let r=75*Math.pow(.7,j);s+=`&lt;circle cx=&quot;${150+30*Math.sin(j*.6)}&quot; cy=&quot;${100+15*Math.cos(j*.6)}&quot; r=&quot;${r}&quot; fill=&quot;none&quot; stroke=&quot;#2563a6&quot; stroke-width=&quot;1.4&quot;/&gt;`}}else{function tri(x,y,z,d){if(!d){s+=`&lt;polygon points=&quot;${x},${y} ${x+z},${y} ${x+z/2},${y-z*Math.sqrt(3)/2}&quot; fill=&quot;none&quot; stroke=&quot;#2563a6&quot; stroke-width=&quot;1&quot;/&gt;`;return}tri(x,y,z/2,d-1);tri(x+z/2,y,z/2,d-1);tri(x+z/4,y-z*Math.sqrt(3)/4,z/2,d-1)}tri(42,173,215,3)}return s+'&lt;/svg&gt;'}
+const root=document.getElementById('questions');qs.forEach((q,i)=&gt;{let section=document.createElement('section');section.className='card';section.innerHTML=`&lt;h2&gt;${q.title}&lt;/h2&gt;&lt;p&gt;${q.desc}&lt;/p&gt;${art(q.shape)}&lt;pre&gt;${q.code.map(line=&gt;line.replace('[A]',`&lt;input id=&quot;q${i}a&quot; aria-label=&quot;${i+1}번 가 빈칸&quot; placeholder=&quot;(가)&quot; autocomplete=&quot;off&quot;&gt;`).replace('[B]',`&lt;input id=&quot;q${i}b&quot; aria-label=&quot;${i+1}번 나 빈칸&quot; placeholder=&quot;(나)&quot; autocomplete=&quot;off&quot;&gt;`)).join('\n')}&lt;/pre&gt;&lt;button onclick=&quot;grade(${i})&quot;&gt;문항 채점&lt;/button&gt;&lt;button onclick=&quot;toggle(${i})&quot;&gt;정답·해설 보기/숨기기&lt;/button&gt;&lt;p class=&quot;feedback&quot; id=&quot;f${i}&quot;&gt;&lt;/p&gt;&lt;div class=&quot;answer&quot; id=&quot;a${i}&quot;&gt;&lt;/div&gt;`;root.appendChild(section);document.getElementById('a'+i).textContent=`(가) ${q.ans[0]}\n(나) ${q.ans[1]}\n\n해설: ${q.ex}`});
+function norm(s){return s.replace(/\s+/g,'').replace(/\(/g,'(').replace(/\)/g,')').replace(/;$/,'')}
+function score(i){return ['a','b'].reduce((n,x,j)=&gt;n+(norm(document.getElementById(`q${i}${x}`).value)===norm(qs[i].ans[j])?1:0),0)}
+function grade(i){let n=score(i),e=document.getElementById('f'+i);e.textContent=`${n}/2점 · ${n===2?'정답입니다!':'틀린 빈칸을 확인하고 다시 도전하세요.'}`;e.className='feedback '+(n===2?'ok':'bad')}
+function gradeAll(){let sum=0;qs.forEach((_,i)=&gt;{grade(i);sum+=score(i)});document.getElementById('total').textContent=`총점 ${sum} / 10점`}
+function toggle(i){let e=document.getElementById('a'+i);e.style.display=e.style.display==='block'?'none':'block'}function showAll(){qs.forEach((_,i)=&gt;document.getElementById('a'+i).style.display='block')}function resetAll(){document.querySelectorAll('input').forEach(x=&gt;x.value='');document.querySelectorAll('.feedback').forEach(x=&gt;x.textContent='');document.querySelectorAll('.answer').forEach(x=&gt;x.style.display='none');document.getElementById('total').textContent=''}
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+" title="Sector 03"></iframe></section><section class="sector" hidden="" id="sector4"><div class="sectitle"><h2>Sector 04 · 후위 표기식 출력</h2><span>원본 5문항</span></div><iframe loading="eager" srcdoc='&lt;!doctype html&gt;&lt;html lang="ko"&gt;&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;&lt;title&gt;04 · 후위 표기식 전체 출력 결과 5문항&lt;/title&gt;&lt;style&gt;body{font-family:Arial,"Malgun Gothic",sans-serif;background:#f4f7fb;color:#172334;margin:0}main{max-width:950px;margin:35px auto;padding:0 18px}header,.q{background:white;border:1px solid #dbe3ee;border-radius:14px;padding:24px;margin-bottom:20px}h1{margin-top:0;color:#12376b}h2{color:#124d88}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eff4fa;border-radius:8px;padding:14px;line-height:1.5;font-size:14px}textarea{width:100%;box-sizing:border-box;min-height:90px;padding:12px;border:1px solid #b8c8d9;border-radius:8px;font:15px Consolas,monospace}button{border:0;border-radius:8px;padding:10px 15px;background:#1658ad;color:white;cursor:pointer;margin:8px 6px 8px 0}button.alt{background:#52657c}.answer{display:none;background:#f0faf5;border-left:4px solid #168052;padding:12px;margin-top:8px;white-space:pre-wrap;font:14px Consolas,monospace}.feedback{font-weight:bold;margin:8px 0}.small{color:#52657c}code{font-family:Consolas,monospace}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;main&gt;&lt;header&gt;&lt;h1&gt;04 · 후위 표기식 전체 출력 결과 쓰기&lt;/h1&gt;&lt;p&gt;원본과 닮은 유형 5문항 · 각 문항 (가), (나) 2개 출력 · 총 10개 답안(각 2점, 20점)&lt;/p&gt;&lt;p&gt;&lt;b&gt;중요:&lt;/b&gt; 최종 숫자만 쓰면 오답입니다. &lt;code&gt;print(stack, end=" ")&lt;/code&gt;에 의해 출력되는 &lt;b&gt;모든 중간 스택&lt;/b&gt;과 마지막 계산값을 정확한 순서로 한 줄에 작성하세요.&lt;/p&gt;&lt;p class="small"&gt;각 입력은 별도로 함수를 호출하므로 스택은 매번 빈 리스트에서 시작합니다. 나눗셈은 &lt;code&gt;/&lt;/code&gt;로 계산하여 실수로 출력됩니다.&lt;/p&gt;&lt;h2&gt;공통 파이썬 코드&lt;/h2&gt;&lt;pre&gt;def postfix(tokens):
+    stack = []
+    for token in tokens:
+        if token.isdigit():
+            stack.append(int(token))
+            print(stack, end=&amp;quot; &amp;quot;)
+        else:
+            b = stack.pop()
+            a = stack.pop()
+            print(stack, end=&amp;quot; &amp;quot;)
+            if token == &amp;quot;+&amp;quot;:
+                stack.append(a + b)
+            elif token == &amp;quot;-&amp;quot;:
+                stack.append(a - b)
+            elif token == &amp;quot;*&amp;quot;:
+                stack.append(a * b)
+            elif token == &amp;quot;/&amp;quot;:
+                stack.append(a / b)
+            print(stack, end=&amp;quot; &amp;quot;)
+    return stack.pop()
+&lt;/pre&gt;&lt;/header&gt;
+&lt;section class="q" id="q1"&gt;&lt;h2&gt;문항 01 · 덧셈과 곱셈&lt;/h2&gt;&lt;pre&gt;print(postfix([&amp;quot;4&amp;quot;, &amp;quot;6&amp;quot;, &amp;quot;+&amp;quot;, &amp;quot;3&amp;quot;, &amp;quot;*&amp;quot;]))
+print(postfix([&amp;quot;9&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;-&amp;quot;, &amp;quot;5&amp;quot;, &amp;quot;+&amp;quot;]))&lt;/pre&gt;&lt;label for="a1"&gt;&lt;b&gt;(가) 첫 번째 줄의 전체 출력&lt;/b&gt;&lt;/label&gt;&lt;textarea id="a1" spellcheck="false" placeholder="중간 스택부터 최종 값까지 한 줄로 입력"&gt;&lt;/textarea&gt;&lt;label for="b1"&gt;&lt;b&gt;(나) 두 번째 줄의 전체 출력&lt;/b&gt;&lt;/label&gt;&lt;textarea id="b1" spellcheck="false" placeholder="중간 스택부터 최종 값까지 한 줄로 입력"&gt;&lt;/textarea&gt;&lt;div&gt;&lt;button onclick="grade(1)"&gt;문항 채점&lt;/button&gt;&lt;button class="alt" onclick="toggle(1)"&gt;정답·해설 보기/숨기기&lt;/button&gt;&lt;/div&gt;&lt;div class="feedback" id="f1"&gt;&lt;/div&gt;&lt;div class="answer" id="ans1"&gt;&lt;b&gt;(가) 정확한 출력&lt;/b&gt;
+[4] [4, 6] [] [10] [10, 3] [] [30] 30
+
+&lt;b&gt;(나) 정확한 출력&lt;/b&gt;
+[9] [9, 2] [] [7] [7, 5] [] [12] 12
+
+해설: 숫자 토큰은 push 후 스택을 출력하고, 연산자 토큰은 두 값을 pop한 직후의 스택(필요하면 [])과 계산 결과를 push한 뒤의 스택을 각각 출력합니다. 마지막 print는 반환값을 같은 줄에 출력합니다.&lt;/div&gt;&lt;/section&gt;
+&lt;section class="q" id="q2"&gt;&lt;h2&gt;문항 02 · 뺄셈과 나눗셈&lt;/h2&gt;&lt;pre&gt;print(postfix([&amp;quot;15&amp;quot;, &amp;quot;7&amp;quot;, &amp;quot;-&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;/&amp;quot;]))
+print(postfix([&amp;quot;6&amp;quot;, &amp;quot;3&amp;quot;, &amp;quot;/&amp;quot;, &amp;quot;4&amp;quot;, &amp;quot;+&amp;quot;]))&lt;/pre&gt;&lt;label for="a2"&gt;&lt;b&gt;(가) 첫 번째 줄의 전체 출력&lt;/b&gt;&lt;/label&gt;&lt;textarea id="a2" spellcheck="false" placeholder="중간 스택부터 최종 값까지 한 줄로 입력"&gt;&lt;/textarea&gt;&lt;label for="b2"&gt;&lt;b&gt;(나) 두 번째 줄의 전체 출력&lt;/b&gt;&lt;/label&gt;&lt;textarea id="b2" spellcheck="false" placeholder="중간 스택부터 최종 값까지 한 줄로 입력"&gt;&lt;/textarea&gt;&lt;div&gt;&lt;button onclick="grade(2)"&gt;문항 채점&lt;/button&gt;&lt;button class="alt" onclick="toggle(2)"&gt;정답·해설 보기/숨기기&lt;/button&gt;&lt;/div&gt;&lt;div class="feedback" id="f2"&gt;&lt;/div&gt;&lt;div class="answer" id="ans2"&gt;&lt;b&gt;(가) 정확한 출력&lt;/b&gt;
+[15] [15, 7] [] [8] [8, 2] [] [4.0] 4.0
+
+&lt;b&gt;(나) 정확한 출력&lt;/b&gt;
+[6] [6, 3] [] [2.0] [2.0, 4] [] [6.0] 6.0
+
+해설: 숫자 토큰은 push 후 스택을 출력하고, 연산자 토큰은 두 값을 pop한 직후의 스택(필요하면 [])과 계산 결과를 push한 뒤의 스택을 각각 출력합니다. 마지막 print는 반환값을 같은 줄에 출력합니다.&lt;/div&gt;&lt;/section&gt;
+&lt;section class="q" id="q3"&gt;&lt;h2&gt;문항 03 · 연산 순서&lt;/h2&gt;&lt;pre&gt;print(postfix([&amp;quot;2&amp;quot;, &amp;quot;3&amp;quot;, &amp;quot;4&amp;quot;, &amp;quot;+&amp;quot;, &amp;quot;*&amp;quot;]))
+print(postfix([&amp;quot;8&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;3&amp;quot;, &amp;quot;*&amp;quot;, &amp;quot;-&amp;quot;]))&lt;/pre&gt;&lt;label for="a3"&gt;&lt;b&gt;(가) 첫 번째 줄의 전체 출력&lt;/b&gt;&lt;/label&gt;&lt;textarea id="a3" spellcheck="false" placeholder="중간 스택부터 최종 값까지 한 줄로 입력"&gt;&lt;/textarea&gt;&lt;label for="b3"&gt;&lt;b&gt;(나) 두 번째 줄의 전체 출력&lt;/b&gt;&lt;/label&gt;&lt;textarea id="b3" spellcheck="false" placeholder="중간 스택부터 최종 값까지 한 줄로 입력"&gt;&lt;/textarea&gt;&lt;div&gt;&lt;button onclick="grade(3)"&gt;문항 채점&lt;/button&gt;&lt;button class="alt" onclick="toggle(3)"&gt;정답·해설 보기/숨기기&lt;/button&gt;&lt;/div&gt;&lt;div class="feedback" id="f3"&gt;&lt;/div&gt;&lt;div class="answer" id="ans3"&gt;&lt;b&gt;(가) 정확한 출력&lt;/b&gt;
+[2] [2, 3] [2, 3, 4] [2] [2, 7] [] [14] 14
+
+&lt;b&gt;(나) 정확한 출력&lt;/b&gt;
+[8] [8, 2] [8, 2, 3] [8] [8, 6] [] [2] 2
+
+해설: 숫자 토큰은 push 후 스택을 출력하고, 연산자 토큰은 두 값을 pop한 직후의 스택(필요하면 [])과 계산 결과를 push한 뒤의 스택을 각각 출력합니다. 마지막 print는 반환값을 같은 줄에 출력합니다.&lt;/div&gt;&lt;/section&gt;
+&lt;section class="q" id="q4"&gt;&lt;h2&gt;문항 04 · 복합 후위 표기식&lt;/h2&gt;&lt;pre&gt;print(postfix([&amp;quot;5&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;+&amp;quot;, &amp;quot;9&amp;quot;, &amp;quot;3&amp;quot;, &amp;quot;/&amp;quot;, &amp;quot;*&amp;quot;]))
+print(postfix([&amp;quot;12&amp;quot;, &amp;quot;4&amp;quot;, &amp;quot;/&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;5&amp;quot;, &amp;quot;+&amp;quot;, &amp;quot;*&amp;quot;]))&lt;/pre&gt;&lt;label for="a4"&gt;&lt;b&gt;(가) 첫 번째 줄의 전체 출력&lt;/b&gt;&lt;/label&gt;&lt;textarea id="a4" spellcheck="false" placeholder="중간 스택부터 최종 값까지 한 줄로 입력"&gt;&lt;/textarea&gt;&lt;label for="b4"&gt;&lt;b&gt;(나) 두 번째 줄의 전체 출력&lt;/b&gt;&lt;/label&gt;&lt;textarea id="b4" spellcheck="false" placeholder="중간 스택부터 최종 값까지 한 줄로 입력"&gt;&lt;/textarea&gt;&lt;div&gt;&lt;button onclick="grade(4)"&gt;문항 채점&lt;/button&gt;&lt;button class="alt" onclick="toggle(4)"&gt;정답·해설 보기/숨기기&lt;/button&gt;&lt;/div&gt;&lt;div class="feedback" id="f4"&gt;&lt;/div&gt;&lt;div class="answer" id="ans4"&gt;&lt;b&gt;(가) 정확한 출력&lt;/b&gt;
+[5] [5, 2] [] [7] [7, 9] [7, 9, 3] [7] [7, 3.0] [] [21.0] 21.0
+
+&lt;b&gt;(나) 정확한 출력&lt;/b&gt;
+[12] [12, 4] [] [3.0] [3.0, 2] [3.0, 2, 5] [3.0] [3.0, 7] [] [21.0] 21.0
+
+해설: 숫자 토큰은 push 후 스택을 출력하고, 연산자 토큰은 두 값을 pop한 직후의 스택(필요하면 [])과 계산 결과를 push한 뒤의 스택을 각각 출력합니다. 마지막 print는 반환값을 같은 줄에 출력합니다.&lt;/div&gt;&lt;/section&gt;
+&lt;section class="q" id="q5"&gt;&lt;h2&gt;문항 05 · 여러 단계의 스택 계산&lt;/h2&gt;&lt;pre&gt;print(postfix([&amp;quot;7&amp;quot;, &amp;quot;3&amp;quot;, &amp;quot;-&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;*&amp;quot;, &amp;quot;5&amp;quot;, &amp;quot;+&amp;quot;]))
+print(postfix([&amp;quot;9&amp;quot;, &amp;quot;3&amp;quot;, &amp;quot;/&amp;quot;, &amp;quot;4&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;-&amp;quot;, &amp;quot;*&amp;quot;]))&lt;/pre&gt;&lt;label for="a5"&gt;&lt;b&gt;(가) 첫 번째 줄의 전체 출력&lt;/b&gt;&lt;/label&gt;&lt;textarea id="a5" spellcheck="false" placeholder="중간 스택부터 최종 값까지 한 줄로 입력"&gt;&lt;/textarea&gt;&lt;label for="b5"&gt;&lt;b&gt;(나) 두 번째 줄의 전체 출력&lt;/b&gt;&lt;/label&gt;&lt;textarea id="b5" spellcheck="false" placeholder="중간 스택부터 최종 값까지 한 줄로 입력"&gt;&lt;/textarea&gt;&lt;div&gt;&lt;button onclick="grade(5)"&gt;문항 채점&lt;/button&gt;&lt;button class="alt" onclick="toggle(5)"&gt;정답·해설 보기/숨기기&lt;/button&gt;&lt;/div&gt;&lt;div class="feedback" id="f5"&gt;&lt;/div&gt;&lt;div class="answer" id="ans5"&gt;&lt;b&gt;(가) 정확한 출력&lt;/b&gt;
+[7] [7, 3] [] [4] [4, 2] [] [8] [8, 5] [] [13] 13
+
+&lt;b&gt;(나) 정확한 출력&lt;/b&gt;
+[9] [9, 3] [] [3.0] [3.0, 4] [3.0, 4, 2] [3.0] [3.0, 2] [] [6.0] 6.0
+
+해설: 숫자 토큰은 push 후 스택을 출력하고, 연산자 토큰은 두 값을 pop한 직후의 스택(필요하면 [])과 계산 결과를 push한 뒤의 스택을 각각 출력합니다. 마지막 print는 반환값을 같은 줄에 출력합니다.&lt;/div&gt;&lt;/section&gt;
+&lt;section class="q"&gt;&lt;button onclick="gradeAll()"&gt;전체 채점 (20점)&lt;/button&gt;&lt;button class="alt" onclick="showAll()"&gt;전체 정답 보기&lt;/button&gt;&lt;div id="total" class="feedback"&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;script&gt;const answers=[["[4] [4, 6] [] [10] [10, 3] [] [30] 30", "[9] [9, 2] [] [7] [7, 5] [] [12] 12"], ["[15] [15, 7] [] [8] [8, 2] [] [4.0] 4.0", "[6] [6, 3] [] [2.0] [2.0, 4] [] [6.0] 6.0"], ["[2] [2, 3] [2, 3, 4] [2] [2, 7] [] [14] 14", "[8] [8, 2] [8, 2, 3] [8] [8, 6] [] [2] 2"], ["[5] [5, 2] [] [7] [7, 9] [7, 9, 3] [7] [7, 3.0] [] [21.0] 21.0", "[12] [12, 4] [] [3.0] [3.0, 2] [3.0, 2, 5] [3.0] [3.0, 7] [] [21.0] 21.0"], ["[7] [7, 3] [] [4] [4, 2] [] [8] [8, 5] [] [13] 13", "[9] [9, 3] [] [3.0] [3.0, 4] [3.0, 4, 2] [3.0] [3.0, 2] [] [6.0] 6.0"]];function norm(s){return s.trim().replace(/\s+/g," ")}function grade(i){let x=answers[i-1],a=norm(document.getElementById("a"+i).value),b=norm(document.getElementById("b"+i).value);let p=(a===norm(x[0])?2:0)+(b===norm(x[1])?2:0);document.getElementById("f"+i).textContent=`${p}/4점 · (가) ${a===norm(x[0])?"정답":"오답"}, (나) ${b===norm(x[1])?"정답":"오답"}`;return p}function toggle(i){let e=document.getElementById("ans"+i);e.style.display=e.style.display==="block"?"none":"block"}function gradeAll(){let t=0;for(let i=1;i&lt;=5;i++)t+=grade(i);document.getElementById("total").textContent=`총점: ${t}/20점`}function showAll(){for(let i=1;i&lt;=5;i++)document.getElementById("ans"+i).style.display="block"}&lt;/script&gt;&lt;/main&gt;&lt;/body&gt;&lt;/html&gt;' title="Sector 04"></iframe></section><section class="sector" hidden="" id="sector5"><div class="sectitle"><h2>Sector 05 · 분할 정복 출력</h2><span>원본 5문항</span></div><iframe loading="eager" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ko&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;05 · 분할 정복 재귀 출력 결과 5문항&lt;/title&gt;&lt;style&gt;body{font-family:'Malgun Gothic',sans-serif;background:#f4f7fb;color:#17233b;margin:0}main{max-width:980px;margin:auto;padding:26px 16px}header,.question{background:white;border:1px solid #dce4f0;border-radius:16px;padding:24px;margin-bottom:18px;box-shadow:0 3px 12px #1b34500b}h1{margin:0 0 8px;font-size:27px}h2{font-size:20px}p{line-height:1.65}.sub{color:#52647c}pre{background:#101b2e;color:#e8f2ff;border-radius:10px;padding:18px;overflow-x:auto;font:15px/1.65 Consolas,'D2Coding',monospace;white-space:pre}textarea{box-sizing:border-box;width:100%;padding:12px;border:1px solid #b8c6db;border-radius:9px;font:15px Consolas,monospace;min-height:64px;resize:vertical}button{cursor:pointer;border:0;border-radius:8px;padding:10px 15px;font-weight:bold;background:#225ad1;color:white;margin:7px 6px 0 0}.secondary{background:#e7edf8;color:#1b3c73}.result{margin-top:10px;white-space:pre-wrap;line-height:1.6}.good{color:#14734c}.bad{color:#b33131}.solution{display:none;background:#f1f6ff;padding:14px;border-radius:10px;margin-top:12px}.solution pre{background:#e4edf9;color:#102441}.score{font-size:20px;font-weight:bold}small{color:#65748b}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;main&gt;&lt;header&gt;&lt;h1&gt;05 · 분할 정복 재귀 함수 출력 결과 5문항&lt;/h1&gt;&lt;p class=&quot;sub&quot;&gt;원본 &lt;code&gt;divide_sum()&lt;/code&gt;과 닮은 유형 · 5문항 · 각 4점 · 총 20점&lt;/p&gt;&lt;p&gt;각 코드의 &lt;strong&gt;실제 출력 결과 전체를 한 줄로 정확히&lt;/strong&gt; 작성하세요. 리스트의 공백, &lt;code&gt;left8&lt;/code&gt;처럼 붙어 출력되는 문자열, 숫자의 순서를 확인하세요. 함수의 반환값이 자동으로 출력되는 것은 아닙니다.&lt;/p&gt;&lt;button onclick=&quot;gradeAll()&quot;&gt;전체 채점&lt;/button&gt;&lt;button class=&quot;secondary&quot; onclick=&quot;toggleAll()&quot;&gt;전체 정답·해설 보기/숨기기&lt;/button&gt;&lt;p id=&quot;total&quot; class=&quot;score&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;&lt;/header&gt;&lt;div id=&quot;questions&quot;&gt;&lt;/div&gt;&lt;/main&gt;&lt;script&gt;
+const questions=[
+{title:'기본 분할 합계',code:`def divide_sum(a):\n    if len(a) == 1:\n        return a[0]\n\n    mid = len(a) // 2\n    left = divide_sum(a[:mid])\n    right = divide_sum(a[mid:])\n\n    if len(a) == 4:\n        print(f'a {a} left{left} right{right} sum {left + right}')\n\n    return left + right\n\ndivide_sum([4, 6, 1, 7])`,answer:'a [4, 6, 1, 7] left10 right8 sum 18',why:'왼쪽 [4, 6]의 합은 10, 오른쪽 [1, 7]의 합은 8입니다. 길이가 4인 최상위 호출에서만 출력합니다.'},
+{title:'홀수 길이 리스트 분할',code:`def divide_sum(a):\n    if len(a) == 1:\n        return a[0]\n\n    mid = len(a) // 2\n    left = divide_sum(a[:mid])\n    right = divide_sum(a[mid:])\n\n    if len(a) == 5:\n        print(f'a {a} left{left} right{right} sum {left + right}')\n\n    return left + right\n\ndivide_sum([2, 4, 6, 8, 10])`,answer:'a [2, 4, 6, 8, 10] left6 right24 sum 30',why:'길이 5에서 mid=2이므로 왼쪽 [2, 4]의 합은 6, 오른쪽 [6, 8, 10]의 합은 24입니다.'},
+{title:'두 부분의 합과 차이 출력',code:`def divide_sum(a):\n    if len(a) == 1:\n        return a[0]\n\n    mid = len(a) // 2\n    left = divide_sum(a[:mid])\n    right = divide_sum(a[mid:])\n\n    if len(a) == 4:\n        print(f'a {a} left{left} right{right} diff {left - right}')\n\n    return left + right\n\ndivide_sum([9, 3, 2, 4])`,answer:'a [9, 3, 2, 4] left12 right6 diff 6',why:'왼쪽 합은 12, 오른쪽 합은 6입니다. diff에는 12-6=6이 출력되지만 함수는 여전히 합을 반환합니다.'},
+{title:'음수를 포함한 재귀 합계',code:`def divide_sum(a):\n    if len(a) == 1:\n        return a[0]\n\n    mid = len(a) // 2\n    left = divide_sum(a[:mid])\n    right = divide_sum(a[mid:])\n\n    if len(a) == 4:\n        print(f'a {a} left{left} right{right} sum {left + right}')\n\n    return left + right\n\ndivide_sum([-3, 8, -2, 5])`,answer:'a [-3, 8, -2, 5] left5 right3 sum 8',why:'왼쪽 합 -3+8=5, 오른쪽 합 -2+5=3, 전체 합은 8입니다.'},
+{title:'최댓값을 반환하는 분할 정복',code:`def divide_max(a):\n    if len(a) == 1:\n        return a[0]\n\n    mid = len(a) // 2\n    left = divide_max(a[:mid])\n    right = divide_max(a[mid:])\n\n    if len(a) == 4:\n        print(f'a {a} left{left} right{right} max {max(left, right)}')\n\n    return max(left, right)\n\ndivide_max([7, 2, 9, 4])`,answer:'a [7, 2, 9, 4] left7 right9 max 9',why:'왼쪽 [7, 2]의 최댓값은 7, 오른쪽 [9, 4]의 최댓값은 9입니다. 최상위 호출에서 한 줄을 출력합니다.'}
+];
+const root=document.getElementById('questions');
+questions.forEach((q,i)=&gt;{const section=document.createElement('section');section.className='question';section.innerHTML=`&lt;h2&gt;문항 ${String(i+1).padStart(2,'0')} · ${q.title}&lt;/h2&gt;&lt;p&gt;다음 프로그램을 실행했을 때 출력되는 &lt;strong&gt;한 줄 전체&lt;/strong&gt;를 쓰시오. (4점)&lt;/p&gt;&lt;pre&gt;&lt;/pre&gt;&lt;label for=&quot;a${i}&quot;&gt;&lt;strong&gt;출력 결과&lt;/strong&gt;&lt;/label&gt;&lt;textarea id=&quot;a${i}&quot; spellcheck=&quot;false&quot; placeholder=&quot;실제 출력되는 한 줄을 입력하세요&quot;&gt;&lt;/textarea&gt;&lt;div&gt;&lt;button onclick=&quot;grade(${i})&quot;&gt;문항 채점&lt;/button&gt;&lt;button class=&quot;secondary&quot; onclick=&quot;toggle(${i})&quot;&gt;정답 및 해설&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;result&quot; id=&quot;r${i}&quot; aria-live=&quot;polite&quot;&gt;&lt;/div&gt;&lt;div class=&quot;solution&quot; id=&quot;s${i}&quot;&gt;&lt;strong&gt;정답&lt;/strong&gt;&lt;pre&gt;&lt;/pre&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;`;section.querySelector('pre').textContent=q.code;section.querySelector('.solution pre').textContent=q.answer;section.querySelector('.solution p').textContent=q.why;root.appendChild(section)});
+function normalize(s){return s.replace(/\r/g,'').trim()}function grade(i){const a=normalize(document.getElementById('a'+i).value),q=questions[i],ok=a===q.answer,r=document.getElementById('r'+i);r.className='result '+(ok?'good':'bad');r.textContent=ok?'정답! 4점':'오답 또는 미입력 (0점). 출력 문자열과 공백을 다시 확인하세요.';return ok}function gradeAll(){let count=0;questions.forEach((_,i)=&gt;{if(grade(i))count++});document.getElementById('total').textContent=`총점: ${count*4} / 20점 (${count} / 5문항 정답)`}function toggle(i){const s=document.getElementById('s'+i);s.style.display=s.style.display==='block'?'none':'block'}function toggleAll(){const show=[...document.querySelectorAll('.solution')].some(s=&gt;s.style.display!=='block');document.querySelectorAll('.solution').forEach(s=&gt;s.style.display=show?'block':'none')}
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+" title="Sector 05"></iframe></section><section class="sector" hidden="" id="sector6"><div class="sectitle"><h2>Sector 06 · 재귀 문자열 출력</h2><span>신규 5문항 (원본 06.html 없음)</span></div><iframe loading="eager" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ko&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;body{font-family:Malgun Gothic,sans-serif;background:#f3f6fb;color:#17253b;padding:18px}h1{color:#153d73}.q{background:white;border:1px solid #dce5ef;border-radius:12px;padding:20px;margin:18px 0}pre{background:#102039;color:#f1f5ff;padding:16px;overflow:auto;line-height:1.7}input{padding:10px;width:75%;max-width:480px}button{padding:10px;background:#1557a5;color:white;border:0;border-radius:7px;margin:6px}details{margin-top:12px;padding:12px;background:#edf4ff}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;06 · 재귀 문자열 출력 5문항&lt;/h1&gt;&lt;p&gt;각 문항의 (가)에 들어갈 파이썬 코드 한 줄을 작성하세요.&lt;/p&gt;&lt;article class=&quot;q&quot;&gt;&lt;h2&gt;문항 01&lt;/h2&gt;&lt;p&gt;다음 출력이 나오도록 (가)에 들어갈 코드를 한 줄로 쓰시오.&lt;/p&gt;&lt;pre&gt;글자 = &amp;#x27;알고리즘상태공간&amp;#x27;
+def 출력(번호):
+    if 번호 == 4:
+        print(&amp;quot;♡&amp;quot;, end=&amp;quot;&amp;quot;)
+        return
+    print(글자[번호] + &amp;quot;→&amp;quot;, end=&amp;quot;&amp;quot;)
+    출력(번호 + 1)
+    # (가) 빈칸
+출력(0)&lt;/pre&gt;&lt;p&gt;목표 출력: &lt;code&gt;알→고→리→즘→♡←상←태←공←간&lt;/code&gt;&lt;/p&gt;&lt;input id=&quot;a1&quot; aria-label=&quot;문항 1 정답&quot; placeholder=&quot;(가) 코드 입력&quot;&gt;&lt;button onclick=&quot;grade(1)&quot;&gt;채점&lt;/button&gt;&lt;div id=&quot;r1&quot;&gt;&lt;/div&gt;&lt;details&gt;&lt;summary&gt;정답과 해설&lt;/summary&gt;&lt;pre&gt;print(&amp;quot;←&amp;quot; + 글자[7 - 번호], end=&amp;quot;&amp;quot;)&lt;/pre&gt;&lt;p&gt;재귀 복귀 시 번호가 3, 2, 1, 0으로 감소하므로 인덱스 7-번호는 4, 5, 6, 7입니다.&lt;/p&gt;&lt;/details&gt;&lt;/article&gt;&lt;article class=&quot;q&quot;&gt;&lt;h2&gt;문항 02&lt;/h2&gt;&lt;p&gt;다음 출력이 나오도록 (가)에 들어갈 코드를 한 줄로 쓰시오.&lt;/p&gt;&lt;pre&gt;글자 = &amp;#x27;자료구조탐색정렬&amp;#x27;
+def 출력(번호):
+    if 번호 == 4:
+        print(&amp;quot;♡&amp;quot;, end=&amp;quot;&amp;quot;)
+        return
+    print(글자[번호] + &amp;quot;→&amp;quot;, end=&amp;quot;&amp;quot;)
+    출력(번호 + 1)
+    # (가) 빈칸
+출력(0)&lt;/pre&gt;&lt;p&gt;목표 출력: &lt;code&gt;자→료→구→조→♡←탐←색←정←렬&lt;/code&gt;&lt;/p&gt;&lt;input id=&quot;a2&quot; aria-label=&quot;문항 2 정답&quot; placeholder=&quot;(가) 코드 입력&quot;&gt;&lt;button onclick=&quot;grade(2)&quot;&gt;채점&lt;/button&gt;&lt;div id=&quot;r2&quot;&gt;&lt;/div&gt;&lt;details&gt;&lt;summary&gt;정답과 해설&lt;/summary&gt;&lt;pre&gt;print(&amp;quot;←&amp;quot; + 글자[7 - 번호], end=&amp;quot;&amp;quot;)&lt;/pre&gt;&lt;p&gt;재귀 복귀 시 번호가 3, 2, 1, 0으로 감소하므로 인덱스 7-번호는 4, 5, 6, 7입니다.&lt;/p&gt;&lt;/details&gt;&lt;/article&gt;&lt;article class=&quot;q&quot;&gt;&lt;h2&gt;문항 03&lt;/h2&gt;&lt;p&gt;다음 출력이 나오도록 (가)에 들어갈 코드를 한 줄로 쓰시오.&lt;/p&gt;&lt;pre&gt;글자 = &amp;#x27;파이썬재귀함수빛&amp;#x27;
+def 출력(번호):
+    if 번호 == 4:
+        print(&amp;quot;♡&amp;quot;, end=&amp;quot;&amp;quot;)
+        return
+    print(글자[번호] + &amp;quot;→&amp;quot;, end=&amp;quot;&amp;quot;)
+    출력(번호 + 1)
+    # (가) 빈칸
+출력(0)&lt;/pre&gt;&lt;p&gt;목표 출력: &lt;code&gt;파→이→썬→재→♡←귀←함←수←빛&lt;/code&gt;&lt;/p&gt;&lt;input id=&quot;a3&quot; aria-label=&quot;문항 3 정답&quot; placeholder=&quot;(가) 코드 입력&quot;&gt;&lt;button onclick=&quot;grade(3)&quot;&gt;채점&lt;/button&gt;&lt;div id=&quot;r3&quot;&gt;&lt;/div&gt;&lt;details&gt;&lt;summary&gt;정답과 해설&lt;/summary&gt;&lt;pre&gt;print(&amp;quot;←&amp;quot; + 글자[7 - 번호], end=&amp;quot;&amp;quot;)&lt;/pre&gt;&lt;p&gt;재귀 복귀 시 번호가 3, 2, 1, 0으로 감소하므로 인덱스 7-번호는 4, 5, 6, 7입니다.&lt;/p&gt;&lt;/details&gt;&lt;/article&gt;&lt;article class=&quot;q&quot;&gt;&lt;h2&gt;문항 04&lt;/h2&gt;&lt;p&gt;다음 출력이 나오도록 (가)에 들어갈 코드를 한 줄로 쓰시오.&lt;/p&gt;&lt;pre&gt;글자 = &amp;#x27;정보과학프로젝트&amp;#x27;
+def 출력(번호):
+    if 번호 == 4:
+        print(&amp;quot;♡&amp;quot;, end=&amp;quot;&amp;quot;)
+        return
+    print(글자[번호] + &amp;quot;→&amp;quot;, end=&amp;quot;&amp;quot;)
+    출력(번호 + 1)
+    # (가) 빈칸
+출력(0)&lt;/pre&gt;&lt;p&gt;목표 출력: &lt;code&gt;정→보→과→학→♡←프←로←젝←트&lt;/code&gt;&lt;/p&gt;&lt;input id=&quot;a4&quot; aria-label=&quot;문항 4 정답&quot; placeholder=&quot;(가) 코드 입력&quot;&gt;&lt;button onclick=&quot;grade(4)&quot;&gt;채점&lt;/button&gt;&lt;div id=&quot;r4&quot;&gt;&lt;/div&gt;&lt;details&gt;&lt;summary&gt;정답과 해설&lt;/summary&gt;&lt;pre&gt;print(&amp;quot;←&amp;quot; + 글자[7 - 번호], end=&amp;quot;&amp;quot;)&lt;/pre&gt;&lt;p&gt;재귀 복귀 시 번호가 3, 2, 1, 0으로 감소하므로 인덱스 7-번호는 4, 5, 6, 7입니다.&lt;/p&gt;&lt;/details&gt;&lt;/article&gt;&lt;article class=&quot;q&quot;&gt;&lt;h2&gt;문항 05&lt;/h2&gt;&lt;p&gt;다음 출력이 나오도록 (가)에 들어갈 코드를 한 줄로 쓰시오.&lt;/p&gt;&lt;pre&gt;글자 = &amp;#x27;수학논리증명탐구&amp;#x27;
+def 출력(번호):
+    if 번호 == 4:
+        print(&amp;quot;♡&amp;quot;, end=&amp;quot;&amp;quot;)
+        return
+    print(글자[번호] + &amp;quot;→&amp;quot;, end=&amp;quot;&amp;quot;)
+    출력(번호 + 1)
+    # (가) 빈칸
+출력(0)&lt;/pre&gt;&lt;p&gt;목표 출력: &lt;code&gt;수→학→논→리→♡←증←명←탐←구&lt;/code&gt;&lt;/p&gt;&lt;input id=&quot;a5&quot; aria-label=&quot;문항 5 정답&quot; placeholder=&quot;(가) 코드 입력&quot;&gt;&lt;button onclick=&quot;grade(5)&quot;&gt;채점&lt;/button&gt;&lt;div id=&quot;r5&quot;&gt;&lt;/div&gt;&lt;details&gt;&lt;summary&gt;정답과 해설&lt;/summary&gt;&lt;pre&gt;print(&amp;quot;←&amp;quot; + 글자[7 - 번호], end=&amp;quot;&amp;quot;)&lt;/pre&gt;&lt;p&gt;재귀 복귀 시 번호가 3, 2, 1, 0으로 감소하므로 인덱스 7-번호는 4, 5, 6, 7입니다.&lt;/p&gt;&lt;/details&gt;&lt;/article&gt;&lt;script&gt;function grade(j){const v=document.getElementById('a'+j).value.replace(/\s+/g,'').replace(/'/g,'&quot;');const ok=v==='print(&quot;←&quot;+글자[7-번호],end=&quot;&quot;)';document.getElementById('r'+j).textContent=ok?'정답입니다.':'다시 확인하세요.'}&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;" title="Sector 06"></iframe></section><section class="sector" hidden="" id="sector7"><div class="sectitle"><h2>Sector 07 · 재귀 호출과 복귀</h2><span>원본 5문항</span></div><iframe loading="eager" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ko&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;07 재귀 호출과 복귀 빈칸 메우기 5문제&lt;/title&gt;&lt;style&gt;body{font-family:'Malgun Gothic',sans-serif;background:#f4f7fb;color:#17253b;margin:0}main{max-width:1000px;margin:auto;padding:28px}h1{color:#123d75}.card{background:white;padding:22px;margin:20px 0;border:1px solid #dce5f0;border-radius:14px}pre{background:#101c30;color:#edf5ff;padding:18px;overflow:auto;line-height:1.65;font-size:15px;border-radius:10px}input{font:15px Consolas,monospace;width:min(95%,500px);padding:10px;border:1px solid #9cacc0;border-radius:6px}button{padding:10px 15px;background:#155db4;color:white;border:0;border-radius:7px;cursor:pointer;margin:6px 5px 6px 0}.result{white-space:pre-wrap;font-family:Consolas,'Malgun Gothic',monospace}.hint{color:#51647d}details{margin-top:12px}summary{cursor:pointer;font-weight:bold}.good{color:#14743a}.bad{color:#b32335}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;main&gt;&lt;h1&gt;07. 재귀 호출과 복귀 — 빈칸 메우기 5문제&lt;/h1&gt;&lt;p&gt;각 문제의 &lt;b&gt;(가)&lt;/b&gt;에 들어갈 파이썬 코드 &lt;b&gt;한 줄&lt;/b&gt;을 작성하세요. 재귀 호출 전의 출력과 재귀 복귀 후의 출력을 모두 고려해야 합니다. 각 4점, 총 20점입니다.&lt;/p&gt;&lt;div id=&quot;questions&quot;&gt;&lt;/div&gt;&lt;button onclick=&quot;gradeAll()&quot;&gt;전체 채점&lt;/button&gt;&lt;b id=&quot;total&quot;&gt;&lt;/b&gt;&lt;/main&gt;&lt;script&gt;
+const problems=[
+{title:'01. 과학과 탐구',code:`글자 = '과학탐구실험'
+def 탐험(번호):
+    if 번호 == 2:
+        print('★', end='')
+        return
+    print(글자[번호] + '→', end='')
+    탐험(번호 + 1)
+    # (가)
+탐험(0)`,goal:'과→학→★←실←험',answer:`print('←' + 글자[5 - 번호], end='')`,explain:'번호가 1, 0 순서로 복귀하므로 인덱스 4, 5를 차례로 읽으려면 5-번호를 사용합니다.'},
+{title:'02. 데이터와 분석',code:`단어 = '데이터분석'
+def 분석(단계):
+    if 단계 == 3:
+        print('◆', end='')
+        return
+    print(단어[단계] + '-', end='')
+    분석(단계 + 1)
+    # (가)
+분석(0)`,goal:'데-이-터-◆+분+석+!',answer:`print('+' + ('분석!'[2 - 단계]), end='')`,explain:'복귀 단계는 2,1,0이므로 문자열 분석!의 인덱스 0,1,2를 순서대로 출력합니다.'},
+{title:'03. 수학의 아름다움',code:`문장 = '수학은즐거워'
+def 노래(깊이):
+    if 깊이 == 3:
+        print('♡', end='')
+        return
+    print(문장[깊이] + '→', end='')
+    노래(깊이 + 1)
+    # (가)
+노래(0)`,goal:'수→학→은→♡←즐←거←워',answer:`print('←' + 문장[5 - 깊이], end='')`,explain:'깊이가 2,1,0으로 돌아올 때 인덱스 3,4,5를 읽습니다.'},
+{title:'04. 숫자의 대칭',code:`숫자 = '12345678'
+def 대칭(위치):
+    if 위치 == 4:
+        print('|', end='')
+        return
+    print(숫자[위치], end='')
+    대칭(위치 + 1)
+    # (가)
+대칭(0)`,goal:'1234|5678',answer:`print(숫자[7 - 위치], end='')`,explain:'위치 3,2,1,0에 대응하는 인덱스는 4,5,6,7입니다.'},
+{title:'05. 정보과학의 여정',code:`글자 = '정보과학미래로'
+def 여행(순서):
+    if 순서 == 4:
+        print('☆', end='')
+        return
+    print(글자[순서] + '→', end='')
+    여행(순서 + 1)
+    # (가)
+여행(0)`,goal:'정→보→과→학→☆←미←래←로←!',answer:`print('←' + '미래로!'[3 - 순서], end='')`,explain:'순서가 3,2,1,0으로 복귀하면 미래로!의 인덱스 0,1,2,3을 차례로 출력합니다.'}
+];
+function esc(s){return s.replaceAll('&amp;','&amp;amp;').replaceAll('&lt;','&amp;lt;').replaceAll('&gt;','&amp;gt;')}
+const area=document.getElementById('questions');problems.forEach((p,i)=&gt;{let d=document.createElement('section');d.className='card';d.innerHTML=`&lt;h2&gt;${p.title}&lt;/h2&gt;&lt;p&gt;다음 출력 결과가 나오도록 빈칸 (가)를 완성하시오.&lt;/p&gt;&lt;pre&gt;${esc(p.code)}&lt;/pre&gt;&lt;p&gt;&lt;b&gt;목표 출력 (한 줄)&lt;/b&gt;&lt;/p&gt;&lt;pre&gt;${esc(p.goal)}&lt;/pre&gt;&lt;label for=&quot;ans${i}&quot;&gt;(가) 정답 코드&lt;/label&gt;&lt;p&gt;&lt;input id=&quot;ans${i}&quot; spellcheck=&quot;false&quot; placeholder=&quot;파이썬 코드 한 줄 입력&quot;&gt;&lt;/p&gt;&lt;button onclick=&quot;grade(${i})&quot;&gt;채점하기&lt;/button&gt;&lt;button onclick=&quot;showAnswer(${i})&quot;&gt;정답·해설 보기&lt;/button&gt;&lt;div class=&quot;result&quot; id=&quot;res${i}&quot;&gt;&lt;/div&gt;&lt;details id=&quot;detail${i}&quot;&gt;&lt;summary&gt;정답 및 상세 해설&lt;/summary&gt;&lt;pre&gt;${esc(p.answer)}&lt;/pre&gt;&lt;p&gt;${p.explain}&lt;/p&gt;&lt;/details&gt;`;area.appendChild(d)});
+function normalized(s){return s.replace(/\s+/g,'').replace(/&quot;/g,&quot;'&quot;).replace(/;$/,'')}
+function grade(i){let p=problems[i],v=document.getElementById('ans'+i).value.trim(),ok=normalized(v)===normalized(p.answer);let el=document.getElementById('res'+i);el.className='result '+(ok?'good':'bad');el.textContent=ok?'정답! 4점':'정답과 일치하지 않습니다. (동등한 다른 표현은 정답 해설과 비교해 확인하세요.)';return ok}
+function showAnswer(i){document.getElementById('detail'+i).open=true}
+function gradeAll(){let n=problems.reduce((sum,_,i)=&gt;sum+(grade(i)?1:0),0);document.getElementById('total').textContent=` 총점 ${n*4}/20점`}
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+" title="Sector 07"></iframe></section><section class="sector" hidden="" id="sector8"><div class="sectitle"><h2>Sector 08 · 재귀 별 패턴</h2><span>원본 5문항</span></div><iframe loading="eager" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ko&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;08 재귀 별 패턴 빈칸 메우기 5문항&lt;/title&gt;&lt;style&gt;body{font-family:'Malgun Gothic',sans-serif;background:#f4f7fc;color:#17243a;max-width:1000px;margin:auto;padding:25px}h1{color:#173b75}.q{background:white;border:1px solid #d8e2f0;border-radius:14px;padding:22px;margin:20px 0}pre{background:#101d32;color:#f1f6ff;padding:17px;border-radius:9px;overflow:auto;font:15px/1.7 Consolas,monospace;white-space:pre-wrap}input{width:min(95%,520px);padding:12px;font:15px Consolas,monospace;border:1px solid #9aaec9;border-radius:7px}button{background:#205eb3;color:white;border:0;border-radius:7px;padding:10px 16px;margin:7px 6px 7px 0;cursor:pointer}.feedback{font-weight:bold;white-space:pre-wrap}.answer{display:none;background:#eff7ff;border-radius:8px;padding:15px;margin-top:12px}small{color:#52647c} .target{background:#f1f5fb;color:#17243a}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;08. 재귀 별 패턴 빈칸 메우기&lt;/h1&gt;&lt;p&gt;모래시계 재귀 함수와 닮은 유형 5문항 · 각 4점 · 총 20점. (가)에 들어갈 &lt;b&gt;파이썬 코드 한 줄&lt;/b&gt;을 입력하세요. 모든 예제는 입력값 4를 기준으로 합니다.&lt;/p&gt;&lt;div id=&quot;questions&quot;&gt;&lt;/div&gt;&lt;button onclick=&quot;gradeAll()&quot;&gt;전체 채점 (20점)&lt;/button&gt;&lt;button onclick=&quot;document.querySelectorAll('.answer').forEach(x=&gt;x.style.display='block')&quot;&gt;모든 정답·해설 보기&lt;/button&gt;&lt;h2 id=&quot;score&quot;&gt;&lt;/h2&gt;&lt;script&gt;
+const qs=[
+{title:'01. 증가하는 직각삼각형',code:`def triangle(n, i=1):\n    if i &gt; n:\n        return\n    print('*' * i)\n    # (가)\n\ntriangle(4)`,target:`*\n**\n***\n****`,answer:'triangle(n, i + 1)',why:'현재 줄에 i개의 별을 출력하고 i를 1 증가시켜 다음 줄을 재귀적으로 출력합니다.'},
+{title:'02. 감소하는 직각삼각형',code:`def reverse_triangle(n, i=1):\n    if i &gt; n:\n        return\n    print('*' * (n - i + 1))\n    # (가)\n\nreverse_triangle(4)`,target:`****\n***\n**\n*`,answer:'reverse_triangle(n, i + 1)',why:'별 개수는 n-i+1로 감소하지만 행 번호 i는 증가해야 합니다.'},
+{title:'03. 가운데 정렬 피라미드',code:`def pyramid(n, i=1):\n    if i &gt; n:\n        return\n    spaces = n - i\n    stars = 2 * i - 1\n    print(' ' * spaces + '*' * stars)\n    # (가)\n\npyramid(4)`,target:`   *\n  ***\n *****\n*******`,answer:'pyramid(n, i + 1)',why:'각 재귀 단계에서 공백은 하나 줄고 별은 두 개 늘어납니다.'},
+{title:'04. 마름모 별 패턴',code:`def diamond(n, i=1):\n    if i &gt; 2 * n - 1:\n        return\n    k = i if i &lt;= n else 2 * n - i\n    print(' ' * (n-k) + '*' * (2*k-1))\n    # (가)\n\ndiamond(4)`,target:`   *\n  ***\n *****\n*******\n *****\n  ***\n   *`,answer:'diamond(n, i + 1)',why:'행 번호 i가 1부터 2n-1까지 증가하면서 위쪽과 아래쪽 대칭 패턴을 완성합니다.'},
+{title:'05. 모래시계의 반쪽 폭 변화',code:`def hour_pattern(n, i=1):\n    if i &gt; 2 * n - 1:\n        return\n    width = n - abs(n - i)\n    print(' ' * (width-1) + '*' * (n-width+1))\n    # (가)\n\nhour_pattern(4)`,target:`****\n ***\n  **\n   *\n  **\n ***\n****`,answer:'hour_pattern(n, i + 1)',why:'i를 증가시키면 width가 1,2,3,4,3,2,1로 변하고, 공백과 별의 개수가 반대로 변합니다.'}
+];
+const root=document.getElementById('questions');qs.forEach((q,i)=&gt;{let el=document.createElement('section');el.className='q';el.innerHTML=`&lt;h2&gt;${q.title}&lt;/h2&gt;&lt;p&gt;다음 프로그램이 제시된 결과를 출력하도록 (가)를 완성하시오.&lt;/p&gt;&lt;pre&gt;&lt;/pre&gt;&lt;b&gt;목표 출력 결과&lt;/b&gt;&lt;pre class=&quot;target&quot;&gt;&lt;/pre&gt;&lt;label for=&quot;a${i}&quot;&gt;&lt;b&gt;(가) 정답 입력&lt;/b&gt;&lt;/label&gt;&lt;p&gt;&lt;input id=&quot;a${i}&quot; spellcheck=&quot;false&quot; autocomplete=&quot;off&quot; placeholder=&quot;파이썬 코드 한 줄&quot;&gt;&lt;/p&gt;&lt;button onclick=&quot;grade(${i})&quot;&gt;문항 채점&lt;/button&gt;&lt;button onclick=&quot;show(${i})&quot;&gt;정답·해설 보기&lt;/button&gt;&lt;p class=&quot;feedback&quot; id=&quot;f${i}&quot;&gt;&lt;/p&gt;&lt;div class=&quot;answer&quot; id=&quot;s${i}&quot;&gt;&lt;/div&gt;`;root.appendChild(el);el.querySelector('pre').textContent=q.code;el.querySelector('.target').textContent=q.target;el.querySelector('.answer').textContent=`정답: ${q.answer}\n해설: ${q.why}`;});
+function norm(s){return s.trim().replace(/\s+/g,'').replace(/#.*$/,'');}function grade(i){const q=qs[i],v=document.getElementById('a'+i).value,ok=norm(v)===norm(q.answer);document.getElementById('f'+i).textContent=ok?'정답! 4점':'다시 확인하세요. (0점)';document.getElementById('f'+i).style.color=ok?'#087443':'#b3261e';return ok?4:0;}function show(i){document.getElementById('s'+i).style.display='block'}function gradeAll(){let s=qs.reduce((a,_,i)=&gt;a+grade(i),0);document.getElementById('score').textContent=`총점: ${s} / 20점`;}
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+" title="Sector 08"></iframe></section><section class="sector" hidden="" id="sector9"><div class="sectitle"><h2>Sector 09 · 병합 알고리즘</h2><span>원본 5문항</span></div><iframe loading="eager" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ko&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;09 · 병합 알고리즘 출력 결과 5문항&lt;/title&gt;&lt;style&gt;body{font-family:'Malgun Gothic',sans-serif;background:#f3f6fb;color:#17233b;margin:0}main{max-width:950px;margin:auto;padding:28px 16px}h1{color:#173c75}article{background:white;border:1px solid #d8e1ed;border-radius:14px;padding:22px;margin:20px 0}pre{background:#102039;color:#f4f8ff;border-radius:9px;padding:18px;overflow:auto;line-height:1.6;font-size:15px}textarea{width:100%;box-sizing:border-box;min-height:65px;font-size:17px;padding:12px;border:1px solid #a6b7cb;border-radius:8px}button{background:#1d56a5;color:white;border:0;border-radius:7px;padding:10px 16px;margin:10px 6px 4px 0;cursor:pointer}button.secondary{background:#53667e}.feedback{font-weight:bold;margin-top:10px;white-space:pre-wrap}.explain{display:none;background:#f0f5fd;padding:14px;border-radius:8px;white-space:pre-wrap;line-height:1.7}small{color:#53667e}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;main&gt;&lt;h1&gt;09 · 병합(merge) 알고리즘 출력 결과 5문항&lt;/h1&gt;&lt;p&gt;각 파이썬 프로그램의 &lt;b&gt;전체 출력 결과를 정확히 한 줄&lt;/b&gt;로 쓰세요. 리스트의 대괄호, 쉼표, 공백까지 확인합니다. 각 문항 4점, 총 20점입니다.&lt;/p&gt;&lt;div id=&quot;questions&quot;&gt;&lt;/div&gt;&lt;button onclick=&quot;gradeAll()&quot;&gt;전체 채점&lt;/button&gt;&lt;button class=&quot;secondary&quot; onclick=&quot;showAll()&quot;&gt;전체 정답·해설 보기&lt;/button&gt;&lt;h2 id=&quot;score&quot;&gt;&lt;/h2&gt;&lt;/main&gt;&lt;script&gt;
+const questions=[
+{title:'01 · 기본 오름차순 병합',code:`def merge(left, right):\n    result = []\n    i = j = 0\n    while i &lt; len(left) and j &lt; len(right):\n        if left[i] &lt;= right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result += left[i:]\n    result += right[j:]\n    return result\n\nprint(merge([1, 5, 8], [2, 3, 9]))`,answer:'[1, 2, 3, 5, 8, 9]',explain:'1과 2 비교 → 1, 5와 2 비교 → 2, 5와 3 비교 → 3, 5와 9 비교 → 5, 8과 9 비교 → 8, 나머지 9를 붙입니다.'},
+{title:'02 · 중복 원소 병합',code:`def merge(left, right):\n    result = []\n    i = j = 0\n    while i &lt; len(left) and j &lt; len(right):\n        if left[i] &lt;= right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result += left[i:]\n    result += right[j:]\n    return result\n\nprint(merge([1, 4, 4, 7], [2, 4, 6]))`,answer:'[1, 2, 4, 4, 4, 6, 7]',explain:'중복 값도 제거하지 않습니다. 4가 왼쪽에 2개, 오른쪽에 1개이므로 결과에 4가 3번 나타납니다.'},
+{title:'03 · 음수와 0을 포함한 병합',code:`def merge(left, right):\n    result = []\n    i = j = 0\n    while i &lt; len(left) and j &lt; len(right):\n        if left[i] &lt;= right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result += left[i:]\n    result += right[j:]\n    return result\n\nprint(merge([-8, -2, 5], [-5, 0, 3, 9]))`,answer:'[-8, -5, -2, 0, 3, 5, 9]',explain:'음수는 -8 &lt; -5 &lt; -2 순서입니다. 0과 양수도 같은 비교 규칙으로 병합합니다.'},
+{title:'04 · 내림차순 병합',code:`def merge(left, right):\n    result = []\n    i = j = 0\n    while i &lt; len(left) and j &lt; len(right):\n        if left[i] &gt;= right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result += left[i:]\n    result += right[j:]\n    return result\n\nprint(merge([12, 7, 1], [10, 8, 2]))`,answer:'[12, 10, 8, 7, 2, 1]',explain:'비교 연산자가 &gt;= 이므로 큰 값을 먼저 선택합니다. 두 입력 리스트도 내림차순 정렬되어 있습니다.'},
+{title:'05 · 병합 후 합계 출력',code:`def merge(left, right):\n    result = []\n    i = j = 0\n    while i &lt; len(left) and j &lt; len(right):\n        if left[i] &lt;= right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result += left[i:]\n    result += right[j:]\n    return result\n\na = merge([2, 6, 11], [1, 7, 10])\nprint(a, sum(a))`,answer:'[1, 2, 6, 7, 10, 11] 37',explain:'병합 결과는 [1, 2, 6, 7, 10, 11]입니다. 합계는 37이며 print(a, sum(a))는 리스트와 합계를 공백 하나로 구분합니다.'}
+];
+function esc(s){return s.replaceAll('&amp;','&amp;amp;').replaceAll('&lt;','&amp;lt;').replaceAll('&gt;','&amp;gt;')}
+function norm(s){return s.trim().replace(/\r/g,'')}
+const area=document.getElementById('questions');questions.forEach((q,i)=&gt;{let a=document.createElement('article');a.innerHTML=`&lt;h2&gt;문항 ${String(i+1).padStart(2,'0')} · ${q.title}&lt;/h2&gt;&lt;pre&gt;${esc(q.code)}&lt;/pre&gt;&lt;label for=&quot;ans${i}&quot;&gt;&lt;b&gt;출력 결과 (한 줄)&lt;/b&gt;&lt;/label&gt;&lt;textarea id=&quot;ans${i}&quot; spellcheck=&quot;false&quot; placeholder=&quot;실제 출력 결과를 입력하세요&quot;&gt;&lt;/textarea&gt;&lt;div&gt;&lt;button onclick=&quot;grade(${i})&quot;&gt;채점&lt;/button&gt;&lt;button class=&quot;secondary&quot; onclick=&quot;reveal(${i})&quot;&gt;정답·해설&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;feedback&quot; id=&quot;feedback${i}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;explain&quot; id=&quot;explain${i}&quot;&gt;&lt;b&gt;정답&lt;/b&gt;&lt;pre&gt;${esc(q.answer)}&lt;/pre&gt;&lt;b&gt;해설&lt;/b&gt;&lt;p&gt;${q.explain}&lt;/p&gt;&lt;/div&gt;`;area.appendChild(a)});
+function grade(i){let ok=norm(document.getElementById('ans'+i).value)===questions[i].answer;document.getElementById('feedback'+i).textContent=ok?'정답 · 4점':'오답 · 0점 (리스트의 값, 순서, 공백을 확인하세요)';document.getElementById('feedback'+i).style.color=ok?'#147a44':'#c03737';return ok?4:0}function reveal(i){let e=document.getElementById('explain'+i);e.style.display=e.style.display==='block'?'none':'block'}function gradeAll(){let s=questions.reduce((v,_,i)=&gt;v+grade(i),0);document.getElementById('score').textContent='총점: '+s+' / 20점'}function showAll(){questions.forEach((_,i)=&gt;document.getElementById('explain'+i).style.display='block')}
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+" title="Sector 09"></iframe></section><section class="sector" hidden="" id="sector10"><div class="sectitle"><h2>Sector 10 · 거북이 별 그리기</h2><span>원본 5문항</span></div><iframe loading="eager" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;ko&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;10. 재귀 거북이 별 그리기 — 빈칸 5문항&lt;/title&gt;&lt;style&gt;body{font-family:'Malgun Gothic',sans-serif;background:#f3f6fb;color:#17243b;margin:0}main{max-width:1050px;margin:auto;padding:26px}h1{color:#173c77}header,.question{background:white;border:1px solid #d9e1ed;border-radius:14px;padding:22px;margin-bottom:20px}header p{line-height:1.7}.question h2{margin:0 0 12px;color:#184b85}.two{display:grid;grid-template-columns:1fr 280px;gap:18px}pre{white-space:pre-wrap;background:#101e32;color:#f1f7ff;padding:18px;border-radius:10px;font:15px/1.65 Consolas,'Malgun Gothic',monospace;overflow:auto}.blank{background:#ffde82;color:#17243b;padding:2px 8px;border-radius:4px}input{width:min(100%,440px);box-sizing:border-box;padding:11px;font:15px Consolas,'Malgun Gothic',monospace;border:1px solid #9caec8;border-radius:8px}button{padding:10px 15px;border:0;border-radius:8px;background:#2158a4;color:white;cursor:pointer;margin:8px 6px 0 0}button.secondary{background:#64748b}.result{font-weight:700;margin-top:10px;min-height:24px}.solution{display:none;background:#eff6ff;border-left:4px solid #3275c5;padding:12px;margin-top:12px;line-height:1.7}svg{width:100%;height:auto;background:#fff;border:1px solid #dce4ef;border-radius:10px}.muted{color:#53657f;font-size:14px}.footer{padding:20px;text-align:center}@media(max-width:700px){.two{grid-template-columns:1fr}main{padding:12px}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;main&gt;&lt;header&gt;&lt;h1&gt;10. 재귀 함수와 거북이 별 그리기&lt;/h1&gt;&lt;p&gt;원본의 &lt;b&gt;star(n - 1)&lt;/b&gt; 빈칸 문제와 닮은 유형 5문항입니다. 각 문제의 &lt;b&gt;(가)&lt;/b&gt;에 들어갈 파이썬 코드 &lt;b&gt;한 줄&lt;/b&gt;을 입력하세요. 아래 그림은 주어진 입력값으로 그리는 예상 도형입니다.&lt;/p&gt;&lt;p&gt;&lt;b&gt;5문항 × 4점 = 20점&lt;/b&gt; · 문항별 채점 · 전체 채점 · 정답 및 해설 · 브라우저에서 오프라인 실행&lt;/p&gt;&lt;button onclick=&quot;gradeAll()&quot;&gt;전체 채점&lt;/button&gt;&lt;button class=&quot;secondary&quot; onclick=&quot;toggleAll()&quot;&gt;정답·해설 모두 보기/숨기기&lt;/button&gt;&lt;span id=&quot;total&quot; class=&quot;result&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/header&gt;&lt;div id=&quot;questions&quot;&gt;&lt;/div&gt;&lt;div class=&quot;footer&quot;&gt;정보과학 · 재귀 호출 · turtle 그래픽 · 10.html&lt;/div&gt;&lt;/main&gt;&lt;script&gt;
+const questions=[
+{title:'정오각별 완성',desc:'입력값 5 2를 이용하여 다섯 선분으로 정오각별을 그리도록 (가)를 완성하시오.',code:`import turtle as t\nn, k = map(int, input('n k 입력: ').split())\n\ndef 별그리기(남은횟수):\n    if 남은횟수 == 0:\n        return\n    t.forward(150)\n    t.right(360 * k / n)\n    (가)\n\n별그리기(n)\nt.done()`,answer:'별그리기(남은횟수 - 1)',alts:['별그리기(남은횟수-1)'],explain:'남은횟수를 1씩 줄이며 자기 자신을 호출합니다. 5회 이동하고 매번 144° 회전하므로 정오각별이 완성됩니다.',n:5,k:2},
+{title:'정칠각별 완성',desc:'입력값 7 3으로 7개의 선분을 이용한 별 다각형을 완성하시오.',code:`import turtle as t\n변의수, 건너뛰기 = 7, 3\n\ndef 칠각별(횟수):\n    if 횟수 &lt;= 0:\n        return\n    t.forward(125)\n    t.right(360 * 건너뛰기 / 변의수)\n    (가)\n\n칠각별(변의수)\nt.done()`,answer:'칠각별(횟수 - 1)',alts:['칠각별(횟수-1)'],explain:'7개의 선분을 그리려면 횟수 7에서 시작하여 0까지 감소해야 합니다. 회전각은 1080/7°입니다.',n:7,k:3},
+{title:'반복 횟수를 매개변수로 전달',desc:'입력값 8 3을 사용합니다. 재귀 호출마다 남은 횟수를 하나씩 줄여 팔각별을 완성하시오.',code:`import turtle as t\nn, k = 8, 3\n\ndef 별모양(남음):\n    if 남음 == 0:\n        return\n    t.forward(110)\n    t.right(360 * k / n)\n    (가)\n\n별모양(n)\nt.done()`,answer:'별모양(남음 - 1)',alts:['별모양(남음-1)'],explain:'재귀 호출 별모양(남음 - 1)은 정확히 8개의 선분을 그리도록 합니다. 8과 3은 서로소이므로 하나의 닫힌 별 다각형이 됩니다.',n:8,k:3},
+{title:'증가하는 재귀 인덱스',desc:'입력값 9 2에서 인덱스를 0부터 9까지 증가시켜 구각별을 그리시오.',code:`import turtle as t\n변의수, 건너뛰기 = 9, 2\n\ndef 구각별(순서):\n    if 순서 == 변의수:\n        return\n    t.forward(100)\n    t.right(360 * 건너뛰기 / 변의수)\n    (가)\n\n구각별(0)\nt.done()`,answer:'구각별(순서 + 1)',alts:['구각별(순서+1)'],explain:'이 문제는 감소형이 아니라 증가형입니다. 순서를 0→1→…→9로 늘려 종료 조건에 도달해야 합니다.',n:9,k:2},
+{title:'길이도 줄이는 나선형 별',desc:'입력값 7 2에서 매번 선분 길이를 15씩 줄이며 별 모양의 나선을 그리시오.',code:`import turtle as t\n변의수, 건너뛰기 = 7, 2\n\ndef 나선별(남은횟수, 길이):\n    if 남은횟수 == 0:\n        return\n    t.forward(길이)\n    t.right(360 * 건너뛰기 / 변의수)\n    (가)\n\n나선별(변의수, 150)\nt.done()`,answer:'나선별(남은횟수 - 1, 길이 - 15)',alts:['나선별(남은횟수-1, 길이-15)'],explain:'두 매개변수를 함께 바꿉니다. 남은횟수는 1씩, 길이는 15씩 감소하므로 선분 길이는 150, 135, 120, 105, 90, 75, 60이 됩니다.',n:7,k:2,spiral:true}
+];
+function draw(q){let x=130,y=130,angle=-Math.PI/2,pts=[[x,y]],len=q.spiral?150:150;let lengths=[];for(let i=0;i&lt;q.n;i++){let l=q.spiral?150-i*15:150;lengths.push(l);angle+=2*Math.PI*q.k/q.n; x+=Math.cos(angle)*l;y+=Math.sin(angle)*l;pts.push([x,y])}let minx=Math.min(...pts.map(p=&gt;p[0])),maxx=Math.max(...pts.map(p=&gt;p[0])),miny=Math.min(...pts.map(p=&gt;p[1])),maxy=Math.max(...pts.map(p=&gt;p[1]));let scale=220/Math.max(maxx-minx,maxy-miny,1);let d=pts.map((p,i)=&gt;(i?'L':'M')+((p[0]-minx)*scale+18).toFixed(1)+','+((p[1]-miny)*scale+18).toFixed(1)).join(' ');return `&lt;svg viewBox=&quot;0 0 ${Math.ceil((maxx-minx)*scale+36)} ${Math.ceil((maxy-miny)*scale+36)}&quot; role=&quot;img&quot; aria-label=&quot;${q.title} 예상 도형&quot;&gt;&lt;path d=&quot;${d}&quot; fill=&quot;none&quot; stroke=&quot;#2460a7&quot; stroke-width=&quot;2.5&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;`}
+const root=document.getElementById('questions');questions.forEach((q,i)=&gt;{let code=q.code.replace('(가)','&lt;span class=&quot;blank&quot;&gt;(가) __________________________&lt;/span&gt;');root.insertAdjacentHTML('beforeend',`&lt;section class=&quot;question&quot;&gt;&lt;h2&gt;문항 ${String(i+1).padStart(2,'0')} · ${q.title}&lt;/h2&gt;&lt;p&gt;${q.desc}&lt;/p&gt;&lt;div class=&quot;two&quot;&gt;&lt;div&gt;&lt;pre&gt;${code}&lt;/pre&gt;&lt;label for=&quot;a${i}&quot;&gt;&lt;b&gt;(가) 정답 코드 한 줄&lt;/b&gt;&lt;/label&gt;&lt;div&gt;&lt;input id=&quot;a${i}&quot; autocomplete=&quot;off&quot; spellcheck=&quot;false&quot; placeholder=&quot;파이썬 코드 입력&quot;&gt;&lt;/div&gt;&lt;button onclick=&quot;grade(${i})&quot;&gt;채점하기&lt;/button&gt;&lt;button class=&quot;secondary&quot; onclick=&quot;toggle(${i})&quot;&gt;정답·해설&lt;/button&gt;&lt;div class=&quot;result&quot; id=&quot;r${i}&quot; aria-live=&quot;polite&quot;&gt;&lt;/div&gt;&lt;div class=&quot;solution&quot; id=&quot;s${i}&quot;&gt;&lt;b&gt;정답:&lt;/b&gt; &lt;code&gt;${q.answer}&lt;/code&gt;&lt;p&gt;${q.explain}&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;p class=&quot;muted&quot;&gt;예상 출력 그림&lt;/p&gt;${draw(q)}&lt;p class=&quot;muted&quot;&gt;${q.spiral?'길이가 점점 짧아지는 별 모양 경로':`선분 ${q.n}개 · 회전각 360 × ${q.k} / ${q.n}°`}&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;`)});
+function norm(s){return s.replace(/\s+/g,'').replace(/#.*$/,'').replace(/;$/,'')}
+function grade(i){let q=questions[i],v=document.getElementById('a'+i).value,ok=[q.answer,...q.alts].some(a=&gt;norm(a)===norm(v));document.getElementById('r'+i).textContent=ok?'정답 · 4점':'오답 · 0점 (정답·해설 버튼으로 확인)';document.getElementById('r'+i).style.color=ok?'#16803c':'#ba3030';return ok?4:0}
+function gradeAll(){let score=questions.reduce((s,q,i)=&gt;s+grade(i),0);document.getElementById('total').textContent=`  총점: ${score} / 20점`}
+function toggle(i){let el=document.getElementById('s'+i);el.style.display=el.style.display==='block'?'none':'block'}
+function toggleAll(){let show=[...document.querySelectorAll('.solution')].some(e=&gt;e.style.display!=='block');document.querySelectorAll('.solution').forEach(e=&gt;e.style.display=show?'block':'none')}
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+" title="Sector 10"></iframe></section><footer>01~05, 07~10은 기존 HTML을 포함했습니다. 원본 06.html 파일이 없어 Sector 06은 새로운 재귀 문자열 문제 5개로 구성했습니다.</footer></main><script>function show(n){document.querySelectorAll('.sector').forEach(x=>x.hidden=true);document.getElementById('sector'+n).hidden=false;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.getElementById('tab'+n).classList.add('active');location.hash='sector'+n;}let initial=Number((location.hash||'').replace('#sector',''));show(initial>=1&&initial<=10?initial:1);</script><script>
+const titles=['','그래프·DFS·BFS','완전탐색과 가지치기','재귀 프랙털','후위 표기식 출력','분할 정복 출력','재귀 문자열 출력','재귀 호출과 복귀','재귀 별 패턴','병합 알고리즘','거북이 별 그리기'];
+function readVar(w,name){return w.eval(name)}
+function textOf(x){return x==null?'':String(x)}
+function compact(x){return textOf(x).replace(/\s+/g,'').replace(/;$/,'').replace(/'/g,'"')}
+function exact(x){return textOf(x).replace(/\r/g,'').trim()}
+function entry(label,given,answer,ok,explanation,points){return {label,given:textOf(given),answer:textOf(answer),ok,explanation:textOf(explanation),points}}
+function collectSector(n){
+ const iframe=document.querySelector('#sector'+n+' iframe'),w=iframe.contentWindow,d=iframe.contentDocument;
+ if(!d||!d.body||!d.body.innerText.trim())throw Error('Sector '+n+' 로딩 실패');
+ let result=[];
+ function get(id){const e=d.getElementById(id);return e?e.value:''}
+ function add(j,items,why,code){result.push({number:j+1,items,why:textOf(why),code:textOf(code)})}
+ if(n===1){const qs=readVar(w,'questions');qs.forEach((q,j)=>add(j,q.answers.map((a,k)=>entry('('+['가','나','다','라','마','바'][k]+')',get('q'+j+'a'+k),a,compact(get('q'+j+'a'+k))===compact(a),'빈칸 코드의 역할: '+q.why,1)),q.why+'\n예상 출력: '+q.output,q.code));}
+ if(n===2){const qs=readVar(w,'questions');qs.forEach((q,j)=>add(j,q.answers.map((a,k)=>{const el=d.querySelector('input[data-q="'+j+'"][data-i="'+k+'"]');const v=el?el.value:'';return entry('빈칸 '+(k+1),v,a,compact(v)===compact(a),q.explain,1)}),q.explain+'\n예상 출력: '+q.output,q.code));}
+ if(n===3){const qs=readVar(w,'qs');qs.forEach((q,j)=>add(j,q.ans.map((a,k)=>entry('('+(k?'나':'가')+')',get('q'+j+(k?'b':'a')),a,compact(get('q'+j+(k?'b':'a')))===compact(a),q.ex,1)),q.ex,q.code));}
+ if(n===4){const qs=readVar(w,'answers');qs.forEach((q,j)=>add(j,q.map((a,k)=>entry('('+(k?'나':'가')+')',get((k?'b':'a')+(j+1)),a,exact(get((k?'b':'a')+(j+1))).replace(/\s+/g,' ')===exact(a).replace(/\s+/g,' '),'스택 push/pop 순서에 따라 모든 중간 상태와 마지막 계산값을 한 줄로 출력합니다.',2)),'각 토큰을 순서대로 처리합니다. 숫자는 push하고 연산자는 두 값을 pop하여 계산한 뒤 push합니다. 중간 스택 및 최종 결과를 모두 작성해야 합니다.',d.querySelectorAll('article,.q')[j]?.querySelector('pre')?.textContent||''));}
+ if(n===5){const qs=readVar(w,'questions');qs.forEach((q,j)=>add(j,[entry('출력 결과',get('a'+j),q.answer,exact(get('a'+j))===exact(q.answer),q.why,4)],q.why,q.code));}
+ if(n===6){for(let j=1;j<=5;j++){const article=d.querySelectorAll('article.q')[j-1];const ans=article.querySelector('details pre')?.textContent||'print("←" + 글자[7 - 번호], end="")';const v=get('a'+j);add(j-1,[entry('(가)',v,ans,compact(v)===compact(ans),'재귀 복귀 순서: 번호 3 → 2 → 1 → 0, 인덱스 4 → 5 → 6 → 7',1)],'재귀 호출을 먼저 수행한 후 복귀하면서 인덱스 7-번호를 출력합니다.',article.querySelector('pre')?.textContent||'');}}
+ if(n===7){const qs=readVar(w,'problems');qs.forEach((q,j)=>add(j,[entry('(가)',get('ans'+j),q.answer,compact(get('ans'+j))===compact(q.answer),q.explain,4)],q.explain+'\n목표 출력: '+q.goal,q.code));}
+ if(n===8){const qs=readVar(w,'qs');qs.forEach((q,j)=>add(j,[entry('(가)',get('a'+j),q.answer,compact(get('a'+j))===compact(q.answer),q.why,4)],q.why+'\n목표 출력:\n'+q.target,q.code));}
+ if(n===9){const qs=readVar(w,'questions');qs.forEach((q,j)=>add(j,[entry('출력 결과',get('ans'+j),q.answer,exact(get('ans'+j))===exact(q.answer),q.explain,4)],q.explain,q.code));}
+ if(n===10){const qs=readVar(w,'questions');qs.forEach((q,j)=>{const v=get('a'+j),acceptable=[q.answer,...(q.alts||[])];add(j,[entry('(가)',v,q.answer,acceptable.some(a=>compact(v)===compact(a)),q.explain,4)],q.explain,q.code)});}
+ if(result.length!==5)throw Error('Sector '+n+'의 문항 수가 5개가 아닙니다: '+result.length);
+ return result;
+}
+async function waitForFrame(frame){if(frame.contentDocument?.readyState==='complete'&&frame.contentDocument.body?.children.length)return;await new Promise((resolve,reject)=>{const timeout=setTimeout(()=>reject(Error('섹터 로딩 시간 초과')),12000);frame.addEventListener('load',()=>{clearTimeout(timeout);resolve()},{once:true})})}
+async function exportReport(){
+ const sid=document.getElementById('studentId').value.trim(),name=document.getElementById('studentName').value.trim(),status=document.getElementById('exportStatus');
+ if(!sid||!name){alert('학번과 이름을 모두 입력하세요.');return}
+ const button=document.getElementById('exportBtn');button.disabled=true;status.textContent='50문항 답안을 수집하고 채점하는 중입니다.';
+ try{
+  const frames=[...document.querySelectorAll('iframe')];await Promise.all(frames.map(waitForFrame));
+  let total=0,max=0,correct=0,parts=[],lines=[];
+  const now=new Date(),pad=n=>String(n).padStart(2,'0');const stamp=now.getFullYear()+pad(now.getMonth()+1)+pad(now.getDate())+'_'+pad(now.getHours())+pad(now.getMinutes())+pad(now.getSeconds());
+  lines.push('정보과학1 · 파이썬 코드 분석 50문항 평가 결과','='.repeat(66),'학번: '+sid,'이름: '+name,'응시시각: '+now.toLocaleString('ko-KR'),'평가 구성: 10 Sector × 5문항','채점 기준: 원본 문항별 배점 적용 (섹터 06 신규 문항은 각 1점)','');
+  for(let n=1;n<=10;n++){
+   const items=collectSector(n);let sect=0,sectMax=0;
+   lines.push('','='.repeat(66),'Sector '+pad(n)+' · '+titles[n],'='.repeat(66));
+   for(const q of items){
+    const score=q.items.reduce((a,x)=>a+(x.ok?x.points:0),0),possible=q.items.reduce((a,x)=>a+x.points,0);sect+=score;sectMax+=possible;total+=score;max+=possible;
+    const allOk=q.items.every(x=>x.ok);if(allOk)correct++;
+    lines.push('','[문항 '+pad(q.number)+'] '+(allOk?'정답':'오답')+' · '+score+'/'+possible+'점');
+    if(q.code)lines.push('문제 코드/조건:\n'+q.code);
+    for(const x of q.items){lines.push('  '+x.label+' : '+(x.ok?'정답':'오답')+' ('+(x.ok?x.points:0)+'/'+x.points+'점)','  학생 답안: '+(x.given||'(미입력)'),'  모범 정답: '+x.answer);}
+    lines.push('상세 해설:\n'+q.why);
+   }
+   parts.push({n,score:sect,max:sectMax});lines.push('','Sector '+pad(n)+' 소계: '+sect+'/'+sectMax+'점');
+  }
+  const pct=Math.round(total/max*10000)/100;
+  const head=['최종 총점: '+total+' / '+max+'점','100점 환산: '+pct+'점','전부 정답인 문항: '+correct+' / 50문항','',...parts.map(x=>'Sector '+pad(x.n)+' : '+x.score+' / '+x.max+'점'),'',''];
+  lines.splice(8,0,...head);
+  lines.push('','=' .repeat(66),'끝 · 이 파일에는 학생 답안, 정오답, 정답 및 상세 해설이 포함되어 있습니다.');
+  const blob=new Blob(['\uFEFF'+lines.join('\r\n')],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  const safe=s=>s.replace(/[\\/:*?"<>|\s]+/g,'_');a.href=url;a.download=safe(sid)+'_'+safe(name)+'_'+pct+'_정보과학1_'+stamp+'.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
+  status.textContent='채점 완료: '+total+'/'+max+'점 (100점 환산 '+pct+'점), 50문항 중 '+correct+'문항 전부 정답. TXT 다운로드가 시작되었습니다.';
+ }catch(e){status.textContent='오류: '+e.message;alert('결과 파일 생성 실패: '+e.message)}finally{button.disabled=false}
+}
+document.getElementById('exportBtn').addEventListener('click',exportReport);
+</script></body></html>
